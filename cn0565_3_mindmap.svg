@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2860 3180" width="2860" height="3180">
+<defs>
+<marker id="ahB91C1C" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#B91C1C"/></marker>
+<marker id="ah8A8580" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#8A8580"/></marker>
+<marker id="ah1D4ED8" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#1D4ED8"/></marker>
+<marker id="ahB45309" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#B45309"/></marker>
+</defs>
+<rect width="2860" height="3180" fill="#FAF9F5"/>
+<text x="80" y="92" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="46" font-weight="700" fill="#141413" text-anchor="start">CN0565 · EIT — how every layer connects</text>
+<text x="80" y="138" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="18" font-weight="400" fill="#44403C" text-anchor="start">Left = what you assume.  Right = what the machine does.  Red = a place the two must agree, and currently may not.</text>
+<text x="80" y="176" font-family="'IBM Plex Mono','Consolas',monospace" font-size="14.5" font-weight="400" fill="#8A8580" text-anchor="start">Every box carries the file:line that proves it.  pyeit 1.2.4 · pyadi-iio 0.0.22 · pylibiio 0.25 · measured on this machine</text>
+<rect x="300" y="230" width="870" height="62" rx="14" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="326" y="269" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="17" font-weight="600" fill="#1D4ED8" text-anchor="start">BRANCH A · THE MODEL — pure simulation, no hardware, computed once</text>
+<rect x="1690" y="230" width="870" height="62" rx="14" fill="#FDF6EC" stroke="#B45309" stroke-width="1.6"/>
+<text x="1716" y="269" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="17" font-weight="600" fill="#B45309" text-anchor="start">BRANCH B · THE MACHINE — real electrodes, real tissue, every frame</text>
+<rect x="300" y="340" width="870" height="206" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="322" y="388" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">A1 · Mesh — the medium you ASSUME</text>
+<text x="322" y="412" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">Defines Ω and the conductivity field the solver believes in.</text>
+<text x="322" y="433" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#166534" text-anchor="start">knobs: n_el · fd (boundary shape) · h0 · p_fix</text>
+<text x="322" y="454" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">default boundary = a circle; default σ = 1.0, dimensionless</text>
+<text x="322" y="474" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">mesh/wrapper.py:313  fd: Callable = shape.circle</text>
+<text x="322" y="493" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">mesh/wrapper.py:44   perm default_factory = 1.0</text>
+<rect x="322" y="510" width="95.0" height="24" rx="12" fill="#DCFCE7"/>
+<text x="369.5" y="526" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">YOU CAN EDIT</text>
+<rect x="300" y="588" width="870" height="206" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="322" y="636" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">A2 · Protocol — drive / read pattern</text>
+<text x="322" y="660" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">Which pair injects, which pair reads, and in what order.</text>
+<text x="322" y="681" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#166534" text-anchor="start">knobs: dist_exc · step_meas · parser_meas</text>
+<text x="322" y="702" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">pairs built as (i + dist) % n_el — assumes a CLOSED RING</text>
+<text x="322" y="722" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">eit/protocol.py:310  (upstream :304)</text>
+<text x="322" y="741" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">measured: 16 exc × 13 meas = 208 values per frame</text>
+<rect x="322" y="758" width="95.0" height="24" rx="12" fill="#DCFCE7"/>
+<text x="369.5" y="774" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">YOU CAN EDIT</text>
+<circle cx="1140" cy="618" r="17" fill="#B91C1C"/>
+<text x="1140" y="623.5" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<rect x="300" y="836" width="870" height="226" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="322" y="884" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">A3 · FEM forward solve</text>
+<text x="322" y="909" font-family="'IBM Plex Mono','Consolas',monospace" font-size="14.5" font-weight="500" fill="#1D4ED8" text-anchor="start">∇·(σ∇u) = 0   →   K(σ) u = b</text>
+<text x="322" y="930" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">current enters at ONE NODE: no contact impedance, no electrode area</text>
+<text x="322" y="950" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">eit/fem.py:90   b[el_pos[ex_line]] = [1, -1]</text>
+<text x="322" y="969" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">eit/fem.py:85   "only simple electrode model is supported"</text>
+<text x="322" y="989" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">σ is a SCALAR per element — anisotropic muscle cannot be expressed</text>
+<text x="322" y="1009" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">eit/fem.py:405  data = ke[i] * perm[i]</text>
+<rect x="322" y="1026" width="242.0" height="24" rx="12" fill="#DCFCE7"/>
+<text x="443.0" y="1042" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">EDITABLE — with structural limits</text>
+<rect x="300" y="1104" width="870" height="208" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="322" y="1152" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">A4 · Jacobian J</text>
+<text x="322" y="1177" font-family="'IBM Plex Mono','Consolas',monospace" font-size="14.5" font-weight="500" fill="#1D4ED8" text-anchor="start">Jᵢⱼ = ∂vᵢ/∂σⱼ    J[i,:,e] = rᵢ Kₑ fₑ</text>
+<text x="322" y="1197" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">eit/fem.py:223  (upstream :255)</text>
+<text x="322" y="1218" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">measured on your config (16 el, h0=0.08):</text>
+<text x="322" y="1239" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">J = 208 × 1083 · 5.21× underdetermined · cond = 1.34×10¹⁵</text>
+<text x="322" y="1259" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">numerically singular — regularization is what makes a solution exist</text>
+<rect x="322" y="1276" width="95.0" height="24" rx="12" fill="#DCFCE7"/>
+<text x="369.5" y="1292" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">YOU CAN EDIT</text>
+<rect x="300" y="1354" width="870" height="249" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="322" y="1402" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">A5 · H — the reconstruction matrix</text>
+<text x="322" y="1427" font-family="'IBM Plex Mono','Consolas',monospace" font-size="14.5" font-weight="500" fill="#1D4ED8" text-anchor="start">JAC   H = (JᵀJ + λR)⁻¹ Jᵀ ,  R = diag(diag(JᵀJ))ᵖ</text>
+<text x="322" y="1450" font-family="'IBM Plex Mono','Consolas',monospace" font-size="14.5" font-weight="500" fill="#1D4ED8" text-anchor="start">GREIT H = WᵀJᵀ(JJᵀ + λR)⁻¹      BP  H = Bᵀ</text>
+<text x="322" y="1470" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">eit/jac.py:93 + :103 · greit.py:118 · bp.py:56  (same upstream)</text>
+<text x="322" y="1489" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">eit/jac.py:79  source cites "adler-dai-lionheart-2007"</text>
+<text x="322" y="1509" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#166534" text-anchor="start">knobs: p · lamb · method · solver choice</text>
+<text x="322" y="1530" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">measured: sensitivity spread diag(JᵀJ) = 3091× rim vs centre</text>
+<text x="322" y="1550" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">p=0 → 1× (noise to rim) · p=0.5 → 55.6× · p=1 → 3091× (to centre)</text>
+<rect x="322" y="1567" width="95.0" height="24" rx="12" fill="#DCFCE7"/>
+<text x="369.5" y="1583" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">YOU CAN EDIT</text>
+<rect x="1690" y="340" width="870" height="265" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<text x="1712" y="388" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">B1 · Your application</text>
+<text x="1712" y="412" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">examples/cn0565/main.py · cn0565_worker.py · realtimeEITUI.py</text>
+<text x="1712" y="433" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#166534" text-anchor="start">working knobs: value_type (Re/Im/|Z|) · solver · baseline</text>
+<text x="1712" y="454" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">BUG — the p and λ sliders are not connected to anything</text>
+<text x="1712" y="474" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">worker.py:87,91 write self.pVal / self.lambdaVal → 0 reads anywhere</text>
+<text x="1712" y="493" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">worker.py:160,172 pass literals p=0.5, lamb=0.01</text>
+<text x="1712" y="513" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">BUG — setup() runs inside the per-frame loop</text>
+<text x="1712" y="533" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">worker.py:146 solver() called in while-loop → :158 rebuilds JAC,</text>
+<text x="1712" y="552" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">recomputing FEM + Jacobian + inv(1083×1083) on every frame</text>
+<rect x="1712" y="569" width="95.0" height="24" rx="12" fill="#DCFCE7"/>
+<text x="1759.5" y="585" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">YOU CAN EDIT</text>
+<circle cx="2530" cy="370" r="17" fill="#B91C1C"/>
+<text x="2530" y="375.5" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<rect x="1690" y="647" width="870" height="227" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<text x="1712" y="695" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">B2 · pyadi-iio driver</text>
+<text x="1712" y="719" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">site-packages/adi/{cn0565, ad5940, adg2128}.py</text>
+<text x="1712" y="740" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#166534" text-anchor="start">knobs: excitation_frequency · excitation_amplitude</text>
+<text x="1712" y="761" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#166534" text-anchor="start">        electrode_count · force_distance · sense_distance</text>
+<text x="1712" y="782" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">the LIVE copy is in site-packages, not work/upstream-download/</text>
+<text x="1712" y="802" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">pyadi_iio-0.0.22.dist-info/direct_url.json → installed from a .zip,</text>
+<text x="1712" y="821" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">not an editable install — edits to the extracted tree do nothing</text>
+<rect x="1712" y="838" width="95.0" height="24" rx="12" fill="#DCFCE7"/>
+<text x="1759.5" y="854" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">YOU CAN EDIT</text>
+<circle cx="2530" cy="677" r="17" fill="#B91C1C"/>
+<text x="2530" y="682.5" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<rect x="1690" y="916" width="870" height="206" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<text x="1712" y="964" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">B3 · libiio + UART transport</text>
+<text x="1712" y="988" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">site-packages/iio.py (ctypes) → libiio.dll → COM port</text>
+<text x="1712" y="1011" font-family="'IBM Plex Mono','Consolas',monospace" font-size="14.5" font-weight="500" fill="#B45309" text-anchor="start">uri = "serial:COM7,230400,8n1"</text>
+<text x="1712" y="1031" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">iio.py:32 CDLL · iio.py:287 iio_create_context_from_uri</text>
+<text x="1712" y="1050" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">iio.py:1328 Context.__init__ calls _new_uri(uri)</text>
+<text x="1712" y="1069" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">measured: pylibiio 0.25, binding (0, 26, 'a0eca0d')</text>
+<rect x="1712" y="1086" width="130.0" height="24" rx="12" fill="#FEF3C7"/>
+<text x="1777.0" y="1102" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#92400E" text-anchor="middle">REFERENCE LIBRARY</text>
+<rect x="1690" y="1164" width="870" height="412" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<text x="1712" y="1212" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">B4 · Firmware (no-OS) — the ceiling, and it IS editable</text>
+<text x="1712" y="1236" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">Source is public: no-OS/projects/cn0565 (variants: eit, eit_iio)</text>
+<text x="1712" y="1256" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">your .hex name decodes exactly: cn0565 · eit_iio · eval-adicup3029</text>
+<text x="1712" y="1276" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">It publishes exactly FIVE device attributes — that is the ceiling:</text>
+<text x="1712" y="1296" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">iio_ad5940.c:236 impedance_mode   :242 magnitude_mode</text>
+<text x="1712" y="1315" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">             :248 excitation_frequency  :254 excitation_amplitude</text>
+<text x="1712" y="1334" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">             :260 gpio1_toggle     :281 raw (channel 'bia')</text>
+<text x="1712" y="1355" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">pyadi-iio exposes those five and nothing else — a 1:1 match.</text>
+<text x="1712" y="1376" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#166534" text-anchor="start">AppBiaCfg_Type already holds ~20 more knobs, just not published:</text>
+<text x="1712" y="1397" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#166534" text-anchor="start">HstiaRtiaSel (RTIA 200Ω–160k) · DftNum · HanWinEn · BiaODR</text>
+<text x="1712" y="1418" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#166534" text-anchor="start">ADCPgaGain · ADCSinc2/3Osr · SweepCfg (multi-frequency!) · RcalVal</text>
+<text x="1712" y="1438" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">bia_measurement.h  AppBiaCfg_Type</text>
+<text x="1712" y="1459" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">Rebuild:  python tools/scripts/no_os_build.py build</text>
+<text x="1712" y="1481" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">          --project cn0565 --variant eit_iio --board eval-adicup3029</text>
+<text x="1712" y="1501" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">projects/cn0565/README.rst, Build Command · needs CCES installed</text>
+<text x="1712" y="1522" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">Then flash the new .hex the same way you already did: drag to DAPLINK.</text>
+<rect x="1712" y="1540" width="354.0" height="24" rx="12" fill="#DBEAFE"/>
+<text x="1889.0" y="1556" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#1D4ED8" text-anchor="middle">EDITABLE — source is public, needs CCES + reflash</text>
+<circle cx="2530" cy="1194" r="17" fill="#B91C1C"/>
+<text x="2530" y="1199.5" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<rect x="1690" y="1618" width="870" height="211" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<text x="1712" y="1666" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#141413" text-anchor="start">B5 · AD5940 + 2× ADG2128</text>
+<text x="1712" y="1690" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">AD5940 drives AC excitation, runs a DFT, returns complex Z.</text>
+<text x="1712" y="1713" font-family="'IBM Plex Mono','Consolas',monospace" font-size="14.5" font-weight="500" fill="#B45309" text-anchor="start">|Z| = (|Vₘₐᵍ| / |Iₘₐᵍ|) × R_TIA</text>
+<text x="1712" y="1733" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">CN-0565 circuit note Rev.A p.4, eq. (5)</text>
+<text x="1712" y="1754" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">ADG2128 routes F+/S+/S−/F− to any electrode (Fig. 10).</text>
+<text x="1712" y="1775" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="500" fill="#B91C1C" text-anchor="start">R_TIA has 20% tolerance and must be calibrated (p.5)</text>
+<rect x="1712" y="1793" width="102.0" height="24" rx="12" fill="#E7E5E4"/>
+<text x="1763.0" y="1809" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#44403C" text-anchor="middle">FIXED SILICON</text>
+<path d="M 735.0 546 L 735.0 578" stroke="#93C5FD" stroke-width="2.5" fill="none"/>
+<path d="M 728.0 576 L 735.0 587 L 742.0 576 Z" fill="#93C5FD"/>
+<path d="M 735.0 794 L 735.0 826" stroke="#93C5FD" stroke-width="2.5" fill="none"/>
+<path d="M 728.0 824 L 735.0 835 L 742.0 824 Z" fill="#93C5FD"/>
+<path d="M 735.0 1062 L 735.0 1094" stroke="#93C5FD" stroke-width="2.5" fill="none"/>
+<path d="M 728.0 1092 L 735.0 1103 L 742.0 1092 Z" fill="#93C5FD"/>
+<path d="M 735.0 1312 L 735.0 1344" stroke="#93C5FD" stroke-width="2.5" fill="none"/>
+<path d="M 728.0 1342 L 735.0 1353 L 742.0 1342 Z" fill="#93C5FD"/>
+<path d="M 2125.0 605 L 2125.0 637" stroke="#E8C39A" stroke-width="2.5" fill="none"/>
+<path d="M 2118.0 635 L 2125.0 646 L 2132.0 635 Z" fill="#E8C39A"/>
+<path d="M 2125.0 874 L 2125.0 906" stroke="#E8C39A" stroke-width="2.5" fill="none"/>
+<path d="M 2118.0 904 L 2125.0 915 L 2132.0 904 Z" fill="#E8C39A"/>
+<path d="M 2125.0 1122 L 2125.0 1154" stroke="#E8C39A" stroke-width="2.5" fill="none"/>
+<path d="M 2118.0 1152 L 2125.0 1163 L 2132.0 1152 Z" fill="#E8C39A"/>
+<path d="M 2125.0 1576 L 2125.0 1608" stroke="#E8C39A" stroke-width="2.5" fill="none"/>
+<path d="M 2118.0 1606 L 2125.0 1617 L 2132.0 1606 Z" fill="#E8C39A"/>
+<path d="M 735.0 1603 C 735.0 1859 800.0 1859 920.0 1899" stroke="#1D4ED8" stroke-width="3" fill="none" marker-end="url(#ah1D4ED8)"/>
+<path d="M 2125.0 1829 C 2125.0 1859 2060.0 1859 1940.0 1899" stroke="#B45309" stroke-width="3" fill="none" marker-end="url(#ahB45309)"/>
+<rect x="680.0" y="1899" width="1500" height="186" rx="18" fill="#141413"/>
+<text x="716.0" y="1947" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="21" font-weight="600" fill="#FAF9F5" text-anchor="start">The two branches meet — and this is the only place they touch</text>
+<text x="716.0" y="1995" font-family="'IBM Plex Mono','Consolas',monospace" font-size="26" font-weight="500" fill="#F5B78B" text-anchor="start">ds = − H · dv          dv = (v1 − v0) / |v0|</text>
+<text x="716.0" y="2031" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="400" fill="#A8A29E" text-anchor="start">eit/base.py:126  ·  eit/base.py:188   (identical upstream)</text>
+<text x="716.0" y="2061" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#E7E5E4" text-anchor="start">H comes from the left. dv comes from the right. Row i of J must be the same measurement as element i of dv.</text>
+<rect x="1080.0" y="2139" width="700" height="96" rx="16" fill="#FFFFFF" stroke="#D6D2C4" stroke-width="1.6"/>
+<text x="1110.0" y="2177" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="20" font-weight="600" fill="#141413" text-anchor="start">Δσ image</text>
+<text x="1110.0" y="2207" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="400" fill="#44403C" text-anchor="start">sim2pts() → tripcolor()  ·  GREIT: mask_value() → imshow()   — a CHANGE, never an absolute tissue value</text>
+<path d="M 1430.0 2085 L 1430.0 2129" stroke="#141413" stroke-width="3" fill="none" marker-end="url(#ah8A8580)"/>
+<rect x="300" y="2289" width="2260" height="330" rx="18" fill="#141413"/>
+<text x="336" y="2339" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="24" font-weight="600" fill="#FAF9F5" text-anchor="start">THE MEDIUM — what is actually between the electrodes?</text>
+<text x="336" y="2371" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="400" fill="#E7E5E4" text-anchor="start">Branch A assumes this. Branch B measures it. Everything above is only as true as these two agreeing.</text>
+<rect x="336.0" y="2393" width="709.3333333333334" height="196" rx="14" fill="#1F1F1E" stroke="#3A3936" stroke-width="1.4"/>
+<text x="356.0" y="2425" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="17" font-weight="600" fill="#E7E5E4" text-anchor="start">Impedance test board</text>
+<text x="356.0" y="2449" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">A lumped RC network. There is no spatial</text>
+<text x="356.0" y="2468" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">conductivity field at all, so an EIT image of it</text>
+<text x="356.0" y="2487" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">carries no anatomy — it only proves the data path.</text>
+<text x="356.0" y="2506" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">Proof: it PASSED prod_tst, which checks fixed</text>
+<text x="356.0" y="2525" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">R/C values, not any distribution.</text>
+<rect x="1075.3333333333335" y="2393" width="709.3333333333334" height="196" rx="14" fill="#1F1F1E" stroke="#3A3936" stroke-width="1.4"/>
+<text x="1095.3333333333335" y="2425" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="17" font-weight="600" fill="#DCFCE7" text-anchor="start">Saline tank phantom</text>
+<text x="1095.3333333333335" y="2449" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">Circular, homogeneous, isotropic, closed ring of</text>
+<text x="1095.3333333333335" y="2468" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">electrodes — matches pyEIT's default model exactly.</text>
+<text x="1095.3333333333335" y="2487" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">This is the only configuration today where an</text>
+<text x="1095.3333333333335" y="2506" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">image can be trusted, and the only way to settle</text>
+<text x="1095.3333333333335" y="2525" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">cross-link 2 below.</text>
+<rect x="1814.6666666666667" y="2393" width="709.3333333333334" height="196" rx="14" fill="#1F1F1E" stroke="#3A3936" stroke-width="1.4"/>
+<text x="1834.6666666666667" y="2425" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="17" font-weight="600" fill="#FEE2E2" text-anchor="start">Facial muscle</text>
+<text x="1834.6666666666667" y="2449" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">Open domain (current escapes into the head) · no</text>
+<text x="1834.6666666666667" y="2468" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">closed ring · layered skin/fat/bone/air · anisotropic</text>
+<text x="1834.6666666666667" y="2487" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">muscle · large contact impedance · and the electrodes</text>
+<text x="1834.6666666666667" y="2506" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">MOVE with the very expression you are imaging.</text>
+<text x="1834.6666666666667" y="2525" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13" font-weight="400" fill="#C9C5BE" text-anchor="start">Every one of these breaks an assumption in A1–A3.</text>
+<path d="M 1170 443.0 C 1470 443.0 1990 714.5 1690 714.5" stroke="#8A8580" stroke-width="2.6" fill="none" stroke-dasharray="9 7" marker-end="url(#ah8A8580)"/>
+<circle cx="1655.0" cy="578.75" r="19" fill="#8A8580" stroke="#FAF9F5" stroke-width="3"/>
+<text x="1655.0" y="584.25" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<path d="M 1170 731.0 C 1470 731.0 1990 786.5 1690 786.5" stroke="#B91C1C" stroke-width="2.6" fill="none" stroke-dasharray="12 6" marker-end="url(#ahB91C1C)"/>
+<circle cx="1655.0" cy="758.75" r="19" fill="#B91C1C" stroke="#FAF9F5" stroke-width="3"/>
+<text x="1655.0" y="764.25" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<path d="M 2560 1370.0 C 2850 1370.0 2850 830.5 2560 830.5" stroke="#8A8580" stroke-width="2.6" fill="none" stroke-dasharray="9 7" marker-end="url(#ah8A8580)"/>
+<circle cx="2777.5" cy="1100.25" r="19" fill="#8A8580" stroke="#FAF9F5" stroke-width="3"/>
+<text x="2777.5" y="1105.75" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<path d="M 300 503.0 C 50 503.0 50 2349 300 2349" stroke="#B91C1C" stroke-width="2.6" fill="none" stroke-dasharray="9 7" marker-end="url(#ahB91C1C)"/>
+<circle cx="112.5" cy="1426.0" r="19" fill="#B91C1C" stroke="#FAF9F5" stroke-width="3"/>
+<text x="112.5" y="1431.5" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+<path d="M 2560 870.5 C 2860 870.5 2860 2409 2560 2409" stroke="#8A8580" stroke-width="2.6" fill="none" stroke-dasharray="9 7" marker-end="url(#ah8A8580)"/>
+<circle cx="2785.0" cy="1639.75" r="19" fill="#8A8580" stroke="#FAF9F5" stroke-width="3"/>
+<text x="2785.0" y="1645.25" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">7</text>
+<path d="M 880.0 2289 C 880.0 2289 880.0 2095 880.0 2095" stroke="#B91C1C" stroke-width="2.6" fill="none" stroke-dasharray="9 7" marker-end="url(#ahB91C1C)"/>
+<circle cx="880.0" cy="2192.0" r="19" fill="#B91C1C" stroke="#FAF9F5" stroke-width="3"/>
+<text x="880.0" y="2197.5" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">8</text>
+<rect x="300" y="2679" width="2260" height="430" rx="18" fill="#FFFFFF" stroke="#D6D2C4" stroke-width="1.6"/>
+<text x="336" y="2725" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="22" font-weight="600" fill="#141413" text-anchor="start">The connections — and the evidence for each</text>
+<circle cx="352" cy="2758" r="15" fill="#8A8580"/>
+<text x="352" y="2763" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="384" y="2761" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="600" fill="#141413" text-anchor="start">n_el is declared in three places</text>
+<text x="384" y="2782" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">driver electrode_count · mesh n_el · protocol n_el. pyEIT only WARNS on mismatch, it does not stop you.  proof: eit/fem.py:143–153</text>
+<circle cx="352" cy="2804" r="15" fill="#B91C1C"/>
+<text x="352" y="2809" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="384" y="2807" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="600" fill="#141413" text-anchor="start">Driver and pyEIT label the sense electrodes in opposite order — on all 208 rows</text>
+<text x="384" y="2828" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">208/208 same excitation pair, 208/208 same sense pair, 208/208 S+/S− swapped.  proof: adi/cn0565.py:73–88 vs protocol.py:254–267 + fem.py:363</text>
+<circle cx="352" cy="2850" r="15" fill="#B91C1C"/>
+<text x="352" y="2855" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="384" y="2853" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="600" fill="#141413" text-anchor="start">The p and λ sliders do nothing, and setup() reruns every frame</text>
+<text x="384" y="2874" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">self.pVal / self.lambdaVal / self.reSetup: 0 reads.  proof: cn0565_worker.py:87–96 vs :160, :172; :146 calls solver() inside the loop</text>
+<circle cx="352" cy="2896" r="15" fill="#1D4ED8"/>
+<text x="352" y="2901" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="384" y="2899" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="600" fill="#141413" text-anchor="start">Firmware sets the ceiling — but you can raise the ceiling yourself</text>
+<text x="384" y="2920" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">5 attributes published (iio_ad5940.c:236–281) = exactly the 5 pyadi-iio exposes. To add one: enum + entry in the iio_attribute array + a case in get/set_attr, rebuild, reflash.</text>
+<circle cx="352" cy="2942" r="15" fill="#B91C1C"/>
+<text x="352" y="2947" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+<text x="384" y="2945" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="600" fill="#141413" text-anchor="start">The fidelity gap — A1's assumed medium vs the real one</text>
+<text x="384" y="2966" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">H is built entirely from the left column. Any mismatch is not flagged; it is rendered as a confident coloured blob.</text>
+<circle cx="352" cy="2988" r="15" fill="#8A8580"/>
+<text x="352" y="2993" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">7</text>
+<text x="384" y="2991" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="600" fill="#141413" text-anchor="start">excitation_frequency decides which tissue the current travels through</text>
+<text x="384" y="3012" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">at 10 kHz the skin barrier dominates; membranes are largely invisible. AD5940 supports 0.015 Hz – 200 kHz.  proof: CN-0565 Rev.A p.3</text>
+<circle cx="352" cy="3034" r="15" fill="#B91C1C"/>
+<text x="352" y="3039" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">8</text>
+<text x="384" y="3037" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="600" fill="#141413" text-anchor="start">Electrode movement enters as perfectly valid data</text>
+<text x="384" y="3058" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">the solver cannot distinguish it from Δσ. Adler 2009 trains GREIT against it — but pyEIT's GREIT is the 'dist' approximation, without that training.  proof: greit.py:77–99</text>
+</svg>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 2410" width="1180" height="2410">
+<defs>
+<marker id="a141413" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#141413"/></marker>
+<marker id="a1D4ED8" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#1D4ED8"/></marker>
+<marker id="aB45309" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#B45309"/></marker>
+<marker id="a8A8580" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#8A8580"/></marker>
+</defs>
+<rect width="1180" height="2410" fill="#FAF9F5"/>
+<text x="72" y="88" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13" font-weight="500" fill="#B45309" text-anchor="start">CN0565 · Electrical Impedance Tomography Board</text>
+<text x="72" y="146" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="42" font-weight="700" fill="#141413" text-anchor="start">How CN0565 Actually Works</text>
+<text x="72" y="186" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="17" font-weight="400" fill="#44403C" text-anchor="start">A plain-English, layer-by-layer tour — from tapping a button on your screen</text>
+<text x="72" y="212" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="17" font-weight="400" fill="#44403C" text-anchor="start">to a real electrical signal on a chip, and back again.</text>
+<rect x="72" y="250" width="1036" height="150" rx="16" fill="#FDF6EC" stroke="#FDF6EC" stroke-width="0"/>
+<text x="102" y="292" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="19" font-weight="600" fill="#141413" text-anchor="start">Think of it as a relay race</text>
+<text x="102" y="322" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">Six runners, each speaking a different language, stand in a line between your mouse click and a real</text>
+<text x="102" y="346" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">chip. Runner 1 doesn’t need to speak Runner 6’s language — each only translates for the runner next to</text>
+<text x="102" y="370" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">them. Your request is handed down the line, translated at every step. The answer runs all the way back.</text>
+<path d="M 150 506 L 150 750" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+<circle cx="150" cy="506" r="36" fill="#DBEAFE"/>
+<g transform="translate(135,491) scale(1.25)" fill="none" stroke="#141413" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<rect x="3" y="4" width="18" height="13" rx="1.5"/>
+<line x1="8" y1="21" x2="16" y2="21"/>
+<line x1="12" y1="17" x2="12" y2="21"/>
+</g>
+<rect x="230" y="470" width="878" height="148" rx="16" fill="#FFFFFF" stroke="#E7E2D6" stroke-width="1.5"/>
+<text x="256" y="510" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="19" font-weight="600" fill="#141413" text-anchor="start">1 · You, using the app</text>
+<text x="256" y="538" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">You click a button, move a slider, or type a value in a window on your PC.</text>
+<rect x="256" y="562" width="348.5" height="24" rx="6" fill="#F5F3EE" stroke="#F5F3EE" stroke-width="0"/>
+<text x="266" y="578" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#6B675E" text-anchor="start">main.py · realtimeEITUI.py · cn0565_worker.py</text>
+<rect x="256" y="596" width="68.8" height="24" rx="12" fill="#DCFCE7" stroke="#DCFCE7" stroke-width="0"/>
+<text x="290.4" y="612" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">EDITABLE</text>
+<text x="230" y="658" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="600" fill="#141413" text-anchor="start">Calls a Python function</text>
+<text x="230" y="680" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">import adi  →  adi.cn0565(uri=...)</text>
+<path d="M 150 750 L 150 1016" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+<circle cx="150" cy="750" r="36" fill="#93C5FD"/>
+<g transform="translate(135,735) scale(1.25)" fill="none" stroke="#141413" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="9 7 4 12 9 17"/>
+<polyline points="15 7 20 12 15 17"/>
+</g>
+<rect x="230" y="714" width="878" height="170" rx="16" fill="#FFFFFF" stroke="#E7E2D6" stroke-width="1.5"/>
+<text x="256" y="754" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="19" font-weight="600" fill="#141413" text-anchor="start">2 · The translator (Python driver)</text>
+<text x="256" y="782" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">Your click becomes a plain instruction — “set frequency to 10 kHz”,</text>
+<text x="256" y="804" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">“read the result” — using ADI’s cn0565 driver.</text>
+<rect x="256" y="828" width="355.8" height="24" rx="6" fill="#F5F3EE" stroke="#F5F3EE" stroke-width="0"/>
+<text x="266" y="844" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#6B675E" text-anchor="start">site-packages/adi/{cn0565, ad5940, adg2128}.py</text>
+<rect x="256" y="862" width="68.8" height="24" rx="12" fill="#DCFCE7" stroke="#DCFCE7" stroke-width="0"/>
+<text x="290.4" y="878" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">EDITABLE</text>
+<text x="230" y="924" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="600" fill="#141413" text-anchor="start">Calls a shared library</text>
+<text x="230" y="946" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">ctypes → a function inside a compiled C library</text>
+<path d="M 150 1016 L 150 1282" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+<circle cx="150" cy="1016" r="36" fill="#60A5FA"/>
+<g transform="translate(135,1001) scale(1.25)" fill="none" stroke="#141413" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<path d="M9 2v6M15 2v6M7 8h10a1 1 0 0 1 1 1v3a6 6 0 0 1-12 0v-3a1 1 0 0 1 1-1z"/>
+<line x1="12" y1="18" x2="12" y2="22"/>
+</g>
+<rect x="230" y="980" width="878" height="170" rx="16" fill="#FFFFFF" stroke="#E7E2D6" stroke-width="1.5"/>
+<text x="256" y="1020" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="19" font-weight="600" fill="#141413" text-anchor="start">3 · The universal adapter (libiio)</text>
+<text x="256" y="1048" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">A general ADI library rewrites that instruction into a standard</text>
+<text x="256" y="1070" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">“measurement device” language shared by hundreds of ADI chips.</text>
+<rect x="256" y="1094" width="385.0" height="24" rx="6" fill="#F5F3EE" stroke="#F5F3EE" stroke-width="0"/>
+<text x="266" y="1110" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#6B675E" text-anchor="start">iio.py (ctypes bridge)  +  libiio.dll (compiled C)</text>
+<rect x="256" y="1128" width="75.9" height="24" rx="12" fill="#FEF3C7" stroke="#FEF3C7" stroke-width="0"/>
+<text x="293.95" y="1144" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#92400E" text-anchor="middle">REFERENCE</text>
+<text x="230" y="1190" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="600" fill="#141413" text-anchor="start">Sends a measurement-device command</text>
+<text x="230" y="1212" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">IIO wire protocol</text>
+<path d="M 150 1282 L 150 1548" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+<circle cx="150" cy="1282" r="36" fill="#3B82F6"/>
+<g transform="translate(135,1267) scale(1.25)" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11 4.88"/>
+<path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07L13 19.12"/>
+</g>
+<rect x="230" y="1246" width="878" height="170" rx="16" fill="#FFFFFF" stroke="#E7E2D6" stroke-width="1.5"/>
+<text x="256" y="1286" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="19" font-weight="600" fill="#141413" text-anchor="start">4 · The wire (USB cable)</text>
+<text x="256" y="1314" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">The instruction travels as plain serial data — the same basic idea</text>
+<text x="256" y="1336" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">as an old dial-up modem — down a USB cable to the board.</text>
+<rect x="256" y="1360" width="239.0" height="24" rx="6" fill="#F5F3EE" stroke="#F5F3EE" stroke-width="0"/>
+<text x="266" y="1376" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#6B675E" text-anchor="start">uri = "serial:COM7,230400,8n1"</text>
+<rect x="256" y="1394" width="47.5" height="24" rx="12" fill="#E7E5E4" stroke="#E7E5E4" stroke-width="0"/>
+<text x="279.75" y="1410" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#44403C" text-anchor="middle">FIXED</text>
+<text x="230" y="1456" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="600" fill="#141413" text-anchor="start">Sends raw bytes down the wire</text>
+<text x="230" y="1478" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">UART, 230,400 bits per second</text>
+<path d="M 150 1548 L 150 1836" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+<circle cx="150" cy="1548" r="36" fill="#1D4ED8"/>
+<g transform="translate(135,1533) scale(1.25)" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<rect x="7" y="7" width="10" height="10" rx="1"/>
+<line x1="7" y1="2" x2="7" y2="5"/><line x1="7" y1="19" x2="7" y2="22"/><line x1="2" y1="7" x2="5" y2="7"/><line x1="19" y1="7" x2="22" y2="7"/>
+<line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+<line x1="17" y1="2" x2="17" y2="5"/><line x1="17" y1="19" x2="17" y2="22"/><line x1="2" y1="17" x2="5" y2="17"/><line x1="19" y1="17" x2="22" y2="17"/>
+</g>
+<rect x="230" y="1512" width="878" height="192" rx="16" fill="#FFFFFF" stroke="#E7E2D6" stroke-width="1.5"/>
+<text x="256" y="1552" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="19" font-weight="600" fill="#141413" text-anchor="start">5 · The board’s brain (firmware)</text>
+<text x="256" y="1580" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">A small program on the board’s own chip receives the instruction and</text>
+<text x="256" y="1602" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">tells the measurement chip what to do. It publishes exactly 5 settings —</text>
+<text x="256" y="1624" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">that is the ceiling for everything above. Source IS public and rebuildable.</text>
+<rect x="256" y="1648" width="370.4" height="24" rx="6" fill="#F5F3EE" stroke="#F5F3EE" stroke-width="0"/>
+<text x="266" y="1664" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#6B675E" text-anchor="start">firmware/*.hex  ·  source: no-OS/projects/cn0565</text>
+<rect x="256" y="1682" width="232.1" height="24" rx="12" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="0"/>
+<text x="372.05" y="1698" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#1D4ED8" text-anchor="middle">EDITABLE — needs CCES + reflash</text>
+<text x="230" y="1744" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="600" fill="#141413" text-anchor="start">Talks chip-to-chip, on the board itself</text>
+<text x="230" y="1766" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12.5" font-weight="400" fill="#8A8580" text-anchor="start">SPI (to AD5940) and I²C (to 2× ADG2128)</text>
+<circle cx="150" cy="1836" r="36" fill="#0F172A"/>
+<g transform="translate(135,1821) scale(1.25)" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="6" cy="6" r="2.1"/><circle cx="18" cy="6" r="2.1"/><circle cx="6" cy="18" r="2.1"/><circle cx="18" cy="18" r="2.1"/><circle cx="12" cy="12" r="2.1"/>
+<path d="M8 6h8M6 8v8M18 8v8M8 18h8M9.7 10.5 8 8M14.3 10.5 16 8M9.7 13.5 8 16M14.3 13.5 16 16"/>
+</g>
+<rect x="230" y="1800" width="878" height="170" rx="16" fill="#FFFFFF" stroke="#E7E2D6" stroke-width="1.5"/>
+<text x="256" y="1840" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="19" font-weight="600" fill="#141413" text-anchor="start">6 · The real world (analog chips)</text>
+<text x="256" y="1868" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">The AD5940 generates a tiny AC signal, sends it through your electrodes</text>
+<text x="256" y="1890" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14.5" font-weight="400" fill="#44403C" text-anchor="start">or test board, and measures what comes back.</text>
+<rect x="256" y="1914" width="348.5" height="24" rx="6" fill="#F5F3EE" stroke="#F5F3EE" stroke-width="0"/>
+<text x="266" y="1930" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#6B675E" text-anchor="start">AD5940 + 2× ADG2128 — real silicon on the PCB</text>
+<rect x="256" y="1948" width="68.8" height="24" rx="12" fill="#E7E5E4" stroke="#E7E5E4" stroke-width="0"/>
+<text x="290.4" y="1964" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#44403C" text-anchor="middle">PHYSICAL</text>
+<rect x="230" y="2020" width="878" height="110" rx="16" fill="#FFFFFF" stroke="#D6D2C4" stroke-width="1.5" stroke-dasharray="7 6"/>
+<g transform="translate(257,2045) scale(1.25)" fill="none" stroke="#B45309" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+<path d="M4 12a8 8 0 1 0 8-8"/>
+<polyline points="4 4 4 12 12 12"/>
+</g>
+<text x="304" y="2058" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="16" font-weight="600" fill="#141413" text-anchor="start">…and the answer comes back the same way, in reverse</text>
+<text x="304" y="2084" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="400" fill="#44403C" text-anchor="start">chip → firmware → cable → libiio → Python driver — until it becomes a number, and a</text>
+<text x="304" y="2106" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="400" fill="#44403C" text-anchor="start">picture, on your screen.</text>
+<path d="M 72 2154 L 1108 2154" stroke="#E7E2D6" stroke-width="1.5"/>
+<text x="72" y="2188" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="17" font-weight="600" fill="#141413" text-anchor="start">What the colours mean</text>
+<rect x="72" y="2208" width="68.8" height="24" rx="12" fill="#DCFCE7" stroke="#DCFCE7" stroke-width="0"/>
+<text x="106.4" y="2224" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#166534" text-anchor="middle">EDITABLE</text>
+<text x="156.8" y="2224" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14" font-weight="400" fill="#44403C" text-anchor="start">You can change this freely — it’s your own Python code.</text>
+<rect x="72" y="2246" width="75.9" height="24" rx="12" fill="#FEF3C7" stroke="#FEF3C7" stroke-width="0"/>
+<text x="109.95" y="2262" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#92400E" text-anchor="middle">REFERENCE</text>
+<text x="163.9" y="2262" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14" font-weight="400" fill="#44403C" text-anchor="start">ADI’s standard library — safe to read, rarely needs editing.</text>
+<rect x="72" y="2284" width="232.1" height="24" rx="12" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="0"/>
+<text x="188.05" y="2300" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#1D4ED8" text-anchor="middle">EDITABLE — needs CCES + reflash</text>
+<text x="320.1" y="2300" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14" font-weight="400" fill="#44403C" text-anchor="start">Source is public; edit, rebuild with CCES, drag the new .hex to DAPLINK.</text>
+<rect x="72" y="2322" width="47.5" height="24" rx="12" fill="#E7E5E4" stroke="#E7E5E4" stroke-width="0"/>
+<text x="95.75" y="2338" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="11.5" font-weight="600" fill="#44403C" text-anchor="middle">FIXED</text>
+<text x="135.5" y="2338" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14" font-weight="400" fill="#44403C" text-anchor="start">Hardware — needs a new PCB to change.</text>
+</svg>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 1930" width="1420" height="1930">
+<defs>
+<marker id="a141413" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#141413"/></marker>
+<marker id="a1D4ED8" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#1D4ED8"/></marker>
+<marker id="aB45309" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#B45309"/></marker>
+<marker id="a8A8580" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,1 L10,5.5 L0,10 Z" fill="#8A8580"/></marker>
+</defs>
+<rect width="1420" height="1930" fill="#FAF9F5"/>
+<text x="64" y="84" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13" font-weight="500" fill="#B45309" text-anchor="start">pyEIT · reconstruction pipeline</text>
+<text x="64" y="140" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="40" font-weight="700" fill="#141413" text-anchor="start">From electrode voltages to an image</text>
+<text x="64" y="180" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15.5" font-weight="400" fill="#44403C" text-anchor="start">Two independent branches run in parallel and meet at one matrix multiply. The left branch simulates the</text>
+<text x="64" y="205" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15.5" font-weight="400" fill="#44403C" text-anchor="start">medium you assume. The right branch is what the hardware measured. The picture is their disagreement.</text>
+<rect x="64" y="235" width="626.0" height="64" rx="12" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.6"/>
+<text x="84" y="262" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="600" fill="#1D4ED8" text-anchor="start">BRANCH A · The model</text>
+<text x="84" y="284" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="400" fill="#44403C" text-anchor="start">computed once, offline → produces H</text>
+<rect x="730.0" y="235" width="626.0" height="64" rx="12" fill="#FDF6EC" stroke="#F0D9BE" stroke-width="1.6"/>
+<text x="750.0" y="262" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="15" font-weight="600" fill="#B45309" text-anchor="start">BRANCH B · The measurement</text>
+<text x="750.0" y="284" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="400" fill="#44403C" text-anchor="start">every frame, live → produces dv</text>
+<rect x="64" y="335" width="626.0" height="166" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="84" y="371" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="16.5" font-weight="600" fill="#141413" text-anchor="start">A1 · Geometry — the medium you assume</text>
+<text x="84" y="399" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="500" fill="#1D4ED8" text-anchor="start">Ω ⊂ ℝ²,  σ(x,y) on each triangle</text>
+<text x="84" y="423" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">mesh.create(n_el=16, fd=shape.circle, h0=0.08)</text>
+<text x="84" y="447" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#166534" text-anchor="start">tune: n_el · fd · h0 · p_fix</text>
+<text x="84" y="471" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#B91C1C" text-anchor="start">default = dimensionless unit circle, uniform σ=1</text>
+<path d="M 377.0 501 L 377.0 525" stroke="#1D4ED8" stroke-width="2.5" fill="none" marker-end="url(#a1D4ED8)"/>
+<rect x="64" y="535" width="626.0" height="166" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="84" y="571" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="16.5" font-weight="600" fill="#141413" text-anchor="start">A2 · Protocol — drive and measure</text>
+<text x="84" y="599" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="500" fill="#1D4ED8" text-anchor="start">A,B inject current  ·  M,N read voltage</text>
+<text x="84" y="623" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">protocol.create(16, dist_exc=1, step_meas=1, "std")</text>
+<text x="84" y="647" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#166534" text-anchor="start">tune: dist_exc · step_meas · parser_meas</text>
+<text x="84" y="671" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="400" fill="#44403C" text-anchor="start">16 el adjacent → 16 × 13 = 208 values per frame</text>
+<path d="M 377.0 701 L 377.0 725" stroke="#1D4ED8" stroke-width="2.5" fill="none" marker-end="url(#a1D4ED8)"/>
+<rect x="64" y="735" width="626.0" height="142" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="84" y="771" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="16.5" font-weight="600" fill="#141413" text-anchor="start">A3 · FEM forward solve</text>
+<text x="84" y="799" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="500" fill="#1D4ED8" text-anchor="start">∇·(σ∇u)=0  →  K(σ) u = b</text>
+<text x="84" y="823" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">fem.py → calculate_ke() → assemble() → spsolve()</text>
+<text x="84" y="847" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#B91C1C" text-anchor="start">point electrodes: no contact impedance, no electrode area</text>
+<path d="M 377.0 877 L 377.0 901" stroke="#1D4ED8" stroke-width="2.5" fill="none" marker-end="url(#a1D4ED8)"/>
+<rect x="64" y="911" width="626.0" height="142" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="84" y="947" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="16.5" font-weight="600" fill="#141413" text-anchor="start">A4 · Jacobian (sensitivity matrix)</text>
+<text x="84" y="975" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="500" fill="#1D4ED8" text-anchor="start">Jᵢⱼ = ∂vᵢ/∂σⱼ    J[i,:,e] = rᵢ Kₑ fₑ</text>
+<text x="84" y="999" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">fwd.compute_jac(perm, normalize)</text>
+<text x="84" y="1023" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#B91C1C" text-anchor="start">J = 208 × 1083 · cond 1.3×10¹⁵ · numerically singular</text>
+<path d="M 377.0 1053 L 377.0 1077" stroke="#1D4ED8" stroke-width="2.5" fill="none" marker-end="url(#a1D4ED8)"/>
+<rect x="64" y="1087" width="626.0" height="166" rx="16" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.6"/>
+<text x="84" y="1123" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="16.5" font-weight="600" fill="#141413" text-anchor="start">A5 · Regularize → matrix H</text>
+<text x="84" y="1151" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="500" fill="#1D4ED8" text-anchor="start">H = (JᵀJ + λR)⁻¹Jᵀ,  R = diag(diag(JᵀJ))ᵖ</text>
+<text x="84" y="1175" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">jac.py:103 · greit.py:118 · bp.py:56</text>
+<text x="84" y="1199" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#166534" text-anchor="start">tune: p · lamb · method</text>
+<text x="84" y="1223" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="400" fill="#44403C" text-anchor="start">computed once at setup(), reused every frame</text>
+<rect x="730.0" y="335" width="626.0" height="166" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<text x="750.0" y="371" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="16.5" font-weight="600" fill="#141413" text-anchor="start">B1 · Hardware scan</text>
+<text x="750.0" y="399" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="500" fill="#B45309" text-anchor="start">Z = V/I per electrode combination</text>
+<text x="750.0" y="423" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">eit_board.all_voltages</text>
+<text x="750.0" y="447" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#166534" text-anchor="start">tune: frequency · amplitude · electrode_count</text>
+<text x="750.0" y="471" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#B91C1C" text-anchor="start">its switch order must match A2, or J and dv differ</text>
+<path d="M 1043.0 501 L 1043.0 525" stroke="#B45309" stroke-width="2.5" fill="none" marker-end="url(#aB45309)"/>
+<rect x="730.0" y="535" width="626.0" height="166" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<text x="750.0" y="571" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="16.5" font-weight="600" fill="#141413" text-anchor="start">B2 · Collapse complex Z to one number</text>
+<text x="750.0" y="599" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="500" fill="#B45309" text-anchor="start">v = Re(Z)  or  Im(Z)  or  |Z|</text>
+<text x="750.0" y="623" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">voltages[:,0] / [:,1] / sqrt(sum²)</text>
+<text x="750.0" y="647" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#166534" text-anchor="start">tune: value_type</text>
+<text x="750.0" y="671" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="400" fill="#44403C" text-anchor="start">Re = extracellular path · Im = membrane / capacitive</text>
+<path d="M 1043.0 701 L 1043.0 725" stroke="#B45309" stroke-width="2.5" fill="none" marker-end="url(#aB45309)"/>
+<rect x="730.0" y="735" width="626.0" height="166" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<text x="750.0" y="771" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="16.5" font-weight="600" fill="#141413" text-anchor="start">B3 · Baseline v0 and live frame v1</text>
+<text x="750.0" y="799" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="500" fill="#B45309" text-anchor="start">v0 = reference state · v1 = current state</text>
+<text x="750.0" y="823" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">cn0565_worker.py: set_baseline → v0</text>
+<text x="750.0" y="847" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="400" fill="#44403C" text-anchor="start">for muscle: v0 = rest, v1 = contraction</text>
+<text x="750.0" y="871" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#B91C1C" text-anchor="start">cn0565_jacobian.py:46 fakes v0 = ones — demo only</text>
+<path d="M 1043.0 901 L 1043.0 925" stroke="#B45309" stroke-width="2.5" fill="none" marker-end="url(#aB45309)"/>
+<rect x="730.0" y="935" width="626.0" height="166" rx="16" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<text x="750.0" y="971" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="16.5" font-weight="600" fill="#141413" text-anchor="start">B4 · Difference data</text>
+<text x="750.0" y="999" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13.5" font-weight="500" fill="#B45309" text-anchor="start">dv = (v1 − v0) / |v0|</text>
+<text x="750.0" y="1023" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">base.py:188 _normalize</text>
+<text x="750.0" y="1047" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#166534" text-anchor="start">tune: normalize=True/False</text>
+<text x="750.0" y="1071" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="400" fill="#44403C" text-anchor="start">normalizing cancels per-channel gain → unitless Δσ/σ</text>
+<path d="M 377.0 1253 C 377.0 1293 490.0 1293 570.0 1323" stroke="#1D4ED8" stroke-width="3" fill="none" marker-end="url(#a1D4ED8)"/>
+<path d="M 1043.0 1101 C 1043.0 1293 930.0 1293 850.0 1323" stroke="#B45309" stroke-width="3" fill="none" marker-end="url(#aB45309)"/>
+<rect x="64" y="1323" width="1292" height="176" rx="18" fill="#141413" stroke="#141413" stroke-width="0"/>
+<text x="96" y="1367" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="20" font-weight="600" fill="#FAF9F5" text-anchor="start">The two branches meet here</text>
+<text x="96" y="1415" font-family="'IBM Plex Mono','Consolas',monospace" font-size="30" font-weight="500" fill="#F5B78B" text-anchor="start">ds = − H · dv</text>
+<text x="96" y="1447" font-family="'IBM Plex Mono','Consolas',monospace" font-size="13" font-weight="400" fill="#A8A29E" text-anchor="start">base.py:126    eit.solve(v1, v0, normalize=True)</text>
+<text x="96" y="1477" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="14" font-weight="400" fill="#E7E5E4" text-anchor="start">One matrix–vector product, 1083×208 times 208×1 — the entire inverse problem at run time.</text>
+<rect x="64" y="1549" width="626.0" height="118" rx="16" fill="#FFFFFF" stroke="#E7E2D6" stroke-width="1.5"/>
+<text x="92" y="1583" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="15.5" font-weight="600" fill="#141413" text-anchor="start">Map values onto something drawable</text>
+<text x="92" y="1611" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">JAC → sim2pts()   GREIT → mask_value()   BP → per-node</text>
+<text x="92" y="1637" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#166534" text-anchor="start">GREIT tune: n · s · ratio</text>
+<rect x="730.0" y="1549" width="626.0" height="118" rx="16" fill="#FFFFFF" stroke="#E7E2D6" stroke-width="1.5"/>
+<text x="758.0" y="1583" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="15.5" font-weight="600" fill="#141413" text-anchor="start">Render</text>
+<text x="758.0" y="1611" font-family="'IBM Plex Mono','Consolas',monospace" font-size="12" font-weight="400" fill="#8A8580" text-anchor="start">tripcolor(x, y, tri, ds)   ·   imshow(np.real(ds))</text>
+<text x="758.0" y="1637" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="12.5" font-weight="400" fill="#44403C" text-anchor="start">Colour = Δσ, a change — never an absolute value.</text>
+<rect x="64" y="1701" width="1292" height="156" rx="18" fill="#FDF6EC" stroke="#FDF6EC" stroke-width="0"/>
+<text x="96" y="1741" font-family="'Fraunces',Georgia,'Times New Roman',serif" font-size="18" font-weight="600" fill="#141413" text-anchor="start">The one thing to remember</text>
+<text x="96" y="1775" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="400" fill="#44403C" text-anchor="start">H is built entirely from Branch A — assumptions: a circular domain, uniform conductivity, point electrodes.</text>
+<text x="96" y="1799" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="400" fill="#44403C" text-anchor="start">dv comes from Branch B — reality: a curved face, layered tissue, electrodes whose contact shifts as the</text>
+<text x="96" y="1823" font-family="'IBM Plex Sans','Segoe UI',Helvetica,sans-serif" font-size="13.5" font-weight="400" fill="#44403C" text-anchor="start">muscle moves. The solver cannot tell a real conductivity change from a modelling error. Both arrive as dv.</text>
+</svg>

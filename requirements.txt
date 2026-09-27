@@ -1,0 +1,13 @@
+# Combined requirements from pyadi-iio main and examples/cn0565.
+# pyadi-iio itself is installed from its checked-out main branch by
+# bootstrap-cn0565-env.ps1, matching the upstream example instructions.
+numpy>=1.20
+pylibiio>=0.23.1
+paramiko
+scipy
+matplotlib
+pyserial
+PyQt5
+pyeit
+openpyxl
+pandas
