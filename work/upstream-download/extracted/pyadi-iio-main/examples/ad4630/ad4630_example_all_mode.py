@@ -1,0 +1,150 @@
+# Copyright (C) 2022 Analog Devices, Inc.
+#
+# SPDX short identifier: ADIBSD
+
+
+import time
+
+import matplotlib.pyplot as plt
+import numpy as np
+import sin_params as sp
+
+import adi
+
+device_name = "ad4630-24"
+fs = 2000000  # Sampling Frequency
+N = 65536  # Length of rx buffer
+
+
+def main():
+    """
+    Instantiate the device and set the parameters.
+
+    Supports all AD4630/AD4632 variants: 16-bit, 20-bit, and 24-bit.
+    Automatically detects and handles different output data modes:
+    - 20bit_diff, 24bit_diff: Pure differential modes
+    - 20bit_diff_8bit_cm, 24bit_diff_8bit_cm: Differential + common mode
+    - 16bit_diff_8bit_cm: 16-bit differential + common mode
+    - 30bit_avg: Averaged mode (all variants)
+    - 32bit_test_pattern: Test pattern mode
+    """
+    adc = adi.ad4630(
+        uri="ip:192.168.10.171", device_name=device_name
+    )  # To connect via ip address
+    adc.rx_buffer_size = N
+    adc.sample_rate = fs
+
+    """oversampling_ratio is only supported by 30bit mode. and in this mode it cannot be OFF."""
+    if adc.output_data_mode == "30bit_avg":
+        adc.chan0.oversampling_ratio = 16
+
+    """ Prints Current output data mode"""
+    print(f"Device: {device_name}, Output mode: {adc.output_data_mode}")
+
+    """ Differential Channel attributes"""
+    adc.chan0.calibscale = 1
+    adc.chan0.calibbias = 2
+    if device_name in ["ad4630-24", "ad4630-20", "ad4632-20"]:
+        adc.chan1.calibscale = 1
+        adc.chan1.calibbias = 2
+
+    data = adc.rx()  # Receive the data
+    adc.rx_destroy_buffer()  # Destroy the remaining data in buffer
+
+    for ch in range(0, len(data)):
+        x = np.arange(0, len(data[ch]))
+        plt.figure(
+            adc._ctrl.channels[ch]._name
+        )  # Using hidden functions in example code is not advised
+        plt.plot(x * (100 / fs), data[ch])
+
+    plt.show()
+
+    if adc.output_data_mode == "30bit_avg":
+        diff_bits = 30
+    elif adc.output_data_mode == "16bit_diff_8bit_cm":
+        diff_bits = 16
+    elif adc.output_data_mode in ["20bit_diff", "20bit_diff_8bit_cm"]:
+        diff_bits = 20
+    else:
+        diff_bits = 24
+
+    if adc.output_data_mode == "32bit_test_pattern":
+        test_pattern_analysis(data[0], "CHA")
+        if device_name in ["ad4630-24", "ad4630-20", "ad4632-20"]:
+            test_pattern_analysis(data[1], "CHB")
+    else:
+        analysis(diff_bits, data[0])
+        if device_name in ["ad4630-24", "ad4630-20", "ad4632-20"]:
+            if (
+                adc.output_data_mode == "16bit_diff_8bit_cm"
+                or adc.output_data_mode == "24bit_diff_8bit_cm"
+                or adc.output_data_mode == "20bit_diff_8bit_cm"
+            ):
+                analysis(diff_bits, data[2])
+            else:
+                analysis(diff_bits, data[1])
+
+
+def analysis(bits, op_data):
+    """Does the SNR Analysis and plots FFT"""
+    print(f"\n=== Analysis using {bits}-bit resolution ===")
+
+    adc_amplitude_adj = 2 ** (bits - 1)  # x**y is same as x^y
+    adc_amplitude_peak = max(op_data) - min(op_data)
+    mag_adj = adc_amplitude_peak / (2 * adc_amplitude_adj)
+    mag_adj_db = 20 * np.log10(mag_adj)
+
+    """SNR Analysis"""
+    harmonics, snr, thd, sinad, enob, sfdr, floor = sp.sin_params(op_data)
+    f1_freq = (harmonics[1][1]) * (fs / N)
+
+    sig_amp = np.sqrt(abs(harmonics[1][0]))
+    fund_dbfs = 20 * np.log10(sig_amp / 2 ** (bits - 1))
+    f2 = 20 * np.log10((np.sqrt(abs(harmonics[2][0]))) / adc_amplitude_adj)
+    f3 = 20 * np.log10((np.sqrt(abs(harmonics[3][0]))) / adc_amplitude_adj)
+    f4 = 20 * np.log10((np.sqrt(abs(harmonics[4][0]))) / adc_amplitude_adj)
+    f5 = 20 * np.log10((np.sqrt(abs(harmonics[5][0]))) / adc_amplitude_adj)
+
+    floor += fund_dbfs
+    max_code = max(op_data)
+    min_code = min(op_data)
+    bin_width = fs / N
+    snr_adj = snr - fund_dbfs
+    thd_calc = 10 * np.log10(
+        (10 ** (f2 / 10)) + (10 ** (f3 / 10)) + (10 ** (f4 / 10)) + (10 ** (f5 / 10))
+    )
+    sinad_calc = -10 * np.log10((10 ** (-snr_adj / 10)) + (10 ** (thd_calc / 10)))
+    enob_calc = (sinad_calc - 1.76) / 6.02
+    sfdr_adj = sfdr - fund_dbfs
+
+    """ Print the actual and calculated parameters"""
+    print("Binwidth = ", bin_width)
+    print("SNR (dB) = ", snr)
+    print("SNR of Adjacent chan (dB) =", snr_adj)
+    print("thd = " + str(thd) + " calculated thd = " + str(thd_calc))
+    print("sfdr = " + str(sfdr) + " adjacent chan sfdr = " + str(sfdr_adj))
+    print("ENOB = " + str(enob) + " calculated ENOB = " + str(enob_calc))
+    print("sinad = " + str(sinad) + " calculated sinad = " + str(sinad_calc))
+    print("Max code = " + str(max_code) + " Min code = " + str(min_code))
+    print("Lent of each captured array =", len(op_data))
+
+
+def test_pattern_analysis(data_op, channel_name=""):
+    """Perform analysis in 32bit test pattern output data mode."""
+
+    print(f"32 bit pattern data from {channel_name} = " + hex(data_op[int(N / 2)]))
+    custom_pattern_data = 0xFADB02EC
+    custom_pattern_data_hex = hex(custom_pattern_data)
+    custom_pattern_data_hex_3 = "0x" + custom_pattern_data_hex[2:4]
+    custom_pattern_data_hex_2 = "0x" + custom_pattern_data_hex[4:6]
+    custom_pattern_data_hex_1 = "0x" + custom_pattern_data_hex[6:8]
+    custom_pattern_data_hex_0 = "0x" + custom_pattern_data_hex[8:10]
+    adc._ctrl.reg_write(0x0026, int(custom_pattern_data_hex_3, 16))
+    adc._ctrl.reg_write(0x0025, int(custom_pattern_data_hex_2, 16))
+    adc._ctrl.reg_write(0x0024, int(custom_pattern_data_hex_1, 16))
+    adc._ctrl.reg_write(0x0023, int(custom_pattern_data_hex_0, 16))
+
+
+if __name__ == "__main__":
+    main()

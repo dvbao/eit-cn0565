@@ -1,26 +1,2 @@
-.venv/
-cn0565-env/
-vendor/
-__pycache__/
-*.py[cod]
-data/raw/*
-!data/raw/.gitkeep
-logs/*
-!logs/.gitkeep
-
-# Reproducible upstream downloads and local work area
-work/
-
-# IDE-local settings
-.vscode/
-.idea/
-
-# Downloaded/reference copies; link their official sources from README instead
-papers/
-CN0565.docx_files/
-CN0565.docx.html
-cn0565 rev. a.pdf
-
-# Download archives and generated measurement output
-*.zip
-examples/cn0565/cn0565_example_data.csv
+# This repository intentionally snapshots the complete local workspace.
+# Git always excludes its own .git metadata directory.
