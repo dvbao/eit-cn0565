@@ -1,0 +1,628 @@
+{
+  "protocol_id": "facial-bioimpedance-pilot-01",
+  "version": "0.1",
+  "date": "2026-10-01",
+  "status": "SUPERSEDED_24_ELECTRODE_DRAFT_NOT_FOR_CURRENT_16_ELECTRODE_COLLECTION",
+  "superseded_on": "2026-10-02",
+  "current_user_decision": {
+    "first_collection_electrode_count": 16,
+    "replacement_layout_finalized": false,
+    "replacement_patterns_finalized": false,
+    "note": "The retained 24-site C24/P12 data below are historical proposals, not a 16-electrode device configuration. Do not execute or truncate them."
+  },
+  "artifact_type": "design_manifest_not_device_configuration",
+  "purpose": "within-person exploratory task-associated impedance patterns; no muscle-specific or clinical claim",
+  "evidence_codes": {
+    "E": "published evidence with source-specific scope",
+    "P": "proposed design choice, not validated optimum",
+    "V": "requires measurement or approval"
+  },
+  "execution": {
+    "contains_observed_data": false,
+    "controls_hardware": false,
+    "human_use_approved": false,
+    "reviewer": null,
+    "review_record": null
+  },
+  "electrodes": {
+    "count": 24,
+    "material_form_user_confirmed": "gold cup",
+    "model": null,
+    "cup_diameter_mm": null,
+    "effective_contact_area_mm2": null,
+    "contact_medium": null,
+    "layout_id": "C24_candidate_v0.1",
+    "layout_evidence_status": "P",
+    "sites": [
+      {
+        "site_id": "L1",
+        "side": "participant_left",
+        "candidate_zone": "lateral_forehead_upper",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L2",
+        "side": "participant_left",
+        "candidate_zone": "lateral_forehead_lower",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L3",
+        "side": "participant_left",
+        "candidate_zone": "temple",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L4",
+        "side": "participant_left",
+        "candidate_zone": "preauricular_upper",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L5",
+        "side": "participant_left",
+        "candidate_zone": "preauricular_lower",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L6",
+        "side": "participant_left",
+        "candidate_zone": "postauricular",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L7",
+        "side": "participant_left",
+        "candidate_zone": "inferior_jaw_angle",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L8",
+        "side": "participant_left",
+        "candidate_zone": "inferior_jaw_intermediate_posterior",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L9",
+        "side": "participant_left",
+        "candidate_zone": "inferior_jaw_intermediate_anterior",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L10",
+        "side": "participant_left",
+        "candidate_zone": "inferior_jaw_near_chin",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L11",
+        "side": "participant_left",
+        "candidate_zone": "submental_anterior",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L12",
+        "side": "participant_left",
+        "candidate_zone": "submental_posterior",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R1",
+        "side": "participant_right",
+        "candidate_zone": "lateral_forehead_upper",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R2",
+        "side": "participant_right",
+        "candidate_zone": "lateral_forehead_lower",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R3",
+        "side": "participant_right",
+        "candidate_zone": "temple",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R4",
+        "side": "participant_right",
+        "candidate_zone": "preauricular_upper",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R5",
+        "side": "participant_right",
+        "candidate_zone": "preauricular_lower",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R6",
+        "side": "participant_right",
+        "candidate_zone": "postauricular",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R7",
+        "side": "participant_right",
+        "candidate_zone": "inferior_jaw_angle",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R8",
+        "side": "participant_right",
+        "candidate_zone": "inferior_jaw_intermediate_posterior",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R9",
+        "side": "participant_right",
+        "candidate_zone": "inferior_jaw_intermediate_anterior",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R10",
+        "side": "participant_right",
+        "candidate_zone": "inferior_jaw_near_chin",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R11",
+        "side": "participant_right",
+        "candidate_zone": "submental_anterior",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R12",
+        "side": "participant_right",
+        "candidate_zone": "submental_posterior",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "software_index": null
+      }
+    ]
+  },
+  "acquisition": {
+    "pattern_set": "P12_candidate_v0.1",
+    "pattern_status": "P,V",
+    "patterns": [
+      {
+        "pattern_id": "P01",
+        "force_plus": "L4",
+        "force_minus": "L10",
+        "sense_plus": "L7",
+        "sense_minus": "L9",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P02",
+        "force_plus": "R4",
+        "force_minus": "R10",
+        "sense_plus": "R7",
+        "sense_minus": "R9",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P03",
+        "force_plus": "L6",
+        "force_minus": "L12",
+        "sense_plus": "L8",
+        "sense_minus": "L11",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P04",
+        "force_plus": "R6",
+        "force_minus": "R12",
+        "sense_plus": "R8",
+        "sense_minus": "R11",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P05",
+        "force_plus": "L1",
+        "force_minus": "L7",
+        "sense_plus": "L3",
+        "sense_minus": "L5",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P06",
+        "force_plus": "R1",
+        "force_minus": "R7",
+        "sense_plus": "R3",
+        "sense_minus": "R5",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P07",
+        "force_plus": "L2",
+        "force_minus": "L10",
+        "sense_plus": "L4",
+        "sense_minus": "L8",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P08",
+        "force_plus": "R2",
+        "force_minus": "R10",
+        "sense_plus": "R4",
+        "sense_minus": "R8",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P09",
+        "force_plus": "L7",
+        "force_minus": "R7",
+        "sense_plus": "L10",
+        "sense_minus": "R10",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P10",
+        "force_plus": "L4",
+        "force_minus": "R4",
+        "sense_plus": "L9",
+        "sense_minus": "R9",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P11",
+        "force_plus": "L6",
+        "force_minus": "R6",
+        "sense_plus": "L11",
+        "sense_minus": "R11",
+        "bench_validated": false,
+        "human_path_approved": false
+      },
+      {
+        "pattern_id": "P12",
+        "force_plus": "L1",
+        "force_minus": "R1",
+        "sense_plus": "L12",
+        "sense_minus": "R12",
+        "bench_validated": false,
+        "human_path_approved": false
+      }
+    ],
+    "bench_characterization_frequencies_hz": [
+      20000,
+      50000,
+      100000
+    ],
+    "candidate_frequency_hz": 50000,
+    "approved_human_frequency_hz": null,
+    "approved_human_excitation_amplitude": null,
+    "approved_human_current_limit": null,
+    "calibrated_measurement_target": "complex transfer impedance (V_Splus - V_Sminus) / I_force",
+    "actual_data_mode_verified": false,
+    "frequency_status": "P,V; literature precedents are not human-use approval",
+    "frame_duration_target_max_s": 0.25,
+    "frame_duration_measured_s": null,
+    "frame_timing_status": "P,V; static-pose target, not dynamic-speech or IPG specification",
+    "per_measurement_timestamps_required": true,
+    "full_raw_outputs_when_available_required": true,
+    "software_mapping_validated": false
+  },
+  "study": {
+    "participants_proposed": 1,
+    "population_scope": "eligible consenting healthy adult under lab protocol; no population inference",
+    "days": 2,
+    "mountings": 3,
+    "labels": [
+      "REST",
+      "PURSE",
+      "SMILE_L",
+      "SMILE_R",
+      "PUFF_BOTH"
+    ],
+    "primary_trials_per_label_per_run": 5,
+    "controls": [
+      "HEAD_TURN",
+      "JAW_OPEN_LIPS_CLOSED"
+    ],
+    "control_repetitions_per_run": 3,
+    "proposal_status": "P",
+    "randomization_algorithm": "xorshift32 seed per run, Fisher-Yates within each block; controls shuffled after primary blocks",
+    "runs": [
+      {
+        "run_id": "A1",
+        "day": "A",
+        "mount": 1,
+        "role": "development",
+        "randomization_seed": 560501,
+        "primary_blocks": [
+          {
+            "block": 1,
+            "trial_order": [
+              "PURSE",
+              "PUFF_BOTH",
+              "SMILE_R",
+              "SMILE_L",
+              "REST"
+            ]
+          },
+          {
+            "block": 2,
+            "trial_order": [
+              "SMILE_L",
+              "PURSE",
+              "SMILE_R",
+              "PUFF_BOTH",
+              "REST"
+            ]
+          },
+          {
+            "block": 3,
+            "trial_order": [
+              "REST",
+              "SMILE_R",
+              "SMILE_L",
+              "PURSE",
+              "PUFF_BOTH"
+            ]
+          },
+          {
+            "block": 4,
+            "trial_order": [
+              "PURSE",
+              "REST",
+              "SMILE_R",
+              "SMILE_L",
+              "PUFF_BOTH"
+            ]
+          },
+          {
+            "block": 5,
+            "trial_order": [
+              "PURSE",
+              "SMILE_L",
+              "PUFF_BOTH",
+              "REST",
+              "SMILE_R"
+            ]
+          }
+        ],
+        "control_order": [
+          "HEAD_TURN",
+          "JAW_OPEN_LIPS_CLOSED",
+          "HEAD_TURN",
+          "JAW_OPEN_LIPS_CLOSED",
+          "HEAD_TURN",
+          "JAW_OPEN_LIPS_CLOSED"
+        ]
+      },
+      {
+        "run_id": "A2",
+        "day": "A",
+        "mount": 2,
+        "role": "development",
+        "randomization_seed": 560502,
+        "primary_blocks": [
+          {
+            "block": 1,
+            "trial_order": [
+              "SMILE_R",
+              "PUFF_BOTH",
+              "PURSE",
+              "SMILE_L",
+              "REST"
+            ]
+          },
+          {
+            "block": 2,
+            "trial_order": [
+              "SMILE_R",
+              "PUFF_BOTH",
+              "SMILE_L",
+              "REST",
+              "PURSE"
+            ]
+          },
+          {
+            "block": 3,
+            "trial_order": [
+              "SMILE_R",
+              "REST",
+              "PURSE",
+              "SMILE_L",
+              "PUFF_BOTH"
+            ]
+          },
+          {
+            "block": 4,
+            "trial_order": [
+              "PUFF_BOTH",
+              "SMILE_R",
+              "SMILE_L",
+              "REST",
+              "PURSE"
+            ]
+          },
+          {
+            "block": 5,
+            "trial_order": [
+              "SMILE_R",
+              "PUFF_BOTH",
+              "REST",
+              "SMILE_L",
+              "PURSE"
+            ]
+          }
+        ],
+        "control_order": [
+          "JAW_OPEN_LIPS_CLOSED",
+          "HEAD_TURN",
+          "HEAD_TURN",
+          "HEAD_TURN",
+          "JAW_OPEN_LIPS_CLOSED",
+          "JAW_OPEN_LIPS_CLOSED"
+        ]
+      },
+      {
+        "run_id": "B1",
+        "day": "B",
+        "mount": 1,
+        "role": "held_out_after_freeze",
+        "randomization_seed": 560503,
+        "primary_blocks": [
+          {
+            "block": 1,
+            "trial_order": [
+              "PURSE",
+              "PUFF_BOTH",
+              "SMILE_R",
+              "SMILE_L",
+              "REST"
+            ]
+          },
+          {
+            "block": 2,
+            "trial_order": [
+              "SMILE_R",
+              "PURSE",
+              "SMILE_L",
+              "REST",
+              "PUFF_BOTH"
+            ]
+          },
+          {
+            "block": 3,
+            "trial_order": [
+              "PURSE",
+              "PUFF_BOTH",
+              "SMILE_L",
+              "REST",
+              "SMILE_R"
+            ]
+          },
+          {
+            "block": 4,
+            "trial_order": [
+              "SMILE_R",
+              "PURSE",
+              "SMILE_L",
+              "REST",
+              "PUFF_BOTH"
+            ]
+          },
+          {
+            "block": 5,
+            "trial_order": [
+              "SMILE_R",
+              "PUFF_BOTH",
+              "REST",
+              "PURSE",
+              "SMILE_L"
+            ]
+          }
+        ],
+        "control_order": [
+          "HEAD_TURN",
+          "JAW_OPEN_LIPS_CLOSED",
+          "JAW_OPEN_LIPS_CLOSED",
+          "JAW_OPEN_LIPS_CLOSED",
+          "HEAD_TURN",
+          "HEAD_TURN"
+        ]
+      }
+    ]
+  },
+  "timing_s": {
+    "initial_rest": 60,
+    "pre_rest": 5,
+    "task": 5,
+    "post_rest": 5,
+    "between_primary_blocks": 30,
+    "break_before_controls": 30,
+    "baseline_analysis_last_s": 3,
+    "task_plateau_after_actual_onset": [
+      1,
+      4
+    ],
+    "nominal_recording_per_run": 675,
+    "nominal_recording_three_runs": 2025,
+    "extra_rest_and_fit_not_included": true
+  },
+  "quality": {
+    "original_usable_trials_per_label_target_min": 4,
+    "maximum_replacement_trials_per_label_run": 1,
+    "replacement_only_for_prespecified_technical_or_execution_failure": true,
+    "valid_no_response_is_not_failure": true,
+    "complete_frames_within_windows_only": true,
+    "criteria_status": "P; not clinical or statistical cutoffs"
+  },
+  "video": {
+    "candidate_fps": 30,
+    "actual_fps": null,
+    "sync_offset_s": null,
+    "sync_drift_s": null,
+    "consented_storage_location": null
+  },
+  "pre_human_required": [
+    "lab safety and institutional process",
+    "gold cup model/size/contact medium and nonoverlapping fit",
+    "physical pin and software mapping",
+    "known-load calibration and mode/units",
+    "each intended current path approved",
+    "measured timing and pattern quality",
+    "video clock synchronization",
+    "frozen protocol and analysis roles"
+  ]
+}

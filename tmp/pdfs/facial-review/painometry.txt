@@ -1,0 +1,1163 @@
+ Painometry: Wearable and Objective �antification System for
+                  Acute Postoperative Pain
+          Hoang Truong1 , Nam Bui1 , Zohreh Raghebi4 , Marta Ceko5 , Nhat Pham1,2 , Phuc Nguyen1,3 ,
+         Anh Nguyen1 , Taeho Kim1 , Katrina Siegfried4 , Evan Stene4 , Taylor Tvrdy5 , Logan Weinman5 ,
+          Thomas Payne1 , Devin Burke1 , Thang Dinh6 , Sidney D’Mello5 , Farnoush Banaei-Kashani4 ,
+                                 Tor Wager7 , Pavel Goldstein8 , Tam Vu1,2
+                          1 University of Colorado Boulder, 2 University of Oxford, 3 University of Texas at Arlington,
+                     4 University of Colorado Denver, 5 Institute of Cognitive Science, University of Colorado Boulder,
+                          6 Virginia Commonwealth University, 7 Dartmouth College, 8 University of Haifa
+
+             {�rstname.lastname}@colorado.edu,{�rstname.lastname}@cs.ox.ac.uk,{�rstname.lastname}@ucdenver.edu
+                                tndinh@vcu.edu,tor.d.wager@dartmouth.edu,pavelg@stat.haifa.ac.il
+
+ABSTRACT                                                                                           CCS CONCEPTS
+Over 50 million people undergo surgeries each year in the United                                   • Computer systems organization ! Embedded systems; •
+States, with over 70% of them �lling opioid prescriptions within                                   Human-centered computing ! Mobile devices; • Hardware
+one week of the surgery. Due to the highly addictive nature of these                               ! Sensor devices and platforms.
+opiates, a post-surgical window is a crucial time for pain manage-
+ment to ensure accurate prescription of opioids. Drug prescription                                 KEYWORDS
+nowadays relies primarily on self-reported pain levels to determine                                impedance sensing, pain quanti�cation, opioid overdose
+the frequency and dosage of pain drug. Patient pain self-reports
+are, however, in�uenced by subjective pain tolerance, memories of
+past painful episodes, current context, and the patient’s integrity                                ACM Reference Format:
+in reporting their pain level. Therefore, objective measures of pain                               Hoang Truong, Nam Bui, Zohreh Raghebi, Marta Ceko, Nhat Pham, Phuc
+are needed to better inform pain management.                                                       Nguyen, Anh Nguyen, Taeho Kim, Katrina Siegfried, Evan Stene, Taylor
+   This paper explores a wearable system, named Painometry, which                                  Tvrdy, Logan Weinman, Thomas Payne, Devin Burke, Thang Dinh, Sidney
+objectively quanti�es users’ pain perception based-on multiple                                     D’Mello, Farnoush Banaei-Kashani, Tor Wager, Pavel Goldstein, Tam Vu.
+physiological signals and facial expressions of pain. We propose                                   2020. Painometry: Wearable and Objective Quanti�cation System for Acute
+a sensing technique, called sweep impedance pro�ling (SIP), to                                     Postoperative Pain. In The 18th ACM International Conference on Mobile
+capture the movement of the facial muscle corrugator supercilii,                                   Systems, Applications, and Services (MobiSys’20), June 15-19, 2020, Toronto,
+one of the important physiological expressions of pain. We deploy                                  Canada. ACM, NewYork, NY, USA, 15 pages. https://doi.org/10.1145/3386901.
+SIP together with other biosignals, including electroencephalogra-                                 3389022
+phy (EEG), photoplethysmogram (PPG), and galvanic skin response
+(GSR) for pain quanti�cation.                                                                      1    INTRODUCTION
+   From the anatomical and physiological correlations of pain with                                 In recent decades, the United States has faced an opioid epidemic,
+these signals, we designed Painometry, a multimodality sensing sys-                                with 40,000 lives lost annually due to opioid misuse [25, 99]. It is
+tem, which can accurately quantify di�erent levels of pain safely. We                              estimated that around 25% of patients who have been prescribed
+prototyped Painometry by building a custom hardware, �rmware,                                      opioids for pain misuse them [111], about 5% of the misusers esca-
+and associated software. Our evaluations use the prototype on 23                                   late to heroin, and about 10% of them develop an opioid addiction.
+subjects, which corresponds to 8832 data points from 276 minutes                                   In addition, about 80% of people who use heroin have previously
+of an IRB-approved experimental pain-inducing protocol. Using                                      misused prescription opioids [13, 17, 45]. Over 50 million people
+leave-one-out cross-validation to estimate performance on unseen                                   undergo surgeries each year [37] in the United States, with over
+data shows 89.5% and 76.7% accuracy of quanti�cation under 3 and                                   70% of them �lling opioid prescriptions after surgery [54].
+4 pain states, respectively.                                                                          Due to the highly addictive nature of these opiates, the post-
+                                                                                                   surgical window is a crucial time for pain management to ensure
+                                                                                                   accurate prescription of opioids. However, a critical challenge in
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed              pain management emerges from the fact that pain cannot be directly
+for pro�t or commercial advantage and that copies bear this notice and the full citation           measured without invasively accessing the nervous system [89].
+on the �rst page. Copyrights for components of this work owned by others than ACM                  Therefore, the current non-invasive gold standard for the assess-
+must be honored. Abstracting with credit is permitted. To copy otherwise, or republish,
+to post on servers or to redistribute to lists, requires prior speci�c permission and/or a         ment of pain is the patient self-report of pain intensity [10]. Though
+fee. Request permissions from permissions@acm.org.                                                 pain self-reporting is a common measure that re�ects a patient’s
+MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada                                                 conscious perception of the given painful sensation, it has several
+© 2020 Association for Computing Machinery.
+ACM ISBN 978-1-4503-7954-0/20/06. . . $15.00                                                       signi�cant limitations, especially for long-term usage: (1) self-re-
+https://doi.org/10.1145/3386901.3389022                                                            porting is subjective and is in�uenced by the patient’s cognitive
+
+
+
+
+                                                                                             419
+MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada                                                                               Hoang Truong, et al.
+
+
+load and emotion at the time of reporting [64, 78, 79], (2) self-report-
+ing introduces bias since frequent self-reporting of pain can create
+pain perception [39], and (3) self-reporting cannot be assessed fre-
+quently or continuously as this would present an unrealistic burden
+on the patient.
+   Thus, there is a critical need for a more objective measure of
+pain that is e�cacious and convenient for real-world daily usage.
+Common biosignals that have shown potential in capturing pain-
+related neurophysiological processes include electroencephalog-
+raphy (EEG), electromyography (EMG), Galvanic Skin Response
+(GSR), electrocardiography (ECG), and photoplethysmogram (PPG).
+The most accurate and objective pain quanti�cation approach is us-
+ing a fMRI machine [84]. However, this approach is expensive and
+inconvenient since it is only available in a clinical setting. Studies
+have used multiple features extracted from facial EMG (corruga-
+tor and zygomaticus muscles), GSR, and ECG signals to classify
+experimentally-induced pain from non-pain with accuracies rang-
+ing from 79-91% [12, 16, 33, 47, 95, 106, 110]. Further improvement
+of these approaches also integrates physiology-, video-, and voice-
+based signals to predict pain. Recent studies have fused ECG, facial         Figure 1: Top panel: Painometry signal recording sites in-
+EMG, GSR, and video data to achieve 80-84% accuracy in discrimi-             cluding positioning of PPG, GSR, EEG, and SIP sensors. Left
+nating experimental pain vs. non-pain [46, 48, 62]. However, these           panel: Flowchart of stimulus processing from the onset of
+systems are often cumbersome because they require complicated                acute pain through the autonomic nervous system (ANS) to
+to setup, and do not support mobility settings.                              the sensing sites of the Painometry system. Right panel: Key
+   In this work, we propose Painometry (Fig. 1), a multimodal sens-          applications of the Painometry system include its use as a
+ing system for objective pain quanti�cation that can be integrated           postoperative monitor, as well as in mitigation of opioid pre-
+into various form factors (e.g. hat, headband, etc.). The key idea           scriptions.
+is to capture the core signals that are directly correlated to pain
+perception, namely the facial muscle activity above and between
+our eyes, in combination with a small number of less pain-speci�c
+signals. The light-weight form factor and a minimal number of
+sensors enable the mobility of Painometry and its capability as
+a wearable and daily device. Painometry aims to support a wide               including EEG, GSR, and PPG. To objectively quantify di�erent pain
+range of applications, including in-hospital scenarios such as au-           levels, we design a thorough experimental protocol to mimic acute
+tomatically and objectively answering the pain rating assessment;            post-surgical pain, analyze the recorded biosignal data, and build a
+assisting anesthetic monitoring; in-home pain assessment for ac-             quanti�cation model that utilizes pain-related feature extraction
+curate dosing of pain relief medication; pain management such as             and selection. We design the Painometry hardware following es-
+daily and real-time medication reminder; and, in long-term assess-           tablished safety guidelines to ensure the system will not cause any
+ments, development of intervention therapies bypassing medication            safety concerns.
+schedules to address chronic pain.                                              Through this work, we make the following key contributions:
+   The key challenges in developing such a system include: (1) ac-                • Introducing a sensitive muscle activity detection technique,
+curately capturing the speci�c muscle actively a�ected by the au-                    Sweep Impedance Pro�ling (SIP).
+tonomous nervous system during pain; (2) identifying a set of                     • Proposing an objective pain quanti�cation algorithm in-
+pain-related features from multiple bio signals that are useful in pro-              cluding a wide-range pain-related feature extraction from
+viding an objective pain quanti�cation; (3) and isolating di�erent                   recorded biosignals, a feature selection using a Recursive
+types of noise present in the recorded signals.                                      Feature Elimination (RFE) method, and a light-weight classi-
+   We introduce Sweep Impedance Pro�ling (SIP), a sensing tech-                      �cation model.
+nique that captures the minuscule movement of muscle under the                    • Evaluating pain quanti�cation of 23 subjects in an experimen-
+point where the sensor makes contact with the skin to capture                        tal protocol to mimic post-surgical pain with the accuracy
+autonomous muscle activity in high spatial resolution with a small                   of 76.7% and 89.5% for 4 and 3 pain levels respectively under
+number of sensors. SIP has advantages over existing impedance-                       leave-one-out cross-validation.
+based sensing techniques in the capability of (1) measuring impedance           Though at current phase, this work is limited to in-lab experi-
+of the singular muscle group under the skin, (2) providing more              ments and only targets acute pain in postoperative pain, it is the
+detailed information about the muscle over a range of sweeping               �rst step in a concerting e�ort to target di�erent types of pain (i.e.
+excitation frequencies, and (3) specifying with greater precision            acute and chronic) and to reduce opioid overdose by developing
+the area of the muscle of interest. To improve the sensitivity of            drug-free, fully closed-loop, and just-in-time pain coaching and
+the system, we leverage a small number of head-based biosignals              intervention systems.
+
+
+
+
+                                                                       420
+Painometry: Wearable and Objective �antification System for Acute Postoperative Pain                             MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada
+
+
+2    ANATOMY AND PHYSIOLOGY OF PAIN
+In this section, we discuss the anatomy and physiology of pain to
+understand the activation of autonomous nervous system (ANS,
+Fig. 2) during pain. When activated, the ANS elicits identi�able
+changes in muscle tone, heart rate, skin conductance, and brain
+activity.
+   Pain perception. Pain is a conscious subjective experience that
+results from the transduction of nociceptive stimuli into neural
+signals that are transmitted to higher cortical brain regions [24]. The
+sensation of pain is the result of tightly coupled neurophysiological
+processes - the peripheral detection of nocicpetive stimuli and the
+transmission and processing of these signals in the central nervous
+system.
+   Acute postoperative pain. Acute pain refers to the short-term
+e�ects of pain, typically lasting less than 3 months, and is directly
+related to soft tissue damage with sharp and dull sensations [94].                     Figure 2: Targets for autonomous nervous system pain re-
+After the 3 month window, chronic pain may develop and pain                            sponse: corrugator supercilii, heart, sweat glands, and brain.
+can become progressively worse and reoccur intermittently. Strong
+correlations exist between the severity of acute postoperative pain
+and the development of chronic pain [80]. The postoperative time                       are reliably correlated with pain [88]. The FACS assigns the activity
+window is also a period of concern relating to opioid misuse. Most                     of distinct facial muscle groups to 44 unique action units (AUs).
+patients are subjected to opioid prescriptions following surgery,                      Muscle groups of interest in the context of pain studies [18, 57, 81]
+putting them at risk of dependence. According to Brat et al. [9],                      include (Fig. 2): (i) AU4 - Brow lowering, (ii) AU6/AU7 - Orbit tight-
+each additional prescription re�ll after surgery attributes to a 44%                   ening, (iii) AU9/AU10 - Levator contraction, and (iv) AU12 - Oblique
+increase in the likelihood of opioid misuse. For these reasons, pro-                   lip pulling. In developing the SIP sensor employed in Painometry,
+viding a quantitative method for managing the intensity of postop-                     we referenced many of the protocols used by FACS to recognize
+erative acute pain to reduce the duration of opioid prescription is                    and classify statistically distinct movements of the corrugator su-
+the main goal of Painometry and guides the system and protocol                         percilii [85, 86].
+design processes.                                                                         The hypothalamus and limbic brain regions involved in the per-
+   Importance of objective pain quanti�cation. To determine                            ception of pain are also involved in the modulation of the ANS.
+patient’s current pain state, physicians rely primarily on the pa-                     These regions are responsible for bodily functions that are regulated
+tient’s subjective self-report, typically using a pain scale (e.g., Visual             without conscious input, such as breathing, heart rate, vasomotor
+analog scale (VAS) [38]). Patients’ report of their pain level using                   activities, and re�ex reactions. The hypothalamus integrates regu-
+the VAS is in�uenced not only by the current subjective level of                       latory input from the limbic system and regulates functions of the
+pain but also by patients’ pain tolerance, emotional state, current                    ANS. These autonomic responses happen with real pain only (not
+environment, memories of past painful episodes, and willingness                        acted pain) and can be captured with the EEG sensor, pulse sensor,
+to communicate painful experiences.                                                    GSR sensor, and muscle activity sensor accordingly.
+   In addition, patients have di�culty providing a good estimate                          With the goal of having a wearable system suitable for daily
+of their current pain state because they have no objective way                         usage, one of the areas where it is feasible to accommodate all those
+to distinguish the score. The lack of an objective pain measure-                       sensors is the Fpz-Oz horizontal line in the 10-20 system [40] that
+ment method can lead to biased pain evaluation and as result to                        covers the forehead area (as depicted in Fig. 1).
+overdosing of patients and drug misuse [77], or underdosing and                           We also base our choice for sensor placement on the intuition
+unnecessary pain for the patients. Thus, an objective pain quan-                       that the forehead (1) provides a good measurement for GSR [107],
+ti�cation system brings bene�ts in (1) removing the need for a                         (2) is a common area to measure PPG signals [115], and (3) covers
+patient to verbalize and focus on their pain state, (2) improving                      a part of the corrugator supercilii. Since the signals resulting from
+dosing, which can reduce the risk of developing an opioid addiction                    muscular contractions initiated by the autonomic innervation of
+while reducing patients’ su�ering, and (3) improving clinical and                      corrugator supercilii are typically small compared to larger signals
+healthcare systems with reliable assessments of patient conditions.                    from neighboring facial muscles (e.g., eye blinking, eye movement,
+   Noninvasive sensing of physiological pain expression. As-                           and jaw movement), the passive EMG measurement with electrodes
+sessing facial expressions of pain behavior is a viable noninvasive                    over the eyebrow is prone to noise. Thus, there is a need for both
+technique to quantify pain [22]. A number of researchers have                          a high spatial resolution and a sensitive measurement to capture
+placed emphasis on universality in expressions of pain, meaning                        autonomic corrugator supercilii responses. In the next section, we
+the same pattern of muscle activation consistently appears when                        will discuss the overview of Painometry and our design goals.
+people are experiencing pain [18, 81]. The Facial Action Coding Sys-
+tem (FACS) [22] is a precise measurement technique that many pain
+studies have employed to accrue evidence that certain facial actions
+
+
+
+
+                                                                                421
+MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada                                                                                                  Hoang Truong, et al.
+
+
+                                                                        Objective Pain Quantification Software
+
+
+
+
+    Multimodal Sensing Hardware
+                                  Sweep Impedance Profiling
+                                    Sweep        Current                Sensor Data Stream                             Signal Pre-Processing
+                                   Generator     Source
+                                                                                               Interpolation         DC Removal     Notch filter      Bandpass filter
+                                          DFT
+                                                             Preamp        SIP
+                                       Conversion                                                SIP     EEG   GSR    EEG                    Pain Quantification
+                                                                                                                                                     Pain Feature
+                                                            Safety        EEG
+
+
+
+
+                                  Analog Front-End
+                                                     SIP                                                        Peak detection, HR/HRV                Extraction
+                                                            Control
+                                                     EEG                  GSR                                                                         RFE-based
+                                                            Ground                                         Skin conductance level
+                                                                                                                                                   Feature Selection
+                                                     GSR   Separation                                  Wavelet Decomposition
+                                                                          PPG                                                                       Sample fusion
+                                                     PPG      BLE                                                                                    based GMM
+                                                                                                |Z|, Ф calculation
+
+
+Figure 3: Painometry System Overview. Sensing data collected with multimodal sensing hardware (Le�) and streamed via
+Bluetooth to software on host device (Right) that process data stream, extract pain features, and quantify pain level.
+
+
+3                                 SYSTEM OVERVIEW                                  features among di�erent pain states [50, 71, 75]. However, there are
+In this section, we describe the overall design of Painometry, the                 challenges in bringing all mentioned sensors together in a singular
+multimodal sensing headband for objective pain quanti�cation                       wearable hardware device that satis�es a daily usage scenario. In
+based on the analysis of physiological expression of pain and auto-                particular, integrating multiple sensors on a small-size hardware
+nomic responses. The design goals include (1) sensitive and high                   is prone to cross-talk interference noise. In addition, the GSR and
+spatial resolution muscle activity sensing; (2) a reliable and safe                SIP sensors that we employ are considered ‘active’ sensors where
+multimodal physiological sensing system; and (3) highly accurate                   a current runs through part of a human body. Thus, it is required
+and light-weight pain level quanti�cation.                                         to consider safety constraints. We carefully design our multimodal
+   Sensitive and high spatial resolution muscle activity sens-                     sensing system including SIP, EEG, GSR, and PPG to minimize
+ing. Muscle activity is traditionally measured using the electromyo-               the cross-talk noise and restrict the ‘active’ sensors under safety
+graphy (EMG) technique. EMG sensors passively capture the biopo-                   thresholds.
+tentials of the muscles under the sensing electrodes. However, the                    Highly accurate pain level quanti�cation. The main chal-
+recorded signals are usually the combination of biopotentials from                 lenge in building the pain quanti�cation system is the subjective
+multiple sources due to nearby muscle activity being detected by                   nature of pain perception. Another challenge is determining distinc-
+the electrodes, which is known as cross-talk noise. One example                    tive features among di�erent pain states. Existing work provides
+of cross-talk noise is that the EMG sensors on the forehead also                   various �ndings in pain-related feature extraction from multiple
+capture eye movements and blinking. In order to capture the activ-                 sensors, however, there is no universally common feature set that
+ity of the muscle group of interest only, one of the conventional                  we can directly employ into our work. We thoroughly design an
+solutions is to have multiple sensors that capture biopotentials from              experimental pain-inducing device and data collection protocol to
+other muscle sources and then use regression or ICA techniques to                  obtain highly accurate ground truth labels We extract a set of possi-
+extract the necessary information [103]. However, this approach                    ble features from each corresponding biosignal and use a recursive
+requires the addition of multiple electrodes attached to the head in               feature elimination as a feature selection algorithm to identify the
+order to accurately extract the EMG contribution of the corrugator                 most discriminating set of features. Finally, we aggregate all the
+supercilii group. So, in order to capture the muscle activity of the               features within one chunk of data to create the sample for our
+corrugator supercilii muscle with fewer sensors and to overcome                    learning model.
+the multi-source noise limitations, we explore the Sweep Impedance                    Painometry System. Fig. 3 illustrates two main components of
+Pro�ling (SIP) sensing technique. By attaching only two sensors                    Painometry including (1) a wearable multi-modal sensing device
+on top of the muscle group of interest, this sensing method can                    to capture physiological pain expression, and (2) an Objective Pain
+capture the change in impedance caused by the contraction of that                  Quanti�cation Software running on the host computer (i.e., mobile
+muscle group.                                                                      phones or PCs). Painometry hardware can be integrated into various
+   Reliable, wearable, and safe multimodal physiological sens-                     form factors (e.g. hat, headband, or eye-glass). The host device
+ing system. In order to capture various physiological expressions                  receives the streaming data from all the sensors, processes the data,
+of the human body, a conventional multimodal sensing system in-                    and quanti�es the current pain level of the user. There are three sub-
+cludes di�erent combinations of sensing modalities such as EEG,                    components of the Painometry’s software architecture including
+EMG, ECG, eye tracking, facial expressions, GSR, etc. These sys-                   (1) Signal pre-processing, (2) Dedicated sensor feature analysis, and
+tems are popular in many mental health and cognitive-related                       (3) Pain quanti�cation algorithm. In the following discussion, we
+research and application such as stress detection [6, 51], seizure                 will describe these sensing hardware and software components in
+prediction [34, 108], and sleep monitoring [19, 20, 72]. Existing                  details.
+pain-sensing applications analyze individual bio-signals or di�er-
+ent combinations of EEG, EMG, GSR, and PPG to explore distinctive
+
+
+
+
+                                                                             422
+Painometry: Wearable and Objective �antification System for Acute Postoperative Pain                             MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada
+
+
+                                                                                             The intuition given by Eq. 1 and 2 is that the dimensions of
+                                                                                        the muscle will change due to muscle activity (e.g., the autonomic
+                                                                                        innervation of corrugator muscle in our scenario). In additon, ' and
+                                                                                        ⇠ behave di�erently based on the change of muscle dimensions !,
+                                                                                        A , and . This leads to the non-linear changes of total impedance /
+                                                                                        due to muscle activity. Due to the dependence of Z on excitation
+                                                                                        frequency 5 , sweeping through a wide range of excitation frequen-
+                                                                                        cies will provide corresponding values of / (5 ) and yield a ‘pro�le’
+                                                                                        of the selected muscle group.
+                                                                                             Fig. 4 shows the anatomy of facial muscle related to the corru-
+                                                                                        gator supercilii area under four layers of skin, subcutaneous fat,
+                                                                                        frontalis muscle, and corrugator muscle. Since we care about corru-
+                                                                                        gator muscle, the corresponding basic sweeping circuit consists of
+Figure 4: SIP sensors over corrugator supercilii and the cor-                           four impedances as shown in Fig. 4. In this model, / ⇢1( and / ⇢2(
+responding circuit.                                                                     are dependant on the contact between electrode and skin and are
+                                                                                        calibrated using lead-o�-detection (mentioned later in Sec. 6). Thus,
+                                                                                        sweeping excitation frequency 5 over a short period achieves the
+4    SWEEP IMPEDANCE PROFILING                                                          corresponding impedance pro�le of corrugator muscle group under
+As stated in previous sections, we seek an accurate and sensitive                       di�erent pain states.
+muscle activity detection method which requires minimal elec-                                DFT-based impedance measurement. Among various impedance
+trodes and �ts into a wearable form factor for daily usage. Existing                    measurement technique, we choose the Discrete Fourier Transform
+EMG sensing technique is not applicable in our goal of capturing                        (DFT) technique [28]. This method provides the best calculation
+the movement of corrugator muscle group. The reason is that the                         accuracy of an unknown impedance while requires smallest mem-
+corrugator supercilii is smaller than other action units related to                     ory space in hardware realization [56]. It correlates the captured
+pain as stated in Section 2. Thus, its activities are overlapped by                     AC signal with sinusoidal basis functions, which are both sine and
+other AUs’ activities.                                                                  cosine waveforms. This correlation results in a complex numeric
+   We introduce Sweep Impedance Pro�ling (SIP), a technique that                        value, in which the imaginary and real parts represent the correla-
+measures the impedance of surface muscles using multiple AC ‘ac-                        tion of the signal with the sine and cosine waveforms, respectively.
+tive’ signals; and infers directly the movement of the muscle groups.                   From this value, its magnitude is used to compute the magnitude
+This sensing method requires to put only two electrodes over the                        spectrum, and its phase value is used to obtain the phase spectrum.
+position of that muscle. In our case of the corrugator supercilii,                      Speci�cally, given the excitation signal: E ( (C) = +02>B (2c 5 C + \ )
+these two electrode positions are easy to located by identifying (i)                         The real '⇢ and imaginary " parts of each sample 8 2 [0..# 1]
+the middle of the eyebrown and (ii) the junction between eyebrow                        after the DFT correlation process is:
+and eyesocket (next to the middle of two eyebrows called glabella).                                       8
+                                                                                                          >         Õ# 1 h             ⇣     ⌘i
+After capturing the responses to these AC signals, we are able to                                         >
+                                                                                                          > '⇢8 = #2 ==0   E8 (=) )2>B 2c
+                                                                                                          >
+                                                                                                          <                              # =
+analyze the relation between muscle impedance and muscle length.                                                                                              (3)
+Combining multiples measurements from that AC frequency range                                             >
+                                                                                                          >
+                                                                                                          >         Õ# 1 h             ⇣     ⌘i
+                                                                                                          > "8 = #2 ==0    E8 (=) )B8= 2c
+                                                                                                          :
+                                                                                                                                           =
+provides a rich feature pro�le of the selected muscle group.                                                                             #
+
+   Impedance of human body part. The impedance / of an ob-                              where ) is sampling interval and # is the number of sample respec-
+ject is given by: / = ' + 9- where ' is the resistance and - is the                     tively.
+combination of capacitance -⇠ and inductance ! of the given object.                        Magnitude and phase of the unknown impedance / will be cal-
+In human-body-related applications, inductance plays a minimal                          culated as following with reference resistor ':
+role in standard impedance measurement [91], so the imaginary
+                                                                                                       q
+impedance component can be simpli�ed to - = -⇠ = 1/2c 5 ⇠,                                              '⇢/2 + "2               ✓                 ◆
+                                                                                                                                  '⇢/ "' '⇢' "/
+where 5 is the excitation frequency. As a result, total impedance                               |/ | = q
+                                                                                                                 /
+                                                                                                                    , q = C0= 1                                 (4)
+                                                                                                         '⇢'2 + "'2               '⇢/ '⇢' + "/ "'
+magnitude |/ | and impedance phase q of a human body part will
+be calculated as:
+                             q                                                             DFT-based measurement provides accurate impedance measure-
+                    |/ | =    ' 2 + -⇠2 , q = C0= 1 (-⇠ /')                 (1)         ment but has large numbers of sampling and calculation require-
+    Relation of muscle impedance to muscle movement. We                                 ment to store the above resulting '⇢ and " components [56] (i.e.
+model the muscle as a solid cylinder with length of ! and radius of                     high processing power). We mitigate this drawback with our choice
+A . The muscle resistance and self capacitance will be calculated as                    of hardware components (Section 6). Fig. 4 shows the feasibility of
+follows:                                                                                capturing the movement of corrugator supercilii using SIP under
+                                ⇣              ⌘                                        the sweeping range 10 : I to 100 : I (covers the known frequency
+                 ' = d (!/ ), ⇠ = 8 + 4.1 (!/A ) 0.76 n< A                  (2)
+                                                                                        for surface impedance analyzer [73]). The safety design and integra-
+where d is the muscle resistivity coe�cient,            is a cross-sectional            tion of SIP with other conventional sensors (EEG, PPG, and GSR)
+area, and n< is overall muscle permitivity.                                             will be discussed in the next section.
+
+
+
+
+                                                                                  423
+MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada                                                                                                                                   Hoang Truong, et al.
+
+
+                                                                                                                         SIP module   Power control PPG Module
+                                                                                                                                                                   SIP     EEG      GSR         PPG
+ SAFE Vpp = 0.98V, I ≤ 0.25mA               SIP
+
+
+
+
+                                                        Main MCU with BT module
+                    Controlled       Sweep        I2C                                       -
+           Analog     source          Gen.
+                                                                                            +
+                                                                                  ADC
+           Switch
+                          ADC          DFT                                         PPG                                                   Main      1cm
+Zmuscle                                                                                                                                  MCU
+
+    .                 -                           SPI                                           SAFE I < 0.5mA
+ 6 ..                 +
+                                       ADC                                              -
+
+                                                                                  ADC
+                                                                                        +
+                                                                                                                 Rbody
+                          -          Vref
+                          +
+          Driven right leg circuit          EEG                                    GSR
+                                                                                                                         EEG Module    BT module   GSR Module
+
+
+               Figure 5: Painometry hardware schematic.                                                                  Figure 6: Fabricated PCBs.              Figure 7: Sensor placements in var-
+                                                                                                                                                                 ious Painometry form-factors.
+
+
+5 PAINOMETRY HARDWARE DESIGN                                                                                                   5.2    Implementation
+5.1 Design considerations                                                                                                      Fig. 5 shows the overview of Painometry hardware schematic with
+                                                                                                                               the corresponding SIP, EEG, PPG, and GSR modules. and Fig. 6
+Safety consideration. Since our customized SIP and GSR sensors
+                                                                                                                               shows the corresponding fabricated PCBs. Fig. 8 shows the example
+are considered ‘active’ (i.e., they excite electrical signals to parts of
+                                                                                                                               of the change in sensing data captured by Painometry multimodal
+the human body), special precautions need to be implemented to
+                                                                                                                               sensing hardware under the in�uence of pain-inducing stimulation
+ensure user’s safety. According to ICNIRP guidelines [36, 74] and
+                                                                                                                               experiment (the details of experimental protocol are in Sec. 7)
+IEEE C95.1 standard [4], 1mA is considered a safety threshold for
+                                                                                                                                  SIP sensor module. We built a SIP sensor from the high-resolution
+DC and AC signals having the frequency below 1MHz. As a result,
+                                                                                                                               impedance analyzer AD5933 [1] and the low noise op-amp AD8606 [2].
+our SIP sensor has been con�gured so that it has the output AC of
+                                                                                                                               To measure SIP from 2 corrugator muscles sequentially, we use the
+0.98 +?? and maximum output current of 0.25 < . Moreover, the AC
+                                                                                                                               analog switch TS5A23159 [105] and four electrode montages over
+signal from SIP must not interfere with the brain signal frequencies
+                                                                                                                               eyebrows. The SIP sensor sweeps 10 excitation signals over the
+recorded by EEG sensor, i.e., the frequency must be larger than 1
+                                                                                                                               range of 10kHz to 100kHz at 0.98 +?? and maximum output current
+: I [32]. The GSR sensor is designed to restrict the DC signal to 1.2
+                                                                                                                               of 0.25 < .
++ applied directly to human skin. Furthermore, the GSR sub-circuit
+                                                                                                                                  EEG sensor module. We built an EEG sensor module with the
+output current is limited at 0.5 < by a current-limit resistor.
+                                                                                                                               core as TI-ADS1299, the ultra-low noise ampli�ers with internal
+   Hardware noise reduction. There are three main hardware
+                                                                                                                               noise at 1uV (peak-to-peak). This module can check the electrode-
+noise sources in our system: (1) electromagnetic noises from the
+                                                                                                                               skin contact impedance using lead-o� detection to ensure high-
+surrounding environment coupling into the signal wires and human
+                                                                                                                               quality signals before the recording. This feature is also used to
+body, (2) parasitic noise from electrical components in the sensing
+                                                                                                                               measure / ⇢1( and / ⇢2( in the SIP circuit model to calibrate the
+sub-circuit itself, and (3) cross-talk noise induced by high-speed
+                                                                                                                               SIP measurement. EEG hardware uses ten electrodes including 6
+digital components into the analog domain. The EEG acquisition
+                                                                                                                               EEG channels (T3-T4, Fp1-Fp2, and F7-F8), one reference , and one
+module provides a driven right leg circuit [116] which helps to elim-
+                                                                                                                               bias. The location of reference and bias electrodes depend on the
+inate common-mode noise coupled into the human body. To further
+                                                                                                                               form-factor of Painometry, i.e. T5-T6 in a hat or a headband; and at
+increase the signal-to-noise ratio, we put the ampli�ers of sensing
+                                                                                                                               the temple tips of the eye-glass form-factor.
+circuits close to the point of measurement, and the wires are kept
+                                                                                                                                  GSR sensor module. We built a GSR sensor based on a non-
+as short as possible. Additionally, all of the electrical components
+                                                                                                                               inverting amplifying circuit with the single micro-power precision
+used to construct Painometry hardware are high precision with
+                                                                                                                               ampli�er LMP2231 [61] and a precision micro-power shunt voltage
+low tolerance level. We designed SIP sensors to operate at high
+                                                                                                                               reference LM4041 [60]. The GSR sensor uses two electrode mon-
+frequency (10 : I – 100 : I) in order to avoid the superposition
+                                                                                                                               tages on top of the forehead. The gain resistor was tuned so that
+on meaningful frequency bands of EEG (i.e. below 100 I). We also
+                                                                                                                               the swing range of GSR output expands as much as possible in the
+add the low-pass �lter RC on EEG and GSR sub-circuit to eliminate
+                                                                                                                               ADC reading range of the main MCU. The GSR sub-circuit output
+the e�ect of high-frequency AC signals from SIP generator.
+                                                                                                                               current is limited at 0.5 < by a current-limit resistor.
+   Cross-talk noise between digital and analog sources is alleviated
+                                                                                                                                  PPG sensor module. We use the reference design of a pulse
+by ground separation in hardware design including (i) separation of
+                                                                                                                               sensor [83]. In this design, there is a super-bright green LED used
+the analog ground domain and digital ground domain and (ii) sepa-
+                                                                                                                               with the dominant wavelength at 525nm accompanied by a highly
+ration between each sub-circuit as depicted in Fig. 6. Furthermore,
+                                                                                                                               sensitive light sensor to pick up re�ected light from the artery. The
+the SIP measurements of the two corrugator groups are processed
+                                                                                                                               green LED and light sensor are placed in the middle of the forehead
+sequentially to avoid interference from 2 AC sweep sources. Thus,
+                                                                                                                               as discussed in Sec. 2.
+the SIP sub-circuit utilizes an analog switch to consecutively inter-
+                                                                                                                                  Putting together Painomerty. We use the TI MSP432P401R [70]
+change the SIP measurement between the two muscle groups.
+                                                                                                                               as the main MCU which connects to SIP sensor via I2C, to EEG
+
+
+
+
+                                                                                                                         424
+Painometry: Wearable and Objective �antification System for Acute Postoperative Pain                                                             MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada
+
+                                                                            PSD of Beta band                                  36.6
+                                                                      2
+
+
+
+
+                                                                                                          MicroSiemen (Ohm)
+                                                                                       Normal                                                                               Post
+                                                                                       Pain OnSet                                                                        Stimulation
+                                                                                                                              36.5
+
+
+
+                                                         Magnitude
+                                                                     1.5               Post Stimulation
+
+
+                                                                      1                                                       36.4
+
+
+                                                                     0.5                                                      36.3        Normal       Pain OnSet
+
+                                                                      0                                                       36.2
+                                                                       0   10     20   30     40     50                           0          8        16       24       32       40       48
+                                                                                Frequency(Hz)                                                               Time (s)
+                               (a)                                                 (c)                                                                        (e)
+                                                                                                                                         HR = 89           HR = 84           HR = 93
+              High                                 Low                     PSD of Gamma band                                             HRV = 0.06        HRV = 0.04        HRV = 0.05
+                                                                      2
+                                                                                       Normal                                   1
+
+
+
+
+                                                                                                             Norm. Intensity
+                                                                                       Pain OnSet
+
+
+
+
+                                                         Magnitude
+                                                                     1.5               Post Stimulation                        0.8
+
+                                                                                                                               0.6
+                                                                      1
+                                                                                                                               0.4
+                                                                     0.5
+                                                                                                                               0.2
+
+                                                                      0                                                         0
+                                                                       0   10     20   30     40     50                              0       8        16       24       32       40       48
+                                                                                Frequency(Hz)                                                                Time(s)
+                               (b)                                                 (d)                                                                         (f)
+
+
+Figure 8: Painometry sensor measurements: (a-b) Normalized average SIP measurement with di�erent pain levels; (c-d) Power
+Spectrum Density envelope of gamma and beta bands in EEG from T4 montage; (e) GSR and (f) PPG measurement with peak
+detection of HR/HRV trend in experimental pain stimulation.
+
+
+sensor via SPI, and to GSR, PPG sensor via analog I/O. This low-                                trend. Finally, we apply a notch �lter to further suppress 50/60Hz
+power MCU has enough high performance to satisfy SIP computing                                  power line interference and lowpass �lters of 1Hz and 100Hz to the
+requirement. Sensor measurements are then broadcasted out via a                                 PPG and EEG signal, respectively, to remove unexpected movement
+Bluetooth module [87]. Finally, we mount all electrodes and both                                artifacts.
+hardware PCBs onto a Velcro �exible patch, which can be easily                                     EEG decomposition. Pain features spread across di�erent re-
+mounted on various form factors such as a hat, a headband, or a                                 gions of the frequency domain (i.e., Alpha, Beta, Gamma, Delta,
+eye-glass. Fig. 7 shows the sensor placements on those form-factors.                            Theta) [50, 53, 75]. As a result, a single frequency band does not
+While both SIP sensors (4 electrodes in total) can be mounted on                                fully capture the brain’s response to pain. Therefore, decomposing
+eye-glass, in other 2 form-factors, those sensors are adjusted on-the-                          signals into multiple frequency bands facilitates more distinctive
+�y with 2 �oating electrodes (not shown in the �gure). Fig 9 shows                              features to be extracted. Classical approaches have used bandpass
+the whole hardware modules and sensor connection assembled on                                   �lters to extract di�erent frequency bands. However, applying a
+a heaband, which we use for our experiment and evaluation.                                      bandpass �lter causes low-frequency background drift, spoils the
+                                                                                                endpoints of the signal, and may lead to the loss of crucial details
+6 OBJECTIVE PAIN QUANTIFICATION                                                                 about acute pain. Fourier transform [8] is another common attempt
+                                                                                                that breaks down the signal into a sum of sinusoidal base functions
+6.1 Signal Pre-Processing                                                                       in order to determine the signal’s spectral components. However,
+In Painometry, we analyze signals collected from four sensing                                   since these sinusoidal base functions are, by design, in�nite signals
+sources: SIP, EEG, GSR, and PPG. Each signal is pre-processed                                   in the time domain, this method results in the loss of temporal
+di�erently due to the di�erences in their respective signal proper-                             information when each frequency band is reconstructed in the time
+ties such as frequencies of interest, sampling rate, and noise e�ects                           domain. Wavelet decomposition [31], on the other hand, is better
+before they are passed through the feature analysis pipeline (Sec.                              suited for non-stationary signals which may vary instantaneously
+7.2).                                                                                           in time [23], as do the biosignals recorded here. Thus, we leverage
+   Signal cleaning process. Even with our e�ort in minimizing                                   this approach and apply a 6th-order Daubechies 9 wavelet decom-
+hardware noise as presented in the previous section, the raw sensing                            position to extract the �ve frequency bands of interest from the
+data is still prone to noise including (1) DC drifting, (2) 50/60Hz                             cleaned EEG signal.
+power line interference, and (3) user movement artifacts. Hence,                                   Peak detection and HR/HRV calculation. Each heartbeat
+we continuously process raw data using an overlapped sliding                                    creates a peak that can be seen clearly in each PPG window. Thus,
+window. We initially apply a spline interpolation method so that all                            we apply a peak detection algorithm onto a sliding sub-window.
+measurements have the same length. We then remove the DC linear                                 After that, the heart rate variability (HRV) is calculated by taking
+trend of each window (except GSR measurement) by subtracting                                    the standard deviation of all the heartbeat interval inside a chunk
+the 6th-order polynomial �t from the original signals. The reason                               data. The sub-window slides overlap until they �nd a local peak
+GSR is left out is because useful information such as the tonic                                 above the magnitude threshold. Then the sub-window skips the
+component (skin conductance level) can be extracted from the DC
+
+
+
+
+                                                                                        425
+MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada                                                                                   Hoang Truong, et al.
+
+
+sliding over this heartbeat interval and look for the local peak of                      Type         Signal      Feature
+the next heartbeat interval.                                                             Temporal     GSR, SIP    -mean, variance
+                                                                                                                  -skewness, kurtosis
+6.2     Pain Features Extraction                                                         Temporal     PPG         -heart rate variability
+                                                                                         Spectral     EEG         -absolute spectral powers
+After obtaining and pre-processing the EEG, GSR, PPG, and SIP                                                     -relative spectral powers
+signals, the collected time series data from each source is segmented                                             -relative spectral ratio
+to �xed-size epochs, and selected features are extracted from each                       Non-linear   EEG         -fractal dimension, entropy
+epoch to be used for classi�cation of the pain level in that epoch. In                           Table 1: List of pain features
+the following sections, we present the feature selection and classi�-
+cation steps in our pain level quanti�cation pipeline. Informed by
+the literature, the features selected for extraction from each signal
+are from a variety of categories as follows:
+   Temporal features. This category includes statistical features
+                                                                               computationally infeasible to test all of possible combinations. To
+for time series data analysis, namely, mean, variance, skewness,
+                                                                               identify the most e�ective combination of features, we adopt three
+and kurtosis. In pain classi�cation, both GSR and SIP signals are
+                                                                               feature selection methods, namely, Recursive Feature Elimination
+often analyzed in time domain due to their considerable variation
+                                                                               (RFE), L1-based feature selection, and tree-based feature selection.
+in amplitude and lack of distinctive frequency patterns [27, 101].
+                                                                               RFE [14] is a greedy optimization algorithm that seeks to improve
+Hence, those four temporal features are extracted from single GSR
+                                                                               generalization performance of the classi�cation model by removing
+channel and ten channels of SIP. Furthermore, since heart rate
+                                                                               the least important features whose deletion will have the least e�ect
+changes when one experiences the pain [104], we choose heart rate
+                                                                               on training error. L1-based feature selection [55] is used for linear
+variability as one independent temporal feature. Overall, there are
+                                                                               models including Logistic Regression and Support Vector Machines
+45 temporal features extracted (i.e., 4 GSR, 40 SIP, and 1 HRV).
+                                                                               (SVM). Since we apply these linear models during the classi�cation
+   Spectral features. The spectral features are extracted to analyze
+                                                                               process, we use L1 norm to remove features with coe�cients of
+the characteristics of EEG signal because brain waves are generally
+                                                                               zero. Finally, with tree-based feature selection [30] takes a di�erent
+available in discrete frequency ranges at di�erent stages [59, 110].
+                                                                               approach by computing importance of features which in turn is
+By transforming the time series EEG signal into the frequency do-
+                                                                               used to remove irrelevant features.
+main in di�erent frequency bands (i.e., Theta, Alpha, Sigma, Beta,
+and Gamma) and computing its power spectrum density, various
+spectral features can be extracted. All the spectral features are ex-          6.4    Pain Level Classi�cation
+tracted from the EEG signals at T3, T4, Fp1, and Fp2 channels ,                Various classi�cation methods including the Support Vector Ma-
+which include the ratio of powers, absolute powers, theta/gamma,               chine (SVM), Logistic Regression, Decision Tree and Random Forest
+theta/alpha, and sigma/gamma. Accordingly, 13 features are ex-                 have been proposed in literature for pain or stress level detection,
+tracted from each of the four channels of EEG, which provides 52               each shown to be e�ective in speci�c settings [27, 110]. To be
+spectral features in total.                                                    inclusive, we deploy all these models in this study and perform
+   Non-linear features. Bioelectrical signals show various com-                an empirical comparative analysis to identify the best performing
+plex behaviors with nonlinear properties. In particular, the chaotic           model for our pain level identi�cation system (see Sec. 7 for our
+parameters of EEG can be used for pain level classi�cation. The dis-           experimental results).
+criminant ability of nonlinear analyses of EEG dynamics is demon-                 Sample fusion based GMM: The acute pain feeling remains
+strated through the measures of complexity such as correlation di-             the same over a short period; hence, we perform a fusion approach
+mension, Lyapunov exponent, entropy, fractal dimension, etc. [100],            to combine the data in one period to improve the performance.
+with the last two features proven to be most informative. In this              We explore the use of the GMM feature aggregation technique to
+study, we extract these two non-linear features for each of the EEG            encode 16 data signals into one sample. For each epoch of data, we
+channels (a total of 8 features).                                              train the GMM model using the Expectation-Maximization (EM)
+   Tab. 1 summarizes the features we extract from each type of                 algorithm. The means of GMM is concatenated to form the sample
+signal under each category of features in this study.                          data for this signal.
+
+6.3     Pain Feature Selection                                                 7     PERFORMANCE EVALUATION
+Even though each extracted feature can capture certain charac-                 Here, we discuss in detail the set of experiments conducted to
+teristics of the input signals, the performance of a classi�cation             evaluate the overall performance of Painometry. Also, we evaluate
+algorithm can be degraded when all possible features are used to-              our proposed SIP sensor performance to demonstrate its ability
+gether, mainly due to feature redundancy. In particular, some of               to capture the autonomous muscle movements. In particular, we
+the features may be irrelevant or redundant, further reducing the              evaluate the following aspects: (1) reliability and safety of the exper-
+classi�cation accuracy.                                                        iment protocol, (2) performance of pain quanti�cation pipeline, and
+   In order to select a set of relevant features among the 105 ex-             (3) user experience survey. We deployed the classi�cation model
+tracted features, we need to compute the discriminating ability of             on a Google Pixel 2 [29]. The average runtime is about 0.17 ms per
+each feature when they are used in combination. However, it is                 classi�cation along with 14% CPU usage and 75MB memory usage.
+
+
+
+
+                                                                         426
+Painometry: Wearable and Objective �antification System for Acute Postoperative Pain                                                  MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada
+
+
+                                                                                                           14                                                        0.35
+
+
+
+
+                                                                                       Pressure (kg/cm2)
+                                                                                                                                                  Normalize rating
+                                                                                                           12
+                                                                                                                                                                      0.3
+                                                                                                           10
+                                                                                                                         Thumbnail pressure                          0.25
+               SIP        EEG                                                                              8             Valve pressure
+                                                   Compressed
+                                                     gas tank                                                                                                         0.2
+              GSR         PPG                                                                              6
+                                                                                                                                                                                            Intensity
+                                                                                                           4                                                         0.15
+               Piezo              Pistol                                                                        0      500     1000       1500                              4           5            6
+              sensor                            Valve pressure                                                        Sample index                                              Pressure (kg/cm2 )
+                                                  controller
+                                                                                       Figure 10: PPD pressure vali- Figure 11: Average rating
+                                    Air tube                                           dation                        across subjects
+                                   connection
+
+Figure 9: Painometry headband form-factor and pain-                                    pressure regulator limits pressure to below 14 :6/2< 2 to prevent
+inducing experiment setup                                                              excessive pressure. Pressure intensity and duration are controlled
+                                                                                       by our LabView implementation. PPD tracks both valve pressure
+                                                                                       and piston-to-thumbnail pressure level in real-time. To ensure the
+7.1     Experimental Methodology
+                                                                                       safety of the device and experimental protocol, the mechanical
+Our experimental design goals are (1) inducing clearly distinguish-                    pain delivery component is held together by 2 asymmetrical screws
+able pain levels in order to get true labels for the ground truth of 4                 which gives subjects the ability to remove their thumbs at their
+di�erent pain states (i.e. no-pain and 3 pain levels), (2) avoiding the                discretion.
+e�ects of short-term pain tolerance, and (3) ensuring the safety of                       Pain stimulation protocol. The protocol is designed to deliver
+the experimental conditions. Since we understand the goals, com-                       clear distinct pain levels to the subject and to avoid the e�ects of
+plexity, and unpleasantness of this research study, our experimental                   short-term pain tolerance. We use PPD to create 3 di�erent pain
+pain-inducing device and protocol has been thoroughly designed                         levels of mild, moderate, and strong. Each subject will experience 12
+and approved by the Institutional Review Board (IRB) of University                     stimulation runs (i.e. 4 runs for each pain level) in a pseudo-random
+of Colorado, Boulder. Participant demographics are shown in Ta-                        sequence. Each run is divided into 3 intervals: T1 (before the stim-
+ble 2. All subjects in our study were pre-screened to be pain-free at                  ulus) is �rst and lasts 16 seconds, T2 (pain stimulus onset) is next
+the time of experiment, i.e. no chronic pain.                                          and lasts 16 seconds, and T3 (after the pain stimulus ceased) lasts 30
+   Existing pain-related research has used various methods to in-                      seconds at least. During the experiment, the Painometry headband
+duce experimental pain such as pressure pain [11, 15, 42], thermal                     records the subjects’ biosignals through all the runs. The subjects
+pain [21, 41] and cold pain [114]. Each method has its own un-                         rate their pain subjectively using the VAS scale right after T2. In
+pleasantness and side e�ects after the experiment (e.g. bruise after                   addition, T3 is adjusted on-the-�y in order to ensure the subjects’
+pressure pain, skin burnt after thermal pain or allergy after cold                     thumb returns to normal feeling before each stimulation run. Fig. 10
+pain). We chose pressure pain induced on subjects’ thumbs as our                       and Fig. 11 prove the correctness and reliability of PPD in delivering
+experimental pain method because we can guarantee the develop-                         pain perceptions and shows the corresponding valve pressure lev-
+ment of acute pain (similar to postoperative acute pain) with a clear                  els, thumbnail pressure levels, and average normalized pain rating
+distinction between di�erent pain levels. Also, this method has a                      for each pressure level across 23 subjects. The pressure applied on
+low probability of producing side e�ects (3 bruises reported from                      the subjects’ thumbnail scales proportionally to 3 valve pressure
+20 subjects in our pilot study and 23 subjects in our research study).                 levels. The average pain rating shows the correlation of pressure
+                                                                                       levels to the subjects’ rating on stimulation runs.
+                       Participant Demographics
+      Age (years)                 21 - 52 years old                                    7.2                          System Performance
+      Participant groups          20 in pilot study, 23 subjects
+                                                                                       We evaluated the performance of our proposed SIP sensing method
+      Pain states                 4 (pain-free and 3 levels of pain)
+                                                                                       and pain quanti�cation pipeline using the accuracy, precision, and
+      Data collection             12 pain-inducing runs, random order
+                                                                                       recall as performance measures. First, we evaluated the impact of
+      Bruise after experiment     9.1% (3 subjects)
+                                                                                       using di�erent feature selection approaches, using each Painometry
+                  Table 2: Data collection details.
+                                                                                       sensor in isolation. Then we performed Leave-one-out cross valida-
+                                                                                       tion (LOOCV) to evaluate classi�cation accuracy on 2 data sets: (i)
+                                                                                       3 pain levels (no-pain, mild, and strong pain) and (ii) 4 pain levels
+   Pressure pain device (PPD). The PPD is designed to be safe                          (no-pain, mild, moderate, and strong pain). During each iteration
+and accurate in delivering experimental pain. This device includes                     of LOOCV, 22 of 23 subjects’ data are used to train our model and
+the mechanical pain delivery component (with a piston-like front-                      the remaining one is used to validate the prediction pain level. This
+end), the pressure controller hardware and a compressed air tank                       process is repeated for all 23 subjects to estimate the accuracy on
+as shown in Fig. 9. The device is designed with a handle to keep the                   the unseen data. Towards this end, we use accuracy, precision, and
+hand comfortable and still while receiving pressure. A hardware                        recall as performance measures.
+
+
+
+
+                                                                                427
+MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada                                                                                                    Hoang Truong, et al.
+
+                                                                                                                                           3 levels                  4 levels
+                                                                                                                           23
+                                                                                                                           22
+                                                                                                                           21
+                                                                                                                           20
+                                                                                                                           19
+                                                                                                                           18
+                                                                                                                           17
+                                                                                                                           16
+                                                                                                                           15
+                                                                                                                           14
+
+                                                                                                                   Study
+                                                                                                                           13
+                                                                                                                           12
+                                                                                                                           11
+                                                                                                                           10
+                                                                                                                            9
+                                                                                                                            8
+                                                                                                                            7
+                                                                                                                            6
+                                                                                                                            5
+                                                                                                                            4
+                                                                                                                            3
+                                                                                                                            2
+                                                                                                                            1
+
+                                                                                                                            1 0.88 0.70 0.53 0.35 0.17 0     0.2   0.4   0.6   0.8   1
+                                                                                                                                                   Accuracy (%)
+
+
+
+Figure 12: Impact of feature Figure 13: Impact of sensor                        Figure 14: Correlation coe�- Figure 15: Accuracy across
+selection methods            combinations                                       cients                       subjects
+
+    We �rst evaluated the performance of various feature selection
+methods by performing the data-split validation on our data set.                highest), followed by heart rate variability, a number of EEG at T3
+Fig. 12 displays accuracy when the features are selected from the               and T4 channels, and GSR mean. We used this feature set for the
+RFE, Tree-based, and L1-based approaches. The result shows that                 rest of our LOOCV evaluation.
+RFE with Decision Tree provides the best accuracy of 96.7% among                    Fig. 16, 17, 18 show the average performance of 3 and 4 pain level
+the combination of feature selection methods and classi�ers.                    quanti�cation respectively using di�erent classi�cation method in-
+    To study the expressive power of the features extracted in our              cluding Logistic Regression (LR), Decision Tree (DT), Support Vec-
+pipeline, we calculated the correlation between each of the extracted           tor Machines (SVM), Random Forest Classi�er (RFC), and XGBC. As
+features and the pain levels using the cor package in R [52]. As                illustrated, the maximum accuracy of 89.5% and 76.7% is achieved
+illustrated in Fig. 14, the features extracted from the SIP signal have         using DT and RFC for 3 and 4 pain levels respectively among dif-
+the highest correlation with the pain levels with a mean of 0.6.                ferent classi�cation methods. On the other hand, the LR method
+Features from the EEG, PPG, and GSR signals ranked in the second,               provides the least accuracy on both data set of 75.14% and 67.39%.
+third, and fourth, respectively.                                                Fig. 15 shows the accuracy from each subjects.
+                                                                                    Tab. 3 shows the comparison of our system to other quanti�ca-
+                         Sensing Method          Level   Accuracy
+                                                                                tion methods of experimental pain based on state-of-the-art labora-
+                                                                                tory sensing systems using fMRI and biosignal sensors. Given our
+         [110]           EEG                         2    95.3%
+                                                                                wearable device, we are able to achieve pain quanti�cation accuracy
+         [12]            fMRI                        2     84%
+                                                                                for 3 and 4 levels on par with those previous works. This shows
+         [95]            EEG                         2    78.5%
+                                                                                that the Painometry provides reasonable and reliable results.
+         Painometry      SIP, EEG, GSR, PPG          3    89.5%
+                                                                                    Painometry hardware power pro�ling. We used the Mon-
+         [71]            EEG                         3     83%
+                                                                                soon power measurement tool [69] to validate the power consump-
+         [65]            GSR                         3    77.4%
+                                                                                tion of current Painometry prototype. At operating voltage of 3.3
+         [47]            Video, EMG, GSR             4    83.1%                 + , our fabricated hardware has an average power consumption of
+         Painometry      SIP, EEG, GSR, PPG          4    76.7%
+                                                                                292.1 <, in the active state (measuring sensor and streaming data
+         [16]            GSR, ECG                    4     75%
+                                                                                via Bluetooth), and (2) 56.8 <, in idle state (only MCU running
+         [112]           fMRI                        5    84.2%                 in sleep mode). Using a 500-< ⌘ battery can maintain the Painom-
+         [71]            EEG                         5     62%                  etry hardware for 5.6 hours in the active state continuously. The
+Table 3: Leave-one-out cross validation performance com-                        sensing sub-circuits and Bluetooth communication module have
+parison with some notable existing works                                        the highest power consumption of 129.4 <, and 93.7 <, respec-
+                                                                                tively. In order to �t the needs of all-day usage, we can further
+                                                                                increase the operation duration of Painometry by optimizing hard-
+   In our next evaluation, represented by Fig. 13, we studied how               ware components (i.e. MCU, external ADCs, and BLE with lower
+using di�erent combinations of biosignal sensors would impact the               power consumption) and larger sized battery.
+classi�cation accuracy. In order to test the feasibility and impact
+of SIP sensor, we also quickly perform the data-split validation                7.3    User study
+on our data set. As illustrated, using only GSR and PPG signals                 While developing and evaluating Painometry, we also conducted
+can classify the pain levels at an accuracy of 27% and 59% without              a survey to identify gaps in our system and the expectations of
+the SIP, respectively. On the other hand, considering only EEG or               the users (both users with the experience of wearing Painometry
+three signals of PPG, GSR, and EEG without SIP signal can achieve               during the experiment and prospective users). This information
+an accuracy of 49% and 66%, respectively. Consequently, it proves               provides us the insight to improve Painometry in the future.
+the feasibility that SIP sensor has a high impact on improving the                 We distributed our survey to 35 people, including our 23 subjects
+accuracy.                                                                       and 12 subjects who had no prior experience with Painometry.
+   The top features as ranked by RFE demonstrate most distinguish-              Fig. 19 shows �ve questions we asked and the statistics on our
+ing power for classi�cation include a variety of SIP features (ranked           participants’ answers. Speci�cally, analyzing the result of Question
+
+
+
+
+                                                                          428
+Painometry: Wearable and Objective �antification System for Acute Postoperative Pain                              MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada
+
+
+
+
+        Figure 16: Average accuracy.                             Figure 17: Average precision.                          Figure 18: Average recall.
+
+
+“How hard is it for you to quantify your pain objectively?” shows                       cross-validated or tested on a new dataset. Consequently, it su�ers
+that it is not easy for everyone to objectively rate their pain. From                   from over�lling to be considered as a reliable tool for pain classi�ca-
+Questions “When was the last time you had to / you struggled to                         tion. Besides the use of frequency band power, [71] extracted more
+rate your pain?”, we see that 11 out of 35 participants experienced                     features including fractal dimension, Shannon entropy, approxi-
+pain within a week; and nearly 80% of them struggled to rate it. As                     mate entropy, and spectral entropy and achieved around 62-83%
+a result, this statistics demonstrates a need for the objective pain                    accuracy in detection of 3 or 5 pain levels. Another commercial
+quanti�er.                                                                              product in this single sensing modality group is the PainQx sys-
+                                                                                        tem [75], which has developed a source localization algorithm for
+           1 . How hard is it for you to              3.How long would you              improved analysis of EEG data of pain patients. Di�erent than the
+           quantify your pain objectively?            feel comfortable...               aforementioned systems, Seok et al. [96] focused on proposing a
+                                                                                        set of optimized algorithms for a continuous postoperative pain
+                                                                   wearing              assessment tool based on the analysis of a pulse contour of PPG
+                                                                   Painometry?
+                                                                                        signal.
+                                                                                            To further enrich the pain quanti�cation resolution, many sys-
+2. When was the
+last time you ...                                                                       tems have been developed to measure other signal types such as
+                                                                                        skin conductance [102], facial features [35, 90], heart rate variability
+                                                                    wearing SIP         (HRV) [43], and trunk strength [66]. Speci�cally, [33, 113] advanced
+                                                                    sensor?             the automated pain recognition system with various biopotential
+                    had to rate   struggled to rate                                     data including EEG, EMG, ECG, and skin conductance level. Salah et
+                    your pain?       your pain?                                         al. [92], otherwise, proposed a system that fuses geometric facial ex-
+                                                                                        pressions and physiological signals to quantify pain. It captures both
+                        Figure 19: User study results                                   similar physiological signals and analyzes the movements of many
+                                                                                        of the facial muscles emphasized in the FACS manual [22]. The sys-
+   Finally, we studied how long people are willing to wear a headband-                  tem also relies on a unique algorithm incorporating a SVM linear
+like device with the placement of sensors on their forehead and                         model and video signal databases. In the same use case of where pa-
+around their head during the use. The answers to the question,                          tients are unable to communicate as [53], PMD-200™ [67, 68] pain
+“How long would you feel comfortable wearing Painometry and SIP                         monitoring device developed by Medasense company, on the other
+sensor?”, suggest that people can tolerate to wear such a device and                    hand, is a tool that uses a derivation from the nonlinear composite
+sensors for 15-30 minutes at most. This information helps know                          of heart rate (HR), HR variability, amplitude of the photoplethys-
+the need of improving the comfort of our current design as well as                      mogram, skin conductance, �uctuations in skin conductance, and
+building a timing constraint in a pain intervention system.                             their time derivatives to de�ne a novel multidimensional index of
+                                                                                        nociception, the nociception level (NOL) index.
+8    RELATED WORK                                                                           Additionally, several patents also applied the concept of quanti-
+Pain quanti�cation systems. There have been various systems                             fying pain by measuring various vital signals and movements [3,
+relying on either single or multiple sensing modalities to quantify                     44, 82]. These patents describe endeavors to integrate an exten-
+pain [33, 35, 43, 50, 53, 66, 67, 71, 75, 90, 96, 102, 113]. In [53], Ku-               sive range of noninvasive methods for monitoring patients’ daily
+mar et al. proposed an EEG-based system that can quantify the                           physiological and environmental stressors in objective, quanti�able
+patient’s physiological response to pain under general anaesthesia.                     schemes via portable devices. The integration of multiple signals
+In this system, the authors developed a real-time pain index based                      has become a trending solution to boost the performance of high-
+on an easy-to-access biosignal. Using the same EEG input, Kagita                        resolution pain quanti�cation systems. However, to collect multiple
+et al. [50] proposed a binary classi�cation of whether the user has                     signals, form factors are cumbersome, uncomfortable, and require
+pain or not with an accuracy of 100%. However, this model was not                       many accessories, which make systems unusable in daily life. In
+
+
+
+
+                                                                                  429
+MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada                                                                                                Hoang Truong, et al.
+
+
+contrast to existing systems, our system is light-weight and requires           settings, contributing to interventional therapies that bypass med-
+a minimal number of sensors.                                                    ication schedules used to relieve long-term pain. A recent study
+    Muscle pro�ling techniques. Applying AC currents to deter-                  similarly interested in developing an automatic, objective measure-
+mine the impedance of body tissues actively has already existed.                ment of signals indicating chronic pain has been successful in recog-
+It has been widely used in various healthcare applications. Exist-              nizing and classifying video recordings of pain-related movements
+ing technology is relatively simple, e�ective, fast, and noninva-               and facial expressions in a group of chronic pain patients [5].
+sive. Its most popular application is to estimate body composi-                    Once we are able to classify di�erent pain levels based on biosig-
+tion [26, 63, 97], which typically uses 50 kHz AC at less than 1mA.             nals, the next logical step would be to analyze the transition be-
+Multi-frequency measurements, or a frequency spectrum, are also                 tween pain states taking into account the biopsychosocial model of
+being used to evaluate di�erences in body composition caused by                 pain. Such a model can provide insights on not only the physiologi-
+di�erent clinical and nutritional conditions [49, 76, 109]. Another             cal markers of pain transition but also the psychological triggers
+application of this technology is to determine muscle diseases. In [7],         of pain. This has the potential to help predict pain episodes before
+the authors used this technology to predict skeletal muscle mass.               they happen and further develop a closed-loop, just-in-time, and
+Meanwhile, it is also an alternative for myography, which is a study            drug-free pain coaching system.
+of the velocity and intensity of muscular contraction [7, 58, 93, 98].
+    Though SIP shares the same fundamental principle of impedance-              10    CONCLUSION
+based pro�ling with the aforementioned techniques, its advantages
+lie in the abilities to (1) measure impedance of the singular muscle            In this work, we propose Painometry, a wearable system that pro-
+group under skin, (2) provide more detailed information about the               vides automated and pain quanti�cation in daily life. Notably, the
+muscle over a range of sweeping excitation frequencies, and (3)                 Painometry prototype captures the changes in multiple biosignals
+specify with greater precision the area of muscle of interest.                  from the subject during pain. Based on our research and under-
+                                                                                standing of the anatomy and physiology of pain, we have designed
+                                                                                Painometry to model the relations between pain and the recorded
+                                                                                biosignals. From the relations observed, we have established dif-
+9    DISCUSSION                                                                 ferent pain quanti�cation levels. The Painometry prototype has
+Chronic pain vs. Acute pain. We have shown the e�ectiveness                     been evaluated on 23 subjects (8832 data points from 276 min-
+of using Painometry in classifying di�erent experimental acute                  utes) through an IRB-approved pain-inducing protocol, and show
+pain levels, allowing for more objective monitoring of indicators               89.5% and 76.7% accuracy of pain quanti�cation under 3 and 4 pain
+of acute postoperative pain during a critical period in the reha-               states respectively. Finally, Painometry is our �rst step in targeting
+bilitation process. Since there is a strong correlation between the             chronic pain quanti�cation, detecting psychological pain triggers,
+severity of acute postoperative pain and development of chronic                 and developing a fully closed-loop ‘just-in-time’ pain intervention
+pain [80], the algorithm and feature selection of physiological ex-             system.
+pressions (i.e., SIP, EEG, PPG, GSR) in this paper will be useful as
+we extend Painometry to chronic pain quanti�cation. Since the                   Acknowledgements. We thank Dr. Sung-Ju Lee for serving as
+existing experimental stimulation device does not support mobility,             the shepherd for the paper and the reviewers for their insightful
+we plan to design and seek permission for new protocol before                   comments. We also thank Mr. Art Atkison for his consultancy in
+evaluating Painometry with in-the-wild scenario in the near future.             the writing of this paper. Our research was partially funded by NSF
+    Limitation. The target of Painometry system in this work is                 CNS/CSR #1846541, NSF SCH #1602428.
+classifying di�erent experimental acute pain levels in the controlled
+in-lab experiment setup. Thus, the system at the current state is               REFERENCES
+prone to false positives from the frown expression Painometry .                  [1] AD5933 [n.d.]. AD5933 12-Bit Impedance Converter. https://www.analog.com/
+While the SIP method has the advantage of capturing the move-                        en/products/ad5933.html.
+                                                                                 [2] AD8606 [n.d.]. Precision, Low Noise, RRIO, CMOS Op Amp (Dual) AD8606.
+ment of the targeted group muscle only (i.e. corrugator supercilli)                  https://www.analog.com/en/products/ad8606.html#product-overview.
+and Painometry can address motion and environmental noises,                      [3] Elizabeth Mary Annoni, Jianwen Gu, Pramodsingh Hirasingh Thakur,
+                                                                                     Bryan Allen Clark, and Kyle Harish Srivastava. 2018. Patient-speci�c calibration
+there are several artifacts that pose as challenges to its usability in              of pain quanti�cation. US Patent App. 15/867,772.
+the real world. In particular, frown expression and sweating can                 [4] ANSI ANSI. 1992. IEEE C95. 1-1992: IEEE Standard for Safety Levels with
+introduce noises into the SIP and GSR measurement respectively.                      Respect to Human Exposure to Radio Frequency Electromagnetic Fields, 3 kHz
+                                                                                     to 300 GHz, The Institute of Electrical and Electronics Engineers. Inc., New York,
+It is part of our future work to optimize the sensors and system in                  NY 10017 (1992).
+order to enhance the practicality of the system.                                 [5] Min S. H. Aung, Sebastian Kaltwang, Bernardino Romera-Paredes, Brais Mar-
+    Application to a range of form factors. Furthermore, we                          tinez, Aneesha Singh, Matteo Cella, Michel Valstar, Hongying Meng, An-
+                                                                                     drew Kemp, Moshen Sha�zadeh, Aaron C. Elkins, Natalie Kanakam, Amschel
+have demonstrated in this work the versatility of the Painome-                       de Rothschild, Nick Tyler, Paul J. Watson, Amanda C. de C Williams, Maja
+try electrode arrangement in its application to a range of unique                    Pantic, and Nadia Bianchi-Berthouze. 2016. The Automatic Detection of
+                                                                                     Chronic Pain-Related Expression: Requirements, Challenges and the Multi-
+form factors. Presumably, the convenience of o�ering the system                      modal EmoPain Dataset. IEEE transactions on a�ective computing 7, 4 (2016),
+in a range of wearable form factors ensures repeated and continued                   435–451. https://doi.org/10.1109/TAFFC.2015.2462830 30906508[pmid].
+use during the postoperative recovery period.                                    [6] Hyun Jae Baek, Haet Bit Lee, Jung Soo Kim, Jong Min Choi, Ko Keun Kim, and
+                                                                                     Kwang Suk Park. 2009. Nonintrusive biological signal monitoring in a car to
+    Towards a closed-loop pain intervention system. The Pain-                        evaluate a driver’s stress and health state. Telemedicine and e-Health 15, 2 (2009),
+ometry system has the potential to be applicable in rehabilitation                   182–189.
+
+
+
+
+                                                                          430
+Painometry: Wearable and Objective �antification System for Acute Postoperative Pain                                             MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada
+
+
+  [7] A Bosy-Westphal, B Jensen, W Braun, M Pourhassan, D Gallagher, and MJ Müller.                   Tsai, et al. 2017. Noninvasive deep brain stimulation via temporally interfering
+      2017. Quanti�cation of whole-body and segmental skeletal muscle mass using                      electric �elds. Cell 169, 6 (2017), 1029–1041.
+      phase-sensitive 8-electrode medical bioelectrical impedance devices. European              [33] Sascha Gruss, Roi Treister, Philipp Werner, Harald C Traue, Stephen Crawcour,
+      journal of clinical nutrition 71, 9 (2017), 1061.                                               Adriano Andrade, and Ste�en Walter. 2015. Pain intensity recognition rates
+  [8] Ronald Newbold Bracewell and Ronald N Bracewell. 1986. The Fourier transform                    via biopotential feature patterns with support vector machines. PloS one 10, 10
+      and its applications. Vol. 31999. McGraw-Hill New York.                                         (2015), e0140330.
+  [9] Gabriel A Brat, Denis Agniel, Andrew Beam, Brian Yorkgitis, Mark Bicket,                   [34] Ying Gu, Evy Cleeren, Jonathan Dan, Kasper Claes, Wim Van Paesschen, Sabine
+      Mark Homer, Kathe P Fox, Daniel B Knecht, Cheryl N McMahill-Walraven,                           Van Hu�el, and Borbála Hunyadi. 2018. Comparison between scalp EEG and
+      Nathan Palmer, and Isaac Kohane. 2018. Postsurgical prescriptions for opi-                      behind-the-ear EEG for development of a wearable seizure detection system for
+      oid naive patients and association with overdose and misuse: retrospec-                         patients with focal epilepsy. Sensors 18, 1 (2018), 29.
+      tive cohort study. BMJ 360 (2018).               https://doi.org/10.1136/bmj.j5790         [35] MJ Guesgen, NJ Beausoleil, M Leach, EO Minot, M Stewart, and KJ Sta�ord. 2016.
+      arXiv:https://www.bmj.com/content/360/bmj.j5790.full.pdf                                        Coding and quanti�cation of a facial expression for pain in lambs. Behavioural
+ [10] Harald Breivik, PC Borchgrevink, SM Allen, LA Rosseland, L Romundstad, EK                       processes 132 (2016), 49–56.
+      Breivik Hals, G Kvarstein, and A Stubhaug. 2008. Assessment of pain. BJA:                  [36] ICNIRP Guideline. 1998. Guidelines for limiting exposure to time-varying
+      British Journal of Anaesthesia 101, 1 (2008), 17–24.                                            electric, magnetic, and electromagnetic �elds (up to 300 GHz). Health phys 74, 4
+ [11] Jannick Brennum, Michel Kjeldsen, Kai Jensen, and Troels Staehelin Jensen.                      (1998), 494–522.
+      1989. Measurements of human pressure-pain thresholds on �ngers and toes.                   [37] Jennifer M. Hah, Brian T. Bateman, John Ratli�, Catherine Curtin, and Eric
+      Pain 38, 2 (1989), 211–217.                                                                     Sun. 2017. Chronic Opioid Use After Surgery: Implications for Perioperative
+ [12] Justin E Brown, Neil Chatterjee, Jarred Younger, and Sean Mackey. 2011. Towards                 Management in the Face of the Opioid Epidemic. Anesthesia & Analgesia 125, 5
+      a physiology-based measure of pain: patterns of human brain activity distinguish                (2017), 1733–1740.
+      painful from non-painful thermal stimulation. PloS one 6, 9 (2011), e24124.                [38] Gillian A Hawker, Samra Mian, Tetyana Kendzerska, and Melissa French. 2011.
+ [13] Robert G Carlson, Ramzi W Nahhas, Silvia S Martins, and Raminta Daniulaityte.                   Measures of adult pain: Visual analog scale for pain (vas pain), numeric rating
+      2016. Predictors of transition to heroin use among initially non-opioid dependent               scale for pain (nrs pain), mcgill pain questionnaire (mpq), short-form mcgill pain
+      illicit pharmaceutical opioid users: A natural history study. Drug and alcohol                  questionnaire (sf-mpq), chronic pain grade scale (cpgs), short form-36 bodily
+      dependence 160 (2016), 127–134.                                                                 pain scale (sf-36 bps), and measure of intermittent and constant osteoarthritis
+ [14] X. Chen and J. C. Jeong. 2007. Enhanced recursive feature elimination. In Sixth                 pain (icoap). Arthritis care & research 63, S11 (2011), S240–S252.
+      International Conference on Machine Learning and Applications (ICMLA 2007).                [39] Matthew S Herbert, Burel R Goodin, Samuel T Pero IV, Jessica K Schmidt, Adri-
+      429–435. https://doi.org/10.1109/ICMLA.2007.35                                                  ana Sotolongo, Hailey W Bulls, Toni L Glover, Christopher D King, Kimberly T
+ [15] Linda S Chesterton, Panos Barlas, Nadine E Foster, G David Baxter, and Chris-                   Sibille, Yenisel Cruz-Almeida, et al. 2013. Pain hypervigilance is associated with
+      tine C Wright. 2003. Gender di�erences in pressure pain threshold in healthy                    greater clinical pain severity and enhanced experimental pain sensitivity among
+      humans. Pain 101, 3 (2003), 259–266.                                                            adults with symptomatic knee osteoarthritis. Annals of Behavioral Medicine 48,
+ [16] Yaqi Chu, Xingang Zhao, Jianda Han, and Yang Su. 2017. Physiological signal-                    1 (2013), 50–60.
+      based method for measurement of pain intensity. Frontiers in neuroscience 11               [40] Richard W Homan, John Herman, and Phillip Purdy. 1987. Cerebral location of
+      (2017), 279.                                                                                    international 10–20 system electrode placement. Electroencephalography and
+ [17] Theodore J Cicero, Matthew S Ellis, Hilary L Surratt, and Steven P Kurtz. 2014.                 clinical neurophysiology 66, 4 (1987), 376–382.
+      The changing face of heroin use in the United States: a retrospective analysis of          [41] Clara Huishi Zhang, Abbas Sohrabpour, Yunfeng Lu, and Bin He. 2016. Spectral
+      the past 50 years. JAMA psychiatry 71, 7 (2014), 821–826.                                       and spatial changes of brain rhythmic activity in response to the sustained
+ [18] Kenneth D. Craig, Susan A. Hyde, and Christopher J. Patrick. 1991. Genuine,                     thermal pain stimulation. Human brain mapping 37, 8 (2016), 2976–2991.
+      suppressed and faked facial behavior during exacerbation of chronic low back               [42] Kai Jensen, Henrik Ørbaek Andersen, Jes Olesen, and Ulf Lindblom. 1986.
+      pain. Pain 46, 2 (1991), 161 – 171. https://doi.org/10.1016/0304-3959(91)90071-5                Pressure-pain threshold in human temporal region. Evaluation of a new pressure
+ [19] Philip De Chazal, Niall Fox, EMER O’HARE, Conor Heneghan, Alberto Za�a-                         algometer. Pain 25, 3 (1986), 313–323.
+      roni, Patricia Boyle, Stephanie Smith, CAROLINE O’CONNELL, and Walter T                    [43] Gunnar Jess, Esther M Pogatzki-Zahn, Peter K Zahn, and Christine H Meyer-
+      McNicholas. 2011. Sleep/wake measurement using a non-contact biomotion                          Frieem. 2016. Monitoring heart rate variability to assess experimentally induced
+      sensor. Journal of sleep research 20, 2 (2011), 356–366.                                        pain using the analgesia nociception index: A randomised volunteer study.
+ [20] Philip De Chazal, Emer O’Hare, Niall Fox, and Conor Heneghan. 2008. Assess-                     European Journal of Anaesthesiology (EJA) 33, 2 (2016), 118–125.
+      ment of sleep/wake patterns using a non-contact biomotion sensor. In 2008 30th             [44] Erwin Roy John, Leslie S Prichep, and Emile Hiesiger. 2016. System and method
+      Annual International Conference of the IEEE Engineering in Medicine and Biology                 for pain detection and computation of a pain quanti�cation index. US Patent
+      Society. IEEE, 514–517.                                                                         9,402,558.
+ [21] Robert R Edwards and Roger B Fillingim. 1999. Ethnic di�erences in thermal                 [45] Christopher M Jones. 2013. Heroin use and heroin use risk behaviors among
+      pain responses. Psychosomatic medicine 61, 3 (1999), 346–354.                                   nonmedical users of prescription opioid pain relievers–United States, 2002–2004
+ [22] Paul Ekman and Wallace V. Friesen. 1978. Facial Action Coding System: Manual.                   and 2008–2010. Drug and alcohol dependence 132, 1-2 (2013), 95–100.
+ [23] Burhan Ergen. 2012. Signal and Image Denoising Using Wavelet Transform.                    [46] Markus Kächele, Mohammadreza Amirian, Patrick Thiam, Philipp Werner, Stef-
+      https://doi.org/10.5772/36434                                                                   fen Walter, Günther Palm, and Friedhelm Schwenker. 2017. Adaptive con�dence
+ [24] W Paul Farquhar-Smith. 2008. Anatomy, physiology and pharmacology of pain.                      learning for the personalization of pain intensity estimation systems. Evolving
+      Anaesthesia & intensive care medicine 9, 1 (2008), 3–7.                                         Systems 8, 1 (2017), 71–83.
+ [25] Centers for Disease Control, Prevention, et al. 2016. Wide-ranging online data             [47] Markus Kächele, Patrick Thiam, Mohammadreza Amirian, Friedhelm Schwenker,
+      for epidemiologic research (WONDER). Atlanta, GA: National Center for Health                    and Günther Palm. 2016. Methods for person-centered continuous pain intensity
+      Statistics (2016).                                                                              assessment from bio-physiological channels. IEEE Journal of Selected Topics in
+ [26] Maria Franco-Villoria, Charlotte M Wright, John H McColl, Andrea Sherri�,                       Signal Processing 10, 5 (2016), 854–864.
+      Mark S Pearce, Gateshead Millennium Study core team, et al. 2016. Assessment of            [48] Markus Kächele, Philipp Werner, Ayoub Al-Hamadi, Günther Palm, Ste�en Wal-
+      adult body composition using bioelectrical impedance: comparison of researcher                  ter, and Friedhelm Schwenker. 2015. Bio-visual fusion for person-independent
+      calculated to machine outputted values. BMJ open 6, 1 (2016), e008922.                          recognition of pain intensity. In International Workshop on Multiple Classi�er
+ [27] A. Ghaderi, J. Frounchi, and A. Farnam. 2015. Machine learning-based signal                     Systems. Springer, 220–230.
+      processing using physiological signals for stress detection. In 2015 22nd Iranian          [49] MW Kafri, JF Potter, and PK Myint. 2014. Multi-frequency bioelectrical
+      Conference on Biomedical Engineering (ICBME). 93–98. https://doi.org/10.1109/                   impedance analysis for assessing fat mass and fat-free mass in stroke or tran-
+      ICBME.2015.7404123                                                                              sient ischaemic attack patients. European journal of clinical nutrition 68, 6 (2014),
+ [28] Victor Giurgiutiu and Buli Xu. 2004. Development of a �eld-portable small-                      677.
+      size impedance analyzer for structural health monitoring using the electrome-              [50] Junichiro Kagita and Yasue Mitsukura. 2018. Quanti�cation of pain degree
+      chanical impedance technique. In Smart Structures and Materials 2004: Sensors                   by frequency features of single-chanelled EEG. In 2018 IEEE 15th International
+      and Smart Structures Technologies for Civil, Mechanical, and Aerospace Systems,                 Workshop on Advanced Motion Control (AMC). IEEE, 359–363.
+      Vol. 5391. International Society for Optics and Photonics, 774–786.                        [51] Kyriaki Kalimeri and Charalampos Saitis. 2016. Exploring multimodal biosignal
+ [29] googlepixel [n.d.]. Google Pixel 2 XL. https://store.google.com/sg/product/                     features for stress detection during indoor mobility. In Proceedings of the 18th
+      pixel_2_xl.                                                                                     ACM International Conference on Multimodal Interaction. ACM, 53–60.
+ [30] Krzysztof Grabczewski and Norbert Jankowski. 2005. Feature selection with                  [52] Maurice G Kendall. 1938. A new measure of rank correlation. Biometrika 30,
+      decision tree criterion. 6 pp. https://doi.org/10.1109/ICHIS.2005.43                            1/2 (1938), 81–93.
+ [31] Amara Graps. 1995. An introduction to wavelets. IEEE computational science                 [53] Sanjeev Kumar, Amod Kumar, Anjan Trikha, and Sneh Anand. 2015. Electroen-
+      and engineering 2, 2 (1995), 50–61.                                                             cephalogram based quantitative estimation of pain for balanced anaesthesia.
+ [32] Nir Grossman, David Bono, Nina Dedic, Suhasa B Kodandaramaiah, Andrii
+      Rudenko, Ho-Jun Suk, Antonino M Cassara, Esra Neufeld, Niels Kuster, Li-Huei
+
+
+
+
+                                                                                           431
+MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada                                                                                                          Hoang Truong, et al.
+
+
+      Measurement 59 (2015), 296 – 301. https://doi.org/10.1016/j.measurement.2014.      [80] WA Pluijms, MAH Steegers, AFTM Verhagen, GJ Sche�er, and OHG Wilder-
+      09.021                                                                                  Smith. 2006. Chronic post-thoracotomy pain: a retrospective study. Acta
+ [54] Karim S. Ladha. 2019. Opioid Prescribing After Surgery in the United                    anaesthesiologica scandinavica 50, 7 (2006), 804–808.
+      States, Canada, and Sweden.            JAMA Network Open 2, 9 (09 2019),           [81] Kenneth M. Prkachin and Susan R. Mercer. 1989. Pain expression in patients
+      e1910734–e1910734. https://doi.org/10.1001/jamanetworkopen.2019.10734                   with shoulder pathology: validity, properties and relationship to sickness impact.
+      arXiv:https://jamanetwork.com/journals/jamanetworkopen/articlepdf/2749239/ladha_2019_oi_190419.pdf
+                                                                                              Pain 39, 3 (1989), 257 – 265. https://doi.org/10.1016/0304-3959(89)90038-9
+ [55] Su-In Lee, Honglak Lee, Pieter Abbeel, and Andrew Y. Ng. 2006. E�cient L1          [82] Christopher L Pulliam and Joseph P Giu�rida. 2017. Pain quanti�cation and
+      Regularized Logistic Regression. In AAAI.                                               management system and device, and method of using. US Patent 9,782,122.
+ [56] Grzegorz Lentka. 2014. Using a particular sampling method for impedance            [83] pulsesensor [n.d.]. Open-Source Pulse Sensor Hardware. https://pulsesensor.
+      measurement. Metrology and Measurement Systems 21, 3 (2014), 497–508.                   com/.
+ [57] Linda LeResche and Samuel F. Dworkin. 1988. Facial expressions of pain and         [84] Marianne C Reddan and Tor D Wager. 2018. Modeling pain using fMRI: from
+      emotions in chronic TMD patients. Pain 35, 1 (1988), 71 – 78. https://doi.org/          regions to biomarkers. Neuroscience bulletin 34, 1 (2018), 208–215.
+      10.1016/0304-3959(88)90278-3                                                       [85] P. Reicherts, A. B. Gerdes, P. Pauli, and M. J. Wieser. 2013. On the mutual e�ects
+ [58] Xiaoyan Li, Le Li, Henry Shin, Sheng Li, and Ping Zhou. 2017. Electrical                of pain and emotion: facial pain expressions enhance pain perception and vice
+      impedance myography for evaluating paretic muscle changes after stroke. IEEE            versa are perceived as more arousing when feeling pain. Pain 154, 6 (Jun 2013),
+      Transactions on Neural Systems and Rehabilitation Engineering 25, 11 (2017),            793–800.
+      2113–2121.                                                                         [86] Philipp Reicherts, Matthias J. Wieser, Antje B. M. Gerdes, Katja U. Likowski, Peter
+ [59] Manyoel Lim, June Sic Kim, Dajung J Kim, and Chun Kee Chung. 2016. In-                  Weyers, Andreas Mühlberger, and Paul Pauli. 2012. Electrocortical evidence
+      creased low-and high-frequency oscillatory activity in the prefrontal cortex of         for preferential processing of dynamic pain expressions compared to other
+      �bromyalgia patients. Frontiers in human neuroscience 10 (2016), 111.                   emotional expressions. PAIN 153, 9 (2012). https://journals.lww.com/pain/
+ [60] LM4041 [n.d.]. LM4041 Precision Micropower Shunt Voltage Reference. http:               Fulltext/2012/09000/Electrocortical_evidence_for_preferential.26.aspx
+      //www.ti.com/product/LM4041-N.                                                     [87] RN42 [n.d.]. Microchip RN42 Bluetooth Module. https://www.microchip.com/
+ [61] LMP2231 [n.d.]. LMP2231 Precision Operational Ampli�er with CMOS Inputs.                wwwproducts/en/RN42.
+      http://www.ti.com/product/LMP2231.                                                 [88] Rosa Rojo, Juan Carlos Prados-Frutos, and Antonio López-Valverde. 2015.
+ [62] Daniel Lopez-Martinez and Rosalind Picard. 2018. Continuous Pain Intensity              Pain assessment using the Facial Action Coding System. A systematic re-
+      Estimation from Autonomic Signals with Recurrent Neural Networks. In 2018               view. Medicina Clínica (English Edition) 145, 8 (2015), 350 – 355. https:
+      40th Annual International Conference of the IEEE Engineering in Medicine and            //doi.org/10.1016/j.medcle.2014.08.002
+      Biology Society (EMBC). IEEE, 5624–5627.                                           [89] Robert Rosenthal and Ralph L Rosnow. 1984. Applying Hamlet’s question to
+ [63] Henry C Lukaski, Phyllis E Johnson, William W Bolonchuk, and Glenn I Lykken.            the ethical conduct of research: A conceptual addendum. American Psychologist
+      1985. Assessment of fat-free mass using bioelectrical impedance measurements            39, 5 (1984), 561.
+      of the human body. The American journal of clinical nutrition 41, 4 (1985),        [90] Sourav Dey Roy, Mrinal Kanti Bhowmik, Priya Saha, and Anjan Kumar Ghosh.
+      810–817.                                                                                2016. An Approach for Automatic Pain Detection through Facial Expression.
+ [64] Mark A Lumley, Jay L Cohen, George S Borszcz, Annmarie Cano, Alison M                   Procedia Computer Science 84 (2016), 99 – 106. Proceeding of the Seventh
+      Radcli�e, Laura S Porter, Howard Schubiner, and Francis J Keefe. 2011. Pain             International Conference on Intelligent Human Computer Interaction (IHCI
+      and emotion: a biopsychosocial review of recent research. Journal of clinical           2015).
+      psychology 67, 9 (2011), 942–968.                                                  [91] Seward B Rutkove. 2009. Electrical impedance myography: background, current
+ [65] Gordon Matthewson, Choong-Wan Woo, Marianne C Reddan, and Tor D Wager.                  state, and future directions. Muscle & Nerve: O�cial Journal of the American
+      2019. Cognitive self-regulation in�uences pain-related physiology. bioRxiv              Association of Electrodiagnostic Medicine 40, 6 (2009), 936–946.
+      (2019), 361519.                                                                    [92] Amir Salah, Mahmoud I Khalil, and Hazem Abbas. 2018. Multimodal Pain
+ [66] TG Mayer, SUSAN S Smith, JANICE Keeley, and VERT Mooney. 1985. Quan-                    Level Recognition using Majority Voting Technique. In 2018 13th International
+      ti�cation of lumbar function. Part 2: Sagittal plane trunk strength in chronic          Conference on Computer Engineering and Systems (ICCES). IEEE, 307–312.
+      low-back pain patients. Spine 10, 8 (1985), 765–772.                               [93] Benjamin Sanchez and Seward B Rutkove. 2017. Electrical impedance myogra-
+ [67] Medasense Biometrics Ltd. [n.d.]. PMD-200 - Pain Monitoring Device. https:              phy and its applications in neuromuscular disorders. Neurotherapeutics 14, 1
+      //tinyurl.com/sxf9cac.                                                                  (2017), 107–118.
+ [68] Fleur S Meijer, Chris H Martini, Suzanne Broens, Martijn Boon, Marieke Ni-         [94] Stephan A Schug, Patricia Lavand’homme, Antonia Barke, Beatrice Korwisi,
+      esters, Leon Aarts, Erik Olofsen, Monique van Velzen, and Albert Dahan. 2019.           Winfried Rief, Rolf-Detlef Treede, et al. 2019. The IASP classi�cation of chronic
+      Nociception-guided versus Standard Care during Remifentanil–Propofol Anes-              pain for ICD-11: chronic postsurgical or posttraumatic pain. Pain 160, 1 (2019),
+      thesiaA Randomized Controlled Trial. Anesthesiology: The Journal of the Ameri-          45–52.
+      can Society of Anesthesiologists 130, 5 (2019), 745–755.                           [95] Enrico Schulz, Andrew Zherdin, Laura Tiemann, Claudia Plant, and Markus
+ [69] Moonson [n.d.]. Moonson Power Management Tool. https://goo.gl/f9J3Dz.                   Ploner. 2011. Decoding an individual’s sensitivity to pain from the multivariate
+ [70] MSP432P401R [n.d.]. TI MSP432P401R MCU. http://www.ti.com/product/                      analysis of EEG data. Cerebral cortex 22, 5 (2011), 1118–1123.
+      MSP432P401R.                                                                       [96] Hyeon Seok, Byung-Moon Choi, Gyu-Jeong Noh, and Hangsik Shin. 2019. Post-
+ [71] Tahereh Nezam, Reza Boostani, Vahid Abootalebi, and Karim Rastegar. 2018. A             operative Pain Assessment Model Based on Pulse Contour Characteristics Anal-
+      Novel Classi�cation Strategy to Distinguish Five Levels of Pain using the EEG           ysis. IEEE Journal of Biomedical and Health Informatics PP (11 2019), 1–1.
+      Signal Features. IEEE Transactions on A�ective Computing (2018).                        https://doi.org/10.1109/JBHI.2018.2890482
+ [72] Anh Nguyen, Raghda Alqurashi, Zohreh Raghebi, Farnoush Banaei-Kashani,             [97] Giuseppe Sergi, Marina De Rui, Brendon Stubbs, Nicola Veronese, and Enzo
+      Ann C Halbower, and Tam Vu. 2016. A lightweight and inexpensive in-ear                  Manzato. 2017. Measurement of lean body mass using bioelectrical impedance
+      sensing system for automatic whole-night sleep stage monitoring. In Proceedings         analysis: a consideration of the pros and cons. Aging clinical and experimental
+      of the 14th ACM Conference on Embedded Network Sensor Systems CD-ROM. ACM,              research 29, 4 (2017), 591–597.
+      230–244.                                                                           [98] Carl A Shi�man, Ronald Aaron, and Seward B Rutkove. 2015. Electrical
+ [73] Nile M Oldham. 1996. Overview of bioelectrical impedance analyzers. The                 impedance myography. US Patent 9,014,797.
+      American journal of clinical nutrition 64, 3 (1996), 405S–412S.                    [99] Lee S Simon. 2012. Relieving pain in America: A blueprint for transforming
+ [74] International Commission on Non-Ionizing Radiation Protection et al. 2003.              prevention, care, education, and research. Journal of pain & palliative care
+      Guidance on determining compliance of exposure to pulsed and complex non-               pharmacotherapy 26, 2 (2012), 197–198.
+      sinusoidal waveforms below 100 kHz with ICNIRP guidelines. Health physics         [100] Carolina Sitges, Xavier Bornas, Jordi Llabrés, Miquel Noguera, and Pedro Mon-
+      84, 3 (2003), 383–387.                                                                  toya. 2010. Linear and nonlinear analyses of EEG dynamics during non-painful
+ [75] painqx [n.d.]. The PainQx System - Objective and Quantitative Pain Measure-             somatosensory processing in chronic pain patients. International Journal of
+      ment. https://www.painqx.com/.                                                          Psychophysiology 77, 2 (2010), 176–183.
+ [76] K Panorchan, A Nongnuch, S El-Kateb, C Goodlad, and A Davenport. 2015.            [101] Jair Stern, Daniel Jeanmonod, and Johannes Sarnthein. 2006. Persistent EEG
+      Changes in muscle and fat mass with haemodialysis detected by multi-frequency           overactivation in the cortical pain matrix of neurogenic pain patients. Neuroim-
+      bioelectrical impedance analysis. European journal of clinical nutrition 69, 10         age 31, 2 (2006), 721–731.
+      (2015), 1109.                                                                     [102] Hanne Storm. 2008. Changes in skin conductance as a tool to monitor noci-
+ [77] Leonard J Paulozzi. 2012. Prescription drug overdoses: a review. Journal of             ceptive stimulation and pain. Current Opinion in Anesthesiology 21, 6 (2008),
+      safety research 43, 4 (2012), 283–289.                                                  796–804.
+ [78] HC Philips. 2015. Imagery and likelihood cognitive bias in pain. Behavioural      [103] Abdulhamit Subasi and M Kemal Kiymik. 2010. Muscle fatigue detection in
+      and cognitive psychotherapy 43, 3 (2015), 270–284.                                      EMG using time–frequency methods, ICA and neural networks. Journal of
+ [79] Tamar Pincus and Stephen Morley. 2001. Cognitive-processing bias in chronic             medical systems 34, 4 (2010), 777–785.
+      pain: a review and integration. Psychological bulletin 127, 5 (2001), 599.
+
+
+
+
+                                                                                     432
+Painometry: Wearable and Objective �antification System for Acute Postoperative Pain                                          MobiSys ’20, June 15–19, 2020, Toronto, ON, Canada
+
+
+[104] Astrid Juhl Terkelsen, Henning Molgaard, John Hansen, Ole Kaeseler Andersen,                   Using Random Forest Models. IEEE Transactions on Biomedical Engineering 64,
+      and Troels Staehelin Jensen. 2005. Acute pain increases heart rate: Di�erential                12 (2017), 2988–2996.
+      mechanisms during rest and mental stress. Autonomic Neuroscience 121 (2005),             [111] Kevin E Vowles, Mindy L McEntee, Peter Siyahhan Julnes, Tessa Frohe, John P
+      101–109.                                                                                       Ney, and David N van der Goes. 2015. Rates of opioid misuse, abuse, and
+[105] TS5A23159 [n.d.]. TS5A23159 2:1 Multiplexer / Demultiplexer. http://www.ti.                    addiction in chronic pain: a systematic review and data synthesis. Pain 156, 4
+      com/product/TS5A23159.                                                                         (2015), 569–576.
+[106] Yiheng Tu, Yeung Sam Hung, Zhiguo Zhang, and Li Hu. 2014. Prediction of                  [112] Tor D Wager, Lauren Y Atlas, Martin A Lindquist, Mathieu Roy, Choong-Wan
+      pain perception using multivariate pattern analysis of laser-evoked EEG oscilla-               Woo, and Ethan Kross. 2013. An fMRI-based neurologic signature of physical
+      tions. In Control Automation Robotics & Vision (ICARCV), 2014 13th International               pain. New England Journal of Medicine 368, 15 (2013), 1388–1397.
+      Conference on. IEEE, 13–16.                                                              [113] Ste�en Walter, Sascha Gruss, Kerstin Limbrecht-Ecklundt, Harald C Traue,
+[107] Marieke van Dooren, Joris H Janssen, et al. 2012. Emotional sweating across                    Philipp Werner, Ayoub Al-Hamadi, Nicolai Diniz, Gustavo Moreira da Silva,
+      the body: Comparing 16 di�erent skin conductance measurement locations.                        and Adriano O Andrade. 2014. Automatic pain quanti�cation using autonomic
+      Physiology & behavior 106, 2 (2012), 298–304.                                                  parameters. Psychology & Neuroscience 7, 3 (2014), 363.
+[108] Carolina Varon, Katrien Jansen, Lieven Lagae, and Sabine Van Hu�el. 2015. Can            [114] Gunnar Wasner, JoÈrn Schattschneider, Andreas Binder, and Ralf Baron. 2004.
+      ECG monitoring identify seizures? Journal of electrocardiology 48, 6 (2015),                   Topical menthol—a human model for cold pain by activation and sensitization
+      1069–1074.                                                                                     of C nociceptors. Brain 127, 5 (2004), 1159–1171.
+[109] Julien Verney, Chloé Schwartz, Saliha Amiche, Bruno Pereira, and David Thivel.           [115] Suzanne Wendelken, Susan McGrath, George Blike, and Metin Akay. 2004.
+      2015. Comparisons of a multi-frequency bioelectrical impedance analysis to the                 The feasibility of using a forehead re�ectance pulse oximeter for automated
+      dual-energy X-ray absorptiometry scan in healthy young adults depending on                     remote triage. In IEEE 30th Annual Northeast Bioengineering Conference, 2004.
+      their physical activity level. Journal of human kinetics 47, 1 (2015), 73–80.                  Proceedings of the. IEEE, 180–181.
+[110] Vishal Vijayakumar, Michelle Case, Sina Shirinpour, and Bin He. 2017. Quanti-            [116] Bruce B Winter and John G Webster. 1983. Driven-right-leg circuit design. IEEE
+      fying and Characterizing Tonic Thermal Pain Across Subjects From EEG Data                      Transactions on Biomedical Engineering 1 (1983), 62–66.
+
+
+
+
+                                                                                         433
+

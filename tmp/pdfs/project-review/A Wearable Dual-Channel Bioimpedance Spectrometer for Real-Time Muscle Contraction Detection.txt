@@ -1,0 +1,661 @@
+11316                                                                   IEEE SENSORS JOURNAL, VOL. 24, NO. 7, 1 APRIL 2024
+
+
+
+
+   A Wearable Dual-Channel Bioimpedance
+ Spectrometer for Real-Time Muscle Contraction
+                   Detection
+          Roman Kusche , Member, IEEE, Andra Oltmann , and Philipp Rostalski , Member, IEEE
+
+
+
+
+   Abstract—The reliable detection of muscle contractions in
+real-time is important for many applications. Both for pros-
+thesis control and in the field of human-computer interaction,
+the physiological commands of the user must be recognized.
+However, conventional methods such as electromyography
+(EMG) are susceptible to interferences. A particularly robust
+method is the electrical impedance myography (EIM). Espe-
+cially the temporal changes of the bioimpedance phase
+response are of interest for muscle activity monitoring.
+However, available wearable measurement systems are not
+capable of detecting muscle contractions in real-time to con-
+trol prostheses or human–computer interaction devices. This
+work presents the development and metrological characteri-
+zation of a wearable real-time bioimpedance spectrometer for the detection of muscle contractions. It can record the
+frequency responses in the range of 20–230 kHz from two antagonistic muscles. The sampling rate of 25 impedance
+spectra per second and per channel provides sufficient temporal resolution for many applications. Phantom measure-
+ments show that the statistical errors are below 1% for the magnitude and below 0.4◦ for the phases, which is sufficient
+for EIM. This system is used to perform first subject measurements. For the first time, these measurements demonstrate
+the temporal impedance behavior and frequency responses of two antagonistic muscles during contraction. In addition,
+the directional dependence of the EIM during a muscle contraction is investigated for the first time. The presented
+measurement system and novel measurement approaches are promising for many EIM applications, especially for
+reliable muscle contraction detection e.g. in prosthetics or human–computer interaction applications.
+  Index Terms— Bioelectrical impedance, electrical impedance myography (EIM), human–computer interaction,
+ human–machine interface, instrumentation, measurement system, muscle contractions, prosthesis control, real-time,
+ wearable.
+
+
+
+  Manuscript received 4 January 2024; accepted 24 January 2024. Date                               I. I NTRODUCTION
+of publication 2 February 2024; date of current version 2 April 2024.             URING the past few years several technical applications
+This work was supported in part by the European Union—European
+Regional Development Fund and in part by the Federal Government and
+Land Schleswig-Holstein through the Project “Diagnose- und Therapiev-
+                                                                            D     have been developed in which the detection of muscle
+                                                                            contractions has been utilized. The acquired and decoded
+erfahren für die Individualisierte Medizintechnik (IMTE)” under Project     information can be used to send commands to a computer
+12420002. The associate editor coordinating the review of this article
+and approving it for publication was Prof. Maryam Shojaei Baghini.
+                                                                            or to control prostheses intuitively [1], [2], [3], [4]. Very
+(Corresponding author: Roman Kusche.)                                       often, the surface electromyography (EMG) is used to measure
+  This work involved human subjects or animals in its research.             muscle contractions. This method is based on the noninvasive
+Approval of all ethical and experimental procedures and protocols was
+granted by the Institutional Ethics Committee of the University of Lübeck
+                                                                            acquisition of the electrical potentials that occur within a
+under Application No. 21-020.                                               muscle during contraction [5], [6], [7]. For that, commer-
+  Roman Kusche is with the Fraunhofer Research Institution for Indi-        cially available electrodes are placed onto the skin above
+vidualized and Cell-Based Medical Engineering (IMTE), 23562 Lübeck,
+Germany, and also with the Department of Computer Science, Hamburg          the muscle or muscle group of interest. A simple electronic
+University of Applied Sciences, 20099 Hamburg, Germany (e-mail:             measurement circuit amplifies, filters, and typically digitizes
+roman.kusche@haw-hamburg.de).                                               the voltage signals [8], [9], [10], [11]. Although the EMG is
+  Andra Oltmann is with the Fraunhofer Research Institution for Indi-
+vidualized and Cell-Based Medical Engineering (IMTE), 23562 Lübeck,         well-known and widely used, it has some disadvantages. One
+Germany.                                                                    drawback is that the EMG is a passive method and therefore
+  Philipp Rostalski is with the Fraunhofer Research Institution for Indi-   depends on the energy generated by the human body. It can
+vidualized and Cell-Based Medical Engineering (IMTE), 23562 Lübeck,
+Germany, and also with the Institute for Electrical Engineering in          therefore only detect movements that were caused by active
+Medicine, Universität zu Lübeck, 23562 Lübeck, Germany.                     muscle contractions. Other causes of muscle contractions or
+  Digital Object Identifier 10.1109/JSEN.2024.3359284                       relaxations such as the sliding down of an arm from the
+                          © 2024 The Authors. This work is licensed under a Creative Commons Attribution 4.0 License.
+                                    For more information, see https://creativecommons.org/licenses/by/4.0/
+KUSCHE et al.: WEARABLE DUAL-CHANNEL BIOIMPEDANCE SPECTROMETER                                                                  11317
+
+
+
+
+table cannot be detected. A second challenging point is the                                    TABLE I
+stochastic behavior of the EMG signal in a frequency range                   OVERVIEW OF W EARABLE B IOIMPEDANCE S YSTEMS
+between 20, . . . , 200 Hz [12], [13]. Typical motion artifacts
+are in a very similar frequency range, which makes it diffi-
+cult to differentiate between actual muscle contractions and
+disturbances [14], [15].
+   In the past, it has been shown that also the passive electrical
+properties of the tissue change during contraction [16], [17],
+[18]. The corresponding promising measurement technique is
+electrical impedance myography (EIM). It uses a similar elec-
+trode configuration like the EMG but requires a significantly
+more complex measurement circuitry. However, the advantage              An overview of recently published relevant wearable
+is that EIM can be more reliable than EMG under certain              bioimpedance systems is given in Table I. It can be seen
+conditions and can provide additional information [18], [19],        that most systems provide just one bioimpedance channel.
+[20]. For example, it has been shown that contracting muscles        Only the system by Critcher et al. [36] is capable of
+cause very specific changes in the phase response. In contrast       acquiring up to four channels via multiplexing. However,
+to mechanical disturbances, actual muscle contractions cause         the system’s sampling rate ( f s,Spec. ) of approximately three
+more negative phases at low frequencies and more positive            complex spectra per second is too low to detect fast mus-
+phases at higher frequencies [21]. This information could be         cle contractions. Furthermore, the frequency range limits the
+useful for controlling prostheses and requires a simultaneous        usage for reliable muscle contraction detection, as described
+acquisition of the complex bioimpedance in a wide frequency          in Section II-B.1.
+range. Since the EIM is an active measurement with a defined            In Section II-A, we first focus on the basics of bioimpedance
+excitation, the useful signals can be distinguished from statis-     spectroscopy and EIM. Then, the technical implementation of
+tical errors, in contrast to EMG setups [18].                        the system is introduced and its technical capabilities are char-
+   To determine the electrical tissue properties, small known        acterized. Afterward, first subject measurements are presented
+alternating currents of a few milliamperes in the frequency          to demonstrate the functionality of the system under realistic
+range from approximately 10 to 500 kHz are applied to the            conditions and to propose new measurement approaches.
+tissue and the resulting voltage drop across the corresponding          The main contributions of this work are as follows.
+tissue section is measured. The electrical impedance can then           1) The development of a wearable dual-channel
+be calculated from the relationship between current and volt-               bioimpedance spectrometer.
+age [22], [23], [24]. A well-known application of this one-time         2) The realization of a real-time interface for training or
+measurement is the determination of the human body com-                     prosthesis control.
+position often implemented in scales, like BF511 (OMRON,                3) The first simultaneous measurement of the impedance
+Mannheim, DE) or the mBCA series (seca, Hamburg, DE)                        spectra of two counteractive muscles.
+[25], [26]. If the electrical bioimpedance is recorded as a             4) The first time-resolved measurement of the direction
+function of time, further applications can be realized. Pop-                dependency of the complex bioimpedance spectra during
+ular applications in research are impedance cardiography to                 muscle contraction.
+approximate cardiac output or detection of arterial pulse
+                                                                        The results of this work focus particularly on prosthetic
+waves to estimate arterial stiffness [24], [27], [28], [29], [30].   control, but can also be easily applied to human-computer-
+In addition, there is preliminary work that focuses on EIM as        interaction applications.
+a function of time so that the timing of muscle contractions
+can be detected. However, these works are either limited to
+single-frequency measurements or provide just one measure-                          II. M ATERIALS AND M ETHODS
+ment channel [18], [19], [20], [21], [31]. However, in order         A. Electrical Impedance Myography
+to take advantage of the EIM, several measurement channels              Bioimpedance measurement is a well-known method to
+are required, which do not only measure at one frequency,            determine the electrical conductivity of tissue. The results
+but determine the complex impedance spectra as a function            are affected by the composition of different tissue structures
+of frequency. In order to use this information for controlling       with different conductivities. For example, the intracellular
+computers, prostheses or other actuators these signals must          and extracellular fluids illustrated in Fig. 1(a) are rather good
+be acquired and evaluated in real-time [32]. Therefore, the          electrical conductors. The cell membranes, on the other hand,
+aim of this work is the development of a wearable real-time          have a more insulating character [22]. The resulting multiple
+bioimpedance measurement system for spectral EIM. In this            transitions between conductors and insulators lead to a capac-
+context, wearable means that the system can be battery-              itive impedance component in addition to a resistive behavior.
+operated. It must also have small dimensions and low weight,         This characteristic behavior is often described in the literature
+which do not discomfort the user.                                    by a simplified equivalent circuit according to Fig. 1(b) [39],
+   In order to examine the behavior of the contracting mus-          [40], [41], [42].
+cle and the stretched muscle simultaneously, a dual-channel             Since the conductivity of an electrical capacitance depends
+system is required.                                                  on the signal frequency, the total bioimpedance also has
+11318                                                                                             IEEE SENSORS JOURNAL, VOL. 24, NO. 7, 1 APRIL 2024
+
+
+
+
+Fig. 1.    Illustration of the relationship between the tissue and the
+frequency-dependent complex bioimpedance. In (a) an exemplary                   Fig. 3. Representation of the frequency response (b) during a muscle
+arrangement of cells is illustrated. Its simplified passive electrical behav-   contraction (a). It can be seen that the whole magnitude response
+ior can be modeled as an equivalent circuit, as shown in (b) leading to         decreases during the contraction. In contrast, the change in the phase
+the typical frequency response, depicted in (c).                                response has a significant frequency dependency.
+
+
+
+                                                                                an almost constant value over the entire shown frequency
+                                                                                range. However, the phase response has a specific charac-
+                                                                                teristic. The measured phase becomes more negative in the
+                                                                                low-frequency range and more positive in the higher frequency
+                                                                                range. Previous measurements have shown that the intersection
+                                                                                of the two-phase responses is approximately between 50 and
+                                                                                150 kHz [21].
+Fig. 2.     Typical measurement setup to acquire muscle activity via
+electrical impedance myograpy. The excitation current is applied via
+the outer electrodes (red) and the occurring voltage drop is measured
+                                                                                B. System Design
+via the inner electrodes (blue). The signals are then processed via the            1) Requirements: To achieve the desired functionality, the
+measurement system and displayed.                                               system must fulfill certain technical requirements. First, it must
+                                                                                be a dual-channel system with synchronized impedance acqui-
+                                                                                sition. According to the preliminary studies, these channels
+an individual frequency behavior. An exemplary frequency                        must be capable to measure complex bioimpedances in the fre-
+response of such an RCR element and thus that of a                              quency range from 50 to 150 kHz [21], [44]. For an acceptable
+bioimpedance is shown in Fig. 1(c). Since the geometric tissue                  user or patient interaction feedback, the system has to be capa-
+properties of a measured area change significantly with the                     ble of measuring at least ten complex frequency responses per
+contraction of a muscle, the complex frequency-dependent                        second and per channel [32]. Since rather the transient changes
+bioimpedance also varies. These changes correspond to the                       than the absolute values of the bioimpedances are useful to
+desired signal in this work.                                                    detect muscle contractions, the systematic measurement errors
+   To measure the bioimpedance, four surface electrodes are                     are not relevant for this EIM application [18]. For potential
+placed onto the skin as shown in Fig. 2. The measuring                          use in other sensing applications, such as body composition
+system then applies an alternating current into the tissue via                  studies, errors below 5% or below 2◦ are accepted in this work.
+the outer two electrodes (red). Simultaneously, the resulting                   For the detection of muscle contractions, the measurement
+voltage drop is derived fromthe two inner electrodes (blue).                    uncertainties are more critical. According to the plot in Fig. 2
+The measuring system either evaluates the bioimpedance by                       and further preliminary work, changes of |1Z | = 10% or
+means of analog electronics or first digitizes the current and                  |1φ| = 1◦ occur during a muscle contraction [18], [21].
+voltage signals. These are then further processed by the digital                In order to be able to not only detect the contraction but also
+part of the measuring system or by a connected PC.                              to quantify it, the measurement uncertainties should be lower.
+   If the frequency response of the bioimpedance is to be                       In addition, most realistic applications require the system to
+determined, the procedure is either repeated using different                    be mobile. The necessary computing power and energy supply
+signal frequencies or simultaneous multifrequency excitation is                 should therefore be feasible to be wearable.
+used [24]. Since this work focuses on transient multifrequency                     2) Concept: To fulfill these requirements, a new measure-
+measurement for real-time applications, the final goal is to                    ment system was developed. Most mobile applications require
+directly output the bioimpedance signals to a monitor.                          a battery lifetime of several hours. To be able to use conven-
+   A promising feature of impedance myography is the charac-                    tional smartphone batteries for the power supply, the power
+teristic frequency response [21], [43]. This information can be                 consumption of the system should be below approximately
+used, for example, to ensure that an actual muscle contraction                  5 W. This can be realized by means of sufficiently powerful
+has occurred and that the bioimpedance has not just been                        but energy-saving microprocessors or controllers. As shown
+affected by motion artifacts. Fig. 3 shows a typical hand                       in Fig. 4, the system has a modular design. It consists of a
+movement (a) and the resulting changes in the frequency                         bioimpedance analog front-end (BioZ-AFE), a communication
+response (b), measured at the underside of the forearm. It can                  interface (COM_IF), and an evaluation and display unit.
+be seen that the impedance magnitude |Z | decreases for                         In order to meet the special requirements, the BioZ-AFE is
+KUSCHE et al.: WEARABLE DUAL-CHANNEL BIOIMPEDANCE SPECTROMETER                                                                11319
+
+
+
+
+newly developed printed circuit board (PCB). For the realiza-      has already been published [45]. Depending on the multi-
+tion of the COM_IF, a commercially available microcontroller       plexer position, this current flows through Z 1 or Z 2 and
+board (Teensy 4.1, PJRC.COM, LLC., Sherwood, OR, USA)              then through the shunt resistor RS . The resulting voltage
+with integrated analog-to-digital converters (ADCs, f s =          across the bioimpedance chosen via the multiplexer MUXV
+650 kHz, 12 bits) is chosen. For stationary measurements,          (MAX4523, Analog Devices Inc.) and the voltage across
+the control, evaluation, and display unit can be realized by       RS are processed simultaneously in identical analog signal
+a PC. In mobile applications, a battery-powered single-board       processing chains. First, the differential signals are amplified
+computer (SBC, Raspberry Pi 3, Raspberry Pi Foundation,            with a programmable gain amplifier (PGA_C1, PGA_V1,
+Cambridge, U.K.) is used.                                          AD8250, Analog Devices Inc.) and converted into signals
+   To measure two bioimpedances with the same hardware, the        with ground reference. The following passive high-pass filters
+principle of time multiplexing is used. The BioZ-AFE gener-        (HP_C2, HP_V, N = 1, f c = 1 kHz) remove the dc
+ates the multifrequency excitation currents and applies them       components and low-frequency disturbances. Then, the signals
+alternately to the electrodes of the two channels. The resulting   are each amplified by a second PGA (PGA_C2, PGA_V2,
+voltages are also derived from the BioZ-AFE and analog             AD8250, Analog Devices Inc.) Since the ADCs can also
+preprocessed. Subsequently, they are fed to the COM_IF             only process positive voltage signals, operational amplifier
+for further processing. In order to be able to allocate the        circuits (OPA2134, Texas Instruments) are used to add half the
+multiplexing in time afterward, an additional synchronization      operating voltage to the alternating signals before digitization.
+signal (SYNC) is sent to the COM_IF. The COM_IF digi-                 The photograph in Fig. 6 shows the developed and man-
+tizes the measurement signals and sends them together with         ufactured circuit board of the AFE. It has dimensions of
+the corresponding SYNC data via Ethernet to the computer.          87 × 54 mm, which approximately correspond to those of a
+In addition, the interface can be used to control the analog       credit card.
+amplifiers of the BioZ-AFE. To comply with the electrical
+safety requirements, the Ethernet interface is electrically iso-                  III. R ESULTS AND D ISCUSSION
+lated with a medical Ethernet isolator and the measurement         A. System Characteristics
+system is powered either by a battery or by a medical power           1) Excitation Signal Generation: Before characterizing the
+supply. A Python (version 3.9) script operates on the SBC or       actual impedance measurement, the generation of the exci-
+PC, which transforms the acquired signals into 25 complex          tation current is analyzed. For this, a 100  resistor with a
+impedance spectra per second and per channel in real-time.         tolerance of 0.1% was connected to the measurement terminals
+In addition, it plots and saves the data.                          and the resulting voltage drop was recorded with an oscillo-
+   3) Bioimpedance Analog Front End: In order to be capa-          scope (Teledyne LeCroy HDO4054, 12 bit, f s = 100 MHz).
+ble of generating arbitrary waveforms for current excitation,      The resulting signal is shown in the time and frequency
+a microcontroller (ATSAM4S2BA, Microchip Technology                domain in Fig. 7.
+Inc., Chandler, AZ, USA) with integrated digital-to-analog            The shape of the signal corresponds to that of the simulated
+converter (DAC, f s = 1 MHz, 12 bits) is implemented on            one in Fig. 5, but the high-frequency converting artifacts have
+the analog front-end (AFE). For multifrequency measurement,        been reduced by the reconstruction filters. There are also no
+this synthesizes a mixed signal SDAC , which is composed of        more undesired signal frequencies in the spectrum visible. The
+several harmonic signals with different frequencies. Since the     effective current is approximately 330 µA and thus fulfills the
+DAC can only generate positive voltages, half of the maximum       requirements of the standard for medical electrical equipment
+output voltage (FullScale) is added as an additional direct        (IEC 60601-1).
+current (dc) component as shown in (1). This results in a time        2) Systematic Errors: The systematic errors are not
+signal as illustrated in Fig. 5                                    relevant in many applications. For example, for mus-
+                        8                                          cle contraction detection or arterial pulse wave detec-
+          FullScale X                                              tion relative impedance changes are analyzed. However,
+ SDAC =            +  sin (2π f i t)
+              2                                                    in some applications, such as body composition measure-
+                       i=1
+     f = {20, 50, 80, 110, 140, 170, 200, 230} kHz. (1)            ment, the absolute values of bioimpedance are required.
+                                                                   In addition, absolute values can be helpful in deciding if
+   In addition, the microcontroller controls the multiplex-        measurement results are plausible and in detecting con-
+ers MUXC and MUXV (MAX4523, Analog Devices Inc.,                   nection problems. In order to determine the systematic
+Norwood, MA, USA) to switch between the analyzed                   errors of the measurement system, 15 known resistances
+bioimpedances Z 1 and Z 2 . To remove the harmonics, the           {12; 15; 18; 22; 27; 33; 39; 47; 56; 68; 82; 100; 120; 150; 180}
+signal generated by the DAC is first band-limited by the active     with tolerances of 0.1% were measured for a duration of
+low-pass filter LP_C1 (N = 4, f c = 400 kHz), realized             30 s. Afterward, the resulting 750 values per resistance were
+with operational amplifiers (OPAMP, LMH6646, Dallas, TX,           averaged to remove statistical errors. Due to the measurement
+USA). Subsequently, the dc component is removed by the             principle and the calculation of the impedance spectra via
+passive high-pass filter HP_C1 (N = 1, f c = 200 Hz).              dividing the complex voltage spectra by the current spectra,
+The OPAMP-based (AD8130, Analog Devices Inc.) voltage-             we assumed that constant phase errors as well as magnitude or
+controlled current source (VCCS) converts the voltage into         frequency dependencies are covered by these measurements.
+a corresponding current. The corresponding electronic circuit      The measurement results are shown in Figs. 8 and 9.
+11320                                                                                      IEEE SENSORS JOURNAL, VOL. 24, NO. 7, 1 APRIL 2024
+
+
+
+
+Fig. 4. Block diagram of the developed EIM measurement system, consisting of a BioZ-AFE, a COM_IF, and a computer for analysis and display.
+
+
+
+
+   Fig. 5. Calculated function of digital values for the 12 bits DAC.   Fig. 7. Current signal across a 100 Ω resistor measured with an oscillo-
+                                                                        scope. The root mean square (rms) value of the current is approximately
+                                                                        330 µA.
+
+
+
+
+Fig. 6. Photograph of the AFE which generates the excitation current
+and preprocesses the measured voltages.
+
+
+
+
+   In Fig. 8, the relative systematic measurement errors of the
+impedance magnitude as a function of frequency and resis-               Fig. 8. Systematic errors of the bioimpedance measurement system
+tance value are plotted. It can be seen that the absolute error         depending on impedance and frequency. The relative measurement
+                                                                        errors of the impedance magnitude are shown.
+is lower than 1.5% in all cases. In Fig. 9, the corresponding
+absolute phase errors are plotted. These are always below 1.2◦
+and depend on the resistance and the frequency. Especially low
+resistances and high measuring frequencies result in higher                3) Statistical Errors: The statistical errors are crucial for the
+errors than expected. However, the requirements of Section              use of the measurement system for the detection of temporal
+II-B.1 are met for both magnitude measurement and phase                 tissue changes as they occur in EIM. To characterize these,
+measurement.                                                            the 15 known resistances have been measured for a duration
+KUSCHE et al.: WEARABLE DUAL-CHANNEL BIOIMPEDANCE SPECTROMETER                                                                     11321
+
+
+
+
+Fig. 9. Systematic errors of the bioimpedance measurement system       Fig. 11. Statistical errors of the bioimpedance measurement system
+depending on impedance and frequency. The absolute phase errors are    depending on impedance and frequency. The relative STDs of the
+plotted.                                                               impedance magnitude measurements are shown.
+
+
+
+
+Fig. 10. Exemplary measurement of a 100 Ω resistor for a duration of   Fig. 12. Statistical errors of the bioimpedance measurement system
+10 s with eight measuring frequencies from 20 to 230 kHz.              depending on impedance and frequency. The STDs of the phase mea-
+                                                                       surements are plotted.
+
+
+of 30 s each. As an example, the raw data recorded from a              influence of the previously analyzed statistical errors, the
+100  resistance is plotted in Fig. 10.                                results were smoothed with a moving average with a duration
+   For a better representation of the frequency and magnitude          of 40 s. The drift effects for the magnitude ranged from 329 to
+influence on the statistical errors, the standard deviation (STD)      566 ppm depending on the frequency. For the phase, the errors
+results are shown in Figs. 11 and 12. In Fig. 11, it can be seen       due to drift effects are between 0.016◦ and 0.027◦ depending
+that the relative statistical magnitude errors are below 1% in all     on the frequency.
+configurations. As expected, the relative error values increase           5) Step Response: Despite the complexity of the signal
+with lower resistance values or with increasing frequencies.           acquisition, it must be ensured that both measuring channels
+Fig. 12 shows the STD values for the statistical phase errors.         do not have a time offset that would lead to erroneous measure-
+These are always below 0.4◦ and have similar behavior in               ment results. In addition, the signal processing methods used,
+terms of dependency on the frequency and impedance magni-              such as the analog filters, must not oscillate to such an extent
+tude. Both the statistical errors of the magnitude measurement         that they influence the signal shape. To check the dynamic
+and the phase measurement meet the requirements and are                system behavior, the step response of both impedance mea-
+thus sufficiently low to perform an EIM with the developed             surement channels was therefore recorded. For this purpose, a
+system.                                                                100  resistor was measured by both channels simultaneously.
+   4) Long-Term Drift: The impedance changes over time do              During the measurement, this resistor was short-circuited for a
+not always occur as quickly as with EIM or arterial pulse              duration of approx. 450 ms. The measured signal is shown in
+wave detection. In some cases of impedance spectroscopy,               Fig. 13. For better visualization, only the plots for 50 kHz are
+significantly slower processes are also observed. This could be,       shown. It can be seen how the measured impedances suddenly
+for example, the filling and emptying of the bladder. In order to      decrease from 100 to 0  and then increase again to 100 .
+estimate the errors caused by drift effects, a 100  resistance        Both impedance measurements are directly on top of each
+was measured for a period of 30 min, corresponding to 45 000           other, which means that the synchronicity of the channels is
+complex impedance frequency responses. To minimize the                 ensured, and due to the multiplexing, the maximum shift is
+11322                                                                                      IEEE SENSORS JOURNAL, VOL. 24, NO. 7, 1 APRIL 2024
+
+
+
+
+                                                                        Fig. 14. Electrical phantom to simulate the electrical behavior of tissue.
+
+
+
+Fig. 13. Step responses of both impedance measurement channels.
+For better visualization, only the 50 kHz plots of the magnitudes are
+shown.
+
+
+one sample. Neither after the decrease nor after the increase of
+the impedance are significant oscillations visible in the signals.
+This ensures that all changes in measurements are due to actual
+impedance variations and not to circuit influences.
+   6) Electrode-Skin Impedances: Measurements under real
+conditions are also affected by the electrode-skin interfaces,
+especially by the corresponding electrode-skin impedances
+Z ESI . Depending on the contact material, the skin condi-
+tions and the accumulation of fluids under the electrodes
+the electrical characteristics can vary widely. In the typical
+bioimpedance measurement setup, there are four electrodes
+which can influence the results. Since the applied current
+is measured for calculating the impedances, effects on the
+current source are not crucial. High impedances of the negative
+                                                                        Fig. 15. Calculated (blue) and measured (orange) magnitude response
+current electrode cause common voltages in the acquired                 of the electrical tissue phantom. At the top, the plots of the magnitude
+differential signal. Since differential amplifiers typically have       response are shown. Below, the absolute difference is plotted.
+a high common-mode rejection, this influence is also small.
+More relevant are the combinations of voltage electrodes and
+input impedances of the PGAs. In particular, the complex                of measuring complex impedances with a capacitive compo-
+voltage dividers, consisting of Z ESI and common mode input             nent. For this, the electrical RCR model from Fig. 1(b) is used.
+impedances. If these voltage dividers are imbalanced, the               In order to reproduce the characteristic electrical behavior of
+corresponding part of the common-mode voltage at this point             the bioimpedance magnitude and phase over frequency, the
+becomes a differential voltage. Since this is applied directly to       realistic values R1 = 39 , R2 = 33  and C1 = 33 nF are
+the amplifier input it is amplified accordingly. At low frequen-        chosen, as shown in Fig. 14 [21], [47].
+cies, the resistive part of the input impedances is dominant.              Components with uncertainties of 0.1% are used to realize
+This is over 1 G and therefore significantly higher than               the phantom.
+typical electrode-skin impedances [46]. However, due to the                The phantom was measured with the developed system for a
+capacitive properties of the input impedances, these become             duration of 10 s, corresponding to 250 samples. The resulting
+low at high frequencies. In the system presented here, the              averaged magnitude response is shown in Fig. 15 and the cor-
+combination of multiplexer and PGA results in input capacities          responding phase response in Fig. 16. In the upper plots, the
+of 7 pF. At the highest measuring frequency of 230 kHz, this            measured (orange) and the simulated curves (blue) calculated
+results in input impedances of only approximately 100 k.               with ideal component values are shown for comparison. The
+In the particular measurement application, it must therefore            absolute differences are shown below each figure. These are
+be ensured that either both voltage electrodes have the same            within the range of systematic measurement errors investigated
+contact impedance or that the contact impedances are much               in Section III-A.2. This shows that the measurement system
+lower than the system’s input impedances. In practice, the              can also reliably measure complex impedances.
+first is hardly feasible. However, preliminary work has shown             2) Subject Measurements on Antagonistic Forearm Muscles:
+that gel electrodes in particular have sufficiently low and             Many parts of the human musculoskeletal system work antag-
+stable contact impedances and that their influence on the               onistically. The contracting muscle is called agonist and the
+measurement is therefore low [46].                                      corresponding relaxing muscle is called antagonist. While
+                                                                        EMG can only detect contractions, bioimpedance measure-
+B. Measurements                                                         ments can also be used to detect the changing geometric
+  1) Phantom Measurements: Before performing measure-                   tissue properties of the relaxed muscles. Since the antag-
+ments on human tissue, it is ensured that the system is capable         onistic muscle pairs move inversely to each other during
+KUSCHE et al.: WEARABLE DUAL-CHANNEL BIOIMPEDANCE SPECTROMETER                                                                               11323
+
+
+
+
+                                                                             Fig. 17.    Electrodes placement of both impedance measurement
+                                                                             channels to acquire the bioimpedances of antagonistic forearm muscles.
+
+
+
+
+Fig. 16. Calculated (blue) and measured (orange) phase response of
+the electrical tissue phantom. At the top, the plots of the phase response   Fig. 18. Performed movements to contract the antagonistic muscle
+are shown. Below, the absolute difference is plotted.                        groups were (a) WE and (b) WF.
+
+
+
+                                                                                The measurement results are shown for the duration of 30 s
+concentric contractions, this behavior is also to be expected                in Fig. 19. To reduce the influence of statistical measurement
+from the bioimpedance. For safety-critical applications, such                errors, all signals were smoothed by a moving average fil-
+as the control of prostheses, the two independent sources                    ter (N = 10). The upper two plots show the changes in
+of information can be used to increase the robustness of                     the bioimpedance magnitudes of CH1 and CH2 during the
+the control. For the exemplary measurement of antagonistic                   movements. It can be clearly seen that for all measurement
+muscles, the forearm was chosen. The study was conducted in                  frequencies the impedance magnitude |Z 1 | of CH1 is reduced
+accordance with the Declaration of Helsinki, and approved                    during WE and slightly increased during WF. As expected,
+by the Institutional Ethics Committee of the University of                   the behavior of |Z 2 | is the opposite. For instance, WE leads to
+Lübeck (#21-020, February 16, 2022). As shown in the                         increases in impedance magnitude and WF leads to decreases.
+photograph in Fig. 17, four electrodes each are placed on the                The phase plots below look similar but differ in one important
+upper side of the forearm and the underside of the forearm                   aspect. It can be seen that the WE periods cause the phases
+to measure the bioimpedances. The electrodes of channel 1                    to become more positive in the φ(Z 1 ) plots for almost all
+(CH1) are located above the extensor carpi radialis longus                   chosen measurement frequencies. However, for particularly
+and the electrodes of channel 2 (CH2) are located above the                  low frequencies, e.g., 20 kHz, the phase becomes more nega-
+flexor carpi radialis. The electrodes for applying the excitation            tive. A similar behavior can be seen in the φ(Z 2 ) plots. The
+currents to the tissue are located on the outside and the two                phase curves of low and high frequencies behave opposite
+inner electrodes are used for voltage measurements. To ensure                to each other. As described in Section II-A, this particular
+good and stable contacting conditions gel electrodes with the                phase behavior was expected and represents a feature in the
+dimensions of 45 × 22 mm and a contact area of 95 mm2 are                    EIM that can be used to detect muscle contractions with high
+used (Ambu BlueSensor N). To avoid mechanical coupling                       reliability. Especially in the φ(Z 2 ) plots it can be seen that also
+between the electrodes, there is a clearance of approximately                contractions of different muscles can be clearly distinguished
+2 mm between the current and voltage electrodes. The dis-                    from each other.
+tances between the contact surfaces of the voltage electrodes                   For a more detailed analysis of the two selected movements
+are approx. 10–20 mm, resulting in a definite longitudinal                   WE and WF and the resulting impedance changes, further
+measurement direction and at the same time limiting the mea-                 measurements are performed. For this purpose, the subject
+surement geometrically to the muscle region to be analyzed.                  was asked to perform several WE or WF in succession.
+   During the bioimpedance measurement, typical hand move-                   The measurement results were also smoothed with a moving
+ments were performed. As shown in Fig. 18, these were the                    average filter (N = 10). Fig. 20 shows the results for the
+wrist extension (WE) and the wrist flexion (WF). The subject                 WE for a duration of 6 s. Again, it can be seen that during
+was asked to first hold the hand in the middle position. Then                the contractions |Z | decreases for all frequencies of CH1
+the subject started with a WE for approximately 3 s and moved                and increases accordingly for CH2. The maximum absolute
+the hand back to the middle position. Subsequently, a WF was                 magnitude changes occur at low measurement frequencies. For
+performed for a duration of about 3 s and again the hand was                 example, for f = 20 kHz, a WE causes a decrease of |Z 1 |
+moved to mid-position. This sequence was repeated several                    from 70.5 to 67 , which is approximately 5%. At higher
+times.                                                                       measurement frequencies, the absolute magnitude changes are
+11324                                                                                IEEE SENSORS JOURNAL, VOL. 24, NO. 7, 1 APRIL 2024
+
+
+
+
+Fig. 19. Measured bioimpedance magnitudes and phases of both
+channels for eight chosen frequencies during WE and WF movements.
+The movements were separated by moving the hand into the middle
+position.
+
+
+
+
+smaller, but are also about 5% in relative terms. Although
+the corresponding changes in |Z 2 | are similar in magnitude in
+                                                                    Fig. 20.   Measured bioimpedances during WEs. The upper plots
+this example, as can be seen in the previous measurement, the       show the timing behavior and the lower plots represent the frequency
+values of the agonist muscles can also be significantly different   responses during relaxation and contraction.
+from those of the antagonist muscles. No general statement
+can be made for the influence of muscle contraction on the
+phase, instead the measurement frequencies must be taken into       phase plots φ(Z 2 ) of CH2 are more useful and the particular
+account. As described above, the phase of CH1 becomes more          frequency dependency of the phase is visible.
+positive during WE muscle contraction for high frequencies             In the frequency responses of CH1 the small changes of the
+and more negative at low frequencies. For the measurement           magnitude |Z 1 | between the relaxation and contraction can be
+frequency in-between of f = 50 kHz, the contraction has             seen. Also in this representation, the changes in φ(Z 1 ) are too
+almost no effect on the phase. An inverse behavior can be           small for reliable detection. However, the frequency response
+seen for φ(Z 2 ).                                                   of CH2 contains more information. The significant magnitude
+    The lower plots show the frequency responses of Z 1 and         changes and phase changes are clearly visible and, as expected,
+Z 2 during relaxation and contraction. For this, time periods of    are inverse to those from the previous plot in Fig. 20.
+0.8 s each, which corresponds to 20 samples, were averaged.            The measurements demonstrate that the system is capable of
+Here it can be clearly seen that |Z 1 | decreases by approx-        detecting the relationships between agonistic and antagonistic
+imately 5% during contraction and |Z 2 | increases by about         muscles. It could also be shown that the effects occurring in the
+5%, regardless of the measurement frequency. In the phase           bioimpedances are complex, especially in the phase responses.
+responses, the absolute phase change increases with distance        More extensive subject measurements and signal evaluations
+from the intersection point at about 50 kHz. Measuring fre-         are needed to also identify the temporal relationships of
+quencies significantly below 50 kHz and above are therefore         antagonistic muscle pairs.
+desirable. However, low measurement frequencies are limited            3) Directional Dependence of the EIM: In the past, the
+due to electrical safety, and significantly higher frequencies      frequency responses of bioimpedance during a muscle con-
+are associated with more complex measurement technology.            traction were analyzed exclusively in the fiber direction.
+    This measurement was repeated for the WF motion. The            Simultaneous measurement of bioimpedance in orthogonal
+filtered signals are shown in Fig. 21. As expected, during          direction was not possible so far, therefore there is no reliable
+contraction the impedance magnitudes |Z 1 | of CH1 increase,        knowledge regarding directional dependence. The presented
+because in this situation they represent the antagonistic mus-      dual-channel measurement system enables such measure-
+cles. Z 2 , on the other hand, is acquired at the underside         ments. For exemplary application, an EIM is again performed
+of the forearm and thus represents the impedance behavior           on the forearm using the same gel electrodes. But, as shown
+of the contracting muscles. Accordingly, during the flexion         in Fig. 22, this measurement uses both channels to measure
+the magnitudes |Z 2 | decrease. The phase changes φ(Z 1 ) in        the same tissue area. For this purpose, the four electrodes
+CH1 over time are too small in this measurement to reliably         of each of the two channels are positioned on the underside
+distinguish them from the statistical measurement errors. The       of the forearm above the flexor carpi radialis. However, the
+KUSCHE et al.: WEARABLE DUAL-CHANNEL BIOIMPEDANCE SPECTROMETER                                                                      11325
+
+
+
+
+                                                                          Fig. 23.     Measurement result of the orthogonally measured
+                                                                          bioimpedances during WFs.
+Fig. 21.   Measured bioimpedances during WFs. The upper plots
+show the timing behavior and the lower plots represent the frequency
+responses during relaxation and contraction.                              be manually oriented for the purpose of muscle contraction
+                                                                          detection using bioimpedance analysis. In addition, special
+                                                                          electrode shapes such as ring electrodes could be implemented.
+
+                                                                                                 IV. C ONCLUSION
+                                                                             The acquisition of the complex bioimpedance as a function
+                                                                          of frequency has been known for a long time, but still
+                                                                          has much potential when the instrumentation is extended.
+                                                                          The goals of this work were in particular the dual-channel
+                                                                          measurement and real-time capability for detection of muscle
+Fig. 22.    Electrodes placement to measure simultaneously the            contractions. For this purpose, a portable measuring sys-
+bioimpedance in two orthogonal directions for analyzing the directional   tem was developed and characterized metrologically. After
+dependence.                                                               the functionality was verified using an electrical phantom,
+                                                                          the first subject measurements were performed. These have
+                                                                          demonstrated that the system can also measure real tissue
+electrode alignment and thus the impedance measurements                   and is capable of detecting muscle contractions. The system
+are orthogonal to each other. The subject is asked to perform             was used for the first time to simultaneously measure and
+several WF movements during this measurement.                             compare the complex frequency responses of two antagonistic
+   The resulting impedance signals for the duration of 8 s are            muscles during contraction. The usefulness of multifrequency
+shown in Fig. 23.                                                         measurement, especially that of the phase response and also
+   As in the results shown above, the muscle contractions cause           that of dual-channel measurements for reliable detection of
+significant decreases in bioimpedance along the muscle fiber,             muscle contractions, could be demonstrated. In a further
+corresponding to |Z 1 | in this measurement. The behavior of              pilot measurement, the directional dependence of impedance
+the phase signals φ(Z 1 ) and the plot of Z 1 in the frequency            changes during muscle contraction was investigated. The first
+domain are also similar to the previous results. A comparison             results indicate that this dependence is very low. While the
+of the four plots of Z 1 with the respective plots for Z 2 shows          anisotropy of tissue structures certainly affects the values of
+that both magnitude and phase are almost identical during                 the bioimpedance, the temporal effects of impedance during
+the muscle contractions. Only the absolute values are slightly            muscle contraction in the fiber direction are similar to these
+different, which is reasonable due to the tissue anisotropy of            in orthogonal direction. The measurements have been pri-
+muscles. If these results are confirmed by further subject mea-           marily used to check the functionality of the measurement
+surements, this would be a great advantage for the placement              system. However, new ideas for measurement approaches also
+of the measuring electrodes. These would no longer need to                emanate from them. In order to make reliable statements
+11326                                                                                                   IEEE SENSORS JOURNAL, VOL. 24, NO. 7, 1 APRIL 2024
+
+
+
+
+in the future, extensive studies on many subjects and under                        [22] O. G. Martinsen and S. Grimnes, Bioimpedance and Bioelectricity
+varying measurement conditions will be required. In addition,                           Basics. New York, NY, USA: Academic, Aug. 2014.
+                                                                                   [23] G. J. Saulnier et al., “An electrical impedance spectroscopy system for
+simultaneous acquisition of the corresponding EMG signals                               breast cancer detection,” in Proc. 29th Annu. Int. Conf. IEEE Eng. Med.
+would be helpful for analysis.                                                          Biol. Soc., Aug. 2007, pp. 4154–4157.
+                                                                                   [24] S. Kaufmann, A. Malhotra, G. Ardelt, and M. Ryschka, “A high
+                                                                                        accuracy broadband measurement system for time resolved com-
+                                 R EFERENCES                                            plex bioimpedance measurements,” Physiolog. Meas., vol. 35, no. 6,
+ [1] K. R. Wheeler, M. H. Chang, and K. H. Knuth, “Gesture-based control                pp. 1163–1180, May 2014.
+     and EMG decomposition,” IEEE Trans. Syst., Man Cybern., C, Appl.              [25] F. Campa, S. Toselli, M. Mazzilli, L. A. Gobbo, and G. Coratella,
+     Rev., vol. 36, no. 4, pp. 503–514, Jul. 2006.                                      “Assessment of body composition in athletes: A narrative review of
+ [2] S. Bitzer and P. van der Smagt, “Learning EMG control of a robotic                 available methods with special reference to quantitative and qualitative
+     hand: Towards active prostheses,” in Proc. IEEE Int. Conf. Robot. Autom.           bioimpedance analysis,” Nutrients, vol. 13, no. 5, p. 1620, May 2021.
+     (ICRA), May 2006, pp. 2819–2823.                                              [26] J. Ferreira, I. Pau, K. Lindecrantz, and F. Seoane, “A handheld and
+ [3] K. Kiguchi, T. Tanaka, and T. Fukuda, “Neuro-fuzzy control of a robotic            textile-enabled bioimpedance system for ubiquitous body composition
+     exoskeleton with EMG signals,” IEEE Trans. Fuzzy Syst., vol. 12, no. 4,            analysis. An initial functional validation,” IEEE J. Biomed. Health
+     pp. 481–490, Aug. 2004.                                                            Informat., vol. 21, no. 5, pp. 1224–1232, Sep. 2017.
+ [4] J. Qi, G. Jiang, G. Li, Y. Sun, and B. Tao, “Intelligent human–computer       [27] R. Kusche, P. Klimach, and M. Ryschka, “A multichannel real-time
+     interaction based on surface EMG gesture recognition,” IEEE Access,                bioimpedance measurement device for pulse wave analysis,” IEEE
+     vol. 7, pp. 61378–61387, 2019.                                                     Trans. Biomed. Circuits Syst., vol. 12, no. 3, pp. 614–622, Jun. 2018.
+ [5] C. J. De Luca, A. Adam, R. Wotiz, L. D. Gilmore, and S. H. Nawab,             [28] M. R. Scudder et al., “Dual impedance cardiography: An inexpensive
+     “Decomposition of surface EMG signals,” J. Neurophysiol., vol. 96,                 and reliable method to assess arterial stiffness,” Psychophysiology,
+     no. 3, pp. 1646–1657, Sep. 2006.                                                   vol. 58, no. 7, pp. 1–14, Jan. 2021.
+ [6] M. Zahak, “Signal acquisition using surface EMG and circuit design            [29] S. Chabchoub, S. Mansouri, and R. Ben Salah, “Detection of valvular
+     considerations for robotic prosthesis,” in Computational Intelligence in           heart diseases using impedance cardiography ICG,” Biocybern. Biomed.
+     Electromyography Analysis—A Perspective on Current Applications and                Eng., vol. 38, no. 2, pp. 251–261, 2018.
+     Future Challenges. London, U.K.: InTech, Oct. 2012.                           [30] R. Kusche, A.-V. Lindenberg, S. Hauschild, and M. Ryschka, “Aortic
+ [7] R. N. Khushaba, S. Kodagoda, M. Takruri, and G. Dissanayake, “Toward               frequency response determination via bioimpedance plethysmography,”
+     improved control of prosthetic fingers using surface electromyogram                IEEE Trans. Biomed. Eng., vol. 66, no. 11, pp. 3238–3246, Nov. 2019.
+     (EMG) signals,” Expert Syst. Appl., vol. 39, no. 12, pp. 10731–10738,         [31] A. Kobelev, A. Briko, V. Popova, V. Kapravchuk, S. Shchukin, and
+     Sep. 2012.                                                                         A. Saltykova, “Determination of the muscle longitudinal electrical resis-
+ [8] A. Prakash, S. Sharma, and N. Sharma, “A compact-sized surface EMG                 tivity in-vivo during contraction,” in Proc. Ural-Siberian Conf. Biomed.
+     sensor for myoelectric hand prosthesis,” Biomed. Eng. Lett., vol. 9, no. 4,        Eng., Radioelectronics Inf. Technol. (USBEREIT), Sep. 2022, pp. 70–73.
+     pp. 467–479, Nov. 2019.                                                       [32] T. R. Farrell and R. F. Weir, “The optimal controller delay for myoelec-
+ [9] M. M. Shobaki et al., “High quality acquisition of surface                         tric prostheses,” IEEE Trans. Neural Syst. Rehabil. Eng., vol. 15, no. 1,
+     electromyography—Conditioning circuit design,” IOP Conf. Ser., Mater.              pp. 111–118, Mar. 2007.
+     Sci. Eng., vol. 53, Dec. 2013, Art. no. 012027.                               [33] K. Dheman, P. Mayer, M. Eggimann, S. Schuerle, and M. Magno,
+[10] M.-S. Song, S.-G. Kang, K.-T. Lee, and J. Kim, “Wireless, skin-                    “ImpediSense: A long lasting wireless wearable bio-impedance sen-
+     mountable EMG sensor for human–machine interface application,”                     sor node,” Sustain. Comput., Informat. Syst., vol. 30, Jun. 2021,
+     Micromachines, vol. 10, no. 12, p. 879, Dec. 2019.                                 Art. no. 100556.
+[11] Y.-D. Wu, S.-J. Ruan, and Y.-H. Lee, “An ultra-low power surface EMG          [34] M. Usman, A. K. Gupta, and W. Xue, “Wearable ring bioelectrical
+     sensor for wearable biometric and medical applications,” Biosensors,               impedance analyzer for estimation and monitoring of body fat,” Smart
+     vol. 11, no. 11, p. 411, Oct. 2021.                                                Health, vol. 24, Jun. 2022, Art. no. 100275.
+[12] I. Mazzetta et al., “Stand-alone wearable system for ubiquitous real-         [35] C. Qiu, F. Wu, W. Han, and M. R. Yuce, “A wearable bioimpedance chest
+     time monitoring of muscle activation potentials,” Sensors, vol. 18, no. 6,         patch for real-time ambulatory respiratory monitoring,” IEEE Trans.
+     p. 1748, May 2018. [Online]. Available: https://www.mdpi.com/1424-                 Biomed. Eng., vol. 69, no. 9, pp. 2970–2981, Sep. 2022.
+     8220/18/6/1748                                                                [36] S. Critcher and T. J. Freeborn, “System performance and user feedback
+[13] A. Phinyomark and E. Scheme, “EMG pattern recognition in the era of                regarding wearable bioimpedance system for multi-site knee tissue mon-
+     big data and deep learning,” Big Data Cognit. Comput., vol. 2, no. 3,              itoring: Free-living pilot study with healthy adults,” Frontiers Electron.,
+     p. 21, Aug. 2018.                                                                  vol. 3, pp. 1–17, Apr. 2022, Art. no. 324981.
+[14] R. Chowdhury, M. Reaz, M. Ali, A. Bakar, K. Chellappan, and T. Chang,         [37] S. Mabrouk et al., “Robust longitudinal ankle edema assessment
+     “Surface electromyography signal processing and classification tech-               using wearable bioimpedance spectroscopy,” IEEE Trans. Biomed. Eng.,
+     niques,” Sensors, vol. 13, no. 9, pp. 12431–12466, Sep. 2013.                      vol. 67, no. 4, pp. 1019–1029, Apr. 2020.
+[15] B. R. Schlink, A. D. Nordin, and D. P. Ferris, “Comparison of sig-            [38] M. H. Jung et al., “Wrist-wearable bioelectrical impedance analyzer with
+     nal processing methods for reducing motion artifacts in high-density               miniature electrodes for daily obesity management,” Sci. Rep., vol. 11,
+     electromyography during human locomotion,” IEEE Open J. Eng. Med.                  no. 1, pp. 1–10, Jan. 2021, Art. no. 1238.
+     Biol., vol. 1, pp. 156–165, 2020.                                             [39] A. G. Gheorghe, F. Constantinescu, M. Niţescu, and M. E. Marin, “Cir-
+[16] S. B. Rutkove, “Electrical impedance myography: Background, current                cuit models of bioelectric impedance,” in Electrochemical Impedance
+     state, and future directions,” Muscle Nerve, vol. 40, no. 6, pp. 936–946,          Spectroscopy. London, U.K.: IntechOpen, Dec. 2020.
+     Dec. 2009.                                                                    [40] M. Yashiro and H. Kotera, “Novel equations for bioimpedance spec-
+[17] G. Hornero, D. Díaz, and O. Casas, “Bioimpedance system for mon-                   troscopy to calculate body fluid volume based on the agreement between
+     itoring muscle and cardiovascular activity in the stump of lower-limb              body weight and extracellular water change before and after hemodial-
+     amputees,” Physiolog. Meas., vol. 34, no. 2, pp. 189–201, Jan. 2013.               ysis as a guide,” Renal Replacement Therapy, vol. 5, no. 1, pp. 1–11,
+[18] R. Kusche and M. Ryschka, “Combining bioimpedance and EMG                          Feb. 2019, Art. no. 7.
+     measurements for reliable muscle contraction detection,” IEEE Sensors         [41] H. C. Lukaski, “Evolution of bioimpedance: A circuitous journey from
+     J., vol. 19, no. 23, pp. 11687–11696, Dec. 2019.                                   estimation of physiological function to assessment of body composition
+[19] C. Ngo et al., “A wearable, multi-frequency device to measure mus-                 and a return to clinical research,” Eur. J. Clin. Nutrition, vol. 67, no. 1,
+     cle activity combining simultaneous electromyography and electrical                pp. 2–9, Jan. 2013.
+     impedance myography,” Sensors, vol. 22, no. 5, p. 1941, Mar. 2022.            [42] L. Röthlingshöfer, M. Ulbrich, S. Hahne, and S. Leonhardt, “Monitoring
+[20] Y. Cho, P. Kim, and K.-S. Kim, “Electrical impedance myography (EIM)               change of body fluid during physical exercise using bioimpedance
+     for multi-class prosthetic robot hand control,” in Proc. 20th Int. Conf.           spectroscopy and finite element simulations,” J. Electr. Bioimpedance,
+     Control, Autom. Syst. (ICCAS), Oct. 2020, pp. 1092–1094.                           vol. 2, no. 1, pp. 79–85, Dec. 2011.
+[21] R. Kusche and M. Ryschka, “Multi-frequency impedance myography:               [43] B. Sanchez and S. B. Rutkove, “Electrical impedance myography and
+     The PhaseX effect,” IEEE Sensors J., vol. 21, no. 3, pp. 3791–3798,                its applications in neuromuscular disorders,” Neurotherapeutics, vol. 14,
+     Feb. 2021.                                                                         no. 1, pp. 107–118, Jan. 2017.
+KUSCHE et al.: WEARABLE DUAL-CHANNEL BIOIMPEDANCE SPECTROMETER                                                                                       11327
+
+
+
+
+[44] B. Sanchez, A. Pacheck, and S. B. Rutkove, “Guidelines to electrode                                 Andra Oltmann received the B.Sc. degree in
+     positioning for human and animal electrical impedance myography                                     medical engineering from Universiāt zu Lübeck,
+     research,” Sci. Rep., vol. 6, no. 1, pp. 1–14, Sep. 2016, Art. no. 32615.                           Lübeck, Germany, in 2017, and the M.Sc.
+[45] R. Kusche, S. Hauschild, and M. Ryschka, “Galvanically decoupled                                    degree in biomedical engineering from Leib-
+     current source modules for multi-channel bioimpedance measurement                                   niz Universität Hannover, Hannover, Germany,
+     systems,” Electronics, vol. 6, no. 4, p. 90, Oct. 2017.                                             in 2020.
+[46] R. Kusche, S. Kaufmann, and M. Ryschka, “Dry electrodes for                                           Since 2020, she has been with the Fraun-
+     bioimpedance measurements—Design, characterization and compari-                                     hofer Research Institution for Individualized and
+     son,” Biomed. Phys. Eng. Exp., vol. 5, no. 1, Nov. 2018, Art. no. 015001.                           Cell-Based Medical Engineering IMTE, Lübeck.
+[47] L. Nescolarde, J. Yanguas, H. Lukaski, X. Alomar, J. Rosell-Ferrer, and                             Her research interests include electrophysiolog-
+     G. Rodas, “Localized bioimpedance to assess muscle injury,” Physiolog.                              ical modeling and simulation of human body
+     Meas., vol. 34, no. 2, pp. 237–245, Jan. 2013.                                                      muscles.
+
+
+
+
+                                                                                                          Philipp Rostalski (Member, IEEE) received the
+                                                                                                          Dipl.-Ing. degree in electrical engineering, with
+                                                                                                          a focus on measurement and control from the
+                                                                                                          Hamburg University of Technology, Hamburg,
+                       Roman Kusche (Member, IEEE) received the                                           Germany, in 2004, and the Ph.D. degree from
+                       B.Sc. degree in electrical engineering from the                                    ETH Zürich, Zürich, Switzerland, in 2009.
+                       Lübeck University of Applied Sciences, Lübeck,                                       In 2005, he joined the Automatic Control Lab-
+                       Germany, in 2013, the M.Sc. degree from                                            oratory, ETH Zürich, where he worked on the
+                       the Hamburg University of Applied Sciences,                                        interface of algebraic geometry, optimization,
+                       Hamburg, Germany, in 2014, and the Dr.-Ing.                                        and control. His Ph.D. thesis was awarded with
+                       (Ph.D.) degree from the University of Lübeck,                                      the ETH Medal for Outstanding Ph.D. theses. In
+                       Lübeck, in 2020.                                          2009, he joined the Department of Mathematics, UC Berkeley, Berkeley,
+                         From 2014 to 2019, he was the Research                  CA, USA, as a Feodor Lynen Fellow of the German Alexander von
+                       Group Leader with the Laboratory of Medical               Humboldt Foundation, where he was working on problems in applied
+                       Electronics, Lübeck University of Applied Sci-            mathematics, most notably on convex algebraic geometry. From 2011
+ences. Afterward, he worked as a Senior Researcher with the Center of            to 2015, he was a Research Engineer and the Project Manager of
+Excellence CoSA, Lübeck. From 2020 to 2023, he was the Head of the               mechatronics applications with the Dräger Research Unit, Lübeck,
+Department for Individualized Therapy, Fraunhofer Research Institution           Germany. He was responsible for projects in signal processing and
+for Individualized and Cell-Based Medical Engineering IMTE, Lübeck.              control, with a focus on pneumatic systems and respiratory care. Since
+He has been appointed a Professor with the Hamburg University of                 2015, he has been the Director of the Institute for Electrical Engineering
+Applied Sciences, since 2023. His research interests include the devel-          in Medicine, Universität zu Lübeck, Lübeck. Since 2020, he has been the
+opment of novel biomedical measurement methods and related medical               Director with the Fraunhofer Research Institution for Individualized and
+sensors.                                                                         Cell-Based Medical Engineering (IMTE), Lübeck.
+

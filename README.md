@@ -38,6 +38,27 @@ An OK result lists the IIO context and its devices. Only after this test passes 
 
 For the normal startup sequence after rebooting Windows, reset behavior, and timeout recovery, see `docs/connection-checklist.md`.
 
+## Simulation only on macOS/Linux
+
+The checked-in `cn0565-env/` is a Windows environment: its interpreter is
+`cn0565-env/Scripts/python.exe`. It cannot run on macOS/Linux. For the
+hardware-free reconstruction sandbox, create a native environment instead:
+
+```bash
+python3 -m venv .venv-sim
+source .venv-sim/bin/activate
+python -m pip install -r requirements-sim.txt
+python scripts/eit_sim_playground.py --preset null
+python scripts/eit_sim_playground.py --noise-rel 0.001 --seed 1
+```
+
+After the first setup, either activate it again or call its interpreter
+directly:
+
+```bash
+.venv-sim/bin/python scripts/eit_sim_playground.py
+```
+
 ## Contents
 
 - `firmware/` — supplied or built `.hex` images; do not mix different builds.

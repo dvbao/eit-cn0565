@@ -1,0 +1,7 @@
+# Platform-independent dependencies for scripts/eit_sim_playground.py.
+# Pin pyEIT because the parameter interpretation in the study guide is based
+# on this implementation.
+numpy>=1.20
+scipy>=1.7
+matplotlib>=3.5
+pyeit==1.2.4

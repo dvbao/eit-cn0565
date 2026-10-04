@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "layout_id": "C16-R-candidate-v0.2",
+  "status": "PROPOSED_NOT_CONTINUITY_VERIFIED_NOT_HUMAN_APPROVED",
+  "source": "EVAL-CN0565-ARDZ schematic Rev B, P1 on sheet 2",
+  "notes": [
+    "Software indices 0..15 use X0..X15; X16..X23 are left unconnected.",
+    "P1 pins 1, 2, 15, 16, 29, 30 are GND_ISO, not body electrodes.",
+    "The order follows a candidate perimeter path, not a valid 2D face mesh.",
+    "Verify connector pin-1 orientation and each lead with continuity and a known load before use."
+  ],
+  "channels": [
+    {"index": 0, "site": "L1", "x_line": "X0", "p1_pin": 3},
+    {"index": 1, "site": "L2", "x_line": "X1", "p1_pin": 4},
+    {"index": 2, "site": "L3", "x_line": "X2", "p1_pin": 5},
+    {"index": 3, "site": "L4", "x_line": "X3", "p1_pin": 6},
+    {"index": 4, "site": "L5", "x_line": "X4", "p1_pin": 7},
+    {"index": 5, "site": "L6", "x_line": "X5", "p1_pin": 8},
+    {"index": 6, "site": "L7", "x_line": "X6", "p1_pin": 9},
+    {"index": 7, "site": "L8", "x_line": "X7", "p1_pin": 10},
+    {"index": 8, "site": "R8", "x_line": "X8", "p1_pin": 11},
+    {"index": 9, "site": "R7", "x_line": "X9", "p1_pin": 12},
+    {"index": 10, "site": "R6", "x_line": "X10", "p1_pin": 13},
+    {"index": 11, "site": "R5", "x_line": "X11", "p1_pin": 14},
+    {"index": 12, "site": "R4", "x_line": "X12", "p1_pin": 17},
+    {"index": 13, "site": "R3", "x_line": "X13", "p1_pin": 18},
+    {"index": 14, "site": "R2", "x_line": "X14", "p1_pin": 19},
+    {"index": 15, "site": "R1", "x_line": "X15", "p1_pin": 20}
+  ]
+}

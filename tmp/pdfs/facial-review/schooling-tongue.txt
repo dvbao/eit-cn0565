@@ -1,0 +1,1173 @@
+                                                                                 eprints@whiterose.ac.uk
+                                                                            https://eprints.whiterose.ac.uk
+                                                      Universities of Leeds, Sheffield and York
+
+
+Deposited via The University of Sheffield.
+
+White Rose Research Online URL for this paper:
+https://eprints.whiterose.ac.uk/id/eprint/169988/
+
+Version: Published Version
+
+Article:
+Schooling, C.N., Jamie Healey, T., McDonough, H.E. et al. (2020) Modelling and analysis
+of electrical impedance myography of the lateral tongue. Physiological Measurement, 41
+(12). 125008. ISSN: 0967-3334
+
+https://doi.org/10.1088/1361-6579/abcb9b
+
+
+
+
+Reuse
+This article is distributed under the terms of the Creative Commons Attribution (CC BY) licence. This licence
+allows you to distribute, remix, tweak, and build upon the work, even commercially, as long as you credit the
+authors for the original work. More information and the full terms of the licence here:
+https://creativecommons.org/licenses/
+
+Takedown
+If you consider content in White Rose Research Online to be in breach of UK law, please notify us by
+emailing eprints@whiterose.ac.uk including the URL of the record and the reason for the withdrawal request.
+Physiological Measurement
+
+
+
+PAPER • OPEN ACCESS
+
+
+Modelling and analysis of electrical impedance myography of the lateral
+tongue
+To cite this article: Chlöe N Schooling et al 2020 Physiol. Meas. 41 125008
+
+
+
+
+View the article online for updates and enhancements.
+
+
+
+
+                               This content was downloaded from IP address 46.64.192.19 on 08/02/2021 at 17:16
+                              Physiol. Meas. 41 (2020) 125008                                                             https://doi.org/10.1088/1361-6579/abcb9b
+
+
+
+                              Physiological Measurement
+
+                              PAPER
+
+                              Modelling and analysis of electrical impedance myography of the
+OPEN ACCESS
+                              lateral tongue
+RECEIVED
+23 September 2020             Chlöe N Schooling1,2, T Jamie Healey3, Harry E McDonough1, Sophie J French1, Christopher J McDermott1,
+REVISED                       Pamela J Shaw1, Visakan Kadirkamanathan2 and James J P Alix1
+6 November 2020
+                              1
+                                Sheffield Institute for Translational Neuroscience, University of Sheffield, Sheffield, United Kingdom
+ACCEPTED FOR PUBLICATION      2
+18 November 2020
+                                Department of Automatic Control and Systems Engineering, University of Sheffield, Sheffield, United Kingdom
+                              3
+                                Department of Clinical Engineering, Sheffield Teaching Hospitals NHS Foundation Trust, Sheffield, United Kingdom
+PUBLISHED
+29 December 2020              E-mail: cnschooling1@sheffield.ac.uk
+
+                              Keywords: electrical impedance myography, amyotrophic lateral sclerosis, biomarker, electrodes, finite element modelling, muscle,
+Original Content from         tongue
+this work may be used
+under the terms of the
+Creative Commons
+Attribution 4.0 licence.
+                              Abstract
+Any further distribution
+of this work must             Objective: Electrical impedance myography (EIM) performed on the centre of the tongue shows
+maintain attribution to
+the author(s) and the title
+                              promise in detecting amyotrophic lateral sclerosis (ALS). Lateral recordings may improve
+of the work, journal          diagnostic performance and provide pathophysiological insights through the assessment of
+citation and DOI.
+                              asymmetry. However, it is not known if electrode proximity to the muscle edge, or electrode
+                              rotation, distort spectra. We evaluated this using finite element-based modelling. Approach: Nine
+                              thousand EIM from patients and healthy volunteers were used to develop a finite element model
+                              for phase and magnitude. Simulations varied electrode proximity to the muscle edge and electrode
+                              rotation. LT-Spice simulations assessed disease effects. Patient data were assessed for reliability,
+                              agreement and classification performance. Main results: No effect on phase spectra was seen if all
+                              electrodes remained in contact with the tissue. Small effects on magnitude were observed.
+                              Cole-Cole circuit simulations indicated capacitance reduced with disease severity. Lateral tongue
+                              muscle recordings in both patients and healthy volunteers were reproducible and symmetrical.
+                              Combined lateral/central tongue EIM improved disease classification compared to either
+                              placement alone. Significance: Lateral EIM tongue measurements using phase angle are feasible.
+                              Such measurements are reliable, find no evidence of tongue muscle asymmetry in ALS and
+                              improve disease classification. Lateral measurements enhance tongue EIM in ALS.
+
+
+                              1. Introduction
+
+                              Amyotrophic lateral sclerosis (ALS) is a fatal neurodegenerative disorder that not only causes weakness of
+                              limb and respiratory muscles, but also weakness of the muscles of speech and swallowing, so-called bulbar
+                              disease. The use of electrical impedance myography (EIM) as a disease biomarker in amyotrophic lateral
+                              sclerosis for both limb and bulbar muscles has been well demonstrated (Alix et al 2020, Shellikeri et al 2015,
+                              McIlduff et al 2017, Rutkove 2009, Rutkove et al 2007). Development of bulbar muscle biomarkers is
+                              particularly important as there are few biomarkers offering an objective measure of bulbar disease (Benatar
+                              et al 2016). EIM has the capacity to accurately identify and measure disease progression (Alix et al 2020,
+                              Shefner et al 2018); thus, it may be of benefit both in clinical practice and research.
+                                  Impedance measurements in the bulbar region in patients with ALS have focused on the tongue. A novel
+                              impedance device was used to take recordings in both 2D and 3D electrode configurations as a means to
+                              obtain potential 3D structural information. So far, recordings have been reported for measurements made in
+                              the midline of the tongue (Alix et al 2020, Shellikeri et al 2015, McIlduff et al 2017, Pacheck et al 2016); it is
+                              not known if lateral measurements are feasible or provide clinically useful information. While EIM
+                              electrodes can be carefully placed on limb muscles, for example, in relation to bony landmarks (Sanchez et al
+                              2016), placement on the tongue is more difficult and could be subject to small rotations of the impedance
+                              device. Attempts to undertake recordings on either half of the tongue blade may also be undermined by the
+
+                              © 2020 Institute of Physics and Engineering in Medicine
+Physiol. Meas. 41 (2020) 125008                                                                       C N Schooling et al
+
+
+
+proximity of the electrodes to the tongue edge (Scholz and Anderson 2000, Li et al 2019, Hua et al 1993).
+However, if possible, lateral recordings may provide additional diagnostic information, for example, by
+providing a more complete picture of the health of the muscle. Such recordings would also provide insight
+into disease pathophysiology, as although limb involvement in ALS is often asymmetrical (Devine et al
+2014), little is known about the presence/absence of bulbar disease asymmetry.
+    In this paper we demonstrate that lateral placement and electrode rotation have no significant effect on
+the impedance phase spectra. To establish this we develop a finite element model of the tongue that achieves
+a simultaneous fit across multiple electrode configurations. The model is applied to patients with ALS
+exhibiting different severities of disease and to healthy volunteers. As a result the paper also develops a
+method for identifying disease and its progression. Using real patient data we show that lateral measurements
+outperform central measurements in the identification of disease, and that their combination further
+enhances disease detection.
+    Herein we describe our impedance data collection process, development of the FEM model and
+subsequent conclusions. An analysis of the robustness of data obtained through lateral placement is
+presented, followed by an assessment of disease identification using lateral and central placement data.
+
+
+2. Methods
+
+2.1. Data collection in human participants
+Impedance spectra were recorded from 41 patients with ALS and 30 healthy volunteers (demographics in
+table 1). Informed consent was obtained and the study was approved by an NHS research ethics committee
+(reference 15/YH/0121). Data was collected in patients at 3 monthly intervals for up to a year where possible,
+while healthy volunteers had just one follow up visit 6 months from baseline.
+     Measurements were taken using a bespoke, handheld bioimpedance tongue device designed and
+constructed by the Department of Clinical Engineering at Sheffield Teaching Hospitals NHS Foundation
+Trust (Alix et al 2020) (figure 1(a)). Upper and lower electrode plates contained four, 1.5 mm diameter
+circular, gold electrodes arranged in a square with a 5 mm centre inter-electrode distance and 7 mm plate
+separation distance. A sinusoidal current (5 µA root mean square) was injected across 14 frequencies.
+     Let the dataset for each measurement be D = {Z( fi )|i = 1, · · · , Nf }, where Z( fi ) = R( fi ) + jX( fi ) is the
+impedance measurements in complex form with R(f ) being the resistance and X(f ) being the reactance. N f
+is the number of frequencies (14) and fi = f1 2i−1 with f1 = 76 Hz. The impedance magnitude, |Z( fi )| and
+impedance phase, θ(f i ) are subsequently calculated as
+
+
+                                                     X( fi )              p
+                                  θ( fi ) = arctan           , |Z( fi )| = R( fi )2 + X( fi )2 .                     (1)
+                                                     R( fi )
+
+
+Multiple studies have demonstrated the impedance phase to be a clinically significant metric (Alix et al 2020,
+Shellikeri et al 2015, McIlduff et al 2017, Rutkove 2009, Rutkove et al 2007). However, the potential utility of
+impedance magnitude should not be discounted; indeed, this metric has been used in other applications of
+impedance spectroscopy (Anumba et al 2020, Khan et al 2016). Figure 3 shows clear discrepancies between
+patients and healthy volunteers in both phase and magnitude spectral patterns. Impedance readings were
+taken for a number of different measurement configurations. This included measurements in the centre of
+the tongue as well as with lateral placement both on the left and right sides; measurements repeated with the
+tongue relaxed inside the mouth (intraoral) and tongue protruded (extraoral); and measurements for all
+eight electrode configurations (as in figure 1(b)).
+    For each visit, recordings were made in turn for left, right, then central placement; first in the extraoral
+configuration followed by the intraoral configuration. To take a second set of measurements (trial 2) this
+whole process was repeated, thus the probe was removed and replaced several times during a recording
+session. The six measurement paradigms and eight electrode configurations used means that 48 spectra were
+generated for each participant visit, therefore the full multi-visit dataset contains over 9000 spectra.
+    Measurement errors can be caused by poor tongue to electrode contact (see section 3.2.1). During
+measurements constant observation of electrode contact was made. If electrodes became visible during
+measurement, then the recording was aborted. Any recordings comprising negative resistance at any
+frequency were removed; because the tongue is a passive system this would imply that it will behave as a
+positive real system and, as such, is a good indication that the measurements are artefactual. Next, remaining
+outlier spectra were removed using a root-mean-squared deviation-based outlier detection algorithm (see
+appendix A).
+
+                                                     2
+Physiol. Meas. 41 (2020) 125008                                                                                          C N Schooling et al
+
+
+
+Table 1. Demographics of the participant cohort. Note that this paper uses the same impedance dataset as Alix et al (2020), which
+includes further details of clinical and electrophysiological characteristics of the patients. Reprinted from Alix et al (2020), Copyright
+(2020), with permission from © 2020 International Federation of Clinical Neurophysiology. Published by Elsevier B.V. All rights
+reserved.
+
+Measurement                                  Patients                         Healthy volunteers                          P value
+
+                                             N = 41                           N = 30                                      (statistical test)
+Mean age in years                            62                               56                                          P = 0.12
+(range)                                      (30–83)                          (22–86)                                     (t-test)
+Male:female (n)                              22:19                            14:16                                       P = 0.63
+(%)                                          (54:46)                          (47:53)                                     (Fishers test)
+Limb onset disease                           24 (59%)
+Bulbar onset disease                         17 (41%)
+
+
+
+
+   Figure 1. (a) The novel EIM tongue device with eight electrodes in a cuboidal arrangement. (b) The eight electrode
+   configurations used, separated into 2D and 3D groups, utilising the electrode labels employed in (a). (c) Image showing central
+   placement of the device on the participant’s tongue. (d) FEM tongue geometry and mesh built in Comsol Multiphysics. (b)
+   reprinted from Alix et al (2020), Copyright (2020), with permission from © 2020 International Federation of Clinical
+   Neurophysiology. Published by Elsevier B.V. All rights reserved.
+
+
+
+
+2.2. Grouping patients by symptoms
+In order to develop finite element models for different severities of disease, patients were sorted into four
+symptom groups (figure 2) by combining the ALS functional rating bulbar subscore (ALSFRS), tongue
+strength, and clinical examination findings (clinical signs of tongue wasting, weakness and fasciculations).
+    The no symptom group was determined by a maximum (12/12) score on the ALS functional rating scale
+bulbar subscore and the absence of any abnormal clinical signs. The other groups were obtained through the
+combination of ALSFRS bulbar subscore, tongue strength and clinical examination. Clinical examination
+was undertaken by an experienced physician, with scoring described in table 1. Evaluation of tongue strength
+was undertaken with quantitative muscle testing (QMT) system (Averil Medical), coupled to the Iowa Oral
+Performance Instrument (IOPI) (Shellikeri et al 2015, Easterling et al 2013). Briefly, patients were asked to
+press the small bulb up onto the roof of the mouth as hard as possible for 10 s.
+
+
+                                                         3
+Physiol. Meas. 41 (2020) 125008                                                                                 C N Schooling et al
+
+
+
+
+                                  (a)                                                     (b)
+
+
+
+
+                                  (c)                                                     (d)
+   Figure 2. Histograms showing the distribution over the four symptom groups of (a) ALSFRS-r bulbar score, (b) tongue strength
+   (Newtons) and (c) clinical score. By combining all three scores the different patient groups become visually distinct (d).
+
+
+
+
+    Assessment of the central placement tongue impedance data was made to evaluate the differences in
+spectral patterns between these four groups (figure 2). Due to the similarity between healthy volunteers and
+patients in the no symptom and mild groups, finite element modelling was only applied to healthy volunteers
+and the moderate and severe patient groups.
+
+
+2.3. Building the FEM-based model
+Finite element method (FEM) based modelling was employed to explore the underlying differences in the
+electrical properties of the tissue between the different disease states. Model parameters were then attributed
+to a lumped circuit LT-Spice model to gain further insight into the disease process.
+    Capturing the detailed structure of the tongue is difficult due to a highly complicated muscle fibre
+arrangement, with fibres running in multiple directions (Gilbert and Napadow 2005, Gaige et al 2007). Here,
+a simplified tongue geometry was built from layers of tissue with varying electrical conductivity and
+anisotropy. The shape of the tissue mimics that of a tongue MRI taken from Ong and Chong (2006), with a
+length of 78 mm and maximum breadth of 56.5 mm, which are reported for the average dimensions of an
+adult tongue (Hopkin 1967). The muscle is surrounded by a 2 mm epithelium layer (Prestin et al 2012), with
+set value of conductivity spectra (10) taken from reported results for the dorsal and ventral layers (Lackovic
+and Stare 2007, Richter et al 2015). The geomtry used is shown in figure 1(d).
+    The model was developed using the AC/DC module in Comsol Multiphysics software. Modelled local
+impedance measurements are produced using eight electrodes of 1.5 mm diameter in a cuboidal
+arrangement analogous to the novel tongue device. The conductivity of the electrodes is set to be much
+greater than that of the tissue. The finite element mesh was generated automatically with the Comsol
+software and consisted of 97 155 elements. The model is run to generate spectra for each of the eight
+electrode configurations in turn, by passing current and reading voltage between different electrode pairs, as
+laid out in figure 1(b). The 2D configurations pass current and read voltage on the same surface, while the
+3D electrodes pass current and read voltage between the upper and lower tongue surfaces.
+    A frequency domain study was employed with the scalar electric potential as the dependent variable.
+Magnetic induction effects are assumed to be negligible since they are expected to be approximately six
+orders of magnitude smaller. The current flow in EIM is the combination of direct current and displacement
+current (J̄tot = J¯c + J¯d ). Direct current flows due to moving charge particles and is defined as
+
+
+                                                 J¯c (x, y, z) = σ(z).Ē(x, y, z),                                                (2)
+
+                                                     4
+Physiol. Meas. 41 (2020) 125008                                                                         C N Schooling et al
+
+
+
+where x y and z are the longitudinal, transverse and vertical coordinates of the local current; σ(z) is the local
+conductivity of the tissue, which is assumed to be uniform over x and y but varies with z (different values
+between the layers of tissue); and Ē(x, y, z) is the local electric field.
+    An alternating current with amplitude, I 0 and frequency, ω (rad s−1 ) is passed between a terminal
+electrode and ground electrode (where the electric potential is set to 0). The displacement current then arises
+from the changing field induced by this alternating current and is given by
+
+                                                     ∂ Ē(x, y, x)         ∂ Ē(x, y, z)
+                                   J¯d (x, y, z) = ϵ               = ϵ0 ϵr               ,                             (3)
+                                                          ∂t                    ∂t
+
+where ε is the permittivity (ϵ = ϵ0 ϵr ), ε0 is permittivity of free space (8.854 × 10−12 ) and εr is relative
+permittivity. The phasor representation of the electric field produced by an alternating current is given by
+
+                                                         Ē = E¯0 ejωt                                                 (4)
+
+and hence (3) becomes
+
+                                                        J¯d = jωϵ0 ϵr Ē.                                              (5)
+
+    For alternating current sources inside conductive media the equation of continuity is then solved:
+
+                                                        Q = ∇ · J̄tot ,                                                (6)
+
+where Q is the total charge inside each element. To get a full description of an electromagnetics problem,
+boundary conditions must be specified at material interfaces. The boundary condition implemented in
+Comsol, for interfaces between different media with electric field E¯1 and E¯2 and outward normal from
+medium two, n¯2 is given by
+
+                                                     n¯2 .(E¯1 − E¯2 ) = Q.                                            (7)
+
+    The electric field is related to the potential difference (V) through
+
+                                                         Ē = −∇V,                                                     (8)
+
+and hence the electrical potential at the electrode surfaces can be output by the FEM.
+   The local impedance (Z) between a set of electrode pairs at the frequency of excitation current signal is
+then calculated as
+                                                              V1 − V2
+                                                       Z=                                                              (9)
+                                                                 I0
+
+where V 1 and V 2 are the potentials at the two electrodes, respectively, as obtained from the FEM model.
+
+2.3.1. Model parameterisation
+To provide a parametrisation with potential for interpretation of the parameters, the conductivity spectra for
+the tissue making up the main body of the tongue is set as the following simplified Cole-Cole equation:
+
+                                                                         1
+                                          σ(z ∈ Φl ) =              ( l)   (l)
+                                                                                                                     (10)
+                                                              ( l) Z − Z1
+                                                             Z1 + 0
+                                                                         f
+                                                                         1 + j (l)
+                                                                              Fc
+                                                                                     (l)   ( l)   (l)
+where j is the imaginary unit, f ( = ω/2π) is the frequency (Hz) and Z0 , Z1 and FC are real valued free
+parameters, which depend on the specific layer of depth, Φl . The tongue muscle has anisotropic properties
+(Gaige et al 2007), so different sets of parameters are inputted for the longitudinal, transverse and vertical
+directions of the tongue.
+    Since it is possible that fibres run in predominantly different directions at different depths (Benatar et al
+2016), the tongue body was split into three layers in order to allow enough geometrical complexity for the
+model fit to data to be achievable. A total of 27 free parameters for conductivity properties were used, with
+an additional parameter representing the thickness of the middle layer.
+
+                                                 5
+Physiol. Meas. 41 (2020) 125008                                                                                  C N Schooling et al
+
+
+
+
+                                    (a)                                                       (b)
+   Figure 3. Median impedance spectra of (a) phase and (b) magnitude. With central measurement data in configuration 3D1 for
+   the four symptom groups and healthy volunteers. Similar patterns were seen across all electrode configurations (not shown).
+
+
+
+
+    To assess the agreement between the modelled and measured data the normalised root mean squared
+error (NRMSE) is employed. The NRMSE metric between the impedance measurement (θ, |Z|) and model
+               ˆ is calculated independently for phase and magnitude as
+estimate (θ̂, |Z|)
+                                                     r
+                                                                  ∑Nf                 2
+                                                                     i=1 (αi −α̂i )
+                                                                          k
+                                                 NRMSE =                                  ,                                      (11)
+                                                                αmax − αmin
+
+where α represents θ or |Z|, N f is the number of measurements in the set (14 frequencies per electrode
+configuration). Note that calculation on impedance phase is not affected by phase flips since values are
+automatically constrained between −90◦ and 90◦ .
+
+2.4. Disease classification and symptom correlation
+Classification analysis between patients and healthy volunteers was undertaken with 3-nearest neighbour and
+4-fold cross validation (Bishop 2006). Classification performance was assessed through sensitivity, specificity
+and the area under the receiver operating characteristics curve (AUROC). Each electrode configuration
+dataset holds 14 phase values from all frequencies, and two electrode configurations (3D1 and 3D2) data
+were combined (see section 3.2.2).
+    Feature selection was made through a wrapper algorithm forward selection approach. This involved
+building up features one by one using the AUROC as the evaluation criterion. The algorithm then selects the
+combination of features that gives the optimal results. A maximum of eight selected features was
+implemented to reduce overfitting.
+    For comparison of two AUROC values A1 and A2 , the Z-score was calculated as
+
+                                                            (A1 − A2 )
+                                            Ξ= p                                   ,                                             (12)
+                                                     SE1 + SE22 − 2Covar[A1 , A2 ]
+                                                       2
+
+
+where SE1 and SE2 are the standard errors of each AUROC value, and Covar[A1 , A2 ] is the covariance of the
+two AUROCs. These were calculated using methods described in Hanley and Hajian-Tilaki (1997).
+    In order to assess the correlation of the impedance data with tongue strength, the spectra were reduced
+into one metric using the L2 (Euclidean) norm. Where again, features were selected through a forward
+selection wrapper algorithm. The L2 norm is calculated as the square root of the sum of the squared values
+over the chosen features. The correlation performance was quantified using the Spearman rank correlation
+coefficient (ρ) which measures the strength and direction of monotonic association between the L2 norm
+and tongue strength.
+
+3. Results
+
+3.1. Model fit
+The parameter values were iteratively adapted so that the model impedance spectra for both phase angle and
+magnitude were in good agreement with collected data. The patients were split into different disease
+categories due to differences in the appearance of spectra (figure 3). The parameter optimization was
+initialised with a trial and error process for a good fit. Following this an iterative local parameter search was
+made to determine the minimum deviation between the model and collected data. Separate models were
+
+                                                     6
+Physiol. Meas. 41 (2020) 125008                                                                                     C N Schooling et al
+
+
+
+
+                                                                 (a)
+
+
+
+
+                                                                 (b)
+
+
+
+
+   Figure 4. Data generated using Comsol (red line) compared to spectra distributions for human participants (dashed line: spectral
+   median, shaded area: interquartile range). Magnitude and phase spectra presented for eight electrode configurations in (a) severe
+   symptom patients, (b) moderate symptom patients and (c) healthy volunteers.
+
+
+
+
+generated for healthy volunteers, patients with moderate disease and patients with severe disease. Producing
+a simultaneous fit across all electrode configurations for both phase and magnitude was challenging due to
+the high number of parameters and variables involved. Despite this challenge, a high level of agreement
+between the observed data and FEM was achieved across all groups for both phase and magnitude (figure 4).
+    Visual assessment of the residual distributions of the FEM fit demonstrated a random distribution
+centred around 0 (appendix C1). Calculation of the NRMSE also showed a good fit, with the variation in the
+phase being around half of the average variation between two repeat measurements (see section 3.2.2 and
+figure 8). Therefore, the model was deemed to have sufficiently captured the overall electrical properties in
+different stages of disease.
+
+                                                      7
+Physiol. Meas. 41 (2020) 125008                                                                                      C N Schooling et al
+
+
+
+
+                               (a)
+                                                                                              (b)
+   Figure 5. Model parameters interpreted as electrical circuit elements. (a) LT-spice 12 element Cole-Cole based circuit simulation.
+   (b) Circuit parameter values RP, R and C for the three modelled disease states in the upper, middle and lower sections of tongue
+   tissue.
+
+
+
+
+    To gain further insight into the effect of the disease process from the external electrical measurements
+made, we explored reducing the system to a lumped circuit model, similar to that presented in Shiffman and
+Rutkove (2013a), Shiffman and Rutkove (2013b). The optimised model parameters describing the
+conductivity spectra of the tongue were fit to a lumped model of a balanced Pi network of four simplified
+Cole-Cole networks (figure 5(a)). This network was simulated with the LT-Spice simulator using AC
+small-signal analysis. A NRMSE analysis was undertaken to assess the level of agreement between the FE and
+LT-spice models. Each set of parameters (Z0 , Z1 , FC ) is then interpreted as an intracellular resistance (RP),
+extracellular resistance (R) and capacitance (C).
+    Inspection of the model parameters for the three scenarios (appendix B2) characterises the underlying
+disease changes to tongue properties and tissue anisotropy. Using LT-Spice simulations these can then be
+interpreted as circuit parameters varying across the different stages of disease (figure 5). The good agreement
+(NRMSE < 0.005) between Comsol and Spice demonstrate that the FEM tongue characteristics can
+accurately be reduced to a lumped model. The most explicit change seen was decreasing capacitance (and
+hence more negative reactance) with disease progression, mainly due to changes in the x/y directions in the
+middle and lower tongue sections. The overall effect on extracellular resistance was an increase with disease
+severity. The intracellular resistance also consistently increased in the lower tongue and the x/y directions of
+the middle tongue, while the direction of change seen in the upper tongue is less consistent. Overall, these
+results are in keeping with the known pathophysiology of muscle in ALS (see section 4).
+
+3.2. Robustness analysis of patient measurements
+The feasibility of lateral tongue EIM phase angle measurements was interrogated using the FEM. The
+robustness of patient data was then evaluated through the assessment of similarity/agreement of different
+measurement configurations, as well as overall measurement reliability.
+
+3.2.1. FEM assessment of edge and rotation effects
+Using the optimised FEM-based models the effects of moving the electrodes closer to the edge of the tissue
+were investigated for both impedance magnitude and phase angle. Simulations were run for four edge
+positions (shift A–D shown in figure 6(a)), starting with the extreme of one electrode pair having no contact
+with the tongue and moving until all electrodes are in full contact. The data show that the effect on
+magnitude is greater than that on phase, with the latter only showing obvious changes when electrode
+contact has been lost (see figure 6, RMSD values presented in appendix B3).
+    When the electrodes are placed close to the edge of the tongue the path of the currents changes because
+the current flow is constrained to be within the tongue and not the surrounding air. The results in figure 4
+demonstrate that the displacement of the current path changes its magnitude distribution but not its phase,
+hence for the transferred impedance measurement there is a greater sensitivity to magnitude over phase. It
+must be noted that all electrodes in use require at least partial contact with the tissue surface. Lack of contact
+
+                                                       8
+Physiol. Meas. 41 (2020) 125008                                                                                     C N Schooling et al
+
+
+
+
+                                                                  (a)
+
+
+
+
+                                                                  (b)
+
+
+
+
+                                                                  (c)
+
+
+
+
+                                                                  (d)
+   Figure 6. (a) Four electrode edge positions, labelled shift A–D. Starting from the extreme of one electrode pair having no contact
+   with the tongue and moved inwards until all electrodes are within the tissue edge. (b)–(d) Modelled magnitude and phase spectra
+   comparing central measurement (black line) to the measurements made at the four edge positions (red, blue, green and yellow
+   lines for shift A, B, C, D respectively). Shown for severe symptom (b), moderate symptom (c) and healthy volunteer model (d).
+
+
+
+can result in an extreme change to the phase spectra and, in addition, the instrumentation will not produce
+reliable results with an open circuit electrode. It is likely that these measurements will likely be excluded in
+the outlier removal stage (2.5% of lateral measurements were removed as outliers, compared to 1.2% of
+central measurements).
+
+                                                       9
+Physiol. Meas. 41 (2020) 125008                                                                                 C N Schooling et al
+
+
+
+
+                                                               (a)
+
+
+
+
+                                                               (b)
+
+
+
+
+                                                               (c
+   Figure 7. Modelled magnitude and phase spectra comparing no rotation (black line) to the rotated measurements (red, blue and
+   green lines for 15◦ , 30◦ and 45◦ respectively). Shown for severe symptom (a), moderate symptom (b) and healthy volunteer
+   model (c).
+
+
+
+
+    Since the tongue muscle demonstrates anisotropy between the longitudinal and transverse directions,
+rotation of the electrode plates during device placement may impact upon the measured impedance spectra.
+To explore this, the FEM simulated electrode plate rotations by 15◦ , 30◦ and 45◦ (figure 7, RMSD values
+presented in appendix B4).
+    Minimal changes to either impedance magnitude or phase spectra were observed under electrode
+rotation. Minor alterations were seen in some 2D electrode configurations, likely due to a higher level of
+anisotropy present on the tongue surface. The phase was again more stable than magnitude. Overall, the
+impedance phase appears stable during lateral measurements and electrode rotation.
+
+                                                    10
+Physiol. Meas. 41 (2020) 125008                                                                                     C N Schooling et al
+
+
+
+
+                                                                   (a)
+
+                    Measurement                                            B-A: 95%
+                                                     B-A: Bias(◦ )                              NRMSE mean
+                    conﬁgurations                                        data range (◦ )
+                 Trial 1            Trial 2             0.9874                 53.2                    0.2137
+                Intraoral          Extraoral            -0.6660               54.07                    0.2045
+                    3D1              3D2                -1.0040               41.64                    0.1439
+
+                                                                   (b)
+   Figure 8. (a) Bland–Altman plots showing the difference between two repeat measurements (trial 1 and 2); an intraoral and
+   extraoral measurement; measurements for configurations 3D1 and 3D2. Horizontal lines plotted for 2.5th and 97.5th quartiles
+   and the mean value. (b) Table summarising the Bland–Altman bias (mean value of phase difference) and 95% data range
+   (difference between 97.5th and 2.5th quartiles), and the mean value of NRMSE metric between the two measurement
+   configurations.
+
+
+
+
+                                                                   (a)
+
+
+
+            Measurement                                                       B-A: 95%
+                                        Disease         B-A: Bias(◦ )                               NRMSE mean
+            conﬁgurations                                                   data range (◦ )
+                                           Patient            0.2512               59.23                   0.2171
+             Left          Right
+                                         Healthy              0.0159               59.67                   0.2209
+                                           Patient            2.4048                  62.1                 0.2533
+            Central       Lateral
+                                         Healthy              3.8367               69.75                   0.3386
+
+                                                                   (b)
+   Figure 9. (a) Bland–Altman plots showing the difference between measurements made at left and right sides of the tongue, and
+   between measurements made in the centre and edges of the tongue. Horizontal lines plotted for 2.5th and 97.5th quartiles and the
+   mean value. (b) Table summarising the Bland–Altman bias (mean value of phase difference) and 95% data range (difference
+   between 97.5th and 2.5th quartiles), and the mean value of NRMSE metric between the two measurement configurations.
+   Analysed separately for patient and healthy volunteer data.
+
+
+
+
+3.2.2. Variability of measurement configurations
+All recordings were performed twice (trial 1 and trial 2) to allow for analysis of reproducibility. Some
+participants (both patients and healthy volunteers) found extraoral recordings difficult and thus all recording
+paradigms were not possible in every individual. Bland-Altmann plots and the NRMSE (11) were used to
+assess spectral agreement/similarity between measurement configurations. The Bland–Altmann mean
+
+                                                         11
+Physiol. Meas. 41 (2020) 125008                                                                                        C N Schooling et al
+
+
+
+Table 2. Description of clinical examination scoring. An experienced physician (JJPA) gives a score in each of the three categories
+(wasting, weakness and fasciculations). The overall clinical score is then calculated as the sum of the three scores.
+
+Clinical sign                                                   Description and corresponding score
+
+Tongue wasting                    None: 0                Minimal: 1                             Moderate: 2                     Severe: 3
+Tongue weakness                   None: 0                Movement inside and                    Movement only                   Paresis: 3
+                                                         outside mouth: 1                       inside mouth: 2
+Fasciculations                    Absent: 0              Present: 1
+
+
+Table 3. Reproducibility analysis. Intraclass correlation coefficient shown for central and lateral measurements with patient data, healthy
+volunteer data and all participants pooled. 95% confidence interval for the ICC is shown in brackets.
+
+Analysis                                          Central ICC                                               Lateral ICC
+                                                  (95% confidence interval)                                 (95% confidence interval)
+
+Pooled                                            0.903                                                     0.907
+                                                  (0.898–0.908)                                             (0.902–0.911)
+Patients                                          0.926                                                     0.915
+                                                  (0.920–0.931)                                             (0.909–0.920)
+Healthy Volunteers                                0.876                                                     0.896
+                                                  (0.866–0.885)                                             (0.889–0.903)
+
+
+
+difference reveals bias, and, since the data is non-parametric, the 95% difference range was calculated using
+percentiles (Bland and Altman 1999). If the spectral similarity between two measurement configurations is
+within that of two repeat measurements, then the two different measurement configurations can be treated
+as equivalent data types.
+    Spectral similarity was assessed between intra- and extraoral measurements and different device
+placement positions (centre, left, right). Comparison was also made between the two electrode
+configurations 3D1 and 3D2, which are identical apart from a 5 mm lateral shift in the measurement area
+(see figure 1). NRMSE and Bland–Altman analyses demonstrated that both intraoral-extraoral and 3D1–3D2
+comparison were within the threshold of two repeat measurements (figure 8). Thus, measurements are
+unaffected by tongue protrusion and there are no local variations in tissue structure.
+    Evaluation of left placement vs. right placement also revealed a high level of spectral similarity within
+the limits of two repeat measurements (figure 9). This was the case for both ALS patients (for all disease
+severities, appendix B5) and healthy volunteers. This indicates that no asymmetry in disease is observed. The
+comparison between lateral and central placements shows the largest difference; bias was relatively high,
+suggesting that central measurements output a higher phase than lateral measurements. Both the
+Bland–Altmann range and the NRMSE exceed that of trial 1–trial 2 comparison.
+
+3.2.3. Measurement reliability
+A single-measure, two-way mixed effects intra-class correlation coefficient (ICC) analysis was undertaken to
+assess the reproducibility of measurements. The reliability of phase measurements was high for patients and
+healthy volunteers across both central and lateral measurements (table 3).
+    In addition, inter- and intra-rater analyses demonstrate high reliability across different observers; this
+was maintained across patient visits (appendix B1).
+
+3.3. Classification performance and symptom correlation assessment
+Feature selection was applied to the performance of both central and lateral (left and right combined)
+datasets independently for each electrode configuration. Left and right data are combined on the grounds of
+having similar spectra (see figure 9).
+    In our anlayses we found that lateral measurements AUROC outperform those made on the centre of the
+tongue (figure 10(a)). We then combined the lateral and central measurement data and found that the
+combined dataset outperformed the lateral measurement only dataset (figure 10(b)). In addition,
+comparison of left vs. right lateral measurements revealed an identical performance (Ξ = 0). Inspection of
+the features (frequencies) selected by the wrapper algorithm revealed a preponderance of frequencies in top
+half of our frequency range (appendix B6). Comparing the performance of the different electrode
+configurations resulted in a general improvement for the 3D configurations over the 2D, as was previously
+demonstrated in Alix et al (2020).
+    The correlation of impedance phase with tongue strength was also compared between the lateral, central
+and combined datasets. Figure 11 shows the correlation between EIM (selected features presented in
+
+                                                       12
+Physiol. Meas. 41 (2020) 125008                                                                                        C N Schooling et al
+
+
+
+
+                                        (a)                                                      (b)
+   Figure 10. Graphs showing the mean average of two AUROC values A1 and A2 against the comparative Z-score (12). Results for
+   classification made on each electrode configuration individually. (a) The comparison of classification performance using either
+   central data or lateral data. Negative Z value infers better performance for lateral measurements. (b) The classification
+   performance with analysis made on both central and lateral data combined, compared to only lateral data. Positive Z value infers
+   better performance for combined data analysis.
+
+
+
+
+                                  (a)                                                                  (b)
+                                      Electrode             Spearman correlation coefficient ρ
+                                     Conﬁguration           Lateral Central      Combined
+                                         2D1                 0.696           0.462            0.638
+                                         2D2                -0.583          -0.525           -0.525
+                                         2D3                 -0.578         0.487            0.677
+                                         2D4                 -0.430         0.207           -0.521
+                                        3D1/2                0.584          0.587            0.618
+                                         3D3                 0.546          0.549           -0.684
+                                         3D4                 0.721          -0.535           -0.620
+
+                                                                      (c)
+   Figure 11. Relationship of EIM data to tongue strength. Scatter plots of the tongue strength against L2 norm for the two best
+   performing electrode configurations (a) 2D1 and (b) 3D4; comparing the use of lateral, central and combined datasets. (c) Table
+   of the Spearman rank correlation coefficients, ρ, for all electrode configurations. The highest performing dataset (|ρ| closest to 1)
+   is shown in bold for each configuration. Scatter plots for remaining configurations are presented in appendix C1.
+
+
+
+
+appendix B7) and tongue strength for the highest performing 2D and 3D configurations (2D1 and 3D4),
+where best correlation was observed for the lateral datasets.
+    Comparing correlation coefficients between central, lateral and combined data for all configurations
+(figure 11(c)) shows consistent lowest performance for using central data. Both combined and lateral datasets
+perform well, with the overall best correlation observed for the lateral 3D4 dataset (Spearman ρ = 0.72).
+
+4. Discussion
+
+Previous FEM-based models of EIM have used impedance measurements of murine gastrocnemius muscle
+to obtain values for permittivity and conductivity (Pacheck et al 2016, Jafarpoor et al 2013, Jafarpoor et al
+2011). This has the advantage of obtaining and using information taken directly from muscle preparations
+
+                                                       13
+Physiol. Meas. 41 (2020) 125008                                                                   C N Schooling et al
+
+
+
+but has the disadvantage of inputting results from muscle fibres of a different size to those in human subjects.
+Here, we have used a large dataset of over 9000 spectra from eight electrode configurations to develop a
+3-dimensional model fitted to different stages of disease. Despite the difference in approach, our results align
+well with previous studies. For example, the small difference we observed on the effect of recording on the
+muscle edge concur with the conclusions of Pacheck et al whose FEM modelling on tongue EIM indicated
+that there is limited flow of current away from the electrodes (Pacheck et al 2016). Thus, while we did not
+utilise different tongue geometries for our patient and volunteer models, both our results and those of
+Pacheck et al suggest that changes in tongue volume are unlikely to impact upon measured or modelled
+spectra.
+     Edge effects have been reported in impedance imaging (Scholz and Anderson 2000, Li et al 2019). The
+minimal change to spectra observed in our studies may be explained by the variations seen in the impedance
+magnitude of the simulations. These observations imply that resistance and reactance are equally affected by
+any edge effects and therefore become insensitive to changes in phase but not magnitude. Phase angle is
+generally employed as the measured impedance parameter, since it is also deemed more resilient to changes
+in tissue size and effects of subcutaneous fat (Rutkove 2009, Rutkove et al 2007, Schwatrtz et al 2015, Li et al
+2016). The slightly greater removal of outliers lateral data suggests that these recordings can still be subject to
+measurement error when electrodes loose contact with the tongue surface.
+     One limitation to our work is the use of central measurement data to optimise the FEM. However, the
+differences in central and lateral measurement spectra are small (figure 9) and much less prominent than the
+differences seen between the different patient groups. A future work could include generating models based
+on differing electrode placements in order to develop a more sophisticated 3D model.
+     Nonetheless, the application of our FEM to Cole-Cole circuit simulation results in changes to model
+parameters that are in keeping with the known pathophysiology of ALS. There are associated problems in
+attributing particular tissue properties directly to elements within the LT-Spice lumped parameter model,
+where the accuracy can be significantly affected by the approximations made (McAdams and Jossinet 1996).
+However, the capacitive element is differential to tissue permittivity and hence to cell membrane area within
+the tissue volume. Disease progression is associated with a loss of cell membranes and hence a reduction in
+the model capacitance is consistent with muscle cell atrophy. Increased extracellular resistance was also found
+and is in keeping with increases in extracellular connective tissue and fat known to occur in ALS (Rutkove
+2009).
+     Our results also provide insight into the pathophysiology of tongue disease in ALS as the asymmetry
+typically observed in limb muscles was not seen in the tongue. This was the case across all severities of
+disease, suggesting that there is no asymmetry early on which is lost as the disease progresses. In keeping with
+the present results, it is our experience that clinically observable asymmetry of the tongue is not a feature of
+ALS. Cerebral hemispheric dominance has been suggested to be a driver of limb asymmetry (Henderson et al
+2019); interestingly, the hypoglossal nucleus receives bilateral cortical innervation which may limit any such
+effect in the tongue muscle (Urban et al 1998, Chen et al 1999). There do, however, appear to be differences
+in the impedance spectra obtained from the centre of the tongue versus the lateral portions. Histological
+studies show a central band of connective tissue, the lingual septum (Larsson et al 1982), which may underlie
+such differences. It seems unlikely that the lingual septum will undergo any significant changes during ALS
+and thus central tongue EIM measurements will still be dominated by muscle. In keeping with this, both our
+group and others have shown that central placement is sensitive to disease and correlates with ALS symptoms
+(Alix et al 2020, Shellikeri et al 2015, McIlduff et al 2017).
+     During the collection of human data, we investigated intra- and extraoral recordings and found them to
+be similar. This is not surprising since extraoral protrusion is achieved via contraction of the genioglossus,
+and not the tongue blade from which recordings are made. Since some participants, mostly patients but
+some healthy volunteers, appeared to find extraoral recordings more difficult, this similarity indicates that
+the examiner can use whichever method is most comfortable for the participant.
+     As noted in our previous work, 3D electrode configurations appear to provide a superior performance to
+2D arrangements. The reason for this remains undetermined but perhaps relates to the 3D configurations
+assessing a relatively greater amount of tongue muscle. Regardless of cause, this observation was preserved in
+both central and lateral placements. With regard to placement, classification performance across lateral and
+central measurements was high and correlation with tongue strength is observed in both datasets, suggesting
+pathology is occurring and detectable throughout the tongue. In general, however, lateral placement
+outperformed central placement. The underlying cause of the higher classification and tongue strength
+correlation from lateral measurements is unclear, although a purer assessment of muscle in lateral recordings
+(vs. muscle and the lingual septum in central recordings) may be a contributing factor. Nonetheless,
+classification appears enhanced through the incorporation of both lateral and central measurements and
+could be further assessed in a larger study.
+
+                                              14
+Physiol. Meas. 41 (2020) 125008                                                                      C N Schooling et al
+
+
+
+5. Conclusion
+
+In this paper we have further developed the technique of tongue EIM through a combination of FEM and
+detailed patient assessments. Our results show that lateral tongue measurements are technically and
+practically achievable. The data from lateral placement reveals symmetry in ALS tongue disease and,
+importantly, enhance disease identification. These data support the use of combined lateral and central
+tongue EIM measurements as a biomarker for ALS.
+
+Acknowledgments
+
+The work was funded by Ryder Briggs Trust/Neurocare, United Kingdom of Great Britain and Northern
+Ireland (Grant No. RS8470), the Motor Neurone Disease Association, United Kingdom of Great Britain and
+Northern Ireland (Grant No. 918-793) and an Engineering and Physical Sciences Research Council Doctoral
+Scholarship (Grant No. EP/R513313/1). The work was also supported by the NIHR Sheffield Biomedical
+Research Centre (BRC). PJS is supported as an NIHR Senior Investigator. The views expressed are those of
+the author(s) and not necessarily those of the NHS, the NIHR or the Department of Health.
+    The authors wish to thank the participants for their time and dedication. The author’s have confirmed
+that any identifiable participants in this study have given their consent for publication.
+
+
+Appendix A. Outlier removal algorithm
+
+(a) If any measurement set has resistance < 0 at any frequency the measurement set is removed.
+(b) Repeat the following for impedance phase and impedance magnitude:
+    For each configuration (c) and frequency (j) calculate the ‘severe patient’ median and quartiles (using
+                                                                                            cj  cj cj
+    only the data from patients presenting with severe symptoms, see appendix B1): Q1p , Q2p , Q3p .
+                                                         c                              c
+    For each set of measurements i in configuration c (Zi ( fj ) ) calculate the RMSD (Ji ) as:
+                                             v
+                                             u
+                                                   14
+                                                                           !2
+                                             u X
+                                                1       Z  i ( f ) − Q2cj
+                                                           c    j        p
+                                       Jci = t                                .
+                                             u
+                                               14              cj      cj)
+                                                  j=1    Q3    p − Q1p
+
+
+      For the variable Jci calculate the lower quartile, upper quartile and MedCouple: Q1[Jci ], Q3[Jci ], MC[Jci ].
+      Define a threshold for each configuration:
+                                                                                      i
+                                     Tc = Q3[Jci ] + 3 ∗ Q3[Jci ] − Q1[Jci ] ∗ e4∗MC[Jc ]
+                                                                            
+
+
+     Then if: Jci ≥ Tc the full set of measurements i in configuration c is removed.
+ (c) If any measurement set has phase > 30◦ at frequencies f 1 or f 14 the measurement set is removed.
+
+
+
+
+                                               15
+Physiol. Meas. 41 (2020) 125008                                                                                         C N Schooling et al
+
+
+
+Appendix B. Tables
+
+
+                             Table B1. Reproducibility analysis for final visit and inter-rater comparisons.
+
+                                                                                ICC (95% confidence interval)
+Analysis                                                   Central                                                        Lateral
+
+Patients                                                   0.913                                                          0.873
+final visit                                                (0.903–0.922)                                                  (0.861–0.885)
+Intra-rater                                                0.903                                                          0.907
+                                                           (0.898–0.908)                                                  (0.902–0.911)
+Inter-rater                                                0.870                                                          0.866
+                                                           (0.859–0.880)                                                  (0.858–0.875)
+
+
+
+
+Table B2. Model parameters for the conductivity spectra in x, y and z directions and thickness of the upper, middle and lower sections of
+the tongue. For model of severe disease, moderate disease and healthy tissue.
+
+                                   Severe disease                        Moderate disease                           Healthy
+                                   FC             Thickness              FC            Thickness                 FC             Thickness
+ section Direction Z 0         Z 1 (Hz)           (mm)      Z0       Z 1 (Hz)          (mm)      Z0       Z1     (Hz)            (mm)
+
+ Upper  x               15.1 4 530         2.31               26.4 4.4 260       2.17               20.5 2.9 380                    2.03
+        y               16.8 4.2 590                          28.1 4.6 290                          26.8 3.3 395
+        z               6.2 4.8 1.7 × 10−5                    7.1 4.5 1.4 × 10−5                    7.5 4.3 1.1 × 10−5
+ Middle x               110 0.2 110        2.38               6.5 0.8 55         2.66               29 0.1 65                       2.94
+        y               45 0.1 280                            29 0.1 65                             7.2 0.1 60
+        z               210 0.2 200                           235 1.5 60                            180 0.1 35
+ Lower x                12.1 0.77 250      2.31               6.4 1.1 20         2.17               4.6 0.95 15                     2.03
+        y               10.6 0.75 250                         17.5 1.2 25                           5.8 1.15 15
+        z               12 9.6 1.7 × 10−5                     6.1 3.5 1.4 × 10−5                    9.2 4.4 1.1 × 10−5
+
+
+
+
+Table B3. Normalised root mean square error (NRMSE) between central impedance spectra and spectra for shift A, B, C, D (see figure
+5(a)). Shown for all electrode configurations for impedance magnitude and phase. NRMSE > 0.1 is shown in bold.
+
+                     Severe disease                            Moderate disease                                   Healthy
+
+                                                              Magnitude NRMSE
+Shift         A        B          C         D           A            B         C         D          A           B           C          D
+
+2D1        1.272     0.310     0.183      0.139      1.113       0.301       0.178     0.105      1.25         0.304      0.186      0.119
+2D2        0.325     0.057     0.112      0.085      0.394       0.061       0.082     0.074      0.714        0.100      0.104      0.078
+2D3        0.398     0.307     0.182      0.122      1.404       0.714       0.395     0.265      1.279        0.640      0.302      0.195
+2D4        0.574     0.016     0.065      0.067      0.612       0.070       0.079     0.055       2.81        0.191      0.208      0.142
+3D1        0.638     0.360     0.295      0.218      0.559       0.298       0.229     0.169      0.949        0.343      0.273      0.195
+3D2        0.160     0.076     0.055      0.038      0.122       0.062       0.046     0.031      0.125        0.070      0.041      0.033
+3D3        0.405     0.291     0.183      0.129      0.361       0.203       0.126     0.087      0.365        0.223      0.133      0.097
+3D4        0.425     0.304     0.191      0.135      0.356       0.294       0.185     0.120      0.424        0.300      0.191      0.130
+
+                                                            Phase NRMSE
+2D1        0.067     0.032     0.039      0.034       0.051      0.026       0.024     0.020      0.082        0.022      0.033      0.027
+2D2        0.298     0.049     0.027      0.023       0.334      0.045       0.025     0.019      0.338        0.027      0.029      0.028
+2D3        0.033     0.032     0.030      0.020       0.066      0.021       0.030     0.029      0.072        0.054      0.078      0.064
+2D4        0.316     0.021     0.015      0.013       0.380      0.032       0.023     0.014      0.502        0.060      0.037      0.026
+3D1        0.234     0.050     0.045      0.032       0.297      0.039       0.035     0.032      0.043        0.031      0.030      0.022
+3D2        0.032     0.015     0.017      0.016       0.042      0.021       0.012     0.011      0.055        0.024      0.025      0.022
+3D3        0.032     0.015     0.017      0.016       0.042      0.021       0.012     0.011      0.055        0.024      0.025      0.022
+3D4        0.046     0.039     0.033      0.024       0.068      0.036       0.037     0.029      0.085        0.036      0.050      0.039
+
+
+
+
+                                                      16
+Physiol. Meas. 41 (2020) 125008                                                                                   C N Schooling et al
+
+
+
+Table B4. Normalised root mean square error (NRMSE) between central impedance spectra and spectra for rotations of 45◦ , 30◦ and
+15◦ . Shown for all electrode configurations for impedance magnitude and phase. NRMSE > 0.1 is shown in bold.
+
+                           Severe disease                           Moderate disease                            Healthy
+
+                                                        Magnitude NRMSE
+Rotation          45   ◦
+                                  30   ◦
+                                                15 ◦
+                                                            45◦           30◦            15◦         45◦           30◦          15◦
+
+  2D1            0.020         0.012           0.011        0.041        0.040         0.006        0.097        0.058         0.035
+  2D2            0.023         0.010           0.002        0.022        0.014         0.007        0.054        0.029         0.021
+  2D3            0.041         0.028           0.007        0.468        0.160         0.021        0.188        0.098         0.040
+  2D4            0.043         0.028           0.010        0.188        0.109         0.031        0.183        0.127         0.051
+  3D1            0.003         0.004           0.001        0.021        0.010         0.002        0.027        0.021         0.014
+  3D2            0.003         0.003           0.003        0.008        0.004         0.003        0.026        0.016         0.002
+  3D3            0.005         0.007           0.001        0.008        0.004         0.003        0.020        0.004         0.012
+  3D4            0.005         0.004           0.001        0.012        0.004         0.006        0.025        0.007         0.006
+
+                                                            Phase NRMSE
+  2D1            0.045         0.031           0.005        0.064        0.044         0.018        0.100         0.083        0.039
+  2D2            0.026         0.015           0.004        0.021        0.011         0.006        0.043         0.024        0.012
+  2D3            0.026         0.015           0.008        0.240        0.098         0.018        0.037         0.015        0.006
+  2D4            0.021         0.010           0.008        0.209        0.102         0.028        0.049         0.031        0.012
+  3D1            0.008         0.011           0.003        0.015        0.009         0.008        0.024         0.015        0.010
+  3D2            0.007         0.006           0.003        0.017        0.011         0.007        0.018         0.011        0.005
+  3D3            0.007         0.005           0.002        0.022        0.012         0.003        0.017         0.009        0.006
+  3D4            0.007         0.004           0.002        0.025        0.013         0.006        0.016         0.007        0.004
+
+
+
+
+Table B5. Asymmetry analysis at different symptom severities. The difference between left and right measurements is quantified through
+Bland–Altman (B-A) analysis (columns 1 and 2) and the NRMSE metric (column 3). Variation in the left and right spectra neither
+increases nor decreases with disease.
+
+Symptoms                               B-A: Bias(◦ )                     B-A: data range (◦ )                        NRMSE mean
+
+None                                    1.1187                                   55.21                                    0.2195
+Mild                                   −0.3454                                   63.28                                    0.2866
+Moderate                                0.7829                                   51.95                                    0.1842
+Severe                                  0.8679                                   54.00                                    0.2494
+
+
+
+
+                                                       17
+Physiol. Meas. 41 (2020) 125008                                                                                    C N Schooling et al
+
+
+
+Table B6. Classification performance comparison between (a) lateral data, (b) central data, and (c) both data types combined. For each
+electrode configuration 3-nearest neighbour, 4-fold cross validation with forward selection wrapper method algorithm applied to select
+a maximum of eight features.
+
+                                                          Lateral data classification
+
+                      Features                                             AUROC               Sensitivity                Specificity
+
+ 2D1                  f9, f12, f13                                           0.74                  0.69                       0.79
+ 2D2                  f10, f12                                               0.81                  0.84                       0.79
+ 2D3                  f1, f11                                                0.73                  0.71                       0.76
+ 2D4                  f3, f6, f11, f12, f13, f14                             0.77                  0.75                       0.79
+3D1/2                 f9, f10, f12, f14                                      0.82                  0.71                       0.92
+ 3D3                  f3, f5, f9, f10, f11, f12, f13, f14                    0.86                  0.90                       0.81
+ 3D4                  f8, f11, f13, f14                                      0.81                  0.81                        0.8
+
+                                                      Central data classification
+
+                      Features                                             AUROC               Sensitivity                Specificity
+
+ 2D1                  f11, f12                                               0.75                  0.79                       0.71
+ 2D2                  f9, f12, f13                                           0.78                  0.74                       0.82
+ 2D3                  f5, f6, f7, f8, f9, f12, f13, f14                      0.75                  0.59                       0.92
+ 2D4                  f1, f12, f14                                           0.70                   0.5                       0.90
+3D1/2                 f2, f5, f9, f10, f11, f12                              0.82                  0.79                       0.85
+ 3D3                  f10, f11, f13                                          0.80                  0.79                       0.81
+ 3D4                  f6, f12, f13                                           0.76                  0.75                       0.77
+
+                                                    Combined data classification
+
+                      Features                                             AUROC               Sensitivity                Specificity
+
+ 2D1                  Central: f8                                            0.77                  0.76                       0.79
+                      Lateral: f11, f12
+ 2D2                  Central: f8                                            0.83                  0.84                       0.82
+                      Lateral: f10
+ 2D3                  Central: f4, f9                                        0.79                  0.71                       0.88
+                      Lateral: f1, f9
+ 2D4                  Central: f1, f3                                        0.72                  0.44                        1.0
+                      Lateral: f12, f14
+3D1/2                 Central: f1, f11, f13                                  0.91                  0.89                       0.92
+                      Lateral: f9, f13
+ 3D3                  Central: f11, f13                                      0.87                  0.90                       0.85
+                      Lateral: f12
+ 3D4                  Central: f9, f11, f12, f13                             0.84                  0.88                        0.8
+                      Lateral: f14
+
+
+
+
+                                                          18
+Physiol. Meas. 41 (2020) 125008                                                                                 C N Schooling et al
+
+
+
+    Table B7. Features selected through forward selection wrapper for L2 norm phase impedance correlation with tongue strength.
+
+
+
+
+                                                    19
+Physiol. Meas. 41 (2020) 125008                                                                                    C N Schooling et al
+
+
+
+Appendix C. Figures
+
+
+
+
+   Figure C1. Residual plots for the model fit to the median impedance phase and magnitude spectra for healthy volunteers (light
+   grey), moderate symptom patients (dark grey) and severe symptom patients (black). All residual plots demonstrate random
+   errors centred around zero. The normalised root mean square error (NRMSE) between the modelled and collected spectra is also
+   presented and demonstrates a significantly smaller error than the average between trial 1 and trial 2 recordings (see figure 6).
+
+
+
+
+                                                     20
+Physiol. Meas. 41 (2020) 125008                                                                                     C N Schooling et al
+
+
+
+
+   Figure C2. Scatter plots of the tongue strength against L2 norm for the remaining electrode configurations not presented in
+   section 3.3.
+
+
+
+
+                                                      21
+Physiol. Meas. 41 (2020) 125008                                                                                    C N Schooling et al
+
+
+
+References
+Alix J J P, McDonough H E, Sonbas B, French S J, Rao D G, Kadirkamanathan V, McDermott C J, Healey T J and Shaw P J 2020
+        Multi-dimensional electrical impedance myography of the tongue as a potential biomarker for amyotrophic lateral sclerosis Clin.
+        Neurophysiol. 131 799–808
+Anumba D O, Stern V, Healey T J, Dixon S and Brown B H 2020 The value of cervical electrical impedance spectroscopy to predict
+        spontaneous preterm delivery in asymptomatic women: the ECCLIPPx prospective cohort study Ultrasound Obstet. Gynecol.
+        accepted (https://doi.org/10.1002/uog.22180)
+Benatar M, Boylan K, Jeromin A, Rutkove S B, Berry J, Atassi N and Brujin L 2016 ALS biomarkers for therapy development: state of the
+        field and future directions Muscle Nerve 53 169–82
+Bishop C 2006 Pattern Recognition and Machine Learning (Berlin: Springer)
+Bland J M and Altman D G 1999 Measuring agreement in method comparison studies Stat. Methods Med. Res. 8 135–60
+Chen C H, Wu T S and Chu N 1999 Bilateral cortical representation of the intrinsic lingual muscles Neurology 52 411–13
+Devine M, Kiernan M, Pannek K, Stephen R, McCombe P and Henderson R 2014 28. Asymmetry of motor dysfunction in amyotrophic
+        lateral sclerosis: the effect of limb dominance Clin. Neurosci. 21 2042
+Easterling C, Antinoja J, Cashin S and Barkhaus P E 2013 Changes in tongue pressure, pulmonary function and salivary flow in patients
+        with amyotrophic lateral sclerosis Dysphagia 28 217–25
+Gaige T A, Benner T, Wang R, Wedeen V J and Gilbert R J 2007 Three dimensional myoarchitecture of the human tongue determined in
+        vivo by diffusion tensor imaging with tractography J. Magn. Reson. Imaging 26 654–61
+Gilbert R J and Napadow V J 2005 Three-dimensional muscular architecture of the human tongue determined in vivo with diffusion
+        tensor magnetic resonance imaging Dysphagia 20 1–7
+Hanley J A and Hajian-Tilaki K O 1997 Sampling variability of nonparametric estimates of the areas under receiver operating
+        characteristic curves: an update Acad. Radiol. 4 49–58
+Henderson R D, Garton F D, Kiernan M C, Turner M R and Eisen A 2019 Human cerebral evolution and the clinical syndrome of
+        amyotrophic lateral sclerosis J. Neurol. Neurosurg. Psychiatry 90 570–75
+Hopkin G B 1967 Neonatal and adult tongue dimensions Angle Orthod. 37 132–33
+Hua P, Woo E J, Webster J G and Tompkins W J 1993 Finite element modeling of electrode–skin contact impedance in electrical
+        impedance tomography IEEE Trans. Biomed. Eng. 40 335–43
+Jafarpoor M, Li J, White J K and Rutkove S B 2013 Optimizing electrode configuration for electrical impedance measurements of muscle
+        via the finite element method IEEE Trans. Biomed. Eng. 60 1446–452
+Jafarpoor M, Spieker A, Li J, Sung M, Darras B T and Rutkove S B 2011 Assessing electrical impedance alterations in spinal muscular
+        atrophy via the finite element method 2011 Annual Int. Conf. IEEE Engineering in Medicine and Biology Society pp 1871–874
+Khan S, Mahara, A, Hyams E S, Schned A R and Halter R J 2016 Prostate cancer detection using composite impedance metric IEEE
+        Trans. Med. Imaging 35 2513–523
+Lackovic I and Stare Z 2007 Low-frequency dielectric properties of the oral mucosa 13th Int. Conf. Electrical Bioimpedance and the 8th
+        Conf. Electrical Impedance Tomography vol 17
+Larsson S G, Mancuso A and Hanafee W 1982 Computed tomography of the tongue and floor of the mouth Radiology 143 493–500
+Li J, Ji Z, Liu B, Shi X and Dong X 2019 Influence of the measuring probe structure on the electrical-field edge effect in electrical
+        impedance scanning Med. Imaging Health Inform. 1 47–52
+Li L, Li X, Hu H, Shin H and Zhou P 2016 The effect of subcutaneous fat on electrical impedance myography: electrode configuration
+        and multi-frequency analyses PLoS One 11 5
+McAdams E T and Jossinet J 1996 Problems in equivalent circuit modelling of the electrical properties of biological tissues
+        Bioelectrochem. Bioenerg. 40 147–52
+McIlduff C E, Yim S J, Pacheck A K and Rutkove S B 2017 Optimizing electrical impedance myography of the tongue in amyotrophic
+        lateral sclerosis Muscle Nerve 55 539–43
+Ong C K and Chong V F 2006 Imaging of tongue carcinoma Cancer Imaging 6 186–93
+Pacheck A, Mijailovic A, Yim S, Li J, Green J R, McIlduff C E and Rutkove S B 2016 Tongue electrical impedance in amyotrophic lateral
+        sclerosis modeled using the finite element method Clin. Neurophysiol. 127 1886–890
+Prestin S, Rothschild S I, Betz C S and Kraft M 2012 Measurement of epithelial thickness within the oral cavity using optical coherence
+        tomography Head Neck 34 1777–781
+Richter I, Alajbeg I, Vučićević Boras V, Andabak Rogulj A and Brailo V 2015 Mapping electrical impedance spectra of the healthy oral
+        mucosa: a pilot study Acta Stomatol. Croat. 49 331–39
+Rutkove S B 2009 Electrical impedance myography: background, current state and future directions Muscle Nerve 40 936–46
+Rutkove S B, Zhang H, Schoenfeld D A, Raynor E A, Shefner J M, Cudkowics M E, Chin A B, Aaron R and Shiffman C A 2007 Electrical
+        impedance myography to assess outcome in amyotrophic lateral sclerosis clinical trials Clin. Neurophysiol. 118 2413–418
+Sanchez B, Pacheck A and Rutkove S B 2016 Guidelines to electrode positioning for human and animal electrical impedance myography
+        research Sci. Rep. 6 32615 (https://www.nature.com/articles/srep32615)
+Scholz B and Anderson R 2000 On electrical impedance scanning—principles and simulations Electromedica 68 35–44
+Schwatrtz S, Geisbush T R, Mijailovic A, Pasternak A, Darras B T and Rutkove S B 2015 Optimizing electrical impedance myography
+        measurements by using a multifrequency ratio: a study in Duchenne muscular dystrophy Clin. Neurophysiol. 126 202–08
+Shefner J M, Rutkove S B, Caress J B, Benatar M, David W S, Cartwright M S, Macklin E A and Bohorquez J L 2018 Reducing sample size
+        requirements for future ALS clinical trials with a dedicated electrical impedance myography system Amyotrop. Lateral Scler.
+        Frontotemporal Degener. 19 555–61
+Shellikeri S, Yunusova Y, Green J R, Pattee G L, Berry J D, Rutkove S B and Zinman L 2015 Electrical impedance myography in the
+        evaluation of the tongue musculature in amyotrophic lateral sclerosis Muscle Nerve 52 584–91
+Shiffman C A and Rutkove S B 2013a Circuit modeling of the electrical impedance: I. neuromuscular disease Physiol. Meas. 34 203–21
+Shiffman C A and Rutkove S B 2013b Circuit modeling of the electrical impedance: II. Normal subjects and system reproducibility
+        Physiol. Meas. 34 223–35
+Urban P P, Vogt T and Hopf H C 1998 Corticobulbar tract involvement in amyotrophic lateral sclerosis. a transcranial magnetic
+        stimulation study Brain 121 1099–108
+
+
+
+
+                                                      22
+

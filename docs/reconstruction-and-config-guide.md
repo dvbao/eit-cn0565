@@ -5,6 +5,11 @@ file/thuật toán tái tạo ảnh gọi nhau thế nào, và "medium" (miền 
 cách tùy biến nó. Dùng sau khi `docs/connection-checklist.md` đã xác nhận kết
 nối OK.
 
+Phân tích chi tiết Fig. 14, công thức đúng theo pyEIT 1.2.4, bộ benchmark và
+lộ trình phantom → human study nằm ở
+[`fig14-and-algorithm-study.md`](fig14-and-algorithm-study.md). Nếu hai tài
+liệu có vẻ mâu thuẫn về `p`, `lambda` hoặc GREIT, dùng tài liệu chi tiết đó.
+
 ## 1. Luồng file khi chạy GUI (`main.py`)
 
 ```
@@ -59,9 +64,9 @@ mà không có dấu hiệu cảnh báo.
 
 | Thuật toán | `setup()` tham số | Ý nghĩa |
 |---|---|---|
-| **BP** | `weight="none"` | Trọng số ma trận back-projection; `perm` nếu muốn cung cấp phân bố conductivity giả định trước |
-| **JAC** | `p=0.20`, `lamb=0.001`, `method="kotre"` (hoặc `"lm"`, `"dgn"`), `perm`, `jac_normalized` | `p`/`lamb` là hệ số regularization (điều chỉnh độ mượt vs. độ nhạy nhiễu); `method` chọn công thức regularize |
-| **GREIT** | `method="dist"`, `w`, `p=0.20`, `lamb=1e-2`, `n=32`, `s=20.0`, `ratio=0.1`, `perm`, `jac_normalized` | `p` là hệ số hiệp phương sai nhiễu giả định, `lamb` là regularization, `n`/`s`/`ratio` điều khiển lưới ảnh đầu ra GREIT |
+| **BP** | `weight="none"` | Trọng số smear/back-projection; `"simple"` giảm trọng số gần biên. `perm` là conductivity prior dùng để dựng forward smear matrix. |
+| **JAC** | `p=0.20`, `lamb=0.001`, `method="kotre"` (hoặc `"lm"`, `"dgn"`), `perm`, `jac_normalized` | Với `kotre`, `R=diag(diag(J.T@J)**p)` và inverse dùng `J.T@J + lamb*R`. `p` bị bỏ qua khi dùng `lm`/`dgn`. `lamb` điều chỉnh bias/noise, không phải đại lượng vật lý. |
+| **GREIT** | `method="dist"`, `w`, `p=0.20`, `lamb=1e-2`, `n=32`, `s=20.0`, `ratio=0.1`, `perm`, `jac_normalized` | Bản pyEIT dùng `diag(diag(J@J.T)**p)`; `p` không đơn giản là noise covariance. `n` là số pixel hiển thị; `s`/`ratio` điều khiển sigmoid mapping. Trong pyEIT 1.2.4, `w` được lưu nhưng không được dùng khi tính `H`. |
 
 **Giới hạn đã biết**: trong [examples/cn0565/cn0565_worker.py:157-173](../examples/cn0565/cn0565_worker.py), `solver()` gọi
 `self.eit.setup(p=0.5, lamb=0.01, ...)` **hard-code**, còn hai thanh trượt
@@ -71,6 +76,10 @@ thật**. Đây là file thuộc `examples/cn0565/` (bản mirror upstream, bị
 `setup_official_examples.ps1` ghi đè nếu chạy lại), nên khi cần sửa, nói để
 làm theo đúng cách project này đang dùng: viết một wrapper không đụng file
 gốc, giống cách `scripts/run_official_example.py` đang làm với URI.
+
+Ngoài ra, tên “Gauss-Newton solver” trong plot của example dễ gây hiểu nhầm:
+`jac.JAC.solve()` là one-step linear reconstruction với matrix tính trước;
+example không gọi iterative solver `JAC.gn()`.
 
 ## 5. "Medium" là gì và cách tùy biến
 

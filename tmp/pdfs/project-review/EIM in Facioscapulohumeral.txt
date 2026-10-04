@@ -1,0 +1,955 @@
+                                HHS Public Access
+                                Author manuscript
+                                Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+
+
+
+
+Author Manuscript
+                    Published in final edited form as:
+                     Muscle Nerve. 2016 October ; 54(4): 696–701. doi:10.1002/mus.25065.
+
+
+
+                    Electrical Impedance Myography in Facioscapulohumeral
+                    Muscular Dystrophy
+                    Jeffrey M. Statland, MD(1), Chad Heatwole, MD(2), Kate Eichinger, PT(2), Nuran Dilek, MS(2),
+                    William B Martens, BA(2), and Rabi Tawil, MD(2)
+                    (1)Department of Neurology, University of Kansas Medical Center, Kansas City, KS
+
+                    (2)Department of Neurology, University of Rochester Medical Center, Rochester, NY
+
+
+
+
+Author Manuscript
+                    Abstract
+                         Introduction—We determined the reliability and validity of electrical impedance myography
+                         (EIM) in facioscapulohumeral muscular dystrophy (FSHD).
+
+                         Methods—We performed a prospective study of EIM on 16 bilateral limb and trunk muscles in
+                         35 genetically defined and clinically affected FSHD patients (reliability testing on n=18).
+                         Summary scores based on body region were derived. Reactance and phase (50 and 100 kHz) were
+                         compared to measures of strength, FSHD disease severity, and functional outcomes.
+
+                         Results—Participants were mostly men, mean age 53.0 years, and included a full range of
+                         severity. Limb and trunk muscles showed good to excellent reliability [intraclass correlation
+                         coefficients (ICC) 0.72-0.99]. Summary scores for the arm, leg, and trunk showed excellent
+
+
+
+
+Author Manuscript
+                         reliability (ICC 0.89-0.98). Reactance was the most sensitive EIM parameter to a broad range of
+                         FSHD disease metrics.
+
+                         Discussion—EIM is a reliable measure of muscle composition in FSHD which offers the
+                         possibility to serially evaluate affected muscles.
+
+                    Keywords
+                         Muscular dystrophy; Facioscapulohumeral Muscular Dystrophy; Electrical Impedance
+                         Myography; Muscle Composition; Outcome Measures
+
+
+
+                    Corresponding author: Jeffrey M Statland, MD, 4330 Shawnee Mission Parkway, Ste 323, Fairway, KS 66205, PH 913-945-9933,
+                    FX 913-945-1620, jstatland@kumc.edu.
+
+
+
+
+Author Manuscript
+                    Author’s Contributions
+                    Jeffrey Statland, Kate Eichinger, Chad Heatwole, and Rabi Tawil contributed to drafting/revising the manuscript for content; study
+                    concept or design; analysis or interpretation of data; acquisition of data; and statistical analysis.
+                    Disclosures
+                    Dr. Statland is a consultant for Cydan and Third Rock Ventures, and served on the advisory board for Bristol Myers Squibb and
+                    Sarepta.
+                    Kate Eichinger reports no disclosures.
+                    Nuran Dilek reports no disclosures.
+                    William Martens reports no disclosures.
+                    Chad Heatwole receives grant funding from the NIH, FDA, and Cure SMA foundation. He is the founder and CEO of the
+                    Neuromuscular Quality of Life Institute. He receives royalties for the Myotonic Dystrophy Health Index. He reviews medical cases for
+                    Imedecs and Maximus. He provides consultation to Biogen and Atyr. He has provided expert testimony for neuromuscular cases
+                    unrelated to this research.
+                    Rabi Tawil is a consultant for Acceleron and aTyr, and served on the DSMB for Novartis for a non FSHD trial.
+                    Statland et al.                                                                                              Page 2
+
+
+                        Introduction
+
+
+
+
+Author Manuscript
+                                       Facioscapulohumeral muscular dystrophy (FSHD) is among the most common muscular
+                                       dystrophies and causes progressive loss of motor function. Approximately 20% of people
+                                       require a wheelchair over age 50.1,2 FSHD is notable for marked side-to-side asymmetry.
+                                       Although considerable variability exists between patients, there is a characteristic pattern of
+                                       progression involving the muscles of the face and shoulders, then later distal lower
+                                       extremity, and finally the hip girdle muscles. In addition, patients may have debilitating
+                                       involvement of abdominal and paraspinal muscles.3,4 Although the individual experience of
+                                       the disease may suggest periods of rapid worsening followed by periods of stability, the
+                                       largest natural history study to date showed a slow but progressive loss of strength over
+                                       time.5,6 Recent advances in our molecular understanding of FSHD have identified potential
+                                       therapeutic targets for future clinical trials, and the focus of the research community is
+                                       shifting towards clinical trial planning.7 Traditional measures of strength testing would
+
+
+
+
+Author Manuscript
+                                       require long follow up periods or large numbers of participants to demonstrate halt of
+                                       progression, but more importantly there are not well validated techniques for quantifying
+                                       changes in muscles which are particularly affected by FSHD, for example the facial,
+                                       abdominal, or paraspinal muscles.5 Recent international FSHD meetings have identified the
+                                       need for a biomarker of muscle structure or function for clinical trials.7
+
+                                       Impedance has long been used to assess body composition, because tissues, such as muscle
+                                       and fat, have different impedance to current flow. Electrical impedance myography (EIM) is
+                                       an adaptation of this technique which uses subthreshold electrical current to determine the
+                                       resistance to current flow through a particular muscle. EIM has been shown in preclinical
+                                       studies to reflect changes in muscle structure, and techniques have been optimized to be
+                                       more sensitive to muscle than underlying skin or fat.8,9 EIM has shown good reliability and
+
+
+
+
+Author Manuscript
+                                       relationship to disease severity in diverse neuromuscular diseases, including spinal muscular
+                                       atrophy (SMA) and Duchenne muscular dystrophy (DMD), and it is responsive to disease
+                                       progression in amyotrophic lateral sclerosis.10-12
+
+                                       Here we determine the reliability of EIM and its association with known measures of disease
+                                       severity in FSHD. In particular, we examine the performance of EIM in muscles particularly
+                                       affected in FSHD, including the face, abdominal, and paraspinal musculature.
+
+
+                        Material and Methods
+                                       We performed a prospective cross-sectional observational study of genetically confirmed
+                                       and clinically affected FSHD patients at the University of Rochester Medical Center
+                                       conducted from 2012 to 2015. The study was approved by the Human Subjects Committee,
+
+
+
+
+Author Manuscript
+                                       and written and informed consent was obtained from all participants.
+
+                        Participants
+                                       FSHD participants were between 18 and 75 years of age, were clinically affected as
+                                       determined by investigator examination, were independently ambulatory, and had genetically
+                                       confirmed FSHD type 1 or 2.13,14 Participants were recruited from our neuromuscular
+                                       research database or neuromuscular clinic using inclusion criteria reflecting the spectrum
+
+
+                                           Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                               Page 3
+
+
+                                      disease severity for a typical, early phase trial. Participants completed a baseline visit, then
+
+
+
+
+Author Manuscript
+                                      local participants (or participants able to extend their stay) returned for a subsequent repeat
+                                      visit within 3 weeks of the baseline assessment for reliability testing. Evaluations included
+                                      EIM, standardized physical evaluation, manual and quantitative strength testing, and a
+                                      battery of standard functional assessments.
+
+                        Outcomes and assessments
+                                      The EIM device was obtained from Skulpt, Inc (Boston, MA, Figure 1A,B) and consists of a
+                                      laptop computer with a connection to a portable hand-held sensor.15 Evaluators were trained
+                                      in technique and standard recording positions during a 1 day training session (Figure 1 C,D).
+                                      Pediatric sensors were used for muscles of the face, as they have a smaller surface area, and
+                                      are more appropriate for facial muscles.11 The impedance is measured at each frequency by
+                                      applying low-intensity electrical current (<1 mA) via surface electrodes embedded in a
+
+
+
+
+Author Manuscript
+                                      single hand-held sensor, and measuring the resulting voltage signals using a second set of
+                                      surface electrodes embedded in the same sensor, converting them into 3 impedance
+                                      parameters, the resistance (R) the reactance (X), and the Phase [arctangent (X/R)]. While the
+                                      device records 41 frequencies ranging between 1 kHz and 10 MHz, 50 and 100 kHz were
+                                      chosen for this analysis, as they are thought to be more sensitive to biological tissues. The 50
+                                      kHz phase is commonly utilized in neuromuscular disease.16 We compared values for phase
+                                      and reactance. Three recordings of each muscle were obtained, and the 2 most closely
+                                      aligned measurements were averaged (Figure 1B). Recordings were made from the
+                                      following bilateral muscle groups: orbicularis oris, deltoid, biceps, triceps, abdominals,
+                                      vastus lateralis, tibialis anterior, and thoracic paraspinals. Recordings took approximately 20
+                                      minutes for each subject. Summary scores were created by averaging the bilateral arm
+                                      muscles, leg muscles, and trunk muscles.
+
+
+
+
+Author Manuscript
+                                      The FSHD Clinical Score is a 15-point clinical severity scale composed of scores for
+                                      different body regions: face, shoulder, arms, abdomen, and legs (0=unaffected, 15=severely
+                                      affected).17
+
+                                      Quantitative myometry was performed using a fixed myometry testing system (QMA,
+                                      Gainesville, GA) with standardized positions in 14 bilateral muscle groups: shoulder
+                                      abductors, external rotators, elbow flexors and extensors, knee extensors, ankle dorsiflexors,
+                                      and handgrips. 18 Manual muscle testing was performed by a trained physical therapist on 28
+                                      muscle groups: bilateral shoulder abductors, shoulder external rotators, elbow flexors, wrist
+                                      flexors, wrist extensors, hip flexors, hip abductors, knee extensors, hip extensors, knee
+                                      flexors, elbow extensors, ankle dorsiflexors, and plantar flexors, plus neck extensor and neck
+                                      flexors.18
+
+
+
+
+Author Manuscript
+                                      The 6-minute walk test (6MWT) is a test of strength and cardiopulmonary reserve and
+                                      determines the distance walked using casual gait in 6 minutes. This test has been shown
+                                      previously to have high test-retest reliability in Duchenne/Becker muscular dystrophy, where
+                                      it was reliable and responsive to change over time. 19-21 Additional standard functional tests
+                                      included: time to ascend 4 stairs; timed supine to sit; and time to don/doff a jacket.22,18
+
+
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                                Page 4
+
+
+                        Statistical Considerations
+
+
+
+
+Author Manuscript
+                                      Distributions for all parameters were tested for normality visually, and by performing the
+                                      Shapiro-Wilk test. Descriptive statistics were used to describe all parameters (mean and
+                                      standard deviation, median, and quartiles). Test-retest reliability was determined using the
+                                      intra-class correlation coefficient based on a mixed effects model, with lower 95%
+                                      confidence limits. To ensure technical consistency for reliability testing, outliers with
+                                      leverage were identified from the linear regression plots using RStudent and CooksD.
+                                      Outliers were removed if visual inspection of the tracing record showed technical
+                                      inconsistencies with measurements. Additionally negative values at 10 kHz were used to
+                                      identify recordings where probe contact was less than optimal. To determine the relative
+                                      sensitivity of phase versus reactance to other measures of FSHD severity, correlation plots of
+                                      the Pearson correlation versus EIM parameter at both 50 and 100 kHz were created. Fifty
+                                      kHz reactance was determined to be the most sensitive measure and was used for subsequent
+
+
+
+
+Author Manuscript
+                                      analysis. The relationships with other known measures of FSHD disease (clinical severity,
+                                      strength, and functional measures) were determined using Pearson correlations. All
+                                      statistical tests were 2-sided, and P-value cut offs were adjusted for multiple testing (P<0.01
+                                      for tables 2 & 4, and P<0.007 for table 3).
+
+
+                        Results
+                                      Thirty-five participants were included, and 18 returned within 3 weeks for test-retest
+                                      reliability. Participants were mostly men (Table 1), adults, and moderately affected, but
+                                      covering the range of disease severity from mild to moderately-severe. Most participants
+                                      were FSHD type 1 (mean D4Z4 fragment size 25.2 kb), except for 2 with SMCHD1
+                                      confirmed FSHD type 2.
+
+
+
+
+Author Manuscript
+                                      Reliability was good to excellent for major muscle groups (deltoid, biceps, triceps, vastus
+                                      lateralis, and tibialis anterior) with ICCs ranging from 0.72-0.99 (Supplementary Table S1,
+                                      available online). Reliability for the abdominals and thoracic paraspinals was also acceptable
+                                      (ICCs 0.71-0.98). There appeared to be a learning effect for the evaluator for recordings over
+                                      the orbicularis oris; there were side-to-side differences in reliability likely due to the order of
+                                      testing, with the right side tested first and ICCs <0.5, and the left side showing acceptable
+                                      ICCs of 0.84-0.91. This was also likely complicated by technical limitations due to facial
+                                      hair, and slightly longer recording times with the smaller pediatric sensors. Overall summary
+                                      scores showed higher reliability due to the reduced variability in averaging across multiple
+                                      muscles with ICCs for trunk, arm, and leg between 0.89 and 0.98.
+
+                                      Sample tables were made for the biceps, vastus lateralis, and thoracic paraspinal muscles to
+
+
+
+
+Author Manuscript
+                                      test the relationship of resistance, reactance, and phase to FSHD severity measures. The
+                                      parameter that showed the strongest overall correlation with FSHD disease measures was
+                                      reactance at 50 kHz, which was chosen for this study (Table 2). The 50 kHz reactance
+                                      showed broad moderate to strong correlations with other FSHD disease measures, which
+                                      made sense for the particular muscle being tested. For example the EIM value for the right
+                                      vastus lateralis correlated with strength on MMT and QMT, as well as functional tasks like
+                                      time to ascend 4 stairs or the 6 minute walk distance (Tables 3 & 4). The summary scores
+                                      demonstrated tighter and more significant correlations with clinical severity and functional
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                              Page 5
+
+
+                                      measures than the individual muscle scores, likely reflecting the ability of the summary
+
+
+
+
+Author Manuscript
+                                      measures to serve as surrogates for overall disease state. The actual relationship between
+                                      reactance and disease severity in FSHD was inverse: as severity increases, reactance
+                                      decreases (Figure 2).
+
+                                      The relationship of EIM reactance with age was driven by disease duration, which can be
+                                      seen by stratifying participants based on their age of diagnosis; a stronger correlation was
+                                      seen for participants with longer disease duration (Figure 3A). Evaluating for differences
+                                      due to known groups is underpowered for this study; women are known to be diagnosed
+                                      later and to be less severely affected per age than men, but no clear difference in reactance or
+                                      phase was seen here. Participants with D4Z4 residual fragments <20 kb also tend to have
+                                      more severe disease and demonstrated lower reactance values in some muscles (Figure
+                                      3B,C).2,23
+
+
+
+
+Author Manuscript
+                        Discussion
+                                      EIM of major muscle groups and summary scores were reliable in FSHD, for both phase and
+                                      reactance. Reactance appeared to be most sensitive to changes in other measures of FSHD
+                                      disease severity, with moderate to strong correlations with other disease measures across a
+                                      broad variety of assessments for FSHD. Of particular interest is the reliability and
+                                      concordant validity of EIM recordings from muscles normally excluded from FSHD
+                                      assessments, such as abdominal and paraspinal muscles. EIM of facial muscles may
+                                      ultimately prove to be useful in FSHD if the technical hurdles that affect reliability can be
+                                      overcome.
+
+                                      Prior studies in EIM have focused on the phase at 50kHz, as this was felt to be the most
+                                      sensitive EIM metric. But this was largely based on the early work in motor neuron diseases,
+
+
+
+
+Author Manuscript
+                                      ALS and SMA.10,16,24 Studies designed to assess the impact of different tissue
+                                      compartments on EIM measurements suggested reactance was particularly sensitive to
+                                      muscle and less sensitive to skin or fat, likely due to the inherent permittivity to current flow
+                                      in muscle tissue.8 Resistance is felt to reflect changes in skin and fat. Ultimately the decision
+                                      to use 1 electrical parameter or another depends on the reliability of the measurements and
+                                      the relationship to a feature of interest in the disease. Phase as a derived measure, which
+                                      incorporates both reactance and resistance, may provide more stability. However to the
+                                      degree stability in phase is due to resistance it may dilute the association with disease
+                                      metrics of interest, because resistance is highly dependent on skin and subcutaneous fat.
+                                      Here, although the phase was slightly more reliable in FSHD, there was a strong relationship
+                                      with disease metrics when we used reactance. Thus, the increase in validity to disease
+                                      metrics of interest should be weighed against any increase in variability of the measurement.
+
+
+
+
+Author Manuscript
+                                      In the DMD literature, a couple of approaches to optimize EIM parameters have been used.
+                                      In one the relative correlation to skin fold measurements versus correlation with the 6MWT
+                                      to pick the frequency which gave the highest correlation to the functional measure, while
+                                      minimizing the correlation to skin fold was used.12 We did not optimize based on skin fold
+                                      here, but the broad correlations with FSHD disease metrics suggest that 50 kHz reactance
+                                      measures a metric of interest to FSHD by providing a value that relates to not only overall
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                             Page 6
+
+
+                                      severity but individual muscle strength and function. Future studies can look at further
+
+
+
+
+Author Manuscript
+                                      optimizing this metric, either by evaluating different frequency ranges or ratios of reactance
+                                      to phase.25 Many things argue for using the current approach at this stage of development.
+                                      We have demonstrated acceptable reliability. Recordings at 50 kHz occur in a stable portion
+                                      of the reactance versus frequency curve profile. Reactance already shows promising
+                                      correlations to a broad set of FSHD disease measures. Ultimately it is the longitudinal
+                                      relationships to change which will need to be used to determine optimized scores. What is
+                                      desired from any outcome is reliability, concordant validity, and responsiveness. Caution
+                                      must be used when trying to optimize EIM to cross-sectional data, as what is optimal in a
+                                      cross sectional association may not prove to be optimal when gauging responsiveness.
+
+                                      EIM should be considered in the context of recent studies of MRI in FSHD. Muscle MRI
+                                      studies in FSHD demonstrated fatty infiltration and structural changes, which could be
+                                      quantified and followed over time.26,27 These structural changes demonstrate moderate
+
+
+
+
+Author Manuscript
+                                      baseline correlations with measures of strength or function. In addition, certain muscles
+                                      demonstrated characteristic T2/STIR hyperintensities consistent with inflammation in
+                                      otherwise ultrastructurally normal appearing muscle, which raises the possibility of
+                                      identifying muscles at risk for future decline.26,28 However, MRI as a clinical outcome tool
+                                      has a number of limitations: 1) MRI is not universally available and requires dedicated
+                                      facilities; 2) there are significant site-to-site differences in equipment and technique; 3) MRI
+                                      can take up to 40 minutes for a single limb; 4) MRI remains an expensive recurring cost; and
+                                      5) some patients with FSHD would be excluded from having a MRI due contraindications
+                                      (e.g. metal in the body).
+
+                                      The advantages of EIM are readily apparent when collecting the measurements. It is
+                                      painless, requires minimal training, and does not require specific expertise in post-
+
+
+
+
+Author Manuscript
+                                      processing. Preclinical data have shown good relationships with muscle structure. Muscles
+                                      that arenot typically tested can be included, in particular facial, abdominal, and paraspinal
+                                      muscles. Lastly, the technology can allow measurements from the home, outside of formal
+                                      study visits. The current commercial price for the complete system used here is $18,000, and
+                                      there is a $50 per sensor recurring cost. Linear arrays used for tongue measurements may
+                                      ultimately prove to be useful for measurements of facial muscles.29 Both MRI and EIM may
+                                      prove useful in FSHD. They may be complimentary in evaluating changes in response to
+                                      therapeutics and allow better understanding of the natural history of disease in FSHD. For
+                                      example, MRI could be used at baseline to stratify patients, and EIM could be used to follow
+                                      individual muscles over time.
+
+                                      Limitations to this study include the sample size and inclusion of ambulatory subjects. EIM
+
+
+
+
+Author Manuscript
+                                      may also be useful for interventions in non-ambulatory patients, and the ability to reliably
+                                      measure more affected muscles is not determined here. Whether EIM ultimately proves
+                                      more responsive to disease progression needs to be determined.
+
+                                      EIM is a fast, commercially available, and simple technique for quantifying muscle
+                                      composition and function. It expands our ability to measure muscles particularly affected in
+                                      FSHD. Future directions will include determining the responsiveness to change in FSHD,
+                                      optimizing recordings for clinical trials, and piloting home measurements of EIM.
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                                               Page 7
+
+
+                        Supplementary Material
+
+
+
+
+Author Manuscript
+                                      Refer to Web version on PubMed Central for supplementary material.
+
+
+                        Acknowledgements
+                                      We wish to thank the patients and family members who are the impetus for this study, and without whom we could
+                                      not perform our research. We would also like to thank S. Rutkove, J Bohorquez, and Skulpt, Inc for their technical
+                                      assistance during the conduct of our study.
+
+                                      Study Funding: The project described in this publication was supported by the following: the FSH Society grants
+                                      (FSHS-22013 and FSHS-82012) and NIAMS grant #U01AR065119. Additional support provided by the University
+                                      of Rochester CTSA award number UL1 RR024160 from the National Center for Research Resources and the
+                                      National Center for Advancing Translational Sciences of the National Institutes of Health. Dr. Statland’s work on
+                                      this project was supported by a NCATS grant awarded to the University of Kansas Medical Center for Frontiers:
+                                      The Heartland Institute for Clinical and Translational Research # KL2TR000119.
+
+
+
+
+Author Manuscript
+                        Abbreviations
+                                        DMD              Duchenne muscular dystrophy
+
+                                        EIM              electrical impedance myography;
+
+                                        FSHD             facioscapulohumeral muscular dystrophy;
+
+                                        kHz              kilohertz
+
+                                        MHz              megahertz;
+
+                                        6MWT             six minute walk test;
+
+                                        SMCHD1           structural maintenance of hinge domain 1;
+
+
+
+
+Author Manuscript
+                                        ICC              intra-class correlation;
+
+                                        MMT              manual muscle testing;
+
+                                        QMT              quantitative myometry;
+
+                                        ALS              amyotrophic lateral sclerosis;
+
+                                        SMA              spinal muscular atrophy;
+
+                                        MRI              magnetic resonance imaging.
+
+
+                        References
+
+
+
+
+Author Manuscript
+                                      1. Padberg GW, Frants RR, Brouwer OF, Wijmenga C, Bakker E, Sandkuijl LA. Facioscapulohumeral
+                                         muscular dystrophy in the Dutch population. Muscle Nerve. 1995; 2:S81–84.
+                                      2. Statland JM, Tawil R. Risk of functional impairment in Facioscapulohumeral muscular dystrophy.
+                                         Muscle Nerve. 2014; 49(4):520–527. [PubMed: 23873337]
+                                      3. Awerbuch GI, Nigro MA, Wishnow R. Beevor’s sign and facioscapulohumeral dystrophy. Arch
+                                         Neurol. 1990; 47(11):1208–1209. [PubMed: 2146943]
+                                      4. Dahlqvist JR, Vissing CR, Thomsen C, Vissing J. Severe paraspinal muscle involvement in
+                                         facioscapulohumeral muscular dystrophy. Neurology. 2014; 83(13):1178–1183. [PubMed:
+                                         25142899]
+
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                                    Page 8
+
+
+                                      5. A prospective, quantitative study of the natural history of facioscapulohumeral muscular dystrophy
+                                         (FSHD): implications for therapeutic trials. The FSH-DY Group. Neurology. 1997; 48(1):38–46.
+
+
+
+
+Author Manuscript
+                                         FSH-DY. [PubMed: 9008491]
+                                      6. Statland JM, McDermott MP, Heatwole C, Martens WB, Pandya S, van der Kooi EL, et al.
+                                         Reevaluating measures of disease progression in facioscapulohumeral muscular dystrophy.
+                                         Neuromuscular Disorders. 2013; 23(4):306–312. [PubMed: 23406877]
+                                      7. Tawil R, Shaw DW, van der Maarel SM, Tapscott SJ. Clinical trial preparedness in
+                                         facioscapulohumeral dystrophy: outcome measures and patient access: 8-9 April 2013, Leiden, The
+                                         Netherlands. Neuromuscul Disord. 2014; 24(1):79–85. [PubMed: 24011701]
+                                      8. Sung M, Spieker AJ, Narayanaswami P, Rutkove SB. The effect of subcutaneous fat on electrical
+                                         impedance myography when using a handheld electrode array: the case for measuring reactance.
+                                         Clin Neurophysiol. 2013; 124(2):400–404. [PubMed: 22917581]
+                                      9. Wu JS, Li J, Greenman RL, Bennett D, Geisbush T, Rutkove SB. Assessment OF aged mdx mice by
+                                         electrical impedance myography and magnetic resonance imaging. Muscle Nerve. 2015
+                                      10. Rutkove SB, Caress JB, Cartwright MS, Burns TM, Warder J, David WS, et al. Electrical
+                                           impedance myography as a biomarker to assess ALS progression. Amyotroph Lateral Scler. 2012;
+
+
+
+
+Author Manuscript
+                                           13(5):439–445. [PubMed: 22670883]
+                                      11. Rutkove SB, Shefner JM, Gregas M, Butler H, Caracciolo J, Lin C, et al. Characterizing spinal
+                                           muscular atrophy with electrical impedance myography. Muscle Nerve. 2010; 42(6):915–921.
+                                           [PubMed: 21104866]
+                                      12. Zaidman CM, Wang LL, Connolly AM, Florence J, Wong BL, Parsons JA, et al. Electrical
+                                           impedance myography in duchenne muscular dystrophy and healthy controls: A multi-center study
+                                           of reliability and validity. Muscle Nerve. 2015
+                                      13. Lemmers RJ, Tawil R, Petek LM, Balog J, Block GJ, Santen GW, et al. Digenic inheritance of an
+                                           SMCHD1 mutation and an FSHD-permissive D4Z4 allele causes facioscapulohumeral muscular
+                                           dystrophy type 2. Nat Genet. 2012; 44(12):1370–1374. [PubMed: 23143600]
+                                      14. Wijmenga C, Hewitt JE, Sandkuijl LA, Clark LN, Wright TJ, Dauwerse HG, et al. Chromosome 4q
+                                           DNA rearrangements associated with facioscapulohumeral muscular dystrophy. Nat Genet. 1992;
+                                           2(1):26–30. [PubMed: 1363881]
+                                      15. Ogunnika OT, Rutkove SB, Ma H, Fogerson PM, Scharfstein M, Cooper RC, et al. A portable
+                                           system for the assessment of neuromuscular diseases with electrical impedance myography. J Med
+
+
+
+
+Author Manuscript
+                                           Eng Technol. 2010; 35(7-8):377–385. [PubMed: 20670104]
+                                      16. Rutkove SB, Fogerson PM, Garmirian LP, Tarulli AW. Reference values for 50-kHZ electrical
+                                           impedance myography. Muscle Nerve. 2008; 38(3):1128–1132. [PubMed: 18642375]
+                                      17. Lamperti C, Fabbri G, Vercelli L, D’Amico R, Frusciante R, Bonifazi E, et al. A standardized
+                                           clinical evaluation of patients affected by facioscapulohumeral muscular dystrophy: The FSHD
+                                           clinical score. Muscle Nerve. 2010; 42(2):213–217. [PubMed: 20544930]
+                                      18. Personius KE, Pandya S, King WM, Tawil R, McDermott MP, The FSH DY Group.
+                                           Facioscapulohumeral dystrophy natural history study: standardization of testing procedures and
+                                           reliability of measurements. Phys Ther. 1994; 74(3):253–263. [PubMed: 8115459]
+                                      19. Kierkegaard M, Tollback A. Reliability and feasibility of the six minute walk test in subjects with
+                                           myotonic dystrophy. Neuromuscul Disord. 2007; 17(11-12):943–949. [PubMed: 17869516]
+                                      20. McDonald CM, Henricson EK, Han JJ, Abresch RT, Nicorici A, Atkinson L, et al. The 6-minute
+                                           walk test in Duchenne/Becker muscular dystrophy: Longitudinal observations. Muscle Nerve.
+                                           2010
+
+
+
+
+Author Manuscript
+                                      21. McDonald CM, Henricson EK, Han JJ, Abresch RT, Nicorici A, Elfring GL, et al. The 6-minute
+                                           walk test as a new outcome measure in Duchenne muscular dystrophy. Muscle Nerve. 2010; 41(4):
+                                           500–510. [PubMed: 19941337]
+                                      22. Brown M, Sinacore DR, Binder EF, Kohrt WM. Physical and performance measures for the
+                                           identification of mild to moderate frailty. J Gerontol A Biol Sci Med Sci. 2000; 55(6):M350–355.
+                                           [PubMed: 10843356]
+                                      23. Tawil R, Van Der Maarel SM. Facioscapulohumeral muscular dystrophy. Muscle Nerve. 2006;
+                                           34(1):1–15. [PubMed: 16508966]
+
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                                 Page 9
+
+
+                                      24. Rutkove SB, Gregas MC, Darras BT. Electrical impedance myography in spinal muscular atrophy:
+                                          a longitudinal study. Muscle Nerve. 2012; 45(5):642–647. [PubMed: 22499089]
+
+
+
+
+Author Manuscript
+                                      25. Schwartz S, Geisbush TR, Mijailovic A, Pasternak A, Darras BT, Rutkove SB. Optimizing
+                                          electrical impedance myography measurements by using a multifrequency ratio: a study in
+                                          Duchenne muscular dystrophy. Clin Neurophysiol. 2015; 126(1):202–208. [PubMed: 24929900]
+                                      26. Friedman SD, Poliachik SL, Carter GT, Budech CB, Bird TD, Shaw DW. The magnetic resonance
+                                          imaging spectrum of facioscapulohumeral muscular dystrophy. Muscle Nerve. 2012; 45(4):500–
+                                          506. [PubMed: 22431082]
+                                      27. Janssen BH, Voet NB, Nabuurs CI, Kan HE, de Rooy JW, Geurts AC, et al. Distinct Disease Phases
+                                          in Muscles of Facioscapulohumeral Dystrophy Patients Identified by MR Detected Fat Infiltration.
+                                          PLoS One. 2014; 9(1):e85416. [PubMed: 24454861]
+                                      28. Frisullo G, Frusciante R, Nociti V, Tasca G, Renna R, Iorio R, et al. CD8(+) T Cells in
+                                          Facioscapulohumeral Muscular Dystrophy Patients with Inflammatory Features at Muscle MRI. J
+                                          Clin Immunol. 2010
+                                      29. Shellikeri S, Yunusova Y, Green JR, Pattee GL, Berry JD, Rutkove SB, et al. Electrical impedance
+                                          myography in the evaluation of the tongue musculature in amyotrophic lateral sclerosis. Muscle
+
+
+
+
+Author Manuscript
+                                          Nerve. 2015
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                            Page 10
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+
+
+
+                                      Figure 1.
+                                      A) The EIM device consists of a simple laptop computer connected to a portable hand-held
+
+
+
+
+Author Manuscript
+                                      sensor. B) Sample recording from the right biceps muscle showing the relationship of
+                                      reactance to frequency range. The lines represent 3 different trials. Dotted lines represent the
+                                      frequencies used in this study, which occur on the most stable portion of the reactance versus
+                                      frequency curve. (C, D) Examples show EIM measurement locations for the biceps (C) and
+                                      orbicularis oris (D).
+
+
+
+
+Author Manuscript
+
+
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                         Page 11
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+                                      Figure 2.
+                                      There is an inverse relationship between reactance and disease severity. As reactance goes
+                                      down disease, severity goes up for FSHD. Rvl_x50 = 50 kHz reactance for the right vastus
+                                      lateralis; FSHD_CS = FSHD clinical severity score.
+
+
+
+
+Author Manuscript
+
+
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                         Page 12
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+
+
+
+                                      Figure 3.
+
+
+
+
+Author Manuscript
+                                      A) The relationship of leg 50 kHz reactance to age was largely driven by an association with
+                                      longer disease duration; B) There was no clear difference for 50 kHz reactance for the right
+                                      vastus lateralis in women; C) EIM values were lower for participants with D4Z4 residual
+                                      fragments ≤ 20 kb, a group thought to be more severely affected.
+
+
+
+
+                                          Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                   Page 13
+
+
+
+
+                                                                                         Table 1
+
+                    Demographics.
+
+
+
+
+Author Manuscript
+                        Parameter                                 Value
+
+                        Number                                    35
+
+                        Men/Women (%)                             27 (77.1)/8 (22.9)
+
+                        Age, years (range)                        53.0 (22-68)
+
+                        Symptom Onset, years (range)              26.0 (10-55)
+
+                        Disease Duration, years (range)*          14.1 (1, 41)
+
+                        FSHD1 (%)                                 33 (94.3)
+
+                        FSHD1 D4Z4 Residual Fragment kb           25.2 (13-41)
+                        (range)
+                        FCS: 0=unaffected, 15=severe (range)      7.3 (2-12)
+
+                    Kb=kilobase; FCS = FSHD Clinical Score.
+
+
+
+
+Author Manuscript
+                    *
+                     Disease duration is defined as the difference in age minus age of diagnosis.
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+                                                 Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                               Page 14
+
+
+
+
+                                                                                    Table 2
+
+                    Sample for sensitivity analysis for right vastus lateralis shows a strong signal for the reactance value (n=35).*
+
+
+
+
+Author Manuscript
+                                                  50 kHz                            100 kHz
+
+                        Comparator                Phase     Reactanc    Resistanc   Phase      Reactance     Resistanc
+                                                            e           e                                    e
+
+                        FSHD Clinical Severity    −0.26     −0.60       −0.13       −0.27      −0.63         −0.10
+                        Score                     (0.14)    (0.0003)    (0.47)      (0.13)     (0.0001)      (0.59)
+
+                        Combined LEXT MMT         0.37      0.57        0.03        0.36       0.59          0.00
+                                                  (0.03)    (0.0004)    (0.85)      (0.04)     (0.0002)      (0.99)
+
+                        Knee Extensor Right       0.32      0.49        0.04        0.32       0.49          0.01
+                        QMT Std                   (0.07)    (0.003)     (0.82)      (0.06)     (0.003)       (0.94)
+
+                        6 Minute Walk Test        0.50      0.69        −0.12       0.50       0.66          −0.16
+                                                  (0.002)   (<0.0001)   (0.49)      (0.003)    (<0.0001)     (0.38)
+
+                    LEXT = lower extremity; MMT = manual muscle testing; QMT = quantitative myometry; Std = standardized score.
+                    *
+
+
+
+
+Author Manuscript
+                     P<0.01 considered significant.
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+                                                 Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                                                Page 15
+
+
+
+
+                                                                                   Table 3
+
+                    EIM 50 kHz reactance correlations with FSHD disease severity and function (n=35).*
+
+
+
+
+Author Manuscript
+                        Parameter     Age      Disease    FSHD        6MWT        Ascend 4    Don/Doff    Supine
+                                               Duration   Clinical                Stairs      Coat        to Sit
+                                                          Score
+
+                        Right         −0.22    −0.39      −0.60       0.69        −0.65       −0.58       −0.64
+                        Vastus        (0.22)   (0.02)     (0.0003)    (<0.0001)   (<0.0001)   (0.0003)    (<0.0001)
+                        Lateralis
+
+                        Right         −0.38    −0.41      −0.50       0.38        −0.39       −0.60       −0.50
+                        Biceps        (0.03)   (0.02)     (0.003)     (0.02)      (0.02)      (0.0002)    (0.002)
+
+                        Right         −0.33    −0.44      −0.51       0.37        −0.42       −0.49       −0.50
+                        Thoracic      (0.05)   (0.008)    (0.002)     (0.03)      (0.01)      (0.003)     (0.002)
+                        Paraspinal
+
+                        Leg           −0.39    −0.52      −0.72       0.74        −0.65       −0.65       −0.69
+                                      (0.02)   (0.001)    (<0.0001)   (<0.0001)   (<0.0001)   (<0.0001)   (<0.0001)
+
+                        Arm           −0.33    −0.55      −0.53       0.45        −0.53       −0.70       −0.58
+                                      (0.06)   (0.0008)   (0.001)     (0.007)     (0.002)     (<0.0001)   (0.0002)
+
+
+
+
+Author Manuscript
+                        Trunk         −0.41    −0.41      −0.54       0.48        −0.47       −0.54       −0.53
+                                      (0.01)   (0.02)     (0.001)     (0.004)     (0.006)     (0.0007)    (0.001)
+
+                        Face          −0.37    −0.34      −0.43       0.30        −0.25       −0.22       −0.26
+                                      (0.04)   (0.05)     (0.02)      (0.10)      (0.19)      (0.24)      (0.15)
+
+                    MMT = manual muscle testing; UEXT = upper extremity; LEXT = lower extremity; QMT = quantitative myometry; PP = percent predicted
+                    normal; 6MWT = 6 minute walk test; REF = right elbow flexor, RKE = right knee extensor.
+                    *
+                     P<0.007 considered significant.
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+                                                 Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+                    Statland et al.                                                                                                                Page 16
+
+
+
+
+                                                                                       Table 4
+
+                    EIM 50 kHz reactance correlations with FSHD muscle strength (n=35).*
+
+
+
+
+Author Manuscript
+                        Parameter      Combined          MMT UEXT       MMT LEXT        RKE        REF QMT PP
+                                       MMT                                              QMT PP
+
+                        Right Vastus   0.63              0.46 (0.006)   0.57            0.49       0.50 (0.005)
+                        Lateralis      (<0.0001)                        (0.0004)        (0.003)
+
+                        Right Biceps   0.54 (0.0007)     0.62           0.33 (0.05)     0.09       0.68
+                                                         (<0.0001)                      (0.59)     (<0.0001)
+
+                        Right          0.54 (0.0009)     0.51 (0.002)   0.43 (0.01)     0.05       0.37 (0.05)
+                        Thoracic                                                        (0.77)
+                        Paraspinal
+
+                        Leg            0.76              0.60           0.70            0.48       0.54 (0.002)
+                                       (<0.0001)         (0.0002)       (<0.0001)       (0.003)
+
+                        Arm            0.63              0.71           0.38 (0.03)     0.09       0.57 (0.001)
+                                       (<0.0001)         (<0.0001)                      (0.62)
+
+                        Trunk          0.56 (0.0004)     0.51 (0.002)   0.47 (0.004)    0.04       0.40 (0.03)
+
+
+
+
+Author Manuscript
+                                                                                        (0.82)
+
+                        Face           0.40 (0.02)       0.30 (0.09)    0.40 (0.02)     0.32       0.16 (0.44)
+                                                                                        (0.08)
+
+                    MMT = manual muscle testing; UEXT = upper extremity; LEXT = lower extremity; QMT = quantitative myometry; PP = percent predicted
+                    normal; REF = right elbow flexor, RKE = right knee extensor.
+                    *
+                     P<0.01 considered significant.
+
+
+
+
+Author Manuscript
+
+
+
+
+Author Manuscript
+
+                                                   Muscle Nerve. Author manuscript; available in PMC 2017 October 01.
+

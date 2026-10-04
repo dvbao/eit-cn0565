@@ -1,0 +1,751 @@
+PLOS ONE
+
+                                                       RESEARCH ARTICLE
+
+                                                       Atlas of voluntary facial muscle activation:
+                                                       Visualization of surface electromyographic
+                                                       activities of facial muscles during mimic
+                                                       exercises
+                                                       Nikolaus P. Schumann1, Kevin Bongers1, Hans C. Scholle1, Orlando Guntinas-Lichius ID2*
+
+                                                       1 Division Motor Research, Pathophysiology and Biomechanics, Department of Trauma, Hand and
+                                                       Reconstructive Surgery, Jena University Hospital, Friedrich-Schiller-University Jena, Jena, Germany,
+a1111111111                                            2 Department of Otolaryngology, Jena University Hospital, Friedrich-Schiller-University Jena, Jena, Germany
+a1111111111
+a1111111111                                            * Orlando.guntinas@med.uni-jena.de
+a1111111111
+a1111111111
+                                                       Abstract
+                                                       Complex facial muscle movements are essential for many motoric and emotional functions.
+    OPEN ACCESS                                        Facial muscles are unique in the musculoskeletal system as they are interwoven, so that the
+                                                       contraction of one muscle influences the contractility characteristic of other mimic muscles.
+Citation: Schumann NP, Bongers K, Scholle HC,
+Guntinas-Lichius O (2021) Atlas of voluntary facial    The facial muscles act more as a whole than as single facial muscle movements. The stan-
+muscle activation: Visualization of surface            dard for clinical and psychosocial experiments to detect these complex interactions is sur-
+electromyographic activities of facial muscles         face electromyography (sEMG). What is missing, is an atlas showing which facial muscles
+during mimic exercises. PLoS ONE 16(7):
+e0254932. https://doi.org/10.1371/journal.
+                                                       are activated during specific tasks. Based on high-resolution sEMG data of 10 facial mus-
+pone.0254932                                           cles of both sides of the face simultaneously recorded during 29 different facial muscle
+Editor: Yingchun Zhang, University of Houston,
+                                                       tasks, an atlas visualizing voluntary facial muscle activation was developed. For each task,
+UNITED STATES                                          the mean normalized EMG amplitudes of the examined facial muscles were visualized by
+Received: May 10, 2021
+                                                       colors. The colors were spread between the lowest and highest EMG activity. Gray shades
+                                                       represent no to very low EMG activities, light and dark brown shades represent low to
+Accepted: July 6, 2021
+                                                       medium EMG activities and red shades represent high to very high EMG activities relatively
+Published: July 19, 2021                               with respect to each task. The present atlas should become a helpful tool to design sEMG
+Peer Review History: PLOS recognizes the               experiments not only for clinical trials and psychological experiments, but also for speech
+benefits of transparency in the peer review            therapy and orofacial rehabilitation studies.
+process; therefore, we enable the publication of
+all of the content of peer review and author
+responses alongside final, published articles. The
+editorial history of this article is available here:
+https://doi.org/10.1371/journal.pone.0254932
+
+Copyright: © 2021 Schumann et al. This is an open      Introduction
+access article distributed under the terms of the
+                                                       Facial movements by contraction of facial muscles support manifold functions in human
+Creative Commons Attribution License, which
+permits unrestricted use, distribution, and
+                                                       behavior [1]. They participate in automatic somatic and visceral motor programs. They are
+reproduction in any medium, provided the original      important to reflect emotions, display current mood, and are essential for non-verbal commu-
+author and source are credited.                        nication. The facial muscular system is composed of a flat web of muscular fascicles. They are
+Data Availability Statement: All relevant data are
+                                                       embedded in a 2-dimensional space and form a complex interdependent system that is con-
+within the paper and its Supporting Information        nected to the skin [1]. Consequently, facial muscle contractions change the superficial geome-
+files.                                                 try of the face. This is unique and not the only difference to other human muscles. They have
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                       1 / 23
+PLOS ONE                                                                                                                   Facial activation sEMG atlas
+
+
+
+Funding: Orlando Guntinas-Lichius acknowledges   no fixed insertion points, are interwoven, partly overlapping, and isolated activation of a single
+support by a Deutsche Forschungsgemeinschaft     muscle is the exception. Nevertheless, anatomical textbooks typical classify facial muscles as
+(DFG) grant GU-463/12-1.
+                                                 individual muscles with individual function [2].
+Competing interests: The authors have declared       Surface facial electromyography (sEMG) represents an appropriate psychophysiological
+that no competing interests exist.               measure to test group activity of some facial muscles and its association to specific emotions
+                                                 [3]. Furthermore, needle EMG is a standard method for diagnostics in patients with facial
+                                                 nerve dysfunction [4]. sEMG is less frequently used for the assessment of patients with facial
+                                                 nerve dysfunction [5]. Facial EMG recordings using only two to six pairs needle or surface
+                                                 electrodes during the resting state or voluntary movement cannot acquire complete informa-
+                                                 tion on the complex activation of facial muscles [6]. Fridlund and Cacioppo therefore recom-
+                                                 mended for psychophysiological experiments the sEMG recordings from ten facial muscles
+                                                 [7]. Recently, Kuramoto et al. recommended the use of 24 sEMG electrodes in an EEG-like
+                                                 arrangement over the facial independent of the underlying muscles and a myogenic potential
+                                                 topogram analysis [8]. Experimental high-density sEMG (HD sEMG) with 90 electrodes even
+                                                 allows a description of facial muscle activation with activation maps projected on the facial sur-
+                                                 face [6].
+                                                     Some years ago, we published a study on facial muscle activation patterns based on multi-
+                                                 channel sEMG [9]. This high-resolution sEMG analysis showed distinct task-specific interac-
+                                                 tions between individual facial muscles. The mean sEMG amplitude characteristics for each
+                                                 facial muscle were specifically dependent on the performed activation task. Since this publica-
+                                                 tion, we are frequently asked if it would be possible to visualize these task-specific facial activa-
+                                                 tion patterns. This would help to define sEMG recording patterns for psychological
+                                                 experiments as well as for clinical studies. This is the reason why we know transposed the
+                                                 sEMG amplitude characteristics in a color-coded atlas of voluntary facial muscle activation
+                                                 tasks.
+
+
+                                                 Materials and methods
+                                                 Subjects
+                                                 The data set of a previous study was used [9]. Briefly, this data set included 30 healthy male vol-
+                                                 unteers with no neurological diseases (mean age: 26± 3.2 years) All subjects gave written
+                                                 informed consent to participate in the study. The ethics committee of the Jena University Hos-
+                                                 pital approved the study (No. 2129-10/07). The individual shown in the figures of this manu-
+                                                 script has given written informed consent to publish these case details.
+
+
+                                                 Facial surface electromyography (sEMG) registration
+                                                 The registration technique is described in detail elsewhere [9]. For this new study we used the
+                                                 48-channel sEMG data recorded in the already mentioned previous study [9]. Briefly, surface
+                                                 electrodes were used (Ag-AgCl discs, diameter of 4 mm, Zentner, Freiburg, Germany). The
+                                                 reference electrodes were set at the ear lobes and a ground electrode at the mastoid. The mono-
+                                                 polar sEMG recording was performed with a multi-channel EMG system (3 dB level frequency
+                                                 range of the EMG amplifiers: 10–700 Hz; sampling rate 3000/s; resolution: 2.44 μV/bit; Biovi-
+                                                 sion, Wehrheim, Germany). Monopolar electromyograms were recorded simultaneously from
+                                                 both sides of the face. The following ten facial muscles were recorded at the same time: fronta-
+                                                 lis, orbicularis oculi, zygomatic major, zygomatic minor, levator labii superioris/levator labii
+                                                 superioris alaeque nasi, orbicularis oris, depressor anguli oris, depressor labii, and mentalis
+                                                 muscle. Furthermore, both external chewing muscles, the masseter and temporal muscle were
+                                                 recorded for control reasons. Fig 1 shows the electrode positions.
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                            2 / 23
+PLOS ONE                                                                                                                       Facial activation sEMG atlas
+
+
+
+
+                                            Fig 1. sEMG electrode arrangement. 44 electrodes were placed symmetrically on 10 mimic muscles on both sided of
+                                            the face, respectively.
+                                            https://doi.org/10.1371/journal.pone.0254932.g001
+
+
+
+                                            Mimic exercises
+                                            The facial motor tasks and the muscles with the highest sEMG activity in each tasks are sum-
+                                            marized in Table 1. In the six tasks comprised the pronunciation of the six German vowels.
+                                            Subsequently, typical mimic expressions were performed related to all parts of the face. Some
+                                            tasks were performed unilaterally. The participants sat in relaxed upright position during the
+                                            exercises, face to face with the examiner. The examiner named and demonstrated each planned
+                                            facial movement. The participants tried the exercise first. The examiner corrected the partici-
+                                            pant if needed.
+
+
+                                            Color coding for visualization of the relative sEMG activity
+                                            A professional graphic designer (see acknowledgment) visualized the facial skull and the over-
+                                            lying facial muscles in 3D based on the description of the facial muscles in an anatomy text-
+                                            book [10] using a 3D visualization software (Maya, Autodesk Inc., San Rafael, United States).
+                                            The hue, saturation, value (HSV) color coding reached from white (no activation) over orange
+                                            to red (maximal activation). The mean normalized EMG amplitudes of the examined facial
+                                            muscles were visualized by the HSV colors determined by linear interpolation. The statistics
+                                            for the normalization process are published elsewhere [9]. In order to achieve an optimal reso-
+                                            lution of the EMG activity pattern, a separate color scale was adapted to each of the 29 facial
+                                            movement tasks. The colors were spread between the lowest and highest EMG activity. Since
+                                            the minimal values the EMG activities hardly differed between the facial movement tasks, the
+                                            range of the color scale was determined by the highest EMG activity value (maximum of the
+                                            mean EMG amplitude). Gray shades represent no to very low EMG activities, light and dark
+                                            brown shades represent low to medium EMG activities and red shades represent high to very
+                                            high EMG activities, relatively with respect to each task.
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                  3 / 23
+PLOS ONE                                                                                                                             Facial activation sEMG atlas
+
+
+
+                                            Table 1. Overview about the mimic tasks.
+                                            No. Description of the task (T)                              Muscles with highest sEMG activity
+                                            1       Pronouncing the German vowel: A/aː/�                 inferior orbicularis oris, mentalis, depressor labii
+                                            2       Pronouncing the German vowel: Ä/æ/�                 inferior orbicularis oris, depressor labii, mentalis
+                                            3       Pronouncing the German vowel: E/eː/�                 inferior orbicularis oris, depressor labii, mentalis
+                                                                                          �
+                                            4       Pronouncing the German vowel: I/iː/                  inferior orbicularis oris, depressor labii, mentalis
+                                            5       Pronouncing the German vowel: O/oː/�                 inferior orbicularis oris, depressor labii
+                                            6       Pronouncing the German vowel: U/uː/�                 inferior orbicularis oris, depressor labii
+                                            7       Pressing lips together                               orbicularis oris, depressor anguli oris, mentalis,
+                                                                                                         depressor labii, zygomatic
+                                            8       Pulling corners of the mouth downwards               inferior orbicularis oris, depressor anguli oris,
+                                                                                                         depressor labii, mentalis
+                                            9       Voluntary smiling: Pulling corners of the mouth      zygomatic, orbicularis oris, mentalis, depressor labii,
+                                                    upwards and backwards                                depressor anguli oris
+                                            10      Depressing lower lip                                 inferior orbicularis oris, depressor labii, mentalis
+                                            11      Protruding lower lip                                 mentalis, depressor anguli oris, depressor labii,
+                                                                                                         orbicularis oris
+                                            12      Pulling upper lip upwards                            levator labii superioris alaeque nasi, levator labii
+                                                                                                         superioris, orbicularis oris
+                                            13      Pulling upper lip upwards and depressing lower lip   depressor labii, inferior orbicularis oris, mentalis
+                                                    simultaneously
+                                            14      Pursing lips                                         orbicularis oris
+                                            15      Blowing out cheeks                                   orbicularis oris, mentalis, depressor labii
+                                            16      Sucking cheeks inward                                orbicularis oris, mentalis, depressor labii
+                                            17      Whistling with a similar tone pitch                  orbicularis oris
+                                            18      Opening jaw with closed lips                         mentalis, orbicularis oris, depressor labii, depressor
+                                                                                                         anguli oris
+                                            19      Exhaling forcefully with moderate closed lips        orbicularis oris
+                                            20      Opening lips as wide as possible while the jaw is    inferior orbicularis oris, depressor labii, mentalis
+                                                    closed
+                                            21      Wrinkling the nose                                   levator labii superioris alaeque nasi
+                                            22      Voluntary smiling only on right side of the face     zygomatic
+                                            23      Voluntary smiling only on left side of the face      zygomatic
+                                            24      Raising eyebrows up and wrinkling the forehead       frontalis
+                                            25      Contracting eyebrows                                 frontalis
+                                            26      Closing eyelids forcefully                           orbicularis oculi, frontalis
+                                            27      Squinting the eyes                                   orbicularis oculi, frontalis
+                                            28      Closing the right eyelid                             right orbicularis oculi, right frontalis, right levator
+                                                                                                         labii superioris
+                                            29      Closing the left eyelid                              left orbicularis oculi, left frontalis, left levator labii
+                                                                                                         superioris
+                                            �
+                                                /international phonetic alphabet/.
+
+                                            https://doi.org/10.1371/journal.pone.0254932.t001
+
+
+
+                                            Atlas
+                                            The atlas consists of 29 illustrations of the different tasks (Figs 2–30). In the legends for the fig-
+                                            ures, the distribution from the lowest (minimum) to the highest mean EMG amplitudes (maxi-
+                                            mum) of each facial movement task is given. In the photos in the upper part of each figure, the
+                                            respective facial movement is shown.
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                             4 / 23
+PLOS ONE                                                                                                                       Facial activation sEMG atlas
+
+
+
+
+                                            Fig 2. Color-coded facial muscle activation pattern of task T1. Pronouncing the German vowel: A/aː/. Animation by
+                                            Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g002
+
+
+
+
+                                            Fig 3. Color-coded facial muscle activation pattern of task T2. Pronouncing the German vowel: Ä/æ/. Animation by
+                                            Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g003
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                  5 / 23
+PLOS ONE                                                                                                                        Facial activation sEMG atlas
+
+
+
+
+                                            Fig 4. Color-coded facial muscle activation pattern of task T3. Pronouncing the German vowel: E/eː/. Animation by
+                                            Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g004
+
+
+
+
+                                            Fig 5. Color-coded facial muscle activation pattern of task T4. Pronouncing the German vowel: I/iː/. Animation by
+                                            Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g005
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                   6 / 23
+PLOS ONE                                                                                                                       Facial activation sEMG atlas
+
+
+
+
+                                            Fig 6. Color-coded facial muscle activation pattern of task T5. Pronouncing the German vowel: O/oː/. Animation
+                                            by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g006
+
+
+
+
+                                            Fig 7. Color-coded facial muscle activation pattern of task T6. Pronouncing the German vowel: U/uː/. Animation
+                                            by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g007
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                 7 / 23
+PLOS ONE                                                                                                                              Facial activation sEMG atlas
+
+
+
+
+                                            Fig 8. Color-coded facial muscle activation pattern of task T7. Pressing lips together.
+                                            https://doi.org/10.1371/journal.pone.0254932.g008
+
+
+
+
+                                            Fig 9. Color-coded facial muscle activation pattern of task T8. Pulling corners of the mouth downwards. Animation
+                                            by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g009
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                       8 / 23
+PLOS ONE                                                                                                                         Facial activation sEMG atlas
+
+
+
+
+                                            Fig 10. Color-coded facial muscle activation pattern of task T9. Voluntary smiling: Pulling corners of the mouth
+                                            upwards and backwards. Animation by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g010
+
+
+
+
+                                            Fig 11. Color-coded facial muscle activation pattern of task T10. Depressing lower lip. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g011
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                     9 / 23
+PLOS ONE                                                                                                                         Facial activation sEMG atlas
+
+
+
+
+                                            Fig 12. Color-coded facial muscle activation pattern of task T11. Protruding lower lip. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g012
+
+
+
+
+                                            Fig 13. Color-coded facial muscle activation pattern of task T12. Pulling upper lip upwards. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g013
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                    10 / 23
+PLOS ONE                                                                                                                          Facial activation sEMG atlas
+
+
+
+
+                                            Fig 14. Color-coded facial muscle activation pattern of task T13. Pulling upper lip upwards and depressing lower lip
+                                            simultaneously. Animation by Jonas Lauströer. Animation by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g014
+
+
+
+
+                                            Fig 15. Color-coded facial muscle activation pattern of task T14. Pursing lips. Animation by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g015
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                        11 / 23
+PLOS ONE                                                                                                                        Facial activation sEMG atlas
+
+
+
+
+                                            Fig 16. Color-coded facial muscle activation pattern of task T15. Blowing out cheeks. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g016
+
+
+
+
+                                            Fig 17. Color-coded facial muscle activation pattern of task T16. Sucking cheeks inward. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g017
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                  12 / 23
+PLOS ONE                                                                                                                          Facial activation sEMG atlas
+
+
+
+
+                                            Fig 18. Color-coded facial muscle activation pattern of task T17. Whistling with a similar tone pitch. Animation by
+                                            Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g018
+
+
+
+
+                                            Fig 19. Color-coded facial muscle activation pattern of task T18. Opening jaw with closed lips. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g019
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                    13 / 23
+PLOS ONE                                                                                                                           Facial activation sEMG atlas
+
+
+
+
+                                            Fig 20. Color-coded facial muscle activation pattern of task T19. Exhaling forcefully with moderate closed lips.
+                                            Animation by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g020
+
+
+
+
+                                            Fig 21. Color-coded facial muscle activation pattern of task T20. Opening lips as wide as possible while the jaw is
+                                            closed. Animation by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g021
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                      14 / 23
+PLOS ONE                                                                                                                           Facial activation sEMG atlas
+
+
+
+
+                                            Fig 22. Color-coded facial muscle activation pattern of task T21. Wrinkling the nose. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g022
+
+
+
+
+                                            Fig 23. Color-coded facial muscle activation pattern of task T22. Voluntary smiling only on right side of the face.
+                                            Animation by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g023
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                      15 / 23
+PLOS ONE                                                                                                                            Facial activation sEMG atlas
+
+
+
+
+                                            Fig 24. Color-coded facial muscle activation pattern of task T23. Voluntary smiling only on left side of the face.
+                                            Animation by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g024
+
+
+
+
+                                            Fig 25. Color-coded facial muscle activation pattern of task T24. Raising eyebrows up and wrinkling the forehead.
+                                            Animation by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g025
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                      16 / 23
+PLOS ONE                                                                                                                          Facial activation sEMG atlas
+
+
+
+
+                                            Fig 26. Color-coded facial muscle activation pattern of task T25. Contracting eyebrows. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g026
+
+
+
+
+                                            Fig 27. Color-coded facial muscle activation pattern of task T26. Closing eyelids forcefully. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g027
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                    17 / 23
+PLOS ONE                                                                                                                          Facial activation sEMG atlas
+
+
+
+
+                                            Fig 28. Color-coded facial muscle activation pattern of task T27. Squinting the eyes. Animation by Jonas Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g028
+
+
+
+
+                                            Fig 29. Color-coded facial muscle activation pattern of task T28. Closing the right eyelid. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g029
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                    18 / 23
+PLOS ONE                                                                                                                          Facial activation sEMG atlas
+
+
+
+
+                                            Fig 30. Color-coded facial muscle activation pattern of task T29. Closing the left eyelid. Animation by Jonas
+                                            Lauströer.
+                                            https://doi.org/10.1371/journal.pone.0254932.g030
+
+
+
+
+                                            Discussion
+                                            The atlas shows objective, quantified and validated activation and coordination patterns of
+                                            facial muscles based on multi-channel sEMG. The method took into account the main ocular,
+                                            nasal and oral muscle regions of the face. Using the EMG activity distribution, differences
+                                            between the various movement tasks important for clinical and psychological studies are illus-
+                                            trated. For such experiments, it is important to measure both sides of the face. Although there
+                                            is no systematical right and left side difference in healthy probands, there can be an individual
+                                            right and left side difference in the strength of the activation of a certain facial muscle [9].
+                                            Excluding the ear muscles and the platysma, the mimic musculature consists of 19 muscles
+                                            [11]. We did not record and visualize the following 9 muscles: occipitalis, procerus, corrugator
+                                            supercilii, depressor supercilii, nasalis, depressor septi nasi, risorius, buccinator, and levator
+                                            anguli oris. These muscles will be involved in some of the presented facial tasks, too. For
+                                            instance, the procerus and corrugator supercilii muscle are important muscles for downward
+                                            eye brow movement. This is of clinical importance, as these two muscles are typical botulinum
+                                            toxin injection targets for glabellar rhytides [12]. The simultaneous recording was limited to
+                                            48 EMG channels. In the future, high-density sEMG will allow to cover a larger area and more
+                                            muscles with higher resolution [6]. Furthermore, the mimic muscles are relatively small, thin
+                                            and interwoven. They are partly in layers on top of each other. Since myoelectric potentials
+                                            spread spatially from their source, crosstalk cannot generally be ruled out in a sEMG registra-
+                                            tion [13]. In addition, myoelectric potentials emanating from deeper muscles are attenuated
+                                            significantly more than potential from muscles lying on the surface [14]. For instance, sEMG
+                                            recording of the corrugator supercilii could also record activity from the orbicularis oculi, leva-
+                                            tor labii superioris alaeque nasi, or frontalis [15]. Hence, more EMG channels will not auto-
+                                            matically lead to a better separation (and visualization in an atlas) of individual muscle
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                       19 / 23
+PLOS ONE                                                                                                           Facial activation sEMG atlas
+
+
+
+                                            function. Finally, the risk of unnatural obstruction that the electrodes pose to the production
+                                            of facial expressions will increase with more electrodes. In this study, only monopolar EMG
+                                            signals were used to derive the facial muscles atlas. The monopolar EMG signal reflects both
+                                            superficial and deep EMG sources. Bipolar EMG signals only reveal superficial EMG sources
+                                            [6,16,17]. An additional analysis of bipolar EMG signals might help to better separate superfi-
+                                            cial from deeper facial muscle activation.
+                                                The atlas has two other limitations: The colored images visualize the activation pattern
+                                            of the facial muscles while the head is upright position. We cannot exclude that these
+                                            sEMG pattern change in other body postures. This has not been analyzed yet. Furthermore,
+                                            the analysis was performed only in men. Although facial sEMG activation patterns were
+                                            generated for men and women in some studies [6,8,17], gender differences were not yet
+                                            analyzed. Therefore, we cannot rule out that women show other facial muscle expression
+                                            patterns.
+                                                The visualized pattern makes it clear that not only individual muscles contract during a
+                                            facial movement or task. Every facial movement is carried by a group of muscles. In addi-
+                                            tion to the agonist, which determines the main direction of the soft tissue displacement
+                                            within the face through its force vector, synergistic but also antagonistic muscles are acti-
+                                            vated, which have a modulating and stabilizing effect on facial expressions [1]. Only
+                                            through the interplay of different facial muscles the mimic expression patterns are made
+                                            possible in all their diversity. About 30–40% of patients with acute facial paralysis do not
+                                            recover completely and develop synkinesis [18]. Postparalytic facial synkinesis is a disfigur-
+                                            ing condition characterized by involuntary contraction of one or more facial muscles dur-
+                                            ing voluntary movement of other facial muscles [19]. It will be worthwhile to study such
+                                            patients with altered facial muscle activation pattern, and to compare the data to the atlas to
+                                            better design rehabilitation programs specifically addressing function relevant combina-
+                                            tions of facial muscle activation.
+                                                The Facial Action Coding System (FACS) is a standardized method to label facial move-
+                                            ments to measure emotional facial expressions [20]. Originally, facial EMG played an impor-
+                                            tant role to define the underlying mimic muscle movements. The activity of specific muscle
+                                            groups is coded as action units (AU) by human coders or by automated video analysis [21,22].
+                                            S1 Table compares the present data to the AU muscular basis of the different tasks. The pres-
+                                            ent atlas does not only cover the important tasks for AU related emotional expression experi-
+                                            ments, but add other important tasks for speech experiments and more detailed orofacial tasks
+                                            for facial rehabilitation in patients with oral dysfunction [23–25]. Hence, the present atlas
+                                            should become a helpful tool to design sEMG experiments not only for clinical trials and psy-
+                                            chological experiments, but also for speech therapy and orofacial rehabilitation studies. For
+                                            instance, in case of Bell’s palsy, the most common course of peripheral facial neuromuscular
+                                            dysfunction [26], classification of the initial severity of facial dysfunction, its changes after
+                                            therapy and during follow-up is mainly done by clinical grading scales dependent on the sub-
+                                            jective evaluation of the observer [27]. This leads to limited inter-observer and intra-observer
+                                            reliability. sEMG mapping offers an objective profiling of facial muscle activity [6]. In combi-
+                                            nation with image analysis of facial movements, this will help to understand the connection
+                                            between facial muscle activation and changes of the facial surface geometry [6]. This is impor-
+                                            tant to develop reliable tools for automated facial nerve dysfunction classification [28]. Fur-
+                                            thermore, sEMG mapping might allow a high-resolution depiction of regional facial muscle
+                                            impairment dyscoordination in patients with chronic facial nerve dysfunction. This should
+                                            help to improve planning of individual physiotherapy or even better planning of facial rehabil-
+                                            itation surgery [29,30].
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                   20 / 23
+PLOS ONE                                                                                                                         Facial activation sEMG atlas
+
+
+
+                                            Conclusions
+                                            Overall, the visualized EMG activity distribution patterns presented here give an overview of
+                                            the activation and coordination patterns of a large number of facial movements. They demon-
+                                            strate the complexity and diversity of facial-muscular activation processes. In addition, in
+                                            terms of acute therapy and rehabilitation, they form a goal-oriented approach for conservative
+                                            treatment strategies and restorative surgical interventions in patients suffering from facial
+                                            paralysis.
+
+                                            Supporting information
+                                            S1 Table. Mimic tasks in comparison to action units (AU) of the Facial Action Coding Sys-
+                                            tem (FACS).
+                                            (DOCX)
+
+
+                                            Acknowledgments
+                                            The authors wish to thank Mr. Jonas Lauströer for the excellent illustrations.
+
+                                            Author Contributions
+                                            Conceptualization: Nikolaus P. Schumann, Hans C. Scholle, Orlando Guntinas-Lichius.
+                                            Data curation: Nikolaus P. Schumann, Hans C. Scholle, Orlando Guntinas-Lichius.
+                                            Formal analysis: Nikolaus P. Schumann, Kevin Bongers, Hans C. Scholle.
+                                            Funding acquisition: Orlando Guntinas-Lichius.
+                                            Investigation: Kevin Bongers.
+                                            Methodology: Nikolaus P. Schumann, Hans C. Scholle, Orlando Guntinas-Lichius.
+                                            Project administration: Nikolaus P. Schumann.
+                                            Supervision: Nikolaus P. Schumann, Hans C. Scholle, Orlando Guntinas-Lichius.
+                                            Validation: Nikolaus P. Schumann, Hans C. Scholle, Orlando Guntinas-Lichius.
+                                            Visualization: Hans C. Scholle, Orlando Guntinas-Lichius.
+                                            Writing – original draft: Orlando Guntinas-Lichius.
+                                            Writing – review & editing: Nikolaus P. Schumann, Kevin Bongers, Hans C. Scholle, Orlando
+                                              Guntinas-Lichius.
+
+
+                                            References
+                                             1.   Cattaneo L, Pavesi G. The facial motor system. Neurosci Biobehav Rev. 2014; 38:135–59. Epub 2013/
+                                                  11/19. https://doi.org/10.1016/j.neubiorev.2013.11.002 PMID: 24239732.
+                                             2.   Gray’s Anatomy. The Anatomical Basis of Clinical Practice. 42nd ed. Standing S, editor. Amsterdam:
+                                                  Elsevier; 2020.
+                                             3.   Hubert W, de Jong-Meyer R. Psychophysiological response patterns to positive and negative film sti-
+                                                  muli. Biol Psychol. 1991; 31(1):73–93. Epub 1991/08/01. https://doi.org/10.1016/0301-0511(90)90079-
+                                                  c PMID: 2021681.
+                                             4.   Guntinas-Lichius O, Volk GF, Olsen KD, Makitie AA, Silver CE, Zafereo ME, et al. Facial nerve electro-
+                                                  diagnostics for patients with facial palsy: a clinical practice guideline. European archives of oto-rhino-lar-
+                                                  yngology: official journal of the European Federation of Oto-Rhino-Laryngological Societies. 2020; 277
+                                                  (7):1855–74. Epub 2020/04/10. https://doi.org/10.1007/s00405-020-05949-1 PMID: 32270328;
+                                                  PubMed Central PMCID: PMC7286870.
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                   21 / 23
+PLOS ONE                                                                                                                      Facial activation sEMG atlas
+
+
+
+                                             5.   Han J, Xiong A, Zhao X, Ding Q, Chen Y, Liu G. sEMG based quantitative assessment of acupuncture
+                                                  on Bell’s palsy: an experimental study. Sci China Inf Sci. 2015; 58:1–15.
+                                             6.   Cui H, Zhong W, Yang Z, Cao X, Dai S, Huang X, et al. Comparison of Facial Muscle Activation Patterns
+                                                  Between Healthy and Bell’s Palsy Subjects Using High-Density Surface Electromyography. Front Hum
+                                                  Neurosci. 2020; 14:618985. Epub 2021/01/30. https://doi.org/10.3389/fnhum.2020.618985 PMID:
+                                                  33510628; PubMed Central PMCID: PMC7835336.
+                                             7.   Fridlund AJ, Cacioppo JT. Guidelines for human electromyographic research. Psychophysiology. 1986;
+                                                  23(5):567–89. Epub 1986/09/01. https://doi.org/10.1111/j.1469-8986.1986.tb00676.x PMID: 3809364.
+                                             8.   Kuramoto E, Yoshinaga S, Nakao H, Nemoto S, Ishida Y. Characteristics of facial muscle activity during
+                                                  voluntary facial expressions: Imaging analysis of facial expressions based on myogenic potential data.
+                                                  Neuropsychopharmacol Rep. 2019; 39(3):183–93. Epub 2019/05/29. https://doi.org/10.1002/npr2.
+                                                  12059 PMID: 31136686; PubMed Central PMCID: PMC7292300.
+                                             9.   Schumann NP, Bongers K, Guntinas-Lichius O, Scholle HC. Facial muscle activation patterns in healthy
+                                                  male humans: a multi-channel surface EMG study. Journal of neuroscience methods. 2010; 187
+                                                  (1):120–8. https://doi.org/10.1016/j.jneumeth.2009.12.019 PMID: 20064556.
+                                            10.   Schünke M, Schulte E, Schumacher U. PROMETHEUS Kopf., Hals und Neuroanatomie. Stuttgart:
+                                                  Thieme; 2021.
+                                            11.   Terminology FCoA. Terminologia anatomica. Stuttgart: Thieme; 1998.
+                                            12.   Stotland MA, Kowalski JW, Ray BB. Patient-reported benefit and satisfaction with botulinum toxin type
+                                                  A treatment of moderate to severe glabellar rhytides: results from a prospective open-label study. Plas-
+                                                  tic and reconstructive surgery. 2007; 120(5):1386–93. Epub 2007/09/28. https://doi.org/10.1097/01.prs.
+                                                  0000279377.86280.8d PMID: 17898617.
+                                            13.   Dimitrova NA, Dimitrov GV, Nikitin OA. Neither high-pass filtering nor mathematical differentiation of the
+                                                  EMG signals can considerably reduce cross-talk. Journal of electromyography and kinesiology: official
+                                                  journal of the International Society of Electrophysiological Kinesiology. 2002; 12(4):235–46. Epub 2002/
+                                                  07/18. https://doi.org/10.1016/s1050-6411(02)00008-1 PMID: 12121680.
+                                            14.   Williamson SJ, Kaufman L. Theory of neuroelectric and neuromagnetic fields. In: Grandosi F, Hoke M,
+                                                  Romani GC, editors. Auditory evoked magnetic fields and electric potentials. Basel: Karger; 1990.
+                                            15.   Ekman P, Schwartz G, Friesen WV. Electrical and visible signs of facial action. San Francisco: Univer-
+                                                  sity of California: Human Interaction Laboratory; 1978.
+                                            16.   Scholle HC, Schumann NP, Biedermann F, Stegeman DF, Grassme R, Roeleveld K, et al. Spatiotem-
+                                                  poral surface EMG characteristics from rat triceps brachii muscle during treadmill locomotion indicate
+                                                  selective recruitment of functionally distinct muscle regions. Exp Brain Res. 2001; 138(1):26–36.
+                                                  https://doi.org/10.1007/s002210100685 PMID: 11374080.
+                                            17.   Lapatki BG, Oostenveld R, Van Dijk JP, Jonas IE, Zwarts MJ, Stegeman DF. Optimal placement of
+                                                  bipolar surface EMG electrodes in the face based on single motor unit analysis. Psychophysiology.
+                                                  2010; 47(2):299–314. Epub 2009/12/17. https://doi.org/10.1111/j.1469-8986.2009.00935.x PMID:
+                                                  20003170.
+                                            18.   Urban E, Volk GF, Geissler K, Thielker J, Dittberner A, Klingner C, et al. Prognostic factors for the out-
+                                                  come of Bells’ palsy: A cohort register-based study. Clinical otolaryngology: official journal of ENT-UK;
+                                                  official journal of Netherlands Society for Oto-Rhino-Laryngology & Cervico-Facial Surgery. 2020. Epub
+                                                  2020/05/13. https://doi.org/10.1111/coa.13571 PMID: 32395899.
+                                            19.   Husseman J, Mehta RP. Management of synkinesis. Facial plastic surgery: FPS. 2008; 24(2):242–9.
+                                                  Epub 2008/05/13. https://doi.org/10.1055/s-2008-1075840 PMID: 18470836.
+                                            20.   Ekman P, Friesen WV. Manual of the Facial Action Coding System (FACS). Palo Alto: Consulting Psy-
+                                                  chologists Press; 1978.
+                                            21.   Wolf K. Measuring facial expression of emotion. Dialogues Clin Neurosci. 2015; 17(4):457–62. Epub
+                                                  2016/02/13. https://doi.org/10.31887/DCNS.2015.17.4/kwolf PMID: 26869846; PubMed Central
+                                                  PMCID: PMC4734883.
+                                            22.   Hofling TTA, Gerdes ABM, Fohl U, Alpers GW. Read My Face: Automatic Facial Coding Versus
+                                                  Psychophysiological Indicators of Emotional Valence and Arousal. Front Psychol. 2020; 11:1388. Epub
+                                                  2020/07/09. https://doi.org/10.3389/fpsyg.2020.01388 PMID: 32636788; PubMed Central PMCID:
+                                                  PMC7316962.
+                                            23.   Homem MA, Vieira-Andrade RG, Falci SG, Ramos-Jorge ML, Marques LS. Effectiveness of orofacial
+                                                  myofunctional therapy in orthodontic patients: a systematic review. Dental Press J Orthod. 2014; 19
+                                                  (4):94–9. Epub 2014/10/04. https://doi.org/10.1590/2176-9451.19.4.094-099.oar PMID: 25279527;
+                                                  PubMed Central PMCID: PMC4296637.
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                                22 / 23
+PLOS ONE                                                                                                                     Facial activation sEMG atlas
+
+
+
+                                            24.   Kent RD. Nonspeech Oral Movements and Oral Motor Disorders: A Narrative Review. Am J Speech
+                                                  Lang Pathol. 2015; 24(4):763–89. Epub 2015/07/01. https://doi.org/10.1044/2015_AJSLP-14-0179
+                                                  PMID: 26126128; PubMed Central PMCID: PMC4698470.
+                                            25.   Pampouchidou A, Simantiraki O, Vazakopoulou CM, Chatzaki C, Pediaditis M, Maridaki A, et al. Facial
+                                                  geometry and speech analysis for depression detection. Annu Int Conf IEEE Eng Med Biol Soc. 2017;
+                                                  2017:1433–6. Epub 2017/10/25. https://doi.org/10.1109/EMBC.2017.8037103 PMID: 29060147.
+                                            26.   Thielker J, Geissler K, Granitzka T, Klingner CM, Volk GF, Guntinas-Lichius O. Acute managment of
+                                                  Bell’s palsy. Curr Otorhinolarygol Rep. 2018; 6(2):161–70.
+                                            27.   Fattah A, Gurusinghe A, Gavilan J, Hadlock T, Marcus J, Marres H, et al. Facial Nerve Grading Instru-
+                                                  ments: Systematic Review of the Literature and Suggestion for Uniformity. Plastic and reconstructive
+                                                  surgery. 2014. https://doi.org/10.1097/PRS.0000000000000905 PMID: 25357164.
+                                            28.   Mothes O, Modersohn L, Volk GF, Klingner C, Witte OW, Schlattmann P, et al. Automated objective
+                                                  and marker-free facial grading using photographs of patients with facial palsy. European archives of
+                                                  oto-rhino-laryngology: official journal of the European Federation of Oto-Rhino-Laryngological Socie-
+                                                  ties. 2019. https://doi.org/10.1007/s00405-019-05647-7 PMID: 31535292.
+                                            29.   Osthues M, Kuttenreich AM, Volk GF, Dobel C, Strauss B, Altmann U, et al. Continual rehabilitation
+                                                  motivation of patients with postparalytic facial nerve syndrome. European archives of oto-rhino-laryn-
+                                                  gology: official journal of the European Federation of Oto-Rhino-Laryngological Societies. 2021. Epub
+                                                  2021/05/25. https://doi.org/10.1007/s00405-021-06895-2 PMID: 34027598; PubMed Central PMCID:
+                                                  PMC8141409.
+                                            30.   Guntinas-Lichius O, Genther DJ, Byrne PJ. Facial Reconstruction and Rehabilitation. Advances in oto-
+                                                  rhino-laryngology. 2016; 78:120–31. https://doi.org/10.1159/000442132 PMID: 27093062.
+
+
+
+
+PLOS ONE | https://doi.org/10.1371/journal.pone.0254932 July 19, 2021                                                                              23 / 23
+

@@ -1,0 +1,626 @@
+Physiological
+Measurement
+
+
+
+
+                                                                                                  You may also like
+                                                                                                     - Reconstruction of conductivity changes
+Temporal image reconstruction in electrical                                                            and electrode movements based on EIT
+                                                                                                       temporal sequences
+impedance tomography                                                                                   Tao Dai, Camille Gómez-Laberge and
+                                                                                                       Andy Adler
+
+                                                                                                     - Beneficial techniques for spatio-temporal
+To cite this article: Andy Adler et al 2007 Physiol. Meas. 28 S1                                       imaging in electrical impedance
+                                                                                                       tomography
+                                                                                                       Alistair Boyle, Kirill Aristovich and Andy
+                                                                                                       Adler
+
+                                                                                                     - Imaging of conductivity changes and
+View the article online for updates and enhancements.                                                  electrode movement in EIT
+                                                                                                       Manuchehr Soleimani, Camille Gómez-
+                                                                                                       Laberge and Andy Adler
+
+
+
+
+                             This content was downloaded from IP address 150.131.100.171 on 20/09/2026 at 23:26
+IOP PUBLISHING                                                                 PHYSIOLOGICAL MEASUREMENT
+Physiol. Meas. 28 (2007) S1–S11                                          doi:10.1088/0967-3334/28/7/S01
+
+
+
+
+Temporal image reconstruction in electrical
+impedance tomography
+                 Andy Adler1, Tao Dai1 and William R B Lionheart2
+                 1 Systems and Computer Engineering, Carleton University, Ottawa, Canada
+                 2 School of Mathematics, University of Manchester, UK
+
+
+                 E-mail: adler@sce.carleton.ca
+
+                 Received 13 December 2006, accepted for publication 3 April 2007
+                 Published 26 June 2007
+                 Online at stacks.iop.org/PM/28/S1
+
+                 Abstract
+                 Electrical impedance tomography (EIT) calculates images of the body from
+                 body impedance measurements. While the spatial resolution of these images
+                 is relatively low, the temporal resolution of EIT data can be high. Most
+                 EIT reconstruction algorithms solve each data frame independently, although
+                 Kalman filter algorithms track the image changes across frames. This paper
+                 proposes a new approach which directly accounts for correlations between
+                 images in successive data frames. Image reconstruction is posed in terms
+                 of an augmented image x̃ and measurement vector ỹ, which concatenate
+                 the values from the d previous and future frames. Image reconstruction is
+                 then based on an augmented regularization matrix R̃, which accounts for a
+                 model of both the spatial and temporal correlations between image elements.
+                 Results are compared for reconstruction algorithms based on independent
+                 frames, Kalman filters and the proposed approach. For low values of the
+                 regularization hyperparameter, the proposed approach performs similarly to
+                 independent frames, but for higher hyperparameter values, it uses adjacent
+                 frame data to reduce reconstructed image noise.
+
+
+                 Keywords:           electrical impedance tomography, regularization, image
+                 reconstruction
+                 (Some figures in this article are in colour only in the electronic version)
+
+
+
+
+1. Introduction
+
+Electrical impedance tomography (EIT) calculates an estimate of the conductivity distribution
+within a body based on current stimulations and voltage measurements on the body surface.
+EIT has fairly low spatial resolution, limited by the low sensitivity of surface measurements
+0967-3334/07/070001+11$30.00 © 2007 IOP Publishing Ltd Printed in the UK                             S1
+S2                                                                                   A Adler et al
+
+to conductivity changes deep within the body. On the other hand, EIT has excellent temporal
+resolution, with some recent systems having frame rates up to 1000/s (Wilkinson et al 2005).
+Such high temporal resolution makes EIT a promising technology to monitor fast physiological
+events which affect the conductivity distribution. For cardiac activity, the frequency content
+of the QRS complex is mainly between 10 and 25 Hz (Kohler et al 2002). Another example
+is high frequency ventilation in which air is pumped into the lungs at rates of 5–25 Hz
+(with smaller tidal volumes). High frequency ventilation is indicated for many patients with
+respiratory distress syndrome since it is understood to place less stress on injured lung tissue
+(Eichenwald and Stark 1999). EIT can potentially be of great benefit to these patients, since
+the distribution of ventilation in their lungs is highly non-uniform and cannot be otherwise
+monitored (Wolf and Arnold 2005).
+     Like many biomedical instrumentation techniques, the ability of EIT to see small
+physiological changes is limited by the signal-to-noise ratio (SNR). A widely used technique
+to improve SNR is ensemble averaging, which reduces random noise by the square root of
+the number of averaged frames. If EIT data acquisition is sufficiently rapid compared to the
+underlying physiological processes to be imaged, then ensemble averaging may be used on
+multiple frames of EIT. However, in EIT applications where conductivity changes are very
+fast with respect to the EIT frame rate, ensemble averaging is not appropriate, since it will
+effectively reduce the temporal resolution. In these cases, each frame of EIT data is typically
+reconstructed independently of the others.
+     In this paper, we are interested in approaches to image a body which is undergoing
+fast changes with respect to the EIT frame rate. In these cases, ensemble averaging is not
+appropriate; however, it is clear that individual data frames are not completely independent,
+but do contain useful correlations, which could be exploited to improve EIT image noise
+performance. We call an approach which uses the time sequence of EIT frame data temporal
+image reconstruction.
+     Temporal image reconstruction can be represented as a linear tracking problem, and
+formulated as an extended Kalman filter, in which the image at each instant is estimated from
+the current data and the previous image estimate. Vauhkonen et al (1998a) proposed the first
+Kalman filter based algorithm for difference EIT; we describe this approach using the notation
+of this paper in section 2.3. More recently, this approach has been extended by Kim et al (2004)
+to reconstruct the resistivity of a contrast of known shape and location. Kim et al (2006) also
+proposed a computationally efficient algorithm based on pre-computing the Kalman gain and
+state estimation matrices. An algorithm for absolute EIT has also been shown for simulation
+data (Trigo et al 2004).
+     In this paper, we propose a new approach for temporal EIT image reconstruction, which
+directly estimates the image at frame t0 from the set of data in a window of frames from
+t−d to td . Using these data, the temporal inverse is formulated as an inverse problem with a
+regularization prior which accounts for both spatial and temporal correlations between image
+elements.
+
+2. Methods
+
+We consider an EIT system with nE electrodes applied to a body using sequential current
+stimulation with parallel voltage measurement. Using these electrodes, nE current stimulation
+patterns are sequentially applied and nV differential measurements are made for each
+stimulation. For an adjacent drive EIT system, voltages are typically not measured at driven
+electrodes, and nV = nE − 3. The delay between each successive stimulation pattern is tS ;
+thus, a complete set (frame) of EIT measurements takes time tF = nE tS . Each data frame
+Temporal image reconstruction in electrical impedance tomography                                      S3
+
+measures a vector, v ∈ RnM , of nM = nE nV data points (some of which are redundant if the
+medium is not changing). Difference EIT calculates difference data y, ([y]i = [v2 ]i − [v1 ]i ;
+or the normalized difference data [y]i = ([v2 ]i − [v1 ]i )/[v1 ]i ). To improve its precision, v1
+is typically averaged over many data frames, at a time when the conductivity distribution may
+be assumed to be stable; we thus assume that v1 is noise free.
+     The body under investigation is modelled using a finite element model (FEM) which
+discretizes the conductivity onto nN piecewise smooth elements, represented by a vector
+σ ∈ RnN . (In this paragraph, σ represents conductivity; elsewhere in this paper, σ is
+the standard deviation.) Again, difference EIT calculates a vector of conductivity change,
+x = σ 2 − σ 1 between the present conductivity distribution, σ 2 , and that at the reference
+measurement, σ 1 . For small variations around the reference conductivity σ 1 , the relationship
+between x and y can be linearized (giving the difference EIT forward model):
+                 y = Jx + n                                                                          (1)
+                nM ×nN
+where J ∈ R                 is the Jacobian or sensitivity matrix and n ∈ R is the measurement
+                                                                              nM
+
+noise which      is assumed      to be uncorrelated white Gaussian. J is calculated from the FEM as
+        ∂yi 
+Jij = ∂x   j σ1
+                 , and  depends       on the FEM, current injection patterns, the reference conductivity,
+and the electrode models. This system is underdetermined since nN > nM . This problem
+is commonly solved using regularization techniques (e.g. Cheney et al (1990), Adler and
+Lionheart (2006)) in order to calculate a conductivity change estimate, x̂, which is both
+faithful to the measurements, y, and to a priori constraints on a ‘reasonable’ image.
+     Over time steps, k, a sequence of difference vectors, yk = Jxk , are measured (assuming
+the body and electrode geometry, and thus J, stay fixed). If the conductivity of the body
+under investigation does not change too rapidly, then it is reasonable to expect that a certain
+number of measurements, d, into the past and future provide useful information about the
+current image. Labelling the current instant as t, we therefore seek to estimate x̂t from data
+[yt−d ; . . . ; yt−1 ; yt ; yt+1 ; . . . ; yt+d ].
+     In the subsequent sections we consider three traditional approaches and the proposed
+temporal inverse; each estimates x̂t at frame t from a sequence of data starting at frame
+0, using the indicated data: section 2.1—Gauss–Newton (GN) inverse, using yt only;
+section 2.2—GN with weighted data, using a weighted average of yt−d . . . yt+d ; section 2.3—
+Kalman filter inverse, using all previous and current data, y0 . . . yt and section 2.4—Temporal
+inverse, using yt−d . . . yt+d based on a temporal prior model.
+
+2.1. One-step linear GN (Gauss–Newton) solver
+One-step Gauss–Newton (GN) EIT reconstruction approaches have been widely used in EIT
+(e.g. Cheney et al (1990), Adler and Guardo (1996)). They allow use of sophisticated
+regularized models of the EIT inverse problem, are able to represent this solution as a linear
+reconstruction matrix, which can then allow rapid, real-time imaging. The GN inverse problem
+seeks to calculate a solution, x̂, to the EIT inverse problem expressed as the minimum of a
+sum of quadratic norms
+                 y − Jx̂2 −1 + x − x◦ 2 −1                                                     (2)
+                              n                x
+         ◦
+where x represents the expected value of element conductivity changes, which is zero for
+difference EIT. Σn ∈ RnM ×nM is the covariance matrix of the measurement noise n. Since n
+is uncorrelated, Σn is a diagonal matrix with [Σn ]i,i = σi2 , where σi2 is the noise variance at
+measurement i. Σx ∈ RnN ×nN is the expected image covariance.
+     Typically, Σn and Σx are not calculated directly. Instead, their inverses, W = σn2 Σ−1   n
+and R = σx2 Σ−1 x , are heuristically determined from a priori considerations. Here σn is
+S4                                                                                    A Adler et al
+
+the average measurement noise amplitude and σx is the a priori amplitude of conductivity
+change. W models the measurement accuracy. For uncorrelated noise, each diagonal element
+is proportional to the signal-to-noise ratio. For difference EIT with identical channels, W = I.
+The regularization matrix R may be understood to model the ‘unlikelihood’ of image elements.
+     By solving (2), a linearized, one-step inverse solution is obtained as
+                                        −1
+                           1         1            1
+                x̂ = JT 2 WJ + 2 R            JT 2 Wy.                                       (3)
+                          σn        σx           σn
+We define the hyperparameter λ = σn /σx , and rewrite (3) as
+               x̂ = (JT WJ + λ2 R)−1 JT Wy = By                                                (4)
+where B = (JT WJ + λ2 R)−1 JT W is the linear, one-step inverse. The regularization
+hyperparameter λ controls the trade-off between resolution and noise attenuation in the
+reconstructed image.
+     If image elements are assumed to be independent with identical expected magnitude, R
+becomes an identity matrix I and (4) uses zeroth-order Tikhonov regularization. For EIT,
+such solutions tend to push reconstructed noise toward the boundary, since the measured data
+are much more sensitive to boundary image elements. Instead, R may be scaled with the
+                                                                                        p
+sensitivity of each element, so that each diagonal element i of R is [R]i,i = [JT J]i,i . This is
+the NOSER prior of Cheney et al (1990) for an exponent p = 1. Many other prior matrices
+have been proposed: to model image smoothness as a penalty for non-smooth image regions,
+R may be set to the discrete Laplacian filter (Vauhkonen et al 1998b) or a discrete high pass
+Gaussian filter (Adler and Guardo 1996).
+     In this paper, the NOSER prior is used for calculating the matrix R with p = 0.5 in all
+tested algorithms, except for the Kalman filtering. Because it is diagonal, R can be inverted
+without numerical difficulties. The choice of exponent is a heuristic compromise between the
+pushing noise to the boundary (p = 0) or to the centre (p = 1).
+     In (4), the term in the inverse is of size nN × nN . To save computational time, and improve
+inverse accuracy and stability, we want to decrease the size of the matrix to be inverted. Thus,
+we rewrite the matrix B using the data form as:
+                                                                       −1 
+                                 −1 T            1 T             1 T
+              = (J WJ + λ R) J W J 2 PJ + V
+                    T         2
+                                                               J 2 PJ + V
+                                                λ               λ
+                                                                          −1
+                                                       1 T          1 T
+              = (JT WJ + λ2 R)−1 (JT WJ + λ2 R)           PJ      J    PJ + V
+                                                      λ2            λ2
+             = PJT (JPJT + λ2 V)−1                                                             (5)
+              −1
+where P = R        = σ12 Σx and V = W−1 = σ12 Σn . In practice, P and V are modelled directly
+                       x                    n
+from the system covariances, rather than the inverse of R and W. Using (5), the size of the
+term in the inverse is reduced to nM × nM . This is especially significant for 3D EIT models
+and for the temporal inverse which we introduce below.
+    Note that the GN solver does not consider the time sequence of EIT data. Each frame is
+solved individually, and inter-frame correlations are ignored.
+
+2.2. One-step linear GN solver with weighted data
+The one-step linear GN solver may be applied to weighted average data in order to implement
+ensemble averaging. Given a temporal window with a half-width d, we model the time
+constant, τ , to represent the rate at which the most rapid changes of interest occur in the body.
+Temporal image reconstruction in electrical impedance tomography                            S5
+
+This means that a feature of interest in a frame will dissipate by a factor of γ = exp(−tF /τ )
+in the next frame, and by γ d in the dth subsequent frame. Using this factor, we calculate a
+weighted ensemble average EIT measurement, ȳ,
+
+                         1  |i|
+                             d
+                 ȳ =           γ yi                                                        (6)
+                        wγ i=−d
+             
+where wγ = di=−d γ |i| . When 0 < γ < 1, this is a forgetting process, and when γ = 1, an
+                                                                √
+averaging process. Noise amplitude will decrease by a factor of wγ due to this ensemble
+averaging. The GN solver with weighted data reconstructs images as
+                 x̂ = Bȳ                                                                   (7)
+where B is calculated using (4).
+
+
+2.3. Kalman solver
+The Kalman filter is a widely used approach for many tracking and data prediction tasks. The
+EIT image reconstruction algorithm of Vauhkonen et al (1998a) is formulated as an iterative
+state estimation problem. The system discrete time prediction model is given by (using the
+notation introduced above)
+                 xk = Axk−1 + w                                                             (8)
+for a discrete time sequence k. A ∈ RnN ×nN is the state transition matrix, and w ∈ RnN is the
+state noise (assumed to be zero mean white Gaussian). One traditional difficulty with Kalman
+filters is finding values for state space parameters. If the underlying processes in the body
+were well known, then A could be derived; for example, in a stirred mixing tank, the process
+would rotate image elements in each frame. We follow the traditional heuristic approach of
+assigning A = I (representing a random walk process) and setting the state noise covariance
+to the image element covariance P. The discrete time observation model at time step k is:
+                 yk = Jk xk + n                                                             (9)
+which is equivalent to (1) if J is constant. Kalman image reconstruction iteratively estimates
+xk based on the previous image xk−1 and measurements yk .
+
+                 x−
+                  k = Ax̂k−1                           state estimation                   (10)
+                 x̂k = x−                −
+                        k + Kk (yk − Jk xk )           state correction                   (11)
+
+where Kk is the Kalman gain, which is calculated from the error covariance estimate Ck as:
+
+                 C−
+                  k = AĈk−1 A + P
+                              T
+                                                       error covariance estimation        (12)
+                                        −1
+                 Kk = C−  T     − T
+                       k Jk Jk Ck Jk + V               Kalman gain                        (13)
+
+                 Ĉk = (I − Kk Jk )C−
+                                    k                  error covariance correction.       (14)
+
+Iterative calculation of K is computationally expensive. If J is constant, K will eventually
+stabilize, and may be precomputed (Kim et al 2006) in order to dramatically speed up the
+calculation. We do not take this approach here.
+S6                                                                                            A Adler et al
+
+2.4. Temporal one-step solver
+Instead of calculating an image based on the sequence of past frames, we propose a temporal
+image reconstruction algorithm which uses a set of data frames nearby in time. The data frame
+sequence is treated as a single inverse problem, with a regularization prior to account for both
+spatial and temporal correlations between image elements. Given a vertically concatenated
+sequence of measurements frames ỹt = [yt−d ; . . . ; yt ; . . . ; yt+d ] and the corresponding
+concatenated images x̃t = [xt−d ; . . . ; xt ; . . . ; xt+d ], the direct temporal forward model (1)
+is rewritten as                                                 
+                                                                                  
+                    yt−d            J            ···         0        xt−d        nt−d
+                  .                                                         . 
+                  ..  
+                                          ..                      ..          .. 
+                                         .                   .                
+                          ..                                                    
+                  yt  =  .                     J          .. 
+                                                             .
+                                                                    xt   +    nt                (15)
+                  .                                           .   . 
+                                                                               
+                  .                                ..          ..   ..         
+                  .                                   .      
+                    yt+d            0            ...         J        xt+d        nt+d
+and also as
+                ỹt = J̃x̃t + ñt                                                                     (16)
+where ñt = [nt−d ; . . . ; nt ; . . . ; nt+d ]. We assume J to be constant, although this formulation
+could be modified to account for a time varying J. Based on this approximation J̃ = I ⊗ J,
+where the identity matrix I has size 2d + 1, and ⊗ is the Kronecker product.
+     The correlation of corresponding elements between adjacent frames (delay δ = 1) can
+be represented by an inter-frame correlation γ which has value between 0 (independent)
+and 1 (fully dependent). As frames become separated in time, the inter-frame correlation
+decreases; for an inter-frame separation δ, the inter-frame correlation is γ δ . γ could also
+possibly be negative if subsequent frames have inverse correlation, although this scenario
+is physiologically unrealistic. Frames with large inter-frame delay, |δ| > d, are considered
+independent. Image reconstruction is then defined in terms of minimizing the augmented
+expression:
+                 
+                                                                       2             
+                  yt−d              J            ···          0       xt−d             xt−d 2
+                                                                                          
+                  ..                   ..                        ..              . 
+                  .                       .                     .                .  
+                                .                                                  . 
+                                                               ..                          
+                  yt  −  .
+                                .               J
+                                                                .
+                                                                      xt   +λ 
+                                                                                      2
+                                                                                           xt      (17)
+                  .                                             
+                                                                     .                   
+                  ..                               ..               .                .
+                                                                                             .  
+                                                         .         .               . 
+                                                                                              
+                  yt+d                                                xt+d             xt+d 
+                                     0            ...          J       W̃                          R̃
+
+and (5) becomes
+               B̃ = R̃−1 J̃T (J̃R̃−1 J̃T + λ2 W̃−1 )−1                               (18)
+where W̃ = I ⊗ W. W̃ is diagonal since measurement noise is uncorrelated between frames.
+R̃ = Γ−1 ⊗ R where Γ is the temporal weight matrix of an image sequence x̃ and is defined
+to have the form as
+                                                              
+                         1          γ      . . . γ 2d−1 γ 2d
+                     γ
+                                   1      . . . γ 2d−2 γ 2d−1 
+                                                               
+                                                              
+               Γ= .
+                     ..            .
+                                    ..     ..
+                                               .
+                                                    .
+                                                    ..     .. 
+                                                           .
+                                                               .                    (19)
+                                                              
+                     2d−1                                     
+                    γ           γ 2d−2
+                                           ...      1      γ 
+                          γ 2d    γ 2d−1    ...     γ         1
+Temporal image reconstruction in electrical impedance tomography                               S7
+
+From (18) and (19),
+                 B̃ = [Γ ⊗ (PJT )][Γ ⊗ (JPJT ) + λ2 (I ⊗ V)]−1 .                             (20)
+Thus, (4) is rewritten as
+                       
+                  x̂t−d
+                 . 
+                 .. 
+                       
+                       
+                 x̂t  = B̃ỹt .                                                            (21)
+                 . 
+                 . 
+                 . 
+                  x̂t+d
+    Although this estimate is an augmented image sequence, we are typically only interested
+in the current image x̂t . which is calculated from x̂t = B̃d ỹt where B̃d is the rows
+nM d + 1 . . . nM (d + 1) of B̃.
+
+2.5. Noise figure
+In order to compare the different image reconstruction algorithms, it is important to
+choose corresponding values of the hyperparameter for each algorithm. For a review of
+hyperparameter selection methods for EIT, refer to Graham and Adler (2006). For our
+application, we wish to compare the resolution and noise performance across algorithms;
+however, since the regularization hyperparameter implicitly controls the compromise between
+resolution and noise performance, we choose to control for noise performance across
+algorithms, and then compare the resolution. Image reconstruction noise performance may
+be measured with the noise figure (NF) parameter of Adler and Guardo (1996). Here we
+generalize the NF calculation to apply to any difference EIT formulation, not simply one-step
+Gauss–Newton-type algorithms.
+     An EIT difference measurement vector is y = y0 + ny , where y0 is the deterministic
+underlying signal, and ny is stochastic, zero mean, measurement noise. Typically, components
+of ny are independent, but this formulation does not make this assumption. For difference
+EIT, [y]i = [v2 ]i − [v1 ]i , and components of ny are often assumed to be equal, but this
+may potentially vary if the gain varies between channels. For normalized difference EIT,
+[y]i = ([v2 ]i − [v1 ]i )/[v1 ]i , and components of ny are scaled by diag(v1 )−1 . Both y0 and ny
+may be complex valued.
+     The signal-to-noise ratio (SNR) of the difference measurement is defined as:
+                        E[|y|]
+                 SNRy = √                                                                    (22)
+                         var(y)
+                                    
+where we approximate E[|y|] = n1M      |y0 | and calculate var(y) = n1M traceΣn where Σn is the
+measurement noise covariance. nM is the number of measured values in the EIT data frame;
+we divide by nM rather than nM − 1 to calculate the variance, since the noise is known to be
+zero mean.
+     This covariance may be modelled by a noise basis, Ny such that Ny NTy = Σn . For
+difference EIT with independent noise on each channel, this is a diagonal matrix with [ny ]i,i
+equal to the noise amplitude on channel i. Using this noise basis, var(y) = n1M Ny 2F , where
+·2F is the sum of each matrix element squared (Frobenius norm squared).
+     A general EIT reconstruction algorithm, EIT, reconstructs an image estimate, x̂ from
+measurements as x̂ = EIT(y). This notation is also extended to reconstruct a matrix of column
+S8                                                                                    A Adler et al
+
+concatenated images independently from a matrix of measurements. The signal-to-noise ratio
+(SNR) of the difference image is:
+                           E[|x|]
+                SNRx = √                                                                (23)
+                            var(x)
+                                  
+where we approximate E[|x|] = A|x0 | where x0 = EIT(y0 ) and A is a diagonal matrix of the
+volume (or area in 2D) of each reconstructed image element. We calculate var(x) = traceA2 Σx
+where Σx is the image noise covariance. For difference EIT, image reconstruction is linear
+for small y, Using noise basis, Nx , we calculate Σx = Nx NTx where Nx = EIT(Ny ) for small
+Ny , and var(x) = ANx 2F .
+     The NF is the ratio of output to input SNR, where the input signal y0 is chosen to be a
+small change in a central inner circular disc covering 10% of the medium diameter, and Nn is
+scaled to be within the linear range of the algorithm.
+                                               
+                      SNRx          A|EIT(y0 )|      nM Ny 2F
+                NF =          =                                 .                      (24)
+                      SNRz              |y0 |      AEIT(Ny )2F
+     While the SNR is normally defined in terms of the signal power, here we define it in
+terms of absolute amplitude. This is necessary because it is the signal amplitude, and not the
+power, that is spread across image elements with changes in hyperparameter; our experiments
+with the signal power definition do not show stable or useful results. Finally, in distinction to
+the definition in Adler and Guardo (1996), we calculate the absolute amplitude of the signal,
+allowing this definition to be appropriate to EIT systems which measure complex signals.
+
+3. Results
+
+Numerical simulations were conducted using a planar 2D FEM model with 5184 elements
+using the EIDORS software (Adler and Lionheart 2006). A unit radius circular medium with
+16 electrodes using adjacent stimulation and measurement pattern is simulated, in which a
+non-conductive spherical object with 0.05 unit radius rotates clockwise along a trajectory
+that has a radius of 2/3 unit, moving at a speed of one rotation per 40 frames. The noise
+performance of the algorithms was tested by adding pseudo random, zero mean Gaussian
+noise. All reconstructed images in figures 1 and 2 used the same random seed; tests with
+different seed values did not vary significantly. Images were reconstructed on a 576 element
+mesh, which differs from the simulation model to avoid the inverse crime.
+     Reconstructed images were calculated for four image algorithms and are shown in
+corresponding columns in figures 1 and 2: (1) Gauss–Newton, (2) GN with weighted data, (3)
+temporal solver and (4) Kalman filter. In each image, the positions of the target  at all data
+frames used in the algorithms are shown. In all cases, the target was at (x, y) = − 23 , 0 in the
+image shown. We explored the behaviour of these algorithms as a function of regularization
+hyperparameter for both noise free and noisy data. In order to choose a hyperparameter to
+allow comparison across algorithms, we select its value for each algorithm in order to give a
+fixed NF value (section 2.5). Figure 2 shows reconstructed images for a low hyperparameter
+value (giving NF = 2.0), while figure 1 shows images for a higher value (giving NF = 0.1).
+Noise levels were chosen heuristically in order to illustrate the algorithm noise performance.
+
+4. Discussion
+
+Traditionally, EIT reconstruction algorithms assume each data frame to be independent.
+However, since EIT is able to make measurements at high frame rates, we know a priori that
+Temporal image reconstruction in electrical impedance tomography                                               S9
+
+
+
+
+                                                                                                               1
+
+
+
+
+                                                                                                               0
+
+
+
+
+                                                                                                                1
+
+
+
+
+                 Figure 1. Reconstructed images of a target at (− 32 , 0) for high hyperparameter (parameters
+                 NF = 0.1, γ = 0.8 and d = 3). Top row: no noise; bottom row: SNR = 0.25. Each column
+                 uses a different reconstruction algorithm: A, Gauss–Newton, B, Gauss–Newton with weighted
+                 data, C, temporal solver, D, Kalman filter. The black circles in the images indicate the position
+                 of the simulated target in each data frame used for the image reconstruction. The colourbar (with
+                 normalized units) is shown at right.
+
+
+
+
+image frames are correlated. This paper addresses reconstruction of EIT data for temporal
+reconstructions, in which we use temporal correlations to improve reconstructed image SNR. A
+new temporal reconstruction algorithm is introduced, which directly formulates the temporal
+inverse in terms of a single regularized expression. We compare four different algorithms: one-
+step GN (with no temporal behaviour), GN with weighted data, Kalman filter reconstruction
+and the proposed temporal reconstruction.
+     Results show that the GN algorithm is able to accurately reconstruct the position and
+shape of the target, but shows poorer noise performance than the other algorithms. As the
+hyperparameter increases (figure 1), GN images tend to image targets closer toward the centre
+of the body. This effect is well understood for EIT (e.g. Adler and Guardo (1996)), and
+is probably a consequence of the prior weighting of central image elements. The GN with
+averaged data blurs the reconstructed image across all the averaged data frames, but is able
+to show improved noise performance, as is expected from ensemble averaging. Thus, GN
+algorithms are recommended when noise levels are low, and GN with weighted data is a good
+solution when the conductivity is changing slowly with respect to the frame rate.
+     At low hyperparameter, the Kalman filter tends to reconstruct images with the target
+‘pushed’ outward toward the boundary, and create image artefacts and image noise on the
+boundary. We hypothesize that this effect is due to the iterative calculation of the error
+covariance term (in (12)), which results in a C− which tends toward the identity matrix.
+S10                                                                                               A Adler et al
+
+
+
+
+                                                                                                             1
+
+
+
+
+                                                                                                             0
+
+
+
+
+                                                                                                                 1
+
+
+
+
+               Figure 2. Reconstructed images of a target at (− 23 , 0) for low hyperparameter (chosen for
+               NF = 2.0, γ = 0.8 and d = 3). Top row: no noise; bottom row: SNR = 4.0. Each column
+               uses a different reconstruction algorithm: A, Gauss–Newton, B, Gauss–Newton with weighted
+               data, C, temporal solver, D, Kalman filter. The black circles in the images indicate the position
+               of the simulated target in each data frame used for the image reconstruction. The colourbar (with
+               normalized units) is shown at right.
+
+
+
+In the Kalman formulation, this term takes the place of R in the GN inverse, making the
+Kalman filter images resemble GN images with zero-order Tikhonov regularization. For
+larger hyperparameter values (figure 1), Kalman filter images tend to show a ‘trail’ as a larger
+weighting is given to previous frame data in the current image calculation.
+     At high hyperparameter values, the temporal reconstruction shows improved resolution
+(illustrated as figure 1). While at low hyperparameter, it gives similar images to that of GN
+(illustrated as figure 2). This behaviour may be understood, since at low hyperparameter
+(λ ≈ 0), (20) approximates
+               B̃ ≈ [Γ ⊗ (PJT )][Γ ⊗ (JPJT )]−1 = I ⊗ [PJT (JPJT )−1 ]                                    (25)
+which will reconstruct each data frame independently. On the other hand, at high
+hyperparameter, the reconstructed image will weigh data frames together, as per GN with
+weighted data,
+               B̃ ≈ [Γ ⊗ (PJT )][λ2 (I ⊗ V)]−1 = Γ ⊗ [PJT (λ2 V)−1 ].                                     (26)
+In this paper, the temporal weight γ is chosen heuristically; however, objective selection of γ
+is possible; its value could be estimated from the covariance of data frames measured.
+     In summary, this paper proposes a temporal EIT reconstruction algorithm. For
+low noise solutions (low hyperparameter) its behaviour approximates that of Gauss–
+Newton reconstruction, while for high noise level and high frame rates cases where large
+Temporal image reconstruction in electrical impedance tomography                                            S11
+
+hyperparameters are adopted, it is advantageous by reconstructing higher resolution images.
+It improves over Kalman filter based algorithms by allowing an explicit control over the
+regularization prior and the weighting of measured data. We recommend the temporal
+algorithm for cases in which the data noise is high and the underlying conductivity changes
+are rapid with respect to the frame rate.
+
+Acknowledgment
+
+This work was supported by a grant from NSERC Canada.
+
+References
+
+Adler A and Guardo R 1996 Electrical impedance tomography: regularized imaging and contrast detection IEEE
+     Trans. Med. Imaging 15 170–9
+Adler A and Lionheart W R B 2006 Uses and abuses of EIDORS: an extensible software base for EIT Physiol.
+     Meas. 27 S25–42
+Cheney M, Isaacson D, Newell J C, Simske S and Goble J C 1990 NOSER: an algorithm for solving the inverse
+     conductivity problem Int. J. Imaging Syst. Technol. 2 66–75
+Eichenwald E C and Stark A R 1999 High frequency ventilation: current status Pediatr. Rev. 20 127–33
+Graham B M and Adler A 2006 Objective selection of hyperparameter for EIT Physiol. Meas. 27 S65–79
+Kim B S, Kim K Y, Kao T-J, Newell J C, Isaacson D and Saulnier G J 2006 Dynamic electrical impedance imaging
+     of a chest phantom using the Kalman filter Physiol. Meas. 27 S81–91
+Kim K Y, Kim B S, Kim M C and Kim S 2004 Dynamic inverse obstacle problems with electrical impedance
+     tomography Math. Comput. Simul. 66 399–408
+Kohler B-U, Hennig C and Orglmeister R 2002 The principles of software QRS detection IEEE Eng. Med. Biol.
+     Mag. 21 42–57
+Trigo F C, Gonzalez-Lima R and Amato M B P A 2004 Electrical impedance tomography using the extended Kalman
+     filter IEEE Trans. Biomed. Eng. 51 72–81
+Vauhkonen M, Karjalainen P A and Kaipio J P 1998a A Kalman filter approach to track fast impedance changes in
+     electrical impedance tomography IEEE Trans. Biomed. Eng. 45 486–93
+Vauhkonen M, Vadàsz D, Karjalainen P A, Somersalo E and Kaipio J P 1998b Tikhonov regularization and prior
+     information in electrical impedance tomography IEEE Trans. Med. Imaging 17 285–93
+Wilkinson A J, Randall E W, Cilliers J J, Durrett D R, Naidoo T and Long T 2005 A 1000-measurement frames/second
+     ERT data capture system with real-time visualization IEEE Sensors J. 5 300–7
+Wolf G K and Arnold J H 2005 Noninvasive assessment of lung volume: respiratory inductance plethysmography
+     and electrical impedance tomography Crit. Care Med. 33 S163–9
+

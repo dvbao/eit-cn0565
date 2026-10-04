@@ -1,0 +1,838 @@
+         iMove: Exploring Bio-impedance Sensing for
+                Fitness Activity Recognition
+                                       Mengxi Liu∗‡ , Vitor Fortes Rey∗†‡ , Yu Zhang∗† ,
+                                 Lala Shakti Swarup Ray∗ , Bo Zhou∗† ,and Paul Lukowicz∗†
+                      ∗ German Research Center for Artificial Intelligence (DFKI), Kaiserslautern, Germany
+                   † Department of Computer Science, RPTU Kaiserslautern-Landau, Kaiserslautern, Germany
+
+                                                   Email: firstname.lastname@dfki.de
+                                                          ‡ equal contribution
+
+
+
+
+   Abstract—Automatic and precise fitness activity recognition           raise privacy concerns, limiting their use in private settings.
+can be beneficial in aspects from promoting a healthy lifestyle to       Sensor-based solutions offer an alternative, employing various
+personalized preventative healthcare. While IMUs are currently           sensing principles like kinematic sensing (e.g., IMU), field-
+the prominent fitness tracking modality, through iMove, we show
+bio-impedence can help improve IMU-based fitness tracking                based sensing (e.g., Capacitive), wave-based sensing (e.g.,
+through sensor fusion and contrastive learning.To evaluate our           WIFI), and physiological sensing (e.g., Electrophysiological)
+methods, we conducted an experiment including six upper body             [10]. IMUs, integrated into devices like smartwatches, are
+fitness activities performed by ten subjects over five days to collect   popular due to their low power consumption and ease of
+synchronized data from bio-impedance across two wrists and               deployment. Electrophysiological sensors, like EMG, provide
+IMU on the left wrist.The contrastive learning framework uses
+the two modalities to train a better IMU-only classification model,      precision tracking but require placement on specific body parts
+where bio-impedance is only required at the training phase, by           [11]. This limitation can be addressed by passive capacitive
+which the average Macro F1 score with the input of a single              sensing methods [6], but they often suffer from low robustness
+IMU was improved by 3.22 % reaching 84.71 % compared to                  due to their high sensitivity to the environment.
+the 81.49 % of the IMU baseline model. We have also shown how               Bio-impedance sensing, a type of electrophysiological sig-
+bio-impedance can improve human activity recognition (HAR)
+directly through sensor fusion, reaching an average Macro F1             nal, monitors conductive information between two electrodes,
+score of 89.57 % (two modalities required for both training and          enabling monitoring of multiple body parts (e.g., hand-to-
+inference) even if Bio-impedance alone has an average macro              hand), unlike IMU sensors. It is dependent upon body status,
+F1 score of 75.36 %, which is outperformed by IMU alone.                 making it more robust than capacitive sensing. While existing
+In addition, similar results were obtained in an extended study          bio-impedance solutions mainly focus on physiological indi-
+on lower body fitness activity classification, demonstrating the
+generalisability of our approach.Our findings underscore the po-         cators and gestures [12]–[15], its application in fitness activity
+tential of sensor fusion and contrastive learning as valuable tools      recognition is not widely explored in current literature. In ad-
+for advancing fitness activity recognition, with bio-impedance           dition, contrastive learning has demonstrated an improvement
+playing a pivotal role in augmenting the capabilities of IMU-            over supervised and unsupervised learning in Human Activity
+based systems.                                                           Recognition for health [16], but contrastive learning between
+   Index Terms—bio-impedance sensing, human activity recogni-
+tion, contrastive learning, sensor fusion
+                                                                         different modalities is not widely studied.
+                                                                            In this work, we present iMove, our solution including
+                                                                         hardware and machine learning methods to explore how bio-
+                        I. I NTRODUCTION
+                                                                         impedance sensing can improve wrist-worn wearables for
+   Regular physical activity is crucial for both mental and              fitness activity recognition. To evaluate the performance of
+physical well-being [1], [2]. Fitness activity, a planned and            iMove for fitness activity recognition, we conducted an exper-
+repetitive subset of physical activity [3], plays an important           iment including six fitness activities performed by ten subjects
+role in personalized preventative healthcare. Automating the             over five days. In addition, we propose an algorithm based
+tracking of fitness activities can provide effective feedback,           on contrastive learning to train better IMU-only classification
+motivating users to exercise correctly and regularly. The field          models using bio-impedance sensing that is only required at
+of Human Activity Recognition (HAR) has evolved from                     the training time.
+manual or semi-automated logging to advanced methods such                   Overall, in this paper, we present the following contributions
+as smart ambient objects [3], [4] and wearable devices [5]–[7].          (all reported percentages are average Macro F1 scores with
+These solutions aim to be precise, convenient, unobtrusive, and          leave-one-person-out cross-validation method):
+user-friendly, promoting a sustainable healthy lifestyle.                   1) Through a novel contrastive training framework, with
+   Computer vision techniques are widely used for fitness                       shared latent representation from different modalities,
+activity recognition, showing high performance with advanced                    we used bio-impedance to enhance a mono-modality
+deep learning methods [8], [9]. However, these methods                          (IMU) model, where bio-impedance is only required at
+     the training phase. Our method increased the average            existing application scenarios, bio-impedance sensing based
+     Macro F1 score by 3.22 % for upper body activities and          full body activity recognition has not been widely studied
+     2.79 % for lower body ones.                                     according to contemporary literature.
+  2) Through sensor fusion, where the neural network model
+     takes both the bio-impedance and IMU signals as input,          B. Sensor fusion in neural networks for HAR
+     two modalities complement each other and significantly             The concurrent use of multiple sensors for human activity
+     improve the recognition result, obtaining 89.57% for            recognition provides a rich data source for complex activity
+     upper body activities and 81.74% for lower body ones.           recognition and improvement of recognition accuracy [26].
+  3) We have also demonstrated how single-channel bio-               Thus, sensor fusion methods have been widely studied in the
+     impedance sensing across two wrists is a viable stand-          contemporary literature. In [27] authors explored sensor fusion
+     alone modality for fitness activity recognition for both        for HAR using IMUs, comparing early, late and hybrid fusion
+     upper body activities (75.36 %) and lower body ones             approaches, among others. Other approaches such as [28] learn
+     (70.02 %), albeit inferior to a single IMU sensor on one        how to weight the contribution of the different sensors. Other
+     wrist (81.49 % and 77.99 %).                                    works, such as [29], [30] use attention modules for multi-
+                                                                     sensor information fusion.
+                     II. R ELATED WORK
+                                                                        On the other hand, the aforementioned approaches, as in
+A. Bio-impedance sensing-based wearables for HAR                     most of the sensor fusion solutions, require all sensor modal-
+   Bio-impedance methods involve the introduction of an al-          ities to be available both in the training and inference phase
+ternating electric current of very low intensity into a biological   [30], [31]. However, there are two obvious disadvantages of
+medium (such as the human body, tissue, or cell culture), lead-      these solutions: the input complexity of the model could be
+ing to a voltage drop, the magnitude of which is proportional        increased along with the modality number; using multiple
+to the electrical impedance of the biological medium [17].           sensing modalities could be difficult to realize in typical
+Thus, many existing works based on bio-impedance sensing             daily life environments. Those disavantages are addressed by
+wearables for HAR tasks have been demonstrated in the past           currently proposed methods, which only require all sensor
+decades in many application scenarios, like human physio-            modalities available at training time [32]–[34] while fewer
+logical index monitoring [13], [18], gesture recognition [14],       sensor modalities are required at the inference time. For
+[19], automatic dietary monitoring [20], and sport science [21].     example, the work More to Less [34] transfers knowledge
+For instance, the bio-impedance based heartbeat monitoring           between different models with different input modalities only
+system with four electrodes in the wristband configuration           when the performance of one model is better than the other,
+was first proposed in work [13], whose result showed that            with only one modality required at the inference time. Still,
+impedance variation at the wrist closely matched with the            the transfer requires labeled data. The work [33] improves
+heartbeat signal acquired from a standard piezoelectric finger       single sensor performance using clustering and boosting in
+pulse transducer. Kaan et al [18]. proposed a wrist-worn respi-      the training phase and supports unlabelled data. The work
+ration monitoring device based on bio-impedance to estimate          Learning from the Best [32] proposed a method based on
+respiration parameters using gold e-tattoos. Besides, the work       contrastive learning which can transfer the knowledge between
+[14] showed a gesture recognition solution based on bio-             each model bidirectionally and also supports unlabelled data.
+impedance tomography using multiple electrodes with a near           But that work did not present transferring knowledge between
+to perfect accuracy for eleven gestures by multiple pairs of         two different modalities, as the method focuses on sensors of
+electrodes in real-time. Ma et al [19]. proposed a frequency-        the same modality (IMU) located in different parts of the body.
+scan system for gesture recognition using the bio-impedance             Inspired by the work Learning from the Best, we proposed
+information, which only required two electrodes, which also          a contrastive learning based method that transfers knowledge
+achieved a very high recognition accuracy for four common            between different modalities, such as bio-impedance sensor
+gestures and a group of six pinch gestures. The bio-impedance        to IMU sensor, to improve the performance of a single
+based method was also widely applied in other scenarios. For         IMU sensor for the full-body fitness activity recognition task.
+example, Zhang et al [20]. proposed a generic sensor fabric          Besides, we also proposed a hyperparameter to control the
+for swallowing sensing based on resistive pressure and bio-          knowledge transmission amount and direction in this work.
+impedance sensors, which were integrated into a shirt collar;
+the result confirmed the signal performance of both sensor                   III. S ENSING PROTOTYPE IMPLEMENTATION
+types for swallowing spotting. The bio-impedance sensing-               Bio-impedance measurements are based on the fact that
+based solutions for biometric studies have been proposed in          biological mediums act as either conductors, dielectrics, or in-
+many works [22], [23]. Although the bio-impedance sensing            sulators of electrical current, depending on their composition.
+based solution is also widely used in the sports science area        This leads to a frequency-dependent bio-impedance, which can
+[21], like assessing knee joint health [24] and muscle fatigue       be used to gain insight into the physiology and pathology of
+[25], most works mainly focused on a physiologic monitoring          tissues and cells [35]. The iMove wearable hardware prototype
+and specific part of the body, like hands (gesture recognition),     shown in Fig. 1 was designed to monitor the bio-impedance
+leg (knee joint health) or specific muscles. Compared to the         signal variation that occurs as users perform fitness activity,
+   (a) Hardware Design                          (b) Prototype
+     Analog Front-End           Controller
+                                                                                 0.8
+            AD5          SPI
+                                                                                 0.7
+            941
+
+
+
+
+                                                                      Accuracy
+                                                                                 0.6
+
+       Electrodes                                                                0.5        wirst
+                                                 Analog Front-End
+                                                                                            forearm
+          PC                                                                     0.4        upper arm
+                                                                                            shoulder
+                                                                                       20         60           100                   200
+                                                                                                        Stimuli frequency (kHz)
+                  Fig. 1: Hardware design and prototype of iMove    Fig. 2: Upper body classification results with different experiment configura-
+                                                                    tions (stimuli frequency and electrode location)
+
+allowing for precise tracking of them. The iMove prototype
+consists of four modules: the analog front-end (AFE) module,        used to label the time series data. The sampling rate of bio-
+the control module, the electrodes, and the power supply.           impedance data and IMU is 20 Hz after synchronization. The
+The chip AD5941 (Analog Devices) was selected as the core           instances with a window size of 50 were generated by a sliding
+component of the analog front-end module of iMove, as it            window approach with a slide step of 10.
+can both generate the voltage stimuli as sinuous signals with a
+                                                                    A. Bio-impendance sensing configuration
+configurable frequency from 0.015 Hz to 200 kHz and measure
+the response current signal with an integrated high-speed trans-       The stimuli frequency used for the bio-impedance measure-
+impedance amplifier. It also has an integrated FFT hardware         ment has a great effect on the relationship of the measurement
+accelerator to decipher the real and imaginary components           to the applied motion and its relationship with the resulting
+from the measurement. An nRF52840 (Nordic) from Feather             motion artifact [36]. In addition, the location of electrodes
+BLE Sense is selected as the controller module that drives the      also has an effect on the bio-impedance measured result. To
+AFE through an SPI bus and transmits the measurement result         obtain high-quality bio-impedance data, a primary experiment
+to the computer via Bluetooth. Besides, there is an IMU sensor      was conducted to select a better experiment configuration,
+on the Feather BLE Sense board. The wet Ag/AgCI electrodes          where we tested four different stimuli frequencies, such as
+interface the user’s body with the AFE. The work current is         20 kHz, 60, kHz, 100 kHz, and 200 kHz, and four different
+around 20 mA. A compact lithium battery with a 500 mAh              electrode locations, such as wrist, forearm, upper arm, and
+capacity powers the system, which could power the system for        shoulder. Then we used a simple KNN classifiers to process
+around one day.                                                     the measured bio-impedance data; the classification result is
+                                                                    shown in Fig. 2, from which we can find that the configuration
+                          IV. E XPERIMENT SETUP                     of stimuli frequency with 100 kHz and electrodes on the
+   Ten volunteers (4 females and 6 males) aged from 21 to           wrist achieved the highest classification accuracy. The result
+32 years old with weights from 50.6 kg to 85.15 kg were             of the sensor location was in line with our expectations, as
+invited to take part in an experiment to assess the performance     the sensing range is the largest when attaching electrodes to
+of iMove with bio-impedance sensing for recognizing fitness         wrists. Thus, this configuration with 100 kHz stimuli and a
+activities. The participants were asked to do six different         wrist-worn electrode was selected for our experiments.
+fitness activities five times within five different days, each
+                                                                    B. Data Collection
+time lasting approximately 15 minutes while wearing iMove
+indoors. The selected six fitness activities come from Pamela 1 ,      In the experiment, both bio-impedance and IMU data (ac-
+including the Box, Biceps curl, Chest press, Shoulder and chest     celerometer and gyroscope) were collected to evaluate the
+press, Arm hold and shoulder press, and Arm opener as shown         performance of bio-impedance sensing modality. Fig. 3 shows
+in Fig. 3. During the experiment, both bio-impedance and IMU        the raw signal from the bio-impedance sensor and IMU while
+data were collected, and the data was transmitted to a web          performing different fitness activities. The bio-impedance data
+application on the laptop via Bluetooth. The web application        includes two channels: magnitude and phase; The original
+was written in JavaScript, which was used to observe the bio-       IMU signal includes three-channel acceleration and three-
+impedance and IMU signal in real-time and store the data            channel angular speed. We use the norm
+                                                                     p                                       p of the accelerometer
+in text files on the laptop. A front-facing camera was used         ( ax2 + ay 2 + az 2 ) and gyroscope ( gx2 + gy 2 + gz 2 ) in-
+to record participants with the video used to label the data        stead of the raw values, as this provided better baseline HAR
+after the experiment. The TRAINSET tool from Geocene was            results when compared to the raw channels. This is most likely
+                                                                    due to the reduction of the effect of IMU sensor orientation.
+  1 https://www.youtube.com/@PamelaRf1                              Moreover, using only the norm also reduces the model size.
+   It can be observed that fitness activities can lead to dis-        To evaluate the performance of the bio-impedance sensing
+tinguishing variations of bio-impedance signal, especially in      modality comprehensively, the bio-impedance, IMU data, and
+activities where arm bending movement is inclusive, such as        the combination of bio-impedance and IMU data were eval-
+Box and Biceps Curl. However, activities, like Chest press         uated as model inputs separately. The leave-one-subject-out
+and Arm opener, where the majority of the movement comes           cross-validation method was employed in this work to demon-
+from the shoulder joint, cause smaller bio-impedance variation     strate the model can recognize the activity across subjects.
+compared to bending the arm. Besides, the repetitive peaks in      Each subject from the ten subjects was selected as the test
+bio-impedance come from the repetitive activity, which looks       subject iteratively; the other nine subjects were selected as
+more obvious than the IMU signal. It’s worth mentioning that       train and validation datasets.
+one bio-impedance sensor can monitor the movement of both
+                                                                      Fig. 6a shows the classification results with a single bio-
+arms; for example, the subjects move one arm while keeping
+                                                                   impedance sensing modality. An average Macro F1 score of
+another hand still when performing the activity Arm hold and
+                                                                   75.36 % was achieved. The most confusing classes are Arm
+shoulder press, whichever arm moves, it can cause significant
+                                                                   hold and shoulder press and Arm opener. Besides, more than
+bio-impedance signal changes, while IMU sensor can only
+                                                                   eleven percent of instances from the two activities, such as
+track the movement of the arm where the IMU sensor is worn.
+                                                                   Arm opener and Chest press, are recognized as a null class.
+   Fig. 4 shows the t-SNE plots of six fitness activities with
+                                                                   These two kinds of activity mainly require only the movement
+different sensing modalities. We employed Principal Com-
+                                                                   of the shoulder instead of bending the arm resulting in smaller
+ponent Analysis (PCA) to extract the 20 most important
+                                                                   bio-impedance variation compared to other activities. Fig. 6b
+components from the raw instances with a window size of 50.
+                                                                   shows the classification result from a single IMU sensor, which
+Subsequently, we utilized t-SNE to further reduce these 20
+                                                                   achieved an average mMcro F1 score of 81.49 %. The most
+components into the two most significant ones. Both the PCA
+                                                                   confusing two classes are the Chest press and Arm opener.
+and TSNE functions come from the Python package scikit-
+                                                                   These two activities have a similar movement trajectory, where
+learn. It can be observed that the clusters of these activities,
+                                                                   the subject presses the dumbbells away from the chest until
+like Box and Chest Press, tend to mix when the features from
+                                                                   the arms are fully extended; the difference is that the former
+bio-impedance data as shown in Fig. 4a. However, the clusters
+                                                                   activity requires the subject to bend the arms, and the latter
+of these activities, like Arm opener and Chest press, tend to
+                                                                   requires the subject to straighten the arms, which can confuse
+be intertwined when the features from IMU data are shown in
+                                                                   IMU-only models as the raw IMU data was the norm of the
+Fig. 4b. The boundary of the clusters of each activity becomes
+                                                                   acceleration together with they gyro’s norm. It can be observed
+much clearer when the features from both bio-impedance and
+                                                                   that the average Macro F1 score of IMU is better than bio-
+IMU data are provided as shown in Fig. 4c. The result from
+                                                                   impedance sensing in this work, which may be explained by
+the t-SNE plot demonstrates that the concurrent use of the
+                                                                   the variation of absolute bio-impedance value across subjects
+two sensing modalities has great potential to improve the
+                                                                   and less sensitivity to shoulder movement of bio-impedance
+classification result of the six different activities.
+                                                                   sensing in this study.
+  V. F ITNESS HAR USING EACH MODALITY AND THEIR                       We also evaluated the performance of using both bio-
+                            FUSION
+                                                                   impedance and IMU data as input to our encoder. In this
+   Fig. 5 shows the Backbone neural network architecture for       data-level fusion the data from two sensors was concatenated
+fitness activity recognition, including an encoder for feature     directly before input into the Backbone model. Fig. 6c illus-
+extraction and a classifier. The Backbone model was built upon     trated the result of two sensing modalities fusion method.
+the framework from TinyHAR [30], as it demonstrated out-           The average Macro F1 score was improved to 89.57 %,
+standing performance on several HAR datasets with hundred-         which is higher than the use of a single sensing modality.
+kilobyte model sizes. In the encoder, the raw sensor data was      It can be observed from the confusion matrix that activities
+processed by four one-dimensional channel-wise convolutions,       confused by the model with single modality input can be
+a self-attention module, one linear layer, and two LSTM layers     well recognized after fusing IMU and bio-impedance data;
+sequentially to extract our (10 × 40) latent representation,       the recognition recall of these activities was improved by
+which is followed by the classifier to output the recognition      around 10 %. The significant improvement in classification
+result, including a temporal attention module, and one linear      results demonstrated that the bio-impedance sensing modality
+layer. The cross-entropy loss function and Adam optimizer          could provide complementary information to the IMU sensor,
+with a learning rate of 5e-4 and 1024 batch size were selected     achieving a better result for the fitness activity recognition
+to train this model. In addition, instances were weighted more     task with a data-level sensor fusion method. A result summary
+for rarer classes using maxm(Mi
+                                 )
+                                   where the distribution of the   and model size of the Backbone model with different input
+number of data samples per class for the training data is          modalities is shown Table I. We can also see there that
+given M = [m1 , ..., mna ]. The model was trained for 100          the concurrent use of multiple modalities with the data-level
+epochs with an early stopping using the patience of 30 to avoid    sensor fusion method can significantly improve the activity
+overfitting. The validation dataset is the one subject selected    recognition performance, but also leads to an increase in model
+randomly from the training dataset.                                size.
+                                                                                 Shoulder+Chest         Arm hold+Shoulder
+                 Box                 Biceps Curl            Chest Press                                                               Arm Opener
+                                                                                     Press                    Press
+
+
+
+
+Fig. 3: Bio-impedance and IMU signal of six upper body fitness activities (The IMU signal is the L2-Norm of raw data. Chest Press: participant holds a
+one-kilogram dumbbell in each hand and presses the dumbbells away from the chest until arms are fully extended, and brings them back to the starting
+position; Shoulder+Chest Press: participant adds an action of lifting the dumbbells from shoulder height to above his/her head when his/her arms are fully
+extended based on chest press 1 activity; Arm hold+shoulder press: participant holds a dumbbell with an overhand grip at shoulder height by one hand,
+push the dumbbell overhead by fully extending his/her arm, while keeping the other arm at shoulder height, change the hand to hold the dumbbell after more
+than ten times)
+
+
+TABLE I: Result summary of backbone network for classifying upper body
+activities
+                                                                              widely used for extended periods of time.
+                                                                                 To address this issue, we propose a constrastive-learning
+ Sensor modality     Macro F1 (%)      Accuracy (%)    Model Parameters
+ Bio-impedance       75.36 ±12.78      76.19 ±11.63        21829
+                                                                              based approach for improving IMU representations that uses
+      IMU             81.49 ±7.24       81.62 ±6.63        21829              bio-impedance only at training time. Our setup was based on
+ Bio-impedance                                                                the existing contrastive learning method [32]. While in that
+    and IMU            89.57 ±5.69      89.39 ±5.82          23429
+                                                                              work authors explored how extra IMU sensors only available
+                                                                              at training time can be used to improve target IMU representa-
+                                                                              tions, here we extend the work to include additional different
+ VI. U SING BIO - IMPEDANCE SENSING TO TRAIN BETTER
+                                                                              modalities at training time and propose a hyperparameter to
+          IMU- ONLY CLASSIFICATION MODELS
+                                                                              control the knowledge transfer amount and direction.
+    We have shown that the combination of IMU and bio-                           For training those networks, we follow a two step pro-
+impedance sensing can improve classification performance by                   cedure as in [32], where first the correspondence between
+providing crucial information that is lacking for each modality               the representations is trained based on contrastive loss. But,
+alone. On the other hand, from the two modalities, the IMU                    different from the existing work [32], we use a weighted
+one has many advantages. It has a better overall performance                  contrastive loss function with a hyperparameter α to control
+than the bio-impedance, but, even more relevant, it is widely                 the knowledge transfer between source latent representation
+available and of easy deployment in real-life scenarios. While                and target latent representation. Let’s go into detail on how
+it is not hard to collect data for both modalities in a laboratory            this loss is computed. If we sample xsrc and xtgt windows
+environment, real deployment requires attaching the electrodes                for source and target modalities, respectively, where every
+to the body parts and prolonged measurement may cause                         xisrc and xitgt co-occur in time, we can obtain for each a
+discomfort to the user. This could prohibit them from being                   representation by computing Rt = Enctgt (xtgt ) and Rs =
+                                               (a) Bio-impedance                                                                                                                                                              (b) IMU                                                                                                              (c) Bio-impedance and IMU
+                                                                                                           Fig. 4: t-SNE plots of six upper body fitness activities with different sensing modalities
+
+
+
+
+                                                                                                                                                                           Encoder                                                                                                                                                                                                                          Classifier
+                             Bio-
+                          impedance
+
+
+
+                                                                                          1D Convolution                     1D Convolution               1D Convolution                       1D Convolution                         Self-Attention                                            Linear Layer                                                                                                                             Linear Layer
+                                                                                                                                                                                                                                                                                                                                                                                                      Temporal-
+                                                                                                                                                                                                                                                                         Flatten                                                            LSTM                        LSTM
+                                  IMU
+                                                                                                                                                                                                                                                                                                                                                                                                      Attention
+                            IMU+
+                          Impedance
+
+
+                                                                                                             Fig. 5: Backbone architecture of the neural network used for classification (Backbone)
+
+                                                 0 D F U R  )   6 F R U H                                                                                                                        0 D F U R  )   6 F R U H                                                                                                             0 D F U R  )   6 F R U H              
+
+       Q X  O O                                                                                              
+                                                                                                                                                              Q X  O O                                                                                                               Q X  O O                                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                             
+
+                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                           
+ 7 U X H  / D E H O                                                                                                                                 7 U X H  / D E H O                                                                                                                                        7 U X H  / D E H O
+                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                              
+
+
+                                                                                                                                                                                                                                                                                                                                     
+
+                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                             O O
+                           Q X                                                                                                                                                O O
+                                                                                                                                                                                  Q X                                                                                                                                                    O O
+                                                                                                                                                                                                                                                                                                                                             Q X                                                                                  
+                                                                 3 U H G L F W L R Q                                                                                                                                            3 U H G L F W L R Q                                                                                                                                 3 U H G L F W L R Q
+
+                                               (a) Bio-impedance                                                                                                                                                              (b) IMU                                                                                                              (c) Bio-impedance and IMU
+Fig. 6: Joint confusion matrix for six upper body activities classification (1: Box, 2: Biceps curl, 3: Chest press, 4: Shoulder and chest press, 5: Arm hold
+and shoulder press, 6: Arm opener)
+
+
+
+Encsrc (xsrc ) . Then, those representations can be translated                                                                                                                                                                                         source). The LCO part of the loss is the infoNCE loss [37]
+between one another by calculating Tt2s = T rlt2s (Rt ) and                                                                                                                                                                                            defined as
+Ts2t = T rls2t (Rs ). Our proposed weighted contrastive loss
+                                                                                                                                                                                                                                                                            1 X                      N
+                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                  LN (Xrk , Xtk , Xri i=0 )
+                                                                                                                                                                                                                                                                                                 
+LW N is defined as                                                                                                                                                                                                                                         LCO (Xr , Xt ) =                                   (2)
+                                                                                                                                                                                                                                                                            N
+                                                                                                                                                                                                                                                                                                                                             k
+                    LW N (Rt , Ts2t , Rs , Tt2s , α) = α ∗ LCO (Rt , Ts2t )+
+                                                                                                                                                                                                                            (1)
+                                                                                                                   (1 − α) ∗ LCO (Rs , Tt2s )                                                                                                          shows. Here LN is
+
+which is a version of the one proposed in [32] where we weight                                                                                                                                                                                                                                                                                              exp(sim(xt , x))/τ
+                                                                                                                                                                                                                                                                    LN (x, xt , Px ) = −log P                                                                                                                                                           (3)
+the transfer of knowledge (from source to target and target to                                                                                                                                                                                                                                                                                            xp ϵPx exp(sim(xp , x))/τ
+                                                                                                             Algorithm 1 Training procedure of our contrastive approach.
+                                                                                                             We used the default values of m = 1024, α = 1.0,
+                      Encoder               Classifier
+    Source
+    modality
+                                                            Cross-Entropy-Loss                               nEpconstr = 80, nEpclassif = 20
+
+
+                                                                                 Classification Loss
+                                                                                                             Require: Batch size m, Adam hyperparameter η, hyperpa-
+                                      Shared Weights              Label                                        rameters alpha, N EPconstr , N EPclassif
+                                                                                                               Input: Xsrc , Xtgt , Y representing labelled synchronised
+
+                      Encoder               Classifier
+     Target
+                                                            Cross-Entropy-Loss
+                                                                                                               sources.
+    modality                                                                                                   for number of batches in N EPconstr epochs do
+                                                                                                                 Sample a batch (xs , xt ) with m examples from Xsrc ,
+               Only the blocks with green color required at inference time                                       Xtgt corresponding to the data at the same windows.
+ Fig. 7: Cross-modality implementation with Shared Representation (SR)                                           Rs ← Encsrc (xs )
+                                                                                                                 Rt ← Enctgt (xt )
+                                                                                                                 Ts2t ← T rls2t (Rs )
+where τ is a temperature hyper-parameter configured as 0.1                                                       Tt2s ← T rlt2s (Rt )
+in this work, the sim(xi , xj ) is defined as Eq. (4) shows,                                                     θ ← θ − η∇θ LW N (Rt , Ts2t , Rs , Tt2s , α)      ▷Eq. (1)
+                                                                                                               end for
+                                              xTi · xj
+                    sim(xi , xj ) =                                                                    (4)     for number of batches in N EPclassif epochs do
+                                            ∥xi ∥ · ∥xj ∥                                                        Sample a batch (xs , xt , yl ) with m examples from Xsrc ,
+   After 80 epochs of training the correspondence between                                                        Xtgt , Y corresponding to the data at the same windows.
+representations, we are ready for the second step of our                                                         Ps ← C(T rls2t (Encsrc (xs )))
+method, which involves fine-tuning the learned representation                                                    Pt ← C(Enctgt (xt ))
+for classification. We obtain predictions using a single classi-                                                 θ ← θ − η∇θ Lc (Ps , Pt , yl )                    ▷Eq. (7)
+fier network C. For the target domain, we can obtain those by                                                  end for
+applying the classifier on the target’s representation using
+                          Pt = C(Enctgt (xtgt ))                                                       (5)   space from 0 to 1.0 with a step length of 0.1 was used to
+For the source domain, we will also use the same C network,                                                  select the best weight value during training our contrastive
+but this time it will receive translated points to the target’s                                              learning model.
+representation as in Eq. (6)                                                                                 A. Results
+                Ps = C(T rls2t (Encsrc (xsrc )))                                                       (6)      Fig. 9 illustrates the distribution of classification perfor-
+                                                                                                             mance for models with different source modality combinations
+The classification function Lc was defined as                                                                and training procedures; it can be observed that both the shared
+           Lc (Ps , Pt , y) = CE(Ps , y) + CE(Pt , y)                                                  (7)   representation model and our contrastive training approach
+                                                                                                             achieved a better performance than the models trained with
+Where y is the labels, C is our classifier network and CE                                                    only one sensor modality, which shows that learning the
+is the cross-entropy-loss function. This second step runs for                                                temporal correspondence between our modalities can posi-
+20 epochs and the full training procedure of CL model can                                                    tively guide the representation in our single-modality models.
+be found inAlgorithm 1. After training we can evaluate our                                                   The standard deviation of the test result is also decreased
+model on the target domain using C(Enctgt (xtgt )).                                                          when the models are trained with two modalities. In addition,
+   To evaluate the proposed contrastive learning approach, two                                               our proposed model trained by weighted contrastive learning
+types of source modalities were designed: just bio-impedance                                                 loss showed superior performance compared to the shared
+and the combination of bio-impedance and IMU. In order to                                                    representation model only using classification loss. When the
+investigate the effect of having this shared classifier between                                              target modality is IMU, the best average macro F1 score was
+sources, we also trained using only classification loss a shared                                             improved by 3.22 % by our contrastive learning approach with
+representation model as in Fig. 7. The shared representation                                                 α = 1.0 as shown in Table II, which means that the contrastive
+model has the same architecture as the contrastive model at                                                  learning loss is computed using only Rt and Ts2t according
+the inference time, but has no translators. Thus, in this case                                               to Eq. (1). It is worth mentioning that a single bio-impedance
+for data xsrc and xtgt                                                                                       modality demonstrated a better performance than using both
+        Lsr (xsrc , xtgt , y) = CE(C(Encsrc (xsrc )), y)                                                     bio-impedance and IMU as source, which achieved the best
+                                                                                                       (8)   performance with an average Macro F1 score with 2.15 %
+                                   +CE(C(Enctgt (xtgt )), y)
+                                                                                                             when the weight α was configured as 0.1.
+In this case it is trained for 100 epochs with early stopping                                                   In Table II, we have also compared our method to M2L
+and 30 patience.                                                                                             [34]. In this case, we used the same hyper-parameters as in
+  Since the hyperparameter weight α can not be decided                                                       the original work, but kept the architecture of models as in
+before training directly, a grid search method with a search                                                 Fig. 7 for fairness, with the important difference that in this
+                                                                                                                                                                                                                                              Translator
+
+                                                                               Encoder                                                                              Classifier
+                                        Source
+                                                                                                                   Translator                                                              Cross-Entropy-Loss
+                                        modality                                                                                                                                                                                              Representation
+
+
+
+
+                                                                                                                                                                                                                    Classification Loss
+                                                                                                                     Weighted
+                                                                                                                    Contrastive                                                                                                                   Self-Attention
+                                                                                                                                                               Shared Weights                     Label
+                                                                                                                       Loss
+
+
+
+
+                                                                               Encoder                                                                              Classifier
+                                                                                                                                                                                                                                                  Self-Attention
+                                         Target
+                                                                                                                   Translator                                                               Cross-Entropy-Loss
+                                        modality
+                                                                                                                                                                                                                                              Representation
+
+
+                                                                                                               Only the blocks with green color required at inference time
+                                                                                                         Fig. 8: Proposed cross-modality implementation with contrastive Loss
+
+                                                                                                                TABLE II: Result summary of upper body activity recognition
+                                                          Model                   Target modality                                   Source modality                              Macro F1 Score(%)     Weight (α)            Improvement (%)
+                                                         Backbone                      IMU                                                  -                                       81.49 ± 7.24           -                         -
+                                                                                       IMU                                           Bio-impedance                                80.53% ± 7.43%           -                      -0.96
+                                                         M2L [34]
+                                                                                       IMU                                      Bio-impedance and IMU                             79.80% ± 6.90%           -                      -1.69
+                                                                                       IMU                                           Bio-impedance                                  81.74 ± 6.51           -                       0.25
+                                                               SR
+                                                                                       IMU                                      Bio-impedance and IMU                               82.57 ± 6.88           -                       1.08
+                                                                                       IMU                                           Bio-impedance                                  84.71 ± 5.46          1.0                      3.22
+                                                             Ours
+                                                                                       IMU                                      Bio-impedance and IMU                               83.64 ± 6.23          0.1                      2.15
+                                                         Backbone                 Bio-impedance                                             -                                      75.36 ± 12.78
+                                                                                  Bio-impedance                                           IMU                                    65.76% ± 14.66%            -                             -9.60
+                                                         M2L [34]
+                                                                                  Bio-impedance                                 IMU and Bio-impedance                            66.40% ± 13.64%            -                             -8,96
+                                                                                  Bio-impedance                                           IMU                                      74.22 ± 13.91            -                             -1.14
+                                                               SR
+                                                                                  Bio-impedance                                 IMU and Bio-impedance                              75.05 ± 13.71            -                             -0.31
+                                                                                  Bio-impedance                                           IMU                                      77.76 ± 12.71           0.3                             2.40
+                                                             Ours
+                                                                                  Bio-impedance                                 IMU and Bio-impedance                              75.74 ± 13.00           0.2                             0.38
+                                                     Sensor Fusion             IMU and Bio-impedance                                        -                                       89.57 ± 5.69
+
+
+
+                                                                                                                                                                 baseline with our studied modality.
+                                                                                                                                                                    Fig. 10 shows the joint confusion matrix for the contrastive
+                                  
+                                                                                                                                                                 learning model with the source modality of a single bio-
+                                                                                                                                                                 impedance while the weight α was 1.0. The recall of each
+                                                                                                                                                              class has been improved from 1% to 5% by our approach
+
+ P D F U R  )   V F R U H
+                                                                                                                                                                 compared to the result of the model trained with a single IMU
+                                                                                                                                                              as shown in Fig. 6b. The activities with the most improved
+                                                                                                                                                                 recall of 5 % are Arm hold+Shoulder Press and Box. The
+                                                                                                                                                                 class Biceps Curl with the highest recognition recall score of
+                                  
+                                                                                                                                                                 95 % was achieved by our model, which is even higher than
+                                                                                                                                                                 the direct sensor fusion method with a recall of 94 % as Fig. 6c
+                                                                                                                                                              shown, where the bio-impedance and IMU data are required
+                                         , 0 8  , 0 3     , 0 3      , 0 8        , 0 3          , 0 3  , 0 8  , 0 3  , 0 8  , 0 3  , 0 3  , 0 8  , 0 3
+                                                                                                                                                                 at inference time.
+                                             ! , 0 8      % 6      % 6      ! , 0 8       ! , 0 8   ! , 0 8   ! , 0 8   ! , 0 8             % 6 
+                                             0  /                             0  /          6 5       6 5         2 X U V    2 X U V                 As our proposed model has demonstrated promising perfor-
+                                                                                             0 R G D O L W \
+                                                                                                                                                                 mance in using bio-impedance sensing to train better IMU-
+ Fig. 9: Boxplots of the result for upper body activities with different models                                                                                  only classification, we further investigated whether the same
+ (IMP: Bio-impedance. BS: baseline from Backbone model. M2L: model
+ from existing work [34]. SR: shared representation model. Ours: Contrastive
+                                                                                                                                                                 approach can train better bio-impedance-only classification
+ learning (CL) based model. In the M2L, SR, and our models, the left of the                                                                                      using IMU data, where the bio-impedance was regarded as
+ arrow is the source modality and the right side is the target modality                                                                                          the target sensor while the IMU or IMU and Bio-impedance
+                                                                                                                                                                 sensor were the source target. As a result in Table II shows, the
+                                                                                                                                                                 average Macro F1 score with a single bio-impedance modality
+ case the classifiers do not share weights, as is the case in                                                                                                    as the modality at inference time was improved by 2.24 %
+ their method. From the results, it is clear that our contrastive                                                                                                with the help of IMU sensor as source modality during training
+ learning approach outperforms it, as it did not improve on the                                                                                                  compared to the backbone classification model. However, there
+                                                  0 D F U R  )   6 F R U H                                                 7 K H  H I I H F W  R I  Z H L J K W  R Q  S H U I R U P D Q F H   , 0 8  D V  W D U J H W  V H Q V R U 
+             O O                                                                                                                              
+       Q X
+                                                                                                                                   
+                                                                                                                                                                                  
+                                                                                        
+
+
+
+                                                                                                                                                0 D F U R  )   V F R U H
+            
+                                                                                                                                                                                  
+                                                                                               
+ 7 U X H  / D E H O                                                                                                                                                              
+                                                                                        
+                                                                                                                                 
+                                                                                                                                                                                  
+                                                                                        
+                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                   : H L J K W
+                                                                                                                                                   % L R  , P S H Q G D Q F H  W H D F K H V  , 0 8                                                        E D V H O L Q H  , 0 8
+                                                                                                                                                                                    % L R  , P S H Q G D Q F H  D Q G  , 0 8  W H D F K  , 0 8                                            E D V H O L Q H  , 0 8  D Q G  % L R  L P S H G D Q F H
+
+                                                                                                                                         Fig. 11: The effect of weight on performance when IMU is the target sensor
+                                                                                       
+                                                                                                                                         (upper body activity recognition)
+                                                                                                                                   
+                                                                                                                                          7 K H  H I I H F W  R I  Z H L J K W  R Q  S H U I R U P D Q F H   % L R  L P S H G D Q F H  D V  W D U J H W  V H Q V R U 
+                             O O
+                           Q X                                                                                 
+                                                                 3 U H G L F W L R Q                                                                                                                                
+
+Fig. 10: Joint confusion matrix of our model based on contrastive learning                                                                                                                                          
+with the input of single IMU at inference(1: Box, 2: Biceps curl, 3: Chest                                                                                                                                          
+
+
+
+                                                                                                                                                                                  0 D F U R  )   V F R U H
+press, 4: Shoulder and chest press, 5: Arm hold and shoulder press, 6: Arm
+                                                                                                                                                                                                                    
+opener)
+                                                                                                                                                                                                                    
+                                                                                                                                                                                                                    
+                                                                                                                                                                                                                    
+                                                                                                                                                                                                                    
+is a performance degradation of the Macro F1 score for this                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                     : H L J K W
+task by the SR model and M2L model. Overall, the proposed                                                                                                                                        , 0 8  W H D F K H V  % L R  L P S H G D Q F H                                                      E D V H O L Q H  % L R  L P S H G D Q F H
+                                                                                                                                                                                                 % L R  , P S H Q G D Q F H  D Q G  , 0 8  W H D F K  % L R  L P S H G D Q F H                    E D V H O L Q H  , 0 8  D Q G  % L R  L P S H G D Q F H
+model based on the weighted contrastive loss can be used
+to train a better IMU-only classification with the help of the                                                                           Fig. 12: The effect of weight on performance when the bio-impedance is the
+source sensor modality, which is not required at the inference                                                                           target sensor (upper body activity recognition)
+time. The performance of our model is better than the model
+trained only by the target sensor modality, but cannot achieve
+the same performance as the direct sensor fusion model, which                                                                                      VII. E XTENDED S TUDY ON L OWER B ODY F ITNESS
+requires all modalities to be available at both training and                                                                                                   ACTIVITY R ECOGNITION
+inference time. This is because the temporal correspondence                                                                                 To demonstrate the generalizability of iMove in fitness
+between the modalities can only guide the target modality to a                                                                           activity recognition, an extended experiment on lower body
+better representation, but clearly there is information missing                                                                          fitness activity was conducted in this work. The experiment
+as the source modality is not present at inference time.                                                                                 protocol is similar to the experiment on the upper body fitness
+                                                                                                                                         activity except for the sensor location. In the lower body fitness
+   Since the proposed hyperparameter weight α can affect                                                                                 activity experiment, two electrodes were attached to the two
+the latent representation translation, the performance of our                                                                            calves separately, by which the knee can be connected into
+contrastive learning model is closely related to this parameter.                                                                         the body circuit loop between the two electrodes as the knee
+In order to study the effect of the weight on classification                                                                             bending activities play an important role in lower body activity,
+result, eleven weight value from 0 to 1 was tested, Fig. 11                                                                              like leg fitness activity. The single IMU was only attached to
+shows the effect of weight on the performance of classification                                                                          the left calf. Five types of leg activity were performed by ten
+task when the IMU as the target sensor modality. It can                                                                                  subjects on five different days. The activities selected can be
+be observed that the average Macro F1 score is changed                                                                                   seen in Fig. 13 and are squat, lunge, cycling, and walking. As
+with different weight values, however, there is not a clear                                                                              we can see in the Figure the cycling activity was performed
+relationship between the weight value and the performance.                                                                               with the subject lying down on an exercise mat. The other
+The same result can be observed in the contrastive approach                                                                              activities performed during the experiment such as standing
+with the target source of bio-impedance as shown in Fig. 12.                                                                             still and activity transitions are regarded as null class.
+The optimal weight value among different target and source                                                                                  Fig. 14 shows the lower body fitness activity classification
+modalities is also different.                                                                                                            result. It can be observed that the best classification result
+Fig. 13: The four activities used for our lower body fitness activity recognition scenario. Two electrodes were attached to the two calves separately, by which
+the knee can be connected into the body circuit loop between the two electrodes, while the single IMU was only attached to the left calf.
+
+
+
+was achieved by the direct sensor fusion method with an                          recognition when combined with inertial measurement units
+average Macro F1 score of 81.74 %, while the model with                          (IMUs) through sensor fusion and contrastive learning tech-
+a single IMU as input achieved an average F1 score of 77.99                      niques. Our contrastive training framework, leveraging shared
+%. With our proposed method using Bio-impedance data to                          latent representations from multiple modalities, enabled us
+guide IMU during the model training, the classification result                   to harness the power of bio-impedance to enhance a mono-
+has been improved by around 3% and is very close to the                          modality IMU model, achieving an impressive 84.71 % Macro
+direct sensor fusion method as Fig. 14b shows. The most                          F1 score. Importantly, this incorporation of bio-impedance was
+confusing classes are the null class and other defined activities,               solely necessary during the training phase. We have evaluated
+especially for the slow activities like squat and lunge, which                   our method first on six upper body fitness activities and then
+can not be well recognized by single IMU as Fig. 14b shows                       on four lower body ones obtaining similar results. This result
+compared to walking and cycling, because the IMU sensor is                       highlights the importance of training rich representations for
+on the calf while the major movement of squat is from knee                       HAR, even if those are only available at training time due to
+blending leading to little movement in the calves. However,                      deployment constraints.
+the knee blending can cause bio-impedance variation between                         Regarding bio-impedance as a modality for HAR, we
+two electrodes, which provides additional information to IMU,                    have demonstrated the effectiveness of single-channel bio-
+thus, the activity classification results were improved when                     impedance sensing between wrists for the recognition of
+adding the bio-impedance information to the model as Fig. 14b                    fitness activities, achieving an average Macro F1 score of
+and Fig. 14c show.                                                               75.36 % for six upper body ones. While this performance
+   Table III shows the result summary of the experiment on the                   was not as good as that of a single IMU sensor on one wrist
+lower body fitness activity classification. The result is similar                (81.49 %), we showed how bio-impedance can improve IMU
+to the experiment on upper body fitness activity classification,                 HAR through sensor fusion, that is, by employing a data-
+our proposed method helps a single IMU-based inference                           level sensor fusion approach which provided in this case a
+model improve the lower body fitness activity classification                     substantial improvement with an activity classification Macro
+Macro F1 score by 2.79 %. In addition, the performance                           F1 of 89.57 %. We have reached similar results for lower body
+of a single bio-impedance-based inference model was also                         activities, with once again the best results being those using
+improved by 4.31 % with the use of our proposed solution.                        sensor-fusion.
+The results outperform both the M2L model and the shared                            Our findings underscore the potential of sensor fusion and
+representation model. Fig. 16 and Fig. 15 show the effect of                     contrastive learning as valuable tools for advancing fitness
+weight on the performance of the leg fitness activity classi-                    activity recognition, with bio-impedance playing a pivotal role
+fication task when the IMU and Bio-impedance as the target                       in augmenting the capabilities of IMU-based systems. This
+sensor modality, correspondingly. Similar to the upper body                      research opens avenues for further exploration and application
+fitness activity classification, the optimal weight values change                of multi-modal sensing in the realm of fitness tracking and
+depending on target and source modalities. In most cases, the                    beyond.
+weight with the value of 0.5, which is the same as the existing
+work Learning from the Best [32], improves results, but does                                              ACKNOWLEDGMENT
+not achieve the best ones. Thus, our proposed weighting factor                     The research reported in this paper was supported by the
+plays an important role in activity classification tasks. In future              BMBF (German Federal Ministry of Education and Research)
+work, we will investigate how weight selection can be done                       in the project VidGenSense (01IW21003) and SocialWear
+end to end in the training procedure instead of remaining a                      (01IW20002).
+hyper-parameter.
+                                                                                                               R EFERENCES
+                         VIII. C ONCLUSION
+                                                                                  [1] R. K. Dishman, J. F. Sallis, and D. R. Orenstein, “The determinants of
+  Our research has successfully showcased the potential of                            physical activity and exercise.” Public health reports, vol. 100, no. 2, p.
+bio-impedance in enhancing the accuracy of fitness activity                           158, 1985.
+                                                            0 D F U R  )   6 F R U H                                                                                                 0 D F U R  )   6 F R U H                                                                                                               0 D F U R  )   6 F R U H              
+                                    O O
+                                 Q X                                                                                                Q X   O O                                                                                                                  Q X   O O                                                                          
+
+                                                                                                                                                                                                                                                                                                                                                 
+    7 U X H  / D E H O                                                                                                                          7 U X H  / D E H O                                                                                                                                   7 U X H  / D E H O
+         / X             6 T                                                                                               / X             6 T                                                                                                        / X             6 T                                                                        
+              Q J             X D                                                                                                                          Q J             X D                                                                                                                                   Q J             X D
+ J                 H               W                                                                                                          J                 H               W                                                                                                                   J                 H               W
+                             F O L Q                                                                                              F O L Q                                                                                                                     F O L Q                                                             
+               & \                                                                                                                                    & \                                                                                                                                                   & \
+             : D                                                                                                          : D                                                                                                                         : D                                                                                    
+                  O N L Q                                                                                                                                O N L Q                                                                                                                                               O N L Q
+                           J                                                                                                                                      J                                                                                                                                                     J
+                                                 O O
+                                              Q X                     W
+                                                                    X D              Q J H                       J
+                                                                                                          F O L Q      : D                                                               O O
+                                                                                                                                                                                      Q X                    W
+                                                                                                                                                                                                          X D                H
+                                                                                                                                                                                                                          Q J                                           J
+                                                                                                                                                                                                                                                                    F O L Q      : D                                                           O O
+                                                                                                                                                                                                                                                                                                                                            Q X                 X D   W
+                                                                                                                                                                                                                                                                                                                                                                                 Q J   H                     J
+                                                                                                                                                                                                                                                                                                                                                                                                      F O L Q       : D
+                                                              6 T                 / X                                       O N L Q                                                                   6 T              / X                                                            O N L Q                                                               6 T               / X                                        O N L Q
+                                                                                                        & \                          J                                                                                                                 & \                                     J                                                                                                    & \                           J
+                                                                                 3 U H G L F W L R Q                                                                                                                  3 U H G L F W L R Q                                                                                                                                    3 U H G L F W L R Q
+                                                           (a) Single IMU                                                                                (b) Bio-impedance teaching IMU (Ours)                                                                                                           (c) Bio-impedance and IMU fusion directly
+                                                                                                                    Fig. 14: Joint confusion matrix for lower body fitness activity classification
+
+                                                                                                                       TABLE III: Result summary of lower body fitness activity recognition
+                                                        Model                                 Target modality                                                                 Source modality                                                                 Macro F1 Score(%)                                              Weight (α)                          Improvement (%)
+                                                       Backbone                                    IMU                                                                                -                                                                          77.99 ± 8.37                                                    -                                       -
+                                                                                                   IMU                                                                         Bio-impedance                                                                     77.13 ± 7.87                                                    -                                    -0.86
+                                                       M2L [34]
+                                                                                                   IMU                                                                    Bio-impedance and IMU                                                                  77.30 ± 8.02                                                    -                                    -0.69
+                                                                                                   IMU                                                                         Bio-impedance                                                                     77.84 ±8.69                                                     -                                    -0.15
+                                                               SR
+                                                                                                   IMU                                                                    Bio-impedance and IMU                                                                  78.53 ±7.61                                                     -                                     0.54
+                                                                                                   IMU                                                                         Bio-impedance                                                                     80.78 ±7.81                                                    0.2                                    2.79
+                                                             Ours
+                                                                                                   IMU                                                                    Bio-impedance and IMU                                                                  79.51 ±8.31                                                    0.4                                    1.52
+                                                       Backbone                               Bio-impedance                                                                           -                                                                         70.02 ± 10.09
+                                                                                              Bio-impedance                                                                         IMU                                                                          70.08 ± 8.96                                                                -                                 0.06
+                                                       M2L [34]
+                                                                                              Bio-impedance                                                               IMU and Bio-impedance                                                                  71.29 ± 9.23                                                                                                  1.27
+                                                                                              Bio-impedance                                                                         IMU                                                                         70.71 ± 10.72                                                              -                                   0.69
+                                                               SR
+                                                                                              Bio-impedance                                                               IMU and Bio-impedance                                                                 71.60 ± 10.44                                                              -                                   1.58
+                                                                                              Bio-impedance                                                                         IMU                                                                          74.33 ± 8.81                                                             0.5                                  4.31
+                                                             Ours
+                                                                                              Bio-impedance                                                               IMU and Bio-impedance                                                                  72.38 ± 9.23                                                             0.4                                  2.36
+                                                   Sensor Fusion                           IMU and Bio-impedance                                                                      -                                                                          81.74 ± 8.55
+
+
+
+                                                                                                                                                                                                                                                                  
+
+                                                                                                                                                                                                                                                                  
+                                     
+                                                                                                                                                                                                                                                                       
+
+
+                                                                                                                                                                                                                                     0 D F U R  )   V F R U H
+                                     
+
+
+  0 D F U R  )   V F R U H
+                                                                                                                                                                                                                                                                       
+                                     
+                                                                                                                                                                                                                                                                  
+
+                                                                                                                                                                                                                                                                  
+                                     
+                                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                           : H L J K W
+                                                                                                                                                                                                                                  , 0 8  W H D F K H V  % L R  L P S H G D Q F H                                                                      E D V H O L Q H  % L R  L P S H G D Q F H
+                                                                                                        : H L J K W                                                                                                                                 % L R  , P S H Q G D Q F H  D Q G  , 0 8  W H D F K  % L R  L P S H G D Q F H                                    E D V H O L Q H  , 0 8  D Q G  % L R  L P S H G D Q F H
+                                        % L R  , P S H Q G D Q F H  W H D F K H V  , 0 8                                        E D V H O L Q H  , 0 8
+                                        % L R  , P S H Q G D Q F H  D Q G  , 0 8  W H D F K  , 0 8                            E D V H O L Q H  , 0 8  D Q G  % L R  L P S H G D Q F H                          Fig. 16: The effect of weight on performance when bio-impedance is the
+                                                                                                                                                                                                                        target sensor in lower body fitness activity classification
+ Fig. 15: The effect of weight on performance when IMU is the target sensor
+ in lower body fitness activity classification
+                                                                                                                                                                                                                               recognition on unmodified commercial off-the-shelf smartphones,” in
+                                                                                                                                                                                                                               Proceedings of the 13th ACM International Conference on PErvasive
+                                                                                                                                                                                                                               Technologies Related to Assistive Environments, 2020, pp. 1–10.
+          [2] F. J. Penedo and J. R. Dahn, “Exercise and well-being: a review of                                                                                                                                           [4] X. Guo, J. Liu, C. Shi, H. Liu, Y. Chen, and M. C. Chuah, “Device-
+              mental and physical health benefits associated with physical activity,”                                                                                                                                          free personalized fitness assistant using wifi,” Proceedings of the ACM
+              Current opinion in psychiatry, vol. 18, no. 2, pp. 189–193, 2005.                                                                                                                                                on Interactive, Mobile, Wearable and Ubiquitous Technologies, vol. 2,
+          [3] B. Fu, F. Kirchbuchner, and A. Kuijper, “Unconstrained workout activity                                                                                                                                          no. 4, pp. 1–23, 2018.
+ [5] B. Zhou, M. Sundholm, J. Cheng, H. Cruz, and P. Lukowicz, “Never skip         [23] C. Holz and M. Knaust, “Biometric touch sensing: Seamlessly augment-
+     leg day: A novel wearable approach to monitoring gym leg exercises,”               ing each touch with continuous authentication,” in Proceedings of the
+     in 2016 IEEE International Conference on Pervasive Computing and                   28th Annual ACM Symposium on User Interface Software & Technology,
+     Communications (PerCom). IEEE, 2016, pp. 1–9.                                      2015, pp. 303–312.
+ [6] S. Bian, V. F. Rey, P. Hevesi, and P. Lukowicz, “Passive capacitive           [24] S. Hersek, H. Töreyin, C. N. Teague, M. L. Millard-Stafford, H.-K.
+     based approach for full body gym workout recognition and counting,”                Jeong, M. M. Bavare, P. Wolkoff, M. N. Sawka, and O. T. Inan,
+     in 2019 IEEE International Conference on Pervasive Computing and                   “Wearable vector electrical bioimpedance system to assess knee joint
+     Communications (PerCom. IEEE, 2019, pp. 1–10.                                      health,” IEEE Transactions on Biomedical Engineering, vol. 64, no. 10,
+ [7] J. Qi, P. Yang, M. Hanneghan, S. Tang, and B. Zhou, “A hybrid hierar-              pp. 2353–2360, 2016.
+     chical framework for gym physical activity recognition and measurement        [25] G. Vescio, J. Rosell, L. Nescolarde, and G. Giovinazzo, “Muscle fatigue
+     using wearable sensors,” IEEE Internet of Things Journal, vol. 6, no. 2,           monitoring using a multifrequency bioimpedance technique,” in 5th
+     pp. 1384–1393, 2018.                                                               European Conference of the International Federation for Medical and
+ [8] T. Rangari, S. Kumar, P. P. Roy, D. P. Dogra, and B.-G. Kim, “Video                Biological Engineering: 14–18 September 2011, Budapest, Hungary.
+     based exercise recognition and correct pose detection,” Multimedia Tools           Springer, 2012, pp. 1257–1260.
+     and Applications, vol. 81, no. 21, pp. 30 267–30 282, 2022.                   [26] A. A. Aguileta, R. F. Brena, O. Mayora, E. Molino-Minero-Re, and
+ [9] U. Aiman and T. Ahmad, “Video based exercise recognition using gcn,”               L. A. Trejo, “Multi-sensor fusion for activity recognition—a survey,”
+     in 2023 International Conference on Recent Advances in Electrical,                 Sensors, vol. 19, no. 17, p. 3808, 2019.
+     Electronics & Digital Healthcare Technologies (REEDCON). IEEE,                [27] S. Münzner, P. Schmidt, A. Reiss, M. Hanselmann, R. Stiefelhagen, and
+     2023, pp. 180–184.                                                                 R. Dürichen, “Cnn-based sensor fusion techniques for multimodal hu-
+[10] S. Bian, M. Liu, B. Zhou, and P. Lukowicz, “The state-of-the-art sensing           man activity recognition,” in Proceedings of the 2017 ACM international
+     techniques in human activity recognition: A survey,” Sensors, vol. 22,             symposium on wearable computers, 2017, pp. 158–165.
+     no. 12, p. 4596, 2022.                                                        [28] J.-H. Choi and J.-S. Lee, “Confidence-based deep multimodal fusion
+                                                                                        for activity recognition,” in Proceedings of the 2018 ACM International
+[11] J. Karolus, F. Bachmann, T. Kosch, A. Schmidt, and P. W. Woźniak,
+                                                                                        Joint Conference and 2018 International Symposium on Pervasive and
+     “Facilitating bodily insights using electromyography-based biofeedback
+                                                                                        Ubiquitous Computing and Wearable Computers, 2018, pp. 1548–1556.
+     during physical activity,” in Proceedings of the 23rd International
+                                                                                   [29] S. Liu, S. Yao, J. Li, D. Liu, T. Wang, H. Shao, and T. Abdelzaher,
+     Conference on Mobile Human-Computer Interaction, 2021, pp. 1–15.
+                                                                                        “Giobalfusion: A global attentional deep learning framework for mul-
+[12] E. Piuzzi, S. Pisa, E. Pittella, L. Podestà, and S. Sangiovanni, “Low-cost
+                                                                                        tisensor information fusion,” Proceedings of the ACM on Interactive,
+     and portable impedance plethysmography system for the simultaneous
+                                                                                        Mobile, Wearable and Ubiquitous Technologies, vol. 4, no. 1, pp. 1–27,
+     detection of respiratory and heart activities,” IEEE Sensors Journal,
+                                                                                        2020.
+     vol. 19, no. 7, pp. 2735–2746, 2018.
+                                                                                   [30] Y. Zhou, H. Zhao, Y. Huang, T. Riedel, M. Hefenbrock, and M. Beigl,
+[13] J. Xu, X. Gao, A. Lee, S. Yamada, E. Yavari, V. Lubecke, and                       “Tinyhar: A lightweight deep learning model designed for human
+     O. Boric-Lubecke, “Wrist-worn heartbeat monitoring system based on                 activity recognition,” in Proceedings of the 2022 ACM International
+     bio-impedance analysis,” in 2016 38th Annual International Conference              Symposium on Wearable Computers, 2022, pp. 89–93.
+     of the IEEE Engineering in Medicine and Biology Society (EMBC).               [31] R. Gravina, P. Alinia, H. Ghasemzadeh, and G. Fortino, “Multi-sensor
+     IEEE, 2016, pp. 6294–6297.                                                         fusion in body sensor networks: State-of-the-art and research chal-
+[14] Y. Zhang and C. Harrison, “Tomo: Wearable, low-cost electrical                     lenges,” Information Fusion, vol. 35, pp. 68–80, 2017.
+     impedance tomography for hand gesture recognition,” in Proceedings            [32] V. Fortes Rey, S. Suh, and P. Lukowicz, “Learning from the best:
+     of the 28th Annual ACM Symposium on User Interface Software &                      Contrastive representations learning across sensor locations for wearable
+     Technology, 2015, pp. 167–173.                                                     activity recognition,” in Proceedings of the 2022 ACM International
+[15] H. Chen, G. Ma, P. Wang, and X. Wang, “A bio-impedance analysis                    Symposium on Wearable Computers, 2022, pp. 28–32.
+     method based on human hand anatomy for hand gesture recognition,”             [33] P. Lago, M. Matsuki, K. Adachi, and S. Inoue, “Using additional
+     IEEE Transactions on Instrumentation and Measurement, vol. 70, pp.                 training sensors to improve single-sensor complex activity recognition,”
+     1–10, 2021.                                                                        in Proceedings of the 2021 ACM International Symposium on Wearable
+[16] C. I. Tang, I. Perez-Pozuelo, D. Spathis, and C. Mascolo, “Exploring               Computers, 2021, pp. 18–22.
+     contrastive learning in human activity recognition for healthcare,” arXiv     [34] H. Yang, H. Yu, K. Sridhar, T. Vaessen, I. Myin-Germeys, and A. Sano,
+     preprint arXiv:2011.11542, 2020.                                                   “More to less (m2l): Enhanced health recognition in the wild with re-
+[17] L. M. Roa, D. Naranjo, J. Reina-Tosina, A. Lara, J. A. Milán, M. A.               duced modality of wearable sensors,” in 2022 44th Annual International
+     Estudillo, and J. S. Oliva, “Applications of bioimpedance to end stage             Conference of the IEEE Engineering in Medicine & Biology Society
+     renal disease (esrd),” Modelling and Control of Dialysis Systems: Volume           (EMBC). IEEE, 2022, pp. 3253–3256.
+     1: Modeling Techniques of Hemodialysis Systems, pp. 689–769, 2013.            [35] D. Naranjo-Hernández, J. Reina-Tosina, and M. Min, “Fundamentals,
+[18] K. Sel, A. Brown, H. Jang, H. M. Krumholz, N. Lu, and R. Jafari,                   recent advances, and future challenges in bioimpedance devices for
+     “A wrist-worn respiration monitoring device using bio-impedance,” in               healthcare applications,” Journal of Sensors, vol. 2019, 2019.
+     2020 42nd Annual International Conference of the IEEE Engineering             [36] A. Cömert and J. Hyttinen, “Impedance spectroscopy of changes in
+     in Medicine & Biology Society (EMBC). IEEE, 2020, pp. 3989–3993.                   skin-electrode impedance induced by motion,” BioMedical Engineering
+[19] G. Ma, H. Chen, P. Wang, S. Dong, and X. Wang, “A two-electrode                    OnLine, vol. 13, no. 1, pp. 1–19, 2014.
+     frequency-scan system for gesture recognition,” Mechatronics, vol. 94,        [37] A. v. d. Oord, Y. Li, and O. Vinyals, “Representation learning with
+     p. 103039, 2023.                                                                   contrastive predictive coding,” arXiv preprint arXiv:1807.03748, 2018.
+[20] R. Zhang, M. Freund, O. Amft, J. Cheng, B. Zhou, P. Lukowicz,
+     S. Fernando, and P. Chabrecek, “A generic sensor fabric for multi-modal
+     swallowing sensing in regular upper-body shirts,” in Proceedings of the
+     2016 ACM International Symposium on Wearable Computers, 2016, pp.
+     46–47.
+[21] T. R. Ackland, T. G. Lohman, J. Sundgot-Borgen, R. J. Maughan,
+     N. L. Meyer, A. D. Stewart, and W. Müller, “Current status of body
+     composition assessment in sport: review and position statement on behalf
+     of the ad hoc research working group on body composition health and
+     performance, under the auspices of the ioc medical commission,” Sports
+     medicine, vol. 42, pp. 227–249, 2012.
+[22] T. Van Steenkiste, W. Groenendaal, P. Dreesen, S. Lee, S. Klerkx,
+     R. de Francisco, D. Deschrijver, and T. Dhaene, “Portable detection of
+     apnea and hypopnea events using bio-impedance of the chest and deep
+     learning,” IEEE Journal of Biomedical and Health Informatics, vol. 24,
+     no. 9, pp. 2589–2598, 2020.
+

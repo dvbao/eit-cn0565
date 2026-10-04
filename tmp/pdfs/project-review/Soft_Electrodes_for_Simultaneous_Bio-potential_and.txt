@@ -1,0 +1,511 @@
+                              Biomed. Phys. Eng. Express 10 (2024) 025036                                                 https://doi.org/10.1088/2057-1976/ad28cb
+
+
+
+
+                              PAPER
+
+                              Soft electrodes for simultaneous bio-potential and bio-impedance
+OPEN ACCESS
+                              study of the face
+RECEIVED
+14 August 2023
+                              Bara Levit1       , Paul F Funk2,3,4       and Yael Hanein3,4
+REVISED                       1
+13 November 2023
+                                School of Physics, Tel Aviv University, Tel Aviv, Israel
+                              2
+                                Department of Otolaryngology, Head and Neck Surgery, University Hospital Jena, Friedrich Schiller University Jena, Jena, Germany
+ACCEPTED FOR PUBLICATION      3
+                                School of Electrical Engineering, Tel Aviv University, Tel Aviv, Israel
+13 February 2024              4
+                                Tel Aviv University Center for Nanoscience and Nanotechnology, Tel Aviv University, Tel Aviv, Israel
+PUBLISHED
+23 February 2024              E-mail: yaelha@tauex.tau.ac.il
+
+                              Keywords: bio-potential, bio-impedance, soft electrodes, facial EMG, dry electrodes, blood ﬂow
+Original content from this
+work may be used under        Supplementary material for this article is available online
+the terms of the Creative
+Commons Attribution 4.0
+licence.
+Any further distribution of   Abstract
+this work must maintain
+attribution to the
+                              The human body’s vascular system is a ﬁnely regulated network: blood vessels can change in shape (i.e.
+author(s) and the title of    constrict, or dilate), their elastic response may shift and they may undergo temporary and partial
+the work, journal citation
+and DOI.                      blockages due to pressure applied by skeletal muscles in their immediate vicinity. Simultaneous
+                              measurement of muscle activation and the corresponding changes in vessel diameter, in particular at
+                              anatomical regions such as the face, is challenging, and how muscle activation constricts blood vessels
+                              has been experimentally largely overlooked. Here we report on a new electronic skin technology for
+                              facial investigations to address this challenge. The technology consists of screen-printed dry carbon
+                              electrodes on soft polyurethane substrate. Two dry electrode arrays were placed on the face: One array
+                              for bio-potential measurements to capture muscle activity and a second array for bio-impedance. For
+                              the bio-potential signals, independent component analysis (ICA) was used to differentiate different
+                              muscle activations. Four-contact bio-impedance measurements were used to extract changes (related
+                              to artery volume change), as well as beats per minute (BPM). We performed concurrent bio-potential
+                              and bio-impedance measurements in the face. From the simultaneous measurements we successfully
+                              captured ﬂuctuations in the superﬁcial temporal artery diameter in response to facial muscle activity,
+                              which ultimately changes blood ﬂow. The observed changes in the face, following muscle activation,
+                              were consistent with measurements in the forearm and were found to be notably more intricate. Both
+                              at the arm and the face, a clear increase in the baseline impedance was recorded during muscle
+                              activation (artery narrowing), while the impedance changes signifying the pulse had a clear repetitive
+                              trend only at the forearm. These results reveal the direct connection between muscle activation and
+                              the blood vessels in their vicinity and start to unveil the complex mechanisms through which facial
+                              muscles might modulate blood ﬂow and possibly affect human physiology.
+
+
+                              1. Introduction                                                       muscles of the body, are unique: they are connected to
+                                                                                                    the skin (rather than being ﬁxed to bone-based
+                              The control of blood ﬂow in the face holds signiﬁcance                insertion points), they are interwoven and they
+                              in facial physiology, encompassing aspects like facial                partially overlap each other [4, 5]. Consequently, facial
+                              expressions and skin well-being [1, 2]. Blood circula-                movements have complex activation patterns, where
+                              tion is subject to a range of factors, including the                  nearly all facial muscles are co-active [6]. Scientiﬁc
+                              expansion and narrowing of blood vessels. Muscle                      explorations spanning over decades explored many
+                              contraction in the proximity of blood vessels can cause               phenomena regarding the physiological, psychologi-
+                              them to narrow, and thus blood circulation in the face                cal, and cognitive effects of facial muscle activation.
+                              can potentially be locally inﬂuenced by facial muscles                For example, expansive evidence implicates facial
+                              [1, 3]. Facial muscles, compared to other skeletal                    muscle activation with the expression of emotions
+
+                              © 2024 The Author(s). Published by IOP Publishing Ltd
+Biomed. Phys. Eng. Express 10 (2024) 025036                                                                  B Levit et al
+
+
+
+[7–10]. Moreover, facial muscles are associated with a      experiments were conducted in accordance with
+wide range of medical disorders including Parkinson’s       relevant guidelines and regulations under approval
+disease (hypomimia, the reduction or loss of sponta-        from the Institutional Ethics Committee Review
+neous facial expressions) [11], Tourette syndrome           Board at Tel Aviv University. Informed consent was
+(fast, brief, and repetitive facial movements in the form   obtained from all subjects. The research was con-
+of tics) [12] and chronic facial palsy (might lead to       ducted in accordance with the principles embodied in
+synkinetic muscle activity or muscle atrophy) [13, 14].     the Declaration of Helsinki and in accordance with
+     Anatomically, facial muscles and the vascular net-     local statutory requirements.
+work are interwoven [15, 16], suggesting a mechanical
+mechanism in which dynamic changes in facial muscle
+activation may affect blood ﬂow. It was long ago            2.2. Soft IPG and sEMG electrodes
+empirically suggested that facial muscles play a role in    The electrode arrays used in this study are based on a
+modulating blood ﬂow [17, 18]. Recently, several            screen-printing process on soft substrates, as pre-
+approaches were used to explore the dynamic interac-        viously described [22, 23]. Brieﬂy, carbon electrodes
+tion between blood ﬂow and facial muscles. Ultra-           and silver traces were screen-printed on a thin and soft
+sound was used to study blood ﬂow blockage caused           polyurethane (PU) ﬁlm (80μm from Delstar EU94DS).
+by muscle activation during smiling [1]. The interac-       A second double-sided adhesive PU ﬁlm was used for
+tion between facial muscles and blood ﬂow was also          passivation and skin adhesive material. The sEMG
+recorded in photoplethysmography (PPG) measure-             arrays (X-trodes Inc.) consisted of 16 electrodes with
+ments in the ear during facial expressions [3]. In paral-   an additional internal ground.
+lel, attempts were made to show an indirect effect of
+this interaction. Mainly, if facial expressions have an
+effect on blood ﬂow or temperature in the brain [19].       2.3. sEMG measurement and analysis
+For example, using functional magnetic resonance            sEMG data were recorded with a miniature wireless
+imaging (fMRI), lower brain activity (in the amygdala)      data acquisition unit (DAU, X-trodes Inc.). The DAU
+was reported during a mimicry of angry expressions          supports up to 16 unipolar channels (2 μV noise RMS,
+when the forehead’s muscles were paralyzed [20].            0.5-700 Hz) with a sampling rate of 4000 S/s, 16 bit
+Similarly, an emotional state from spontaneous              resolution and input range of ±12.5 mV. A 620 mAh
+expressions was assessed using functional near-infra-       battery supports DAU operation for a duration of up
+red spectroscopy (fNIRS) and electroencephalography         to 16 hr. A Bluetooth (BT) module is used for
+(EEG) [21]. However, such attempts do not                   continuous data transfer. The DAU is controlled by an
+offer insight into local mechanical muscle-vessel           Android application and the data are stored on a built-
+interactions.                                               in SD card and the Cloud for further analysis. The
+     Overall, the study of the link between facial mus-     DAU also includes a 3-axis inertial sensor, to measure
+cles and a change in blood ﬂow due to changes in local      the acceleration of the hand or face during the
+vessel diameter was so far limited, with existing tools     measurements.
+allowing only low-resolution investigation under sta-           The face electrode array was placed at close esti-
+tic conditions. To facilitate the investigation of the      mated proximity to major facial muscles, such as the
+interaction between facial muscles and blood ﬂow in         zygomaticus, frontalis, and orbicularis oris muscle.
+the face under natural conditions, we introduce a           The forearm electrode array was positioned at the
+novel skin electronic approach, consisting of impe-         ﬂexor carpi radialis and pronator teres muscles region.
+dance plethysmography (IPG), combined with a high-          A 16-electrode array was placed such it is centered
+resolution surface electromyography (sEMG). IPG,            approximately at one-third of the forearm anterior
+sEMG, and EEG from the face under natural condi-            length measured from the wrist to the elbow (see
+tions were achieved with printed soft electrode arrays.     ﬁgure 1). The array was connected to a wireless DAU.
+Using this method, we recorded high-resolution facial           ICA was performed following the scheme pre-
+muscle activation and simultaneous minute changes           sented previously [22, 23]. Here we implemented the
+in IPG at the superﬁcial temporal artery to investigate     algorithm in Python, using python-picard [24, 25].
+the impact of facial muscle activation on vessel dia-       We also implemented the heat maps described pre-
+meter, which potentially affects blood ﬂow. We fur-         viously to visually present the sources on the face,
+ther explore how this relation differs at the forearm.      allowing us to discern the different segments of mus-
+                                                            cles that were activated. The interpolation was done
+2. Methods                                                  using Scipy (griddata, linear method). In addition, to
+                                                            evaluate the dominance of each ICA source, we calcu-
+2.1. Subjects                                               lated their intensities in each action: First, the absolute
+Four healthy volunteers (ages 27-30) participated in        value of the amplitude of each source during each
+the study. For both the sEMG and IPG measurements,          action was calculated, then the intensity was deﬁned as
+an electrode array was adhered to the skin. All             the average of the absolute value.
+
+                                               2
+Biomed. Phys. Eng. Express 10 (2024) 025036                                                                                      B Levit et al
+
+
+
+
+   Figure 1. Simultaneous sEMG and IPG measurements. (a1) IPG measurement from the ulnar artery during relaxation. Extremal
+   points signifying the pulse are marked in circles. (a2) sEMG (most intense ICA source during ﬁst clenching) during relaxation and ﬁst
+   clenching. (a3) Placement of the gel electrodes and sEMG array on the forearm. (b1) IPG measurement from the superﬁcial temporal
+   artery during relaxation. (b2) sEMG (most intense ICA source for the lips condition) during relaxation, ‘lips’ and ‘teeth’ condition.
+   (b3) Placement of the 4-electrode IPG array on the superﬁcial temporal artery. (b4) Placement of the sEMG facial array.
+
+
+
+2.4. IPG measurement and analysis                                       deﬁned as one over Δt, multiplied by 60 (as Δt is in
+The IPG array consisted of four electrodes to support a                 seconds). See ﬁgure 1.
+4-terminal measurement. The four-contact IPG was                            The impedance can be related to the diameter of
+measured using an impedance analyzer (MFIA by                           the blood vessel by modeling the artery as a cylindrical
+Zurich Instruments). A custom-made printed circuit                      resistor [26]:
+board (PCB) was produced to facilitate contact                                           Z a = rl A = rl (pra2)                            (1)
+between the MFIA and the soft electrodes which were
+connected directly to ﬂat conducting traces on the                      where Za is the impedance of the artery, ra is the artery
+PCB using a z-axis adhesive. IPG data were analyzed                     radius, l is length of the measured segment, and ρ is the
+                                                                        blood resistivity.
+with Python code. First, a running average over the
+                                                                            The overall bio-impedance is also sensitive to
+raw data was performed, using Scipy (uniform_ﬁl-
+                                                                        blood pulsation and can be therefore described by a
+ter1d). Then, the detection of the maximum and
+                                                                        baseline impedance (Z) and ΔZ - the change in the
+minimum peaks of the pulse was performed (Scipy,
+                                                                        impedance due to pulsation. ΔZ can be expressed by
+ﬁnd_peaks). Next, the impedance change and beats                        equation (2) [27]:
+per minute (BPM) were calculated as follows: The
+impedance change ΔZ was deﬁned as the difference                                           DZ = pZ 2Dra2 (rl )                             (2)
+between the absolute impedance at the maximum and                       where Dra = ra¢ 2 - ra2 is the (artery) radius pulsa-
+the absolute impedance at the minimum of each pulse                     tion amplitude change.
+(see ﬁgure 1). As pulsation measurements included                           Further detail can be found in Supplementary
+dynamic actions, only reliable pulses were kept.                        Material E.
+Reliable pulses were deﬁned as those with a repetitive
+pulse shape and behavior, with approximately equal                      2.5. Fist clenching protocol
+spacing. For the BPM, we calculated the time between                    A 16 electrode sEMG array was placed on the forearm,
+each peak minima (each pulse), Δt, then the BPM was                     together with four commercial pre-gelled Ambu
+
+                                                        3
+Biomed. Phys. Eng. Express 10 (2024) 025036                                                                   B Levit et al
+
+
+
+electrodes of 40 mm in diameter (Ambu® BlueSensor             printed dry electrodes are characterized by high-qual-
+Q ECG electrodes) along the ulnar artery. Subjects            ity signals and good stability, even under muscle
+were instructed to rest and then to clench their ﬁst.         activation.
+Muscle activity (sEMG) and blood pulsation (IPG)                   IPG data can be used to derive artery properties.
+were recorded during ﬁst clenching and release.               Foremost, we observe that the pulse shape differs
+                                                              between the forearm and face, with the secondary
+2.6. Facial muscle activation protocol                        notch (the dicrotic notch [31]) being less pronounced
+Subjects with sEMG and IPG electrodes were recorded           at the face. Indeed pulse shape has a strong association
+while performing three facial activation tasks: ‘lips’        with the electrode location [30, 32]. Additionally, from
+(holding a pen in the mouth with the lips), ‘teeth’           the extremal points (corresponding to the pulsation
+(holding a pen in the mouth with the teeth), and facial       itself), we can extract the pulse amplitude (ΔZ) and
+expressions. The ‘lips’ and ‘teeth’ tasks were adapted        duration (Δt) (see ﬁgure 1(a1)), which characterize
+from Strack and coworkers [28]. We chose this task as         blood ﬂow. Pulsation amplitude provides information
+it is a simple mechanical facial ‘expression’ that can be     about the artery mechanical parameters (equation
+activated for longer without feeling overly self-con-         E.3), and the heart rate. Moreover, baseline impedance
+scious. We also tested sEMG and IPG during facial             can be associated with artery cross-section (equation
+expressions. IPG measurements were taken from the             E.1-E.2). Simultaneous IPG and sEMG measurements
+superﬁcial temporal artery, as it is easily accessible with   reveal how muscle activation impacts artery properties
+minimal discomfort to the subject.                            at rest and during muscle action.
+                                                                   In ﬁgure 2, we examine how ﬁst clenching affected
+                                                              the diameter of the ulnar artery. Figure 2 shows sEMG
+3. Results                                                    activity at the forearm muscle of the left hand during
+                                                              ﬁve repetitions of ﬁst clenching and relaxation. The
+Soft and dry electrodes were used for simultaneous            IPG signal is directly affected by muscle activation in a
+IPG and sEMG measurements, to study how muscle                very consistent manner (ﬁgure 2(a)). At the onset of
+activation affects the diameter of the superﬁcial             muscle activation, the baseline IPG signal shifted
+temporal artery in the face. We used unique screen-           upward (i.e. the impedance Z increases, the artery dia-
+printed dry carbon electrodes which were extensively          meter decreases, ﬁgure 2(a) bottom panel) and the
+validated previously for bio-potential [29] and bio-          pulse amplitude ΔZ slightly increased (ﬁgure 2(b) top
+impedance [30] measurements. As a reference, we also          panel). At the release of the force, the IPG signal
+performed similar measurements on the forearm. In             returned to the baseline (artery diameter returns to its
+both cases, sEMG data were recorded with soft 16              original state). After the release of the force, we also
+electrode arrays and a miniaturized and wireless DAU.         observed a change in IPG pulsation amplitude. It ﬁrst
+IPG was measured using a 4-terminal impedance                 deﬂected downwards and gradually returned back to
+measurement. For IPG from the forearm, both dry               the baseline value (ﬁgure 2(b) middle panel). Finally,
+and conventional gelled electrodes were used (see             we make note of the elevated heart rate during ﬁst
+supplementary ﬁgure B1-B2). Clearly, to access                clenching (from 75 ± 5.6 BPM at initial relaxation to
+arteries in the face, IPG measurements had to be              an average of 92 ± 6.8 BPM across all ﬁst clenching
+performed using low form factor and soft electrodes           repetitions, ﬁgure 2(b) bottom panel).
+that can conform to the curvature of the face.                     Under manual obstruction of the artery (both
+    In ﬁgure 1, we show the two electrode arrays (i.e.        above the elbow, far from the measurement site (Sup-
+IPG and sEMG) placed on the forearm and the face              plementary ﬁgure (A1)-(A3)), and at the forearm at
+(ﬁgure 1(a3)) and IPG electrodes along the ulnar artery       close proximity to the measurement site), we observed
+and on the face (ﬁgure 1(b3)). The advantage of the           similar behavior in Z (increase during blockage and
+dry-printed electrodes to study the face is readily           return to the baseline after release). In both ﬁst clench-
+apparent.                                                     ing and mechanical blockage, the increase in Z can be
+    In ﬁgure 1 we also show typical IPG and sEMG              associated with artery radius reduction, followed by a
+data from the arm and the face. For the sEMG data, we         return to the baseline when the blockage is lifted. ΔZ
+used independent component analysis (ICA), to mini-           was slightly larger during ﬁst clenching than during
+mize noise and to reduce the effect of cross-talk [23].       relaxation (ﬁgure 2). As explained in the Supplemen-
+For clarity, the onset of muscle activity is marked by        tary, how Δra changes reﬂects on the viscoelasticity of
+orange in ﬁgure 1(a2) for the forearm and orange and          the artery and may depend on the manner the block-
+blue in ﬁgure 1(b2) for the face. IPG data was recorded       age is applied and released. The measurements were
+simultaneously. As clearly seen in ﬁgure 1(a1) and            repeated both with gel electrodes and printed carbon
+1(a2), IPG records blood pulsation that can be readily        electrodes and similar results were obtained (Supple-
+seen when the electrodes are positioned in close proxi-       mentary ﬁgure (B1)-(B2)).
+mity to an artery (ulnar artery in the forearm or super-           For the study of facial muscles, we followed the
+ﬁcial temporal artery in the face). As we recently            approach of Strack and co-authors [28] to generate
+demonstrated in [30], IPG recordings with soft-               different activations. Two facial actions were used:
+
+                                                 4
+Biomed. Phys. Eng. Express 10 (2024) 025036                                                                                        B Levit et al
+
+
+
+
+   Figure 2. sEMG and IPG response to ﬁst clenching. (a). Most intense ICA source during ﬁst clenching (top) and 4-terminal IPG signal
+   at the ulnar artery as a function of time (bottom). (b). Running average of the impedance as a function of time (top), relative impedance
+   changes as a function of time (middle), BPM as a function of time (bottom). Vertical dashed lines signify a transition between states
+   and the solid black line signiﬁes the average at the ﬁrst relaxation period. Only data from detectable pulses are shown.
+
+
+‘lips’ and ‘teeth’. In ‘lips’, the participants were asked               in contrast to the effect observed during ﬁst clenching,
+to hold a pen with their lips, while in ‘teeth’ , a pen was              after the force is released, the pulsation amplitude does
+held with their teeth. In this extensively studied para-                 not exhibit an abrupt decrease with a gradual increase
+digm, the ‘lips’ action supposedly inhibits smiling,                     to the baseline (across all repetitions). In general, and
+while the ‘teeth’ action activates muscles necessary for                 as shown here (in ﬁgure 3(b), top and middle panels),
+smiling [28]. In fact, in our high-resolution facial                     after muscle activation, pulse amplitude increased.
+sEMG data (data discussed below), we can map which                       The qualitative difference between the ulnar and the
+muscles are active, and show how these activations                       superﬁcial temporal artery may be attributed to their
+change from action to action.                                            different arterial properties, taking into account that
+     As portrayed in ﬁgure 3, simultaneous IPG and                       the determining factors for arterial stiffness stem from
+sEMG measurements from the face reveal a con-                            the cellular and extracellular composition of the
+spicuous link between muscle activation and vessel                       artery, as well as its geometry [33, 34].
+diameter. Foremost, at the onset of muscle activation,                       Altogether these results show that the difference
+the baseline IPG signal shifts upward (increase in                       between the two movements (smile and non-smile) is
+impedance, decrease in artery radius), as shown in the                   manifested in different muscle activations (amplitude
+bottom panel of ﬁgure 3(a). The increase or decrease                     and composition) as well as changes in vessel dia-
+of pulse amplitude, both during and after muscle acti-                   meter. The implications of these results are further
+vation, differed between the two actions. In ﬁgure 3(b)                  discussed below.
+(top and middle panels) we show an example where                             Unlike the robust and consistent behavior
+the pulsation amplitude increased slightly during                        observed during ﬁst clenching, the effect observed in
+muscle activation in the ‘lips’ condition and increased                  the face is more complicated, potentially reﬂecting
+more substantially in the ‘teeth’ condition (see other                   the higher complexity of the facial muscle-blood net-
+examples in Supplementary Material C). Interestingly,                    work and the intricate manner in which arteries are
+
+                                                          5
+Biomed. Phys. Eng. Express 10 (2024) 025036                                                                                       B Levit et al
+
+
+
+
+   Figure 3. sEMG and IPG response to Strack conditions (‘lips’ and ‘teeth’). (a). sEMG activity versus time (most intense ICA source
+   during the ‘lips’ condition) and 4-terminal IPG signal at the superﬁcial temporal artery versus time (bottom). (b). Running average of
+   the impedance versus time (top), relative impedance change versus time (middle), and beats per minute (BPM) versus time (bottom).
+   Dashed lines signify a transition between states and the solid black line is the average at the ﬁrst relaxation period.
+
+
+
+
+interwoven between the muscles [2]. Repetition of                       weak in the ﬁrst sessions, but is one of the top most
+the protocol showed different responses in the pulsa-                   intense sources in the last three lips/teeth activations.
+tion amplitude. We hypothesize that the cause for the                   Similarly, source 10 (corner of the lips), was the
+variability in the IPG responses (in the face) is due to                strongest source for both the ‘lips’ and ‘teeth’ condi-
+differences in muscle activation, even when similar                     tion in the ﬁrst and second sessions, drops to the sec-
+action is performed. We explore this in ﬁgure 4.                        ond and third least intense sources for the third and
+Figure 4 demonstrates the distinct difference between                   fourth sessions. This is in contrast to the muscle acti-
+the forearm and the face. We plot all ICA sources dur-                  vation in the forearm, where variability of the mus-
+ing each activation, ordered by intensity (highest to                   cles activated is much smaller (ﬁgure 4(a)). Indeed,
+lowest, left to right), the color denotes the average
+                                                                        the variability of muscle activation between each ﬁst
+intensity of the source throughout all sessions. The
+                                                                        clenching is on average 0.58, meaning on average the
+case of ﬁst clenching is typiﬁed by close similarity
+                                                                        intensity of the sources varies up to 1 ranking. The
+between repetitions. This result is echoed in the IPG
+                                                                        average variation for the face, on the other hand, is
+data: for all repetitions ΔZ during ﬁst clenching
+increases between 2.6—5.8 standard deviations (σ)                       1.6 for the ‘lips’ and 2 for the ‘teeth’ condition. This
+from ΔZ0 (changes during initial relax). Similarly,                     means the ranking of the intensity varies on average
+post ﬁst clenching, ΔZ decreases between 0.72–1.9 σ                     by 2 rankings in the face, twice as much as in the fore-
+from ΔZ0. In the face, each activation is different. We                 arm (Supplementary ﬁgure D(1)). This variability is
+can see how the contribution of the source varies in                    particularly manifested in ΔZ for the teeth condition,
+different sessions, despite the fact that the measure-                  as well as the post-action relaxation period in both
+ments were taken from the same participant, on the                      ‘teeth’ and ‘lips’. For the former, ΔZ differs from ΔZ0
+same day, using the same electrode arrays and on the                     anywhere from 2.4 to 8.8 σ, and the latter has a wider
+same location. In particular, source 6 (forehead) was                   range still of 1.5-24 σ.
+
+                                                         6
+Biomed. Phys. Eng. Express 10 (2024) 025036                                                                                          B Levit et al
+
+
+
+
+   Figure 4. sEMG and IPG comparison of ﬁst clenching and Strack. (a) Five repeated ﬁst clenching measurements. (Left) Sources
+   ordered by intensity. (Middle) Pulsation amplitude during and after ﬁst clenching. (Right) Source 6 and 7 during ﬁst clenching. (b)
+   Four repeated Strack sessions (two measurements in each session). (Top) ‘Lips ’condition and (bottom) ‘teeth’ condition. (Left)
+   Sources ordered by intensity. (Middle) Pulsation amplitude during and after ‘lips’ or ‘teeth’ condition. (Right) Source 6, 7, 8, and 10
+   during facial muscle activity.
+
+
+
+4. Discussion                                                             muscle activation. It is interesting to see that the impe-
+                                                                          dance change (ΔZ) post-action is comparable, if not
+In this paper, we discussed a novel electronic skin                       even greater, to the impedance change in the ‘lips’ or
+technology designed for analyzing facial characteris-                     ‘teeth’ condition, despite the fact that muscle activity is
+tics. Through the utilization of soft and non-invasive                    stronger during the actions. The variability in this
+electrode arrays, we achieved the capability to simulta-                  effect emphasizes the importance of what combina-
+neously record both bio-potential and bio-impedance                       tion of muscles is activated over their magnitude. It
+data. This allowed us to effectively record delicate                      demonstrates the complexity of the facial muscle-ves-
+variations in the diameter of the superﬁcial temporal                     sel network: In the face, seemingly similar expressions
+artery as a response to facial muscle movements.                          could activate different combinations of muscles,
+     We report on direct evidence for a mechanical                        which could lead to a different outcome. Each combi-
+muscle-vessel connection. Both in the forearm and the                     nation of activated muscles could result in a different
+face, simultaneous sEMG and IPG data reveal a clear                       effect on the IPG signal.
+change in the baseline impedance (Z) during muscle                            Thus, an important result of our investigation is
+action. The baseline impedance increases, indicating                      how the ‘lips’ and ‘teeth’ actions differ in their IPG
+blood vessel narrowing.                                                   response: Both lower amplitude and faster recovery
+     A second phenomenon we investigated in this                          are observed in ‘teeth’ versus ‘lips’. Clear responses of
+paper is the effect of muscle activation on pulse ampl-                   the IPG signals to spontaneous facial expressions
+itude. During ﬁst clenching, the observed impedance                       (Supplementary ﬁgure C10-C15) and to yawning
+change due to pulsation (ΔZ) consistently increased                       (Supplementary ﬁgure C8-C9) suggest an underlying
+under repetitive actions. In the face, the increase (if                   mechanical mechanism. A more expansive invest-
+occurs) varied from activation to activation, in part-                    igation is needed to corroborate these ﬁndings.
+icular for the ‘teeth’ condition.                                             The experimental approach we discussed here
+     Finally, we examined the post-action impedance                       allowed us to observe the direct mechanical link
+change. Unlike the consistent effect in the forearm, in                   between muscles and blood vessels, both in the fore-
+the face, we observed a change that depends on the                        arm and in the face. Increased blood supply to active
+exact muscle action as revealed by the high-resolution                    muscles is the most studied muscle-blood phenom-
+sEMG analysis. In the forearm, the post-action impe-                      enon [35–37]. Direct mechanical muscle-blood con-
+dance change ΔZ decreased with a stable recovery to                       nection is a documented mechanism in which
+the baseline. No such trend was observed in facial                        contracting skeletal muscles squeeze vasculature,
+
+                                                          7
+Biomed. Phys. Eng. Express 10 (2024) 025036                                                                            B Levit et al
+
+
+
+against underlying tissue or bones, causing an effective    involvement with any organization or entity with a
+narrowing of these blood vessels. The most well-            ﬁnancial interest in or ﬁnancial conﬂict with
+known example of this regulatory interaction is the         the subject matter or materials discussed in the
+muscular pump in the leg [38–40]. Evidence for a            manuscript apart from those disclosed.
+mechanical muscle-blood connection in the forearm
+is also reported [41]. And here, for the ﬁrst time, we
+mapped these effects in the face.                           ORCID iDs
+     Human blood circulation is complex. It is a care-
+                                                            Bara Levit https://orcid.org/0000-0001-9509-2750
+fully regulated system in which chemical, neural, and
+                                                            Paul F Funk https://orcid.org/0009-0000-4316-4249
+mechanical processes take place in concert to reach
+                                                            Yael Hanein https://orcid.org/0000-0002-4213-9575
+proper ﬂow through the network of arteries and veins
+in response to changing physiological demands.
+Abnormalities such as changes in wall rigidity, mechan-     References
+ical constrictions or long-term application of pressure      [1] Cotofana S, Lowry N, Devineni A, Rosamilia G, Schenck T L,
+change the properties of vessels and indicate potentially        Frank K, Bautista S A, Green J B, Hamade H and Gotkin R H
+fatal medical conditions such as stroke and cardiovas-           2020 Can smiling inﬂuence the blood ﬂow in the facial vein an
+cular diseases [42–44]. Thus, the reaction of vessels to         experimental study Journal of Cosmetic Dermatology 19
+                                                                 321–7
+the mechanical pressure of muscles can serve as a prog-
+                                                             [2] von Arx T V A, Tamura K, Yukiya O and Lozanoff S 2018 The
+nostic tool, and perhaps early detection. The results we         face—a vascular perspective. a literature review Swiss Dental
+discussed here reveal the complex manner by which                Journal 128 382–92
+facial muscles can inﬂuence blood ﬂow through chan-          [3] Choi S, Gao Y, Jin Y, Kim S J, Li J, Xu W and Jin Z 2022
+                                                                 PPGface: Like What You are watching? earphones can feel your
+ging vessel diameter in the face, shedding new light on
+                                                                 facial expressions Proceedings of the ACM on Interactive,
+how facial motion can affect physiology, and perhaps             Mobile, Wearable and Ubiquitous Technologies p 6
+even our psychological state [8, 17, 18, 28]. Future stu-    [4] Mueller N, Trentzsch V, Grassme R, Guntinas-Lichius O,
+dies looking into the link between facial expressions and        Volk G F and Anders C 2022 High-resolution surface
+                                                                 electromyographic activities of facial muscles during mimic
+emotion might beneﬁt from inspecting both muscle
+                                                                 movements in healthy adults: a prospective observational
+activity and blood ﬂow. A possible additional sig-               study Frontiers in Human Neuroscience 16 1029415
+niﬁcance of the action of facial muscles on blood vessels    [5] Cattaneo L and Pavesi G 2014 The facial motor system
+is in assessing clinical outcomes of facial surgeries            Neuroscience & Biobehavioral Reviews 38 135–59
+                                                             [6] Schumann N P, Bongers K, Scholle H C and Guntinas-Lichius O
+[43–45]. Lastly, the results point out a possible route
+                                                                 2021 Atlas of voluntary facial muscle activation: Visualization of
+towards expanding in-vivo analysis of bio-mechanical             surface electromyographic activities of facial muscles during
+properties of arteries [1], for example, investigation of        mimic exercises PLoS One 16 1–23
+the active response of arteries [46].                        [7] Darwin C 1965 The Expression of the Emotions in Man and
+                                                                 Animals (Chicago: University of Chicago Press)
+                                                             [8] Coles N A, Larsen J T and Lench H C 2019 A meta-analysis of
+Acknowledgments                                                  the facial feedback literature: effects of facial feedback on
+                                                                 emotional experience are small and variable Psychological
+                                                                 Bulletin 145 610–51
+This research was co-funded by the European Union            [9] James W 1884 What is an emotion? Mind 9 188–205
+(ERC, Outer-Ret, 101053186), by an Israel Science           [10] Price T F and Harmon-Jones E 2015 Embodied emotion: the
+Foundation grant (538/22), and by the Ministry of                inﬂuence of manipulated facial and bodily states on emotive
+                                                                 responses WIREs Cognitive Science 6 461–73
+Innovation, Science & Technology, Israel (3-17857).
+                                                            [11] Wu P, Gonzalez I, Patsis G, Jiang D, Sahli H, Kerckhofs E and
+The authors thank Anat Mirelman, Galit Yovel, Shira              Vandekerckhove M 2014 Objectifying facial expressivity
+Klorfeld-Auslender, Zohar Yosibash, and Peter Krebs-             assessment of parkinson’s patients: preliminary study
+bach for insightful discussions.                                 Computational and Mathematical Methods in Medicine 2014
+                                                                 427826
+                                                            [12] Brandt V C, Patalay P, Bäumer T, Brass M and Münchau A
+Data availability statement                                      2016 Tics as a model of over-learned behaviorimitation and
+                                                                 inhibition of facial tics Movement Disorders 31 1155–62
+                                                            [13] Guntinas-Lichius O, Prengel J, Cohen O, Mäkitie A A,
+The datasets generated and/or analyzed during the                Vander Poorten V, Ronen O, Shaha A and Ferlito A 2022
+current study are not publicly available as they rely on         Pathogenesis, diagnosis and therapy of facial synkinesis: a
+face images. The data that support the ﬁndings of this           systematic review and clinical practice recommendations by
+                                                                 the international head and neck scientiﬁc group Frontiers
+study are available upon reasonable request from the             Neurol. 13 1019554
+authors.                                                    [14] Volk G F, Pohlmann M, Sauer M, Finkensieper M and
+                                                                 Guntinas-Lichius O 2014 Quantitative ultrasonography of
+                                                                 facial muscles in patients with chronic facial palsy Muscle &
+Conﬂict of interest                                              Nerve 50 358–65
+                                                            [15] von Arx T, Tamura K, Yukiya O and Lozanoff S 2018 A vascular
+                                                                 perspective. a literature review Swiss Dent J. 128 382–92
+YH declares a ﬁnancial interest in X-trodes Ltd, which      [16] von Arx T, Nakashima M J and Lozanoff S 2018 The face–a
+developed the screen-printed electrode technology                musculoskeletal perspective. a literature review Swiss Dent. J.
+used in this paper. YH has no other relevant ﬁnancial            128 678–88
+
+
+                                               8
+Biomed. Phys. Eng. Express 10 (2024) 025036                                                                                       B Levit et al
+
+
+
+[17] Waynbaum I 1907 La physionomie humaine, son mecanisme et            [32] Sel K, Osman D and Jafari R 2021 Non-invasive cardiac and
+     son role social (France: Librairie Fe’lix Alcan)                         respiratory activity assessment from various human body
+[18] Zajonc R B 1985 Emotion and facial efference: a theory                   locations using bioimpedance IEEE Open Journal of
+     reclaimed Science 228 15–21                                              Engineering in Medicine and Biology 2 210–7
+[19] Zajonc R B, Murphy S T and Inglehart M 1989 Feeling and             [33] Lacolley P, Regnault V, Segers P and Laurent S 2017 Vascular
+     facial efference: implications of the vascular theory of emotion         smooth muscle cells and arterial stiffening: Relevance in
+     Psychological Review 96 395–416                                          development, aging, and disease Physiol. Rev. 97 1555–617
+[20] Hennenlotter A, Dresel C, Castrop F, Ceballos-Baumann A O,          [34] Ostadfar A 2016 Macrocirculation System Bioﬂuid mechanics
+     Wohlschläger A M and Haslinger B 2008 The link between                   (Amsterdam, Netherlands: Elsevier/Academic Press) 2 61–86
+     facial feedback and neural activity within central circuitries of   [35] Mortensen S P and Saltin B 2014 Regulation of the skeletal
+     emotionnew insights from botulinum toxin-induced                         muscle blood ﬂow in humans Exp. Physiol. 99 1552–8
+     denervation of frown muscles Cerebral Cortex 19                     [36] Hellsten Y, Nyberg M, Jensen L G and Mortensen S P 2012
+     537–42                                                                   Vasodilator interactions in skeletal muscle blood ﬂow
+[21] Sun Y, Ayaz H and Akansu A N 2020 Multimodal affective state             regulation The Journal of Physiology 590 6297–305
+     assessment using fnirs + eeg and spontaneous facial expression      [37] Saltin B, Radegran G, Koskolou M D and Roach R C 1998
+     Brain Sciences 10 85                                                     Skeletal muscle blood ﬂow in humans and its regulation during
+[22] Inzelberg L, Rand D, Steinberg S, David-Pur M and Hanein Y               exercise Acta Physiol. Scand. 162 421–36
+     2018 A wearable high-resolution facial electromyography for         [38] Recek C 2013 Calf pump activity inﬂuencing venous
+     long term recordings in freely behaving humans Sci. Rep.                 hemodynamics in the lower extremity The International
+     8 2058                                                                   Journal of Angiology 22 023–30
+[23] Inzelberg L, David-Pur M, Gur E and Hanein Y 2020 Multi-            [39] Uhl J F and Gillot C 2015 Anatomy of the veno-muscular
+     channel electromyography-based mapping of spontaneous                    pumps of the lower limb Phlebology 30 180–93
+     smiles J. Neural Eng. 17 026025                                     [40] Orr L, Klement K A, McCrossin L, Drombolis D O,
+[24] Ablin P, Cardoso J F and Gramfort A 2018 Faster independent              Houghton P E, Spaulding S and Burke S 2017 A systematic
+     component analysis by preconditioning with hessian                       review and meta-analysis of exercise intervention for the
+     approximations IEEE Trans. Signal Process. 66 4040–9                     treatment of calf muscle pump impairment in individuals with
+[25] Ablin P, Cardoso J F and Gramfort A 2018 Faster ICA Under                chronic venous insufﬁciency Ostomy Wound Management 63
+     Orthogonal Constraint 2018 IEEE International Conference on              30–43
+     Acoustics, Speech and Signal Processing (ICASSP) (IEEE)             [41] Shang J and Wu J 2019 A usable authentication system using
+     4464–8                                                                   wrist-worn photoplethysmography sensors on smartwatches
+[26] Nyboer J 1970 Electrical Impedance Plethysmography : The                 2019 IEEE Conference on Communications and Network
+     Electrical Resistive Measure of the Blood Pulse Volume Peripheral        Security (CNS) pp 1–9
+     and Central Blood Flow II edn (C.C. Thomas)                         [42] fai Cheung Y 2010 Ch 6—systemic circulation Paediatric
+[27] NYBOER J, Kreider M M and Hannapel L 1950 Electrical                     Cardiology ed R H Anderson et al (Churchill Livingstone) III
+     impedance plethysmography Circulation 2 811–21                           edn pp 91–116
+[28] Strack F, Martin L L and Stepper S 1988 Inhibiting and              [43] Neutel C H G, Corradin G, Puylaert P, De Meyer G R Y,
+     facilitating conditions of the human smile: A nonobtrusive test          Martinet W and Guns P J 2021 High pulsatile load decreases
+     of the facial feedback hypothesis Journal of Personality and             arterial stiffness: An ex vivo study Frontiers in Physiology 12
+     Social Psychology 54 768–77                                              741346
+[29] Ben Ari L, Ben Ari A, Hermon C and Hanein Y 2023 Finger             [44] Terai M, Ohishi M, Ito N, Takagi T, Tatara Y, Kaibe M,
+     gesture recognition with smart skin technology and deep                  Komai N, Rakugi H and Ogihara T 2008 Comparison of
+     learning Flex. Print. Electron. 8 025012                                 arterial functional evaluations as a predictor of cardiovascular
+[30] Levit B, Krebsbach P, Bar-Haim C, Hernandez-Sosa G and                   events in hypertensive patients: The non-invasive
+     Hanein Y 2023 Printed soft skin electrodes for seamless bio-             atherosclerotic evaluation in hypertension (NOAH) study
+     impedance measurements Flex. Print. Electron. 8 015020                   Hypertension Research 31 1135–45
+[31] Boonya-ananta T, Rodriguez A J, Ajmal A, Du Le V N,                 [45] Naruse K 2018 Mechanomedicine Biophys. Rev. 10 1257–62
+     Hansen A K, Hutcheson J D and Ramella-Roman J C 2021                [46] Gilbert R R, Grafenhorst M, Hartmann S and Yosibash Z 2019
+     Synthetic photoplethysmography (PPG) of the radial artery                Simulating the temporal change of the active response of
+     through parallelized Monte Carlo and its correlation to body             arteries by ﬁnite elements with high-order time-integrators
+     mass index (BMI) Scientiﬁc Reports 11 2570                               Comput. Mech. 64 1669–84
+
+
+
+
+                                                          9
+

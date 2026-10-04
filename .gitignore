@@ -1,2 +1,11 @@
 # This repository intentionally snapshots the complete local workspace.
 # Git always excludes its own .git metadata directory.
+.venv-sim/
+__pycache__/
+
+# Ignore local environments and OS/Office temporary files. Already tracked
+# workspace snapshots remain tracked; these rules do not rewrite history.
+cn0565-env/
+.venv/
+.DS_Store
+~$*

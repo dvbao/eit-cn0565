@@ -1,0 +1,935 @@
+Session 3A: Tracking User's Bodies and Faces Using Cameras                                                 UIST '20, October 20–23, 2020, Virtual Event, USA
+
+
+
+   C-Face: Continuously Reconstructing Facial Expressions
+   by Deep Learning Contours of the Face with Ear-mounted
+                     Miniature Cameras
+
+                      Tuochao Chen 1,2,3 , Benjamin Steeper 1,2 , Kinan Alsheikh 1,2 , Songyun Tao 1,2
+                                        François Guimbretière 2 , Cheng Zhang 1,2
+                              1 SciFi Lab, Cornell University, Ithaca, New York, United States
+                        2 Information Science, Cornell University, Ithaca, New York, United States
+                                         3 EECS, Peking University, Beijing, China
+
+                     chentuochao@pku.edu.cn, {bds238, kta33, st938, fvg3,chengzhang}@cornell.edu;
+
+
+ABSTRACT                                                                                             CCS Concepts
+C-Face (Contour-Face) is an ear-mounted wearable sensing                                             •Human-centered computing → Ubiquitous and mobile
+technology that uses two miniature cameras to continuously                                           devices;
+reconstruct facial expressions by deep learning contours of
+the face. When facial muscles move, the contours of the face
+change from the point of view of the ear-mounted cameras.
+These subtle changes are fed into a deep learning model which
+continuously outputs 42 facial feature points representing the
+shapes and positions of the mouth, eyes and eyebrows. To eval-
+uate C-Face, we embedded our technology into headphones
+and earphones. We conducted a user study with nine partic-
+ipants. In this study, we compared the output of our system
+to the feature points outputted by a state of the art computer
+vision library (Dlib1 ) from a font facing camera. We found
+that the mean error of all 42 feature points was 0.77 mm for
+earphones and 0.74 mm for headphones. The mean error for
+20 major feature points capturing the most active areas of the
+face was 1.43 mm for earphones and 1.39 mm for headphones.                                                              Figure 1. Overview of C-Face
+The ability to continuously reconstruct facial expressions in-
+troduces new opportunities in a variety of applications. As a
+demonstration, we implemented and evaluated C-Face for two                                           INTRODUCTION
+applications: facial expression detection (outputting emojis)                                        Humans use facial expressions as a natural mode of commu-
+and silent speech recognition. We further discuss the oppor-                                         nication. The ability to continuously record and understand
+tunities and challenges of deploying C-Face in real-world                                            facial movements can improve interactions between humans
+applications.                                                                                        and computers in a variety of applications. For example, re-
+                                                                                                     constructing and recording facial movements in a learning
+                                                                                                     environment can give instructors useful feedback into stu-
+Author Keywords
+                                                                                                     dent engagement levels[55]. In virtual social environments,
+Wearable computing; Deep Learning; Computer Vision:                                                  users can have their real-time facial expressions mirrored on
+Facial Expression Reconstruction and Tracking; Ear Sensing;                                          avatars for more immersive social experiences. Tracking fa-
+Emoji Recognition; Silent Speech;                                                                    cial expressions can potentially improve daily communication
+                                                                                                     experiences as well. For instance, in order to provide facial
+1 dlib Library: http://dlib.net/
+                                                                                                     feedback on a mobile video call, a user must currently hold
+                                                                                                     the phone in hand and point the camera towards the face. If
+Permission to make digital or hard copies of all or part of this work for personal or                the user’s facial expression could be automatically recorded
+classroom use is granted without fee provided that copies are not made or distributed                and presented in a hands-free fashion, communication experi-
+for proft or commercial advantage and that copies bear this notice and the full citation             ences could be greatly improved in scenarios where the user
+on the frst page. Copyrights for components of this work owned by others than the
+author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or               is carrying groceries, doing the dishes, jogging, and more.
+republish, to post on servers or to redistribute to lists, requires prior specifc permission
+and/or a fee. Request permissions from permissions@acm.org.                                          Traditional facial reconstruction methods require a camera
+UIST ’20, October 20–23, 2020, Virtual Event, USA                                                    positioned in front of the user’s face at all times[5] and an en-
+© 2020 Association for Computing Machinery.
+ACM ISBN 978-1-4503-7514-6/20/10 ...$15.00.                                                          tire view of the face without occlusions. These methods have
+http://dx.doi.org/10.1145/3379337.3415879
+
+
+                                                                                               112
+Session 3A: Tracking User's Bodies and Faces Using Cameras                            UIST '20, October 20–23, 2020, Virtual Event, USA
+
+
+
+
+Figure 2. The captured contour images, acquired ground-truth using Dlib, and predicted results of facial expressions used in the user study. The facial
+expressions are rendered using a 3D mesh model © TurboSquid.
+
+
+provided reliable facial tracking performance when certain cri-               We introduce C-Face, a novel wearable sensing device that con-
+teria (e.g. position, view angle) are met. However, they have                 tinuously reconstructs facial expressions by learning contours
+limitations in many use cases. They may not work well when                    of the face with ear-mounted miniature cameras. C-Face is
+1) a user is in motion or in an environment where a camera                    designed based on the key observation that facial contours are
+can not be appropriately set up or 2) the user’s face is partially            highly informative of facial expressions. When we perform
+occluded or is not fully visible due to camera positioning or                 a facial expression, our facial muscles stretch and contract.
+angling relative to the user’s face. The ability to track facial              They push and pull the skin and affect the tension of nearby
+movements even when the face is partially covered could al-                   facial muscles. This effect causes the outline of the cheeks
+low for facial reconstruction use in new settings. For instance,              (contours) to alter from the point of view of the ear. Based
+it could even be used to track facial expressions under the                   on this observation, we developed the key research question
+current COVID-19 pandemic when people wear face masks                         behind C-Face:
+during their daily activities. Traditional computer vision based
+technology does not work well in these kinds of settings.                      • Is it possible to continuously reconstruct full facial move-
+                                                                                 ments by observing the contours of the face from the ear?
+To overcome the above challenges, researchers have devel-
+oped various wearable devices for facial expression recogni-                  To explore this research question, we developed our system,
+tion using sensing techniques such as acoustic interference,                  leveraging the latest advancements in wearable sensing, deep
+pressure sensing, electrical impedance tomography (EIT) and                   learning, and computer vision, while maintaining the mobil-
+electromyography (EMG) [42, 43, 10]. Compared to the pre-                     ity and minimal-obtrusiveness that a wearable device offers.
+viously mentioned front-facing camera method, wearable de-                    To demonstrate the capability of C-Face, we integrated the
+vices are always mounted on the user. As a result, it does not                system into two commonplace form factors: headphones and
+                                                                              earphones. By embedding the cameras near the ear, our system
+require any pre-setup in the environment and has the potential
+                                                                              is able to continuously reconstruct facial movements repre-
+to recognize facial expressions in mobile settings. However,
+                                                                              sented by 42 facial feature points without the need for a frontal
+these wearable technologies also present limitations. Many of
+them require heavy instrumentation on the user (e.g., covering                view of the face. A user study with 9 participants (2 of which
+the face), making it challenging for them to be adopted into                  are authors) showed that the mean error for all 42 facial feature
+common form factors. Also, most of these wearable devices                     points was 0.77 mm (SD = 0.1 mm) using earphones and 0.74
+can only recognize discrete facial expressions. We do not                     mm (SD = 0.11 mm) using headphones. The mean error for 20
+know of a prior wearable technology that can continuously                     major feature points around the mouth and eye areas was 1.43
+                                                                              mm (SD = 0.21 mm) for earphones and 1.39 mm (SD = 0.28
+reconstruct full facial expressions, capturing the shapes and
+                                                                              mm) for headphones. This approach allows us to reconstruct
+positions of the mouth, eyes and eyebrows. There is a clear
+                                                                              the face even when it is partially occluded by a mask or a pair
+need for a practical wearable sensing technology that can con-
+                                                                              of glasses.
+tinuously reconstruct full facial expressions under non-optimal
+scenarios(e.g., mobile setting, covered face).                                To the best of our knowledge, C-Face is the frst wearable
+                                                                              technology that is able to continuously reconstruct full facial
+
+
+                                                                        113
+Session 3A: Tracking User's Bodies and Faces Using Cameras                   UIST '20, October 20–23, 2020, Virtual Event, USA
+
+expressions, capturing the positions and shapes of the mouth,          built a face mask with built-in ultrasonic transducers and used
+eyes, and eyebrows without the need to view the entire face            acoustic interferometry to detect facial movements. But the
+directly. The contributions of this paper are:                         on-body acoustic sensing may suffer from performance de-
+                                                                       crease after remounting the device [22, 57]. Other researchers
+• We developed an ear-mounted wearable system, with two                [42, 43, 10] secured electrodes to the human face, and used
+  miniature RGB cameras to capture the contours of the face.           electromyography (EMG) or capacitive sensing to track the
+• We designed and implemented a deep neural networks to                muscles that control the eyebrows and mouth corners. Re-
+  learn the subtle changes of the contour shapes of the face,          searchers have also attached pressure sensors onto the face in
+  which outputs 42 facial feature points representing the posi-        order to sense skin deformation for facial expression recogni-
+  tions and shapes of the mouth, eyes and eyebrows.                    tion [48, 31]. However, all of the above methods require that
+                                                                       the devices be attached directly onto the users’ faces or body.
+• We conducted a user study with 9 participants to evalu-              This could block feld of vision and interfere with normal daily
+  ate the performance of the system with two form factors,             activities like eating or socializing. Furthermore, most of them
+  earphones and headphones, under different circumstances              only recognize discrete facial expressions. Interferi [22] ex-
+  (after remounting and with face mask occlusion) and appli-           plored continuous reconstruction of the shape and position of
+  cations (silent speech and emoji recognition).                       the mouth when the user performs one expression (smiling)
+                                                                       while covered by a mask.
+• We discuss the opportunities, challenges and limitations of
+  C-Face for future work.                                              Researchers have explored more unobtrusive methods and
+                                                                       form factors to address this problem and reduce discomfort.
+RELATED WORK                                                           For example, [36, 1] created an earpiece which ft inside the
+In this paper, we evaluate C-Face’s continuous facial recon-           ear canal. The device measured contact impedance and air
+struction performance and explore its applications (i.e. silent        pressure from inside the canal to sense its deformation. They
+speech, emoji input) as well. Therefore, we discuss related            then mapped the ear canal deformation to facial movement.
+work in three sections: 1) traditional computer vision method          This paper [35] embedded infrared proximity sensors into
+for facial movement sensing 2) non-CV wearable facial move-            eye glasses to detect facial expressions. However, despite
+ment sensing and 3) silent speech recognition.                         the efforts and successes of these unobtrusive facial sensing
+                                                                       methods, they are limited to discrete facial gesture classifca-
+CV-based Facial Movement Sensing                                       tion. The lack of continuous facial gesture classifcation limits
+Computer vision (CV) is one of the most popularly explored             potential applications.
+approaches on sensing the facial movements. Typically, re-
+search in this feld involves placing an RGB camera [45],
+                                                                       Silent Speech Recognition
+thermal camera [14], or depth camera [41] in front of the face
+and using the captured images for facial movement sensing.             The idea of a ’silent speech interface’ has emerged and shown
+For facial movement recognition and reconstruction, there are          promise in recent years as a method to aid the handicapped,
+two main types of approaches: pre-designed and learned [5].            or offer users text input capabilities in high-background-noise
+As for the pre-designed method, researchers use conventional           environments or settings where vocalizing speech is inappro-
+computer vision methods, such as appearance [52, 60] and ge-           priate [8]. Past approaches for silent speech detection can be
+ometry [29], in order to extract relevant information and deter-       divided into two main categories: contact and non-contact. In
+mine facial expressions. As for the learned method, machine            the contact approach, different sensors (magnetic [17, 4, 47],
+learning-based approaches are used to automatically learn the          EMG [50, 49], EEG , ultrasonic [27, 24, 20, 7]) are attached di-
+feature extraction and classifcation methods from the training         rectly onto the face or inside the mouth to detect the movement
+data. Deep learning approaches in particular, namely CNN,              of articulators involved in speaking (i.e. lips, tongue, jaw) to
+DBN, RNN, and GAN, have demonstrated outstanding per-                  recover speech content. However, these contact sensing meth-
+formances in recent years. Some researchers have built deep            ods may interfere with daily activities in real-world scenarios.
+learning models focused on discrete classifcation such as [44,         Other researchers have focused on non-contact detection meth-
+46, 25] (CNN), [33, 11] (DBN), [6, 3] (RNN), and [30, 58, 56]          ods. The non-contact approach often involves positioning a
+(GAN). Others have succeeded in building models focused on             camera in front of the face and capturing lip movement to
+continuous reconstruction and analysis such as [28] (RNN),             recognize predetermined phrases [39, 53]. However, these
+[13] (DBLSTM) and [37] (Kernel Regression).                            systems still require users to position the camera by either
+                                                                       holding it in front of their faces or securing it onto something.
+However, the key issues with traditional CV methods in facial          There is a need for a non-contact wearable approach that has
+movement detection are that 1) it requires a pre-set camera in         the potential to detect silent speech phrases.
+front of the user with specifc requirements for its angle and
+view and 2) the face of the user can not be blocked. In free
+living environments, these are signifcant limitations.                 Summary
+                                                                       Compared to these prior projects, C-Face is the frst wearable
+Non-CV Wearable Facial Movement Sensing                                sensing device using minimally invasive common form factors
+A number of non-CV wearable methods have also been tested              that can continuously reconstruct full facial expressions with
+to reconstruct facial expressions. For example, Interferi [22]         the position and shapes of the mouth, eyes and eyebrows.
+
+
+                                                                 114
+Session 3A: Tracking User's Bodies and Faces Using Cameras                             UIST '20, October 20–23, 2020, Virtual Event, USA
+
+THEORY OF OPERATION                                                             predicting full facial expressions from facial contours. Other
+In 1996, this paper [38] put forward one of the most infu-                      sensing methods to capture facial contours can be tested in the
+ential facial motion models. In the model, the human face                       future.
+is composed of three main layers: skin, muscles, and skull.
+                                                                                We built two types of form factors for our study: headphones
+When humans make facial expressions, their facial muscles
+                                                                                and earphones as shown in fgure 5. For the headphones, we
+contract and their jaw rotates. The skin, being connected to
+                                                                                embedded two 14x14mm ArduCAM cameras (OV5647 with
+both the facial muscles and bones, gets pushed and pulled as
+                                                                                adjustable focus, auto exposure and a view angle of 120x120
+these articulators move. This deformation of the facial skin
+                                                                                degrees) into the side earpieces. For the earphones, we secured
+alters the contours of the face. C-Face is designed based on the
+                                                                                two smaller 6x6mm cameras (OV5647 with fxed focus, auto
+above model and observation. FingerTrak [18] demonstrated
+                                                                                exposure and the view angle of 64 x 48 degrees) to an attach-
+the feasibility of using contours of the wrist to continuously
+                                                                                ment which slid onto the base of each earphone. Both cameras
+reconstruct full hand posture using wrist-mounted miniature
+                                                                                had an image resolution of 640x480 pixels and a frame rate
+cameras. Thus, we hypothesize that facial contours are also
+                                                                                of 30 fps. Each camera was connected to a Rasberry Pi board
+informative to predict full facial expressions.
+                                                                                which read the images through a CSI interface. Next, we
+To validate the feasibility of our proposed theory, one of the                  transmitted data from the Raspberry Pi boards to the server
+researchers fxed a camera under each ear. The researcher                        through WiFi or Ethernet for further data processing. Before
+then made different facial expressions and captured his facial                  data processing, the server synchronized the images from the
+contours with the cameras while doing so. As shown in Fig. 3,                   right and left cameras.
+the contours of the user’s face uniquely varied depending on
+the facial expression. We then trained a simple machine learn-                  Form Factor Design and Camera Position Selection
+ing model to distinguish between discrete facial expressions.                   We conducted an experiment to explore the infuence of cam-
+With encouraging results, this preliminary experiment veri-                     era positioning on facial reconstruction performance.
+fed that facial contours are informative on predicting facial
+expressions.
+
+
+
+
+                                                                                Figure 4. The relationship between camera positions/angles and the fa-
+                                                                                cial contours captured, 3D mesh model© TurboSquid
+
+
+                                                                                Pre-experiment Considerations
+Figure 3. Facial contour images captured in the preliminary feasibility
+test                                                                            Fig 4(a) visualizes a top view of the 3D head model (by Tur-
+                                                                                boSquid 2 ) with two camera positions shown. The camera
+                                                                                placed farther from the skin better captures skin deformation
+HARDWARE AND FORM FACTOR DESIGN OF C-FACE
+                                                                                than the camera placed closer because it has a better line of
+In this section, we discuss form factor design considerations,
+                                                                                sight to the facial contour (referred to by the and green lines
+present our data acquisition system and an experiment to de-
+                                                                                in Fig.4(a)). Fig.4(b) visualizes a side view of the head with
+termine optimal camera positioning.
+                                                                                two camera angles shown. Naturally, when the camera tilts
+                                                                                upward, it better captures the upper part of the face near the
+Hardware
+                                                                                eye. When the camera tilts downward, it better captures the
+To capture facial contours, we had many options for sens-                       lower part of the face near the mouth. The closer the skin is to
+ing: depth cameras, an array of proximity sensors, thermal                      the mouth or eye, the more apparent its deformation. So, to
+cameras, and RGB cameras. We intended to fnd a balance                          maximize changes in facial contours captured by the cameras,
+between practicality and capacity when choosing our sensing                     it makes sense to keep both the eye and mouth in view.
+approach. Depth cameras are very informative, but too bulky
+to be attached to an earphone. The resolution of proximity                      Experiment on the Camera Position
+sensor arrays and thermal cameras are too low. Only RGB                         To conduct our experiment, we designed 3D printed head-
+cameras offer enough picture resolution while being compati-                    phones with adjustable ear pieces to allow the camera’s posi-
+ble with form factors that are small in size and light enough to                tion and angle to be adjusted as shown in Fig. 5. We tested
+be worn on the ear. Admittedly, RGB cameras are susceptible                     three camera distances from the skin (1 cm, 2 cm, 3 cm) and
+to ambient light and background interference. However, our
+main focus of this paper is to demonstrate the feasibility of                   2 Turbosquid:https://www.turbosquid.com/Search/3D-Models.
+
+
+
+
+                                                                          115
+Session 3A: Tracking User's Bodies and Faces Using Cameras                              UIST '20, October 20–23, 2020, Virtual Event, USA
+
+                                                                                  from facial contours. We frst introduce the ground-truth ac-
+                                                                                  quisition method to our system for training and testing.
+
+                                                                                  Ground Truth Acquisition
+                                                                                  Defnition of Ground Truth
+                                                                                  CV-based methods using a front-facing camera have achieved
+                                                                                  reliable performance tracking full facial expressions. There-
+                                                                                  fore, we set up a frontal camera and used a state-of-the-art
+          Figure 5. Prototypes of headphones and earphones                        computer vision library (Dlib library [28]) as our ground-truth
+                                                                                  acquisition method. Dlib library can extract 68 facial land-
+                                                                                  marks (feature points). When humans make different facial
+four angles (-10°, -20°, -30°, -40°). For each camera posi-                       expressions, changes mainly occur in the mouth, eyes and eye-
+tion and angle, a researcher was asked to make the same set                       brows. So, we removed the less informative feature points, and
+of facial expressions. Images from the 12 different camera                        selected 42 of the 68 landmarks (outlining the mouth, right eye,
+variations are shown in Fig. 6. The collected data from each                      right eyebrow, left eye and left eyebrow) for our ground-truth
+variation was divided into training and testing datasets to train                 for continuous reconstruction, as shown in Figure 7.
+a deep learning model and evaluate its fnal performance. As
+                                                                                  Ground Truth Alignment
+
+
+
+
+                                                                                      Figure 7. Feature points that represent full facial expressions
+
+Figure 6. Different facial contours from the perspective of the camera in         One common issue with CV-based methods is that the cam-
+different positions                                                               era’s view can infuence results. During data collection, if a
+                                                                                  user slightly changes his or her facing direction, the acquired
+the camera moves away from the skin, reconstruction perfor-                       ground-truth for the same facial expressions can vary. To over-
+mance improves according to the mean square distance (MSD)                        come this limitation, we frst align the ground-truth before
+in pixels between our predictions and the ground truth. We                        using these landmarks as output labels for training. Because
+determined that for our study, a distance of 1.5cm to 2.5cm                       changes in head position are relatively small, we regarded any
+would be an appropriate range. We therefore set the camera                        resulting landmark transformations as affne transformations.
+distance to 2.5cm from the skin for the headphones, and 1.5cm                     To recover original landmark positions, we selected three land-
+from the skin for the earphones. Intuitively, as the camera an-                   marks whose relative positions change little when making
+gle tilts downward, eye reconstruction worsens. As the camera                     facial expressions (right canthus, left canthus, and the apex
+angle tilts upward, mouth reconstruction worsens. We found                        of the nose as shown in Fig. 7). We then set these three land-
+that the total MSD reached its minimum value in the range of                      marks fxed in the picture and used them to calculate the affne
+-20° -30°, where the camera images capture the skin around                        matrix for each ground-truth image. Using this method, we
+both the mouth and eye. We designed and built both form fac-                      aligned the landmark positions to the same range and reduced
+tors to allow their cameras to swivel upwards and downwards,                      the infuence of head position change during ground-truth
+and then set their angles within this range for the user study.                   collection.
+
+CONTINUOUS FACIAL RECONSTRUCTION
+With the captured contour images from the ear-mounted cam-
+eras, we put forward a CV-based pre-processing method and a
+deep learning model to reconstruct continuous facial expres-
+sions. Since our raw data is 2D images, we use a convolutional
+neural network (CNN) since they have shown exemplary per-
+                                                                                                Figure 8. The pre-processing procedure
+formance in image classifcation, detection, and retrieval [26]
+compared to other traditional ML methods. In addition, previ-
+ous works have applied CNN to human gesture reconstruction                        Pre-processing Facial Contour Images
+tasks (such as hand gestures [18], facial expressions [23], and                   Pre-processing of the captured images is composed of four
+body poses [2]) and demonstrated good performance. There-                         steps, as shown in Fig. 8. First, we convert the raw camera
+fore, we chose to use CNN to reconstruct facial expressions                       image color space from RGB to YCrCb, and apply the Otsu
+
+
+                                                                            116
+Session 3A: Tracking User's Bodies and Faces Using Cameras                   UIST '20, October 20–23, 2020, Virtual Event, USA
+
+threshold [59] algorithm to extract the skin color from the
+background. Second, we seek out the max contour area (the
+facial contour) and remove other parts (background), which
+can help to decrease the infuence of the background on our
+system’s performance. Third, to reduce the infuence of am-
+bient light, we binarize the images after extraction. Another
+merit of binarization is that it can help to reduce the datasize
+of an image (from over 50KB to less than 5KB) during trans-
+mission. Lastly, we apply the morphological transformations
+(like erosion and dilation) and median flter to remove noisy
+points and smooth the image. These pre-processed images are
+sent to the deep learning model described below.
+Deep Learning Pipeline
+As described in the preliminary experiments, to capture more
+detailed facial expressions on both sides of the face, we chose
+to use one camera on each side. We divided our ground-truth
+into two parts: left and right, as shown in Fig 9. We used the
+left and right facial contours to train the landmarks of the left
+and right side of the face, respectively. In our deep learning
+model, we implemented two identical deep convolutional neu-
+ral networks respectively for estimating the facial landmarks
+                                                                                Figure 9. The structure of our deep learning model
+on each side. This combination of two models performs better
+than using one model to predict landmarks on both sides.
+Network Architecture
+                                                                       and scaling. We apply data augmentations on the contour
+The deep convolutional neural network has two parts: a back-           images in the training set to address this issue. Specifcally,
+bone network and a regression network behind it, as shown in           we set a probability of 0.5 to conduct certain transformations
+Fig. 9. The backbone network follows the same design as the            on the images before they are sent to the backbone network
+18-layer residual network [12] (ResNet-18), which has been             for training. The transformation can be shifting (range: -20
+proven to be highly effective for visual recognition tasks and         to 20 pixels), rotation (range: -10°to 10°), scaling (range: 0.8
+less prone to over-ftting. A convolutional block in ResNet in-         to 1.2) or any combination of these. The distribution within
+cludes several convolution operations, each followed by batch          each range following a Gaussian distribution (N (µ = 0, σ 2 =
+normalization [21] and rectifed linear unit (ReLU). A global           0.01)).
+average pooling is performed at the end of the backbone net-
+work to extract a vector representation of each image. Then,           Training Parameter Setting. We select the following train-
+the extracted feature vector is inputted into the regression net-      ing hyper-parameters based on the common practices estab-
+work, which consists of two fully connected layers with ReLU           lished in previous CV research [15]: standard mini-batch
+in between them and a dropout [51] (p = 0.5) before the last           stochastic gradient descent (SGD) with momentum (0.9),
+layer. The regression network outputs the landmarks of either          weight decay (1e-4), batch size 60, and a learning rate of
+side of the face. A matching module then concatenates the              0.01 with Cosine learning rate annealing [34]. For all exper-
+landmarks from the left and right by matching them to the              iments, our model was trained for 50 epochs on the training
+same level using translation and scaling. It then outputs the          set, with each epoch being a pass over the full training set with
+fnal reconstruction result as 84 parameters (42 feature points         random shuffing. The trained model was further evaluated on
+x 2 dimensions for X and Y). Our deep learning model is built          a hold-out non-overlapping test set.
+under the Pytorch framework.
+Training Process
+                                                                       USER STUDY
+Weighted Loss Function. Our model was trained with
+ground-truth facial landmarks using the weighted Huber loss            Due to the COVID-19 pandemic, recruiting participants for
+function [19] to provide a robust regression. The weighted             an in-person user study was extremely challenging. After
+loss function is designed to tackle the common issue of im-            discussing with the Institutional Review Board (IRB) in our
+                                                                       university, we were allowed to recruit the roommates of two
+balanced data in real-world data collection [40]. Since facial
+                                                                       co-authors as participants in our study. We successfully re-
+movement data is collected in continuous streams, the amount
+                                                                       cruited 7 roommates as study participants. To provide more
+of background frames (frames of natural facial expressions)
+                                                                       information on C-Face’s performance with different people
+is signifcantly larger than foreground ones (frames of other
+facial expressions).                                                   amidst these guidelines, the two co-authors (P1 and P2) also
+                                                                       participated in this study. They followed the same study pro-
+Data Augmentation When users remount form factors or                   cedure as the other participants. In total, we evaluated C-Face
+the form factor has a small shifting, facial contours from the         with 9 participants in our user study - 6 males and 3 females
+camera’s POV can change with respect to translation, rotation          ranging from 21 to 25 years old.
+
+
+                                                                 117
+Session 3A: Tracking User's Bodies and Faces Using Cameras                    UIST '20, October 20–23, 2020, Virtual Event, USA
+
+Setup                                                                  each expression four times in the training video, and once in
+To begin the study, a researcher introduced the study protocol         the testing video. The training video was about 6 minutes
+ and answered any participant questions. Then, the participant         long and the testing video was 2 minutes. For each participant,
+ sat down in a chair in front of a small RGB camera (Arducam           since our sampling rate is 30 fps, we obtained an average of 6
+ cameras (OV5647) 30 Hz, 480 x 640) taped to a monitor for             x 60 x 30 = 10.8K samples for training and 2 x 60 x 30 = 3.6K
+ ground truth collection. The monitor would be used later to           samples for testing, leading to a total of (10.8K + 3.6K) x 9 =
+ play pre-recorded instructional videos throughout the study.          129.6K samples. Each sample contains 2 images of both facial
+ Next, the researcher adjusted the ground truth camera to a            contours captured at the same time and one frontal image of
+ suitable position and angle to capture the user’s facial feature      the user’s face for ground-truth labelling.
+ landmark points. Next, the researcher helped the participant
+ put on the earphones (the frst form factor tested). Both the          CONTINUOUS RECONSTRUCTION RESULTS
+ left and right cameras were adjusted to ft participants’ face         Evaluation Protocol
+ size and shape. We frst adjust the camera positions to guar-          To evaluate the continuous reconstruction results, we used
+ antee that each camera can capture the facial contour lines of        MSD (Mean Square Distance), calculating the mean of the
+ the participant. Then, we adjust pitch angle (around -20°to           square distances of each pair of landmarks between our predic-
+-30°based on our camera positioning study) until the camera’s          tion results and the ground truth. However, after adopting this
+ frame can capture the participant’s eye and mouth. For each           method we found that many landmarks on more inactive parts
+ form factor (headphones and earphones) the cameras were               of the face (like the lower eyelid) move very little (less than 1
+ only adjusted one time before collecting data. Once data col-         mm) throughout the study. If we were to include all landmarks
+ lection began, we did not adjust the cameras again. Before            and weigh them equally, our results would be skewed since
+ the study began, the participant was encouraged to practice           these inactive landmarks have a very low MSD regardless of
+ making facial movements to ensure comfort.                            facial expression. Thus, to more accurately represent our data
+                                                                       quantitatively, we created a new variable called "MMAE (Ma-
+Data Collection                                                        jor Mean Absolute Error)" comprised of the more meaningful
+For data collection, we played a series of pre-recorded videos         landmarks. To fnd these landmarks, we frst calculated the
+portraying faces for the participant to imitate. We frst tested        variance of each landmark using the collected ground-truth
+earphones followed by headphones. The earphone data col-               data as Fig. 10 shows. Higher variance signifes a higher
+lection procedure consisted of three categories: continuous            degree of change for a given landmark during a facial expres-
+reconstruction, emoji input detection, and silent speech detec-        sion. We then chose the landmarks with the highest variance
+tion. Data from the last two categories, emoji input detection         capturing both the mouth and the eye to be considered major
+and silent speech detection, were used to conduct a prelimi-           landmarks, as shown in Fig. 10. We derived MMAE from
+nary applications study which is outlined in the "Applications"        these major landmarks to better represent our results.
+section. For each category, training data and testing data were
+collected separately in different sessions (training data frst,
+followed by testing data).
+After collecting all training and testing data, the researcher
+reinserted the earphones and ran the continuous reconstruc-
+tion testing session again to evaluate remounting performance.
+The researcher then removed the earphones and mounted the
+headphones on the participant’s head. The headphone cameras            Figure 10. The variance of landmarks during data collection. The ar-
+were adjusted the same way as the earphones’. For head-                rows indicate chosen major landmarks.
+phones, we only tested continuous reconstruction. Similar to
+the earphones, we remounted them and ran the continuous                Since the landmarks are image points, the MMAE unit must
+reconstruction testing session again to evaluate remounting            be converted from pixels to a physical unit. We thus measured
+performance.                                                           the positions of the right and left canthus relative to the nose
+                                                                       apex and combined these values with the alignment to scale
+The continuous reconstruction training and testing videos
+                                                                       the landmark positions from pixels to millimeters.
+prompted the participant to make the following facial expres-
+sions as Figure 2 shows: |o:| face (mouth "oh"), |a:| face (mouth      Continuous Reconstruction Evaluation
+"ah"), smile without teeth, smile with teeth, |sh| face (mouth         We evaluated our continuous facial reconstruction model on
+"sh"), grimace with fat lips, right sneer, left sneer, right wink,     all nine participants with both form factors. Across all nine
+left wink, raise eyebrows, frown and a combination of both             participants, our system achieves an MMAE of 1.43 mm (SD
+eye motion and mouth motion. Figure 2 demonstrates the                 = 0.21 mm) and an MSD of 0.77mm (SD = 0.1 mm) for ear-
+facial expressions rendered by a 3D human face mesh model              phones, and an MMAE of 1.39 mm (SD = 0.28 mm) and an
+provided by TurboSquid 3 . When mapping the facial expres-             MSD of 0.74 mm for headphones (SD = 0.11 mm). Fig. 11 (a)
+sion data to the 3D mesh model, we adjusted the ratio of Dlib          (b) (c) shows the MMAE for mouth motion, eye motion and
+landmarks to ft with the model. Each expression was sepa-              overall face motion for all nine participants with both form
+rated by a neutral, relaxed facial expression. We prompted             factors. To give an intuitive understanding of our reconstruc-
+3 Turbosquid:https://www.turbosquid.com/Search/3D-Models.              tion error, we calculate the MMAE for each facial expression
+
+
+                                                                 118
+Session 3A: Tracking User's Bodies and Faces Using Cameras                             UIST '20, October 20–23, 2020, Virtual Event, USA
+
+of participant 1 (p1) when wearing earphones and visualize
+the facial expressions with highest MMAE, median MMAE,
+and lowest MMAE as shown in Fig. 12. Additionally, we
+use a gradient to represent the error of each point. We can
+see most error occurs on the eyebrows, upper eyelids and the
+corners of the mouth. Fig. 2 provides a visualization for more
+reconstruction results. We also conducted a one-way ANOVA
+test on the MMAE results between earphones and headphones
+and found no signifcant effect (F(1,16) = 0.006 and p = 0.93).
+
+                                                                                Figure 13. The results of the remounting experiment among 9 partici-
+                                                                                pants.
+
+
+
+
+Figure 11. The continuous reconstruction results for facial expressions
+                                                                                    Figure 14. The statistical results of the remounting experiment
+
+
+
+                                                                                data augmentation, the MSD is 1.79 mm (SD = 0.77 mm) and
+                                                                                the MMAE is 3.59 mm (SD = 1.5 mm). For the headphones,
+                                                                                with data augmentation, the MSD after remounting is 0.867
+                                                                                mm (SD = 0.08 mm) and the MMAE is 1.72 mm (SD = 0.24
+                                                                                mm). Without data augmentation, the MSD rises to 1.10
+                                                                                mm (SD = 0.15 mm) and the MMAE to 2.14 mm (SD =
+                                                                                0.26 mm). Fig. 13 visualizes the remounting results (MMAE)
+                                                                                among different participants and Fig. 14 displays the average
+                                                                                ΔMMAE of remounting results with a 95% confdence interval.
+                                                                                The results show that our data augmentation helped to decrease
+                                                                                the remounting error by 26% for the earphones and 21.2% for
+                                                                                the headphones. It demonstrated that our system can adapt to
+                                                                                minor remounting variations for earphones and headphones
+                                                                                and thus has potential for real world use cases. We ran a
+                                                                                two-way ANOVA test to study possible effects between data
+Figure 12. The visualization for the expressions of highest, median and         augmentation and form factor. We found the main effect on
+lowest MMAE of participant 1.
+                                                                                data augmentation (F(1,32) = 3.9 and p = 0.05) and the main
+                                                                                effect on form factor (F(1,32) = 14 and p = 0.001). There were
+Form Factor Remounting Performance                                              no interactions between these two variables (F(1,32) = 0.35
+During data collection, the device was remounted on the same                    and p = 0.55).
+participant to emulate a real-world scenario. Remounting the
+device can shift the camera positions and lead to adaptability                  There are two elements of our remounting results which need
+                                                                                further explanation. Firstly, even though the remounting re-
+challenges for our deep learning model. In the evaluation,
+                                                                                sults are encouraging, if the camera shifts too much (such
+we test the model after remounting both form factors. Addi-
+                                                                                as with participant 2), data augmentation may still not work,
+tionally, to validate our data augmentation method, we train a
+                                                                                as the system may not be able to capture enough facial con-
+model without data augmentation and test it with the new data
+after remounting.                                                               tour. Secondly, headphones performed better than earphones
+                                                                                in the remounting experiment, and we think this was because
+The results for the models with and without data augmentation                   earphones have a larger freedom of movement compared to
+are summarized in Fig 13. For the earphones, with data                          headphones while being worn. A carefully designed earphone
+augmentation, the MSD after remounting is 1.32 mm (SD =                         to constrain the freedom of movement can potentially alleviate
+0.37 mm) and the MMAE is 2.79 mm (SD = 1.1 mm). Without                         this issue. Furthermore, a camera with a wider view could also
+
+
+                                                                          119
+Session 3A: Tracking User's Bodies and Faces Using Cameras                    UIST '20, October 20–23, 2020, Virtual Event, USA
+
+help address this issue, as it could potentially capture all facial     them. The input of our classifer is a sequence of 42 landmark
+contours regardless of the camera’s exact physical orientation.         positions from the ResNet, and the output is a one-hot encod-
+                                                                        ing of the facial event class. This BLSTM network was trained
+APPLICATIONS - EMOJIS AND SILENT SPEECH                                 with batch size 30, stochastic gradient descent (SGD) with
+To further evaluate the performance and potential applications          momentum (0.9), learning rate 0.001 and training epochs 50.
+of C-face, we selected two real-world scenarios using recon-            A similar data augmentation method described in the previous
+structed facial expressions provided by C-Face: emoji input             section is applied on this labeled data and fed into the BLSTM
+and silent speech input. Emoji input is an input technique              to improve generalizability of the model.
+whereby users can input emojis into a text message, online
+comment or post by imitating the desired emoji with a facial            Evaluation
+expression. Silent speech is a language interaction interface           Once the data was collected, we used the data from the train-
+enabling speech-to-text input to take place without the need            ing set of each participant to train the deep learning model,
+to voice an active acoustic signal. It has the potential to allow       which was evaluated using the testing set of that participant.
+speech-to-text input in environments where speaking out loud            The average emoji recognition accuracy is 88.6% (SD = 6%).
+may be diffcult due to background noise or uncomfortable                and the average silent speech word accuracy is 84.7%(SD =
+due to social norms.                                                    7.8%). The confusion matrix of emoji recognition and silent
+                                                                        speech recognition results are shown in fgure 16 and fgure
+Data Collection Procedure                                               17 respectively.
+As a part of the user study, we collected data for emoji input
+and silent speech recognition from the same 9 participants.
+For emoji input recognition, we selected eight commonly used
+emojis to display in our emoji videos: natural, smile, laugh,
+angry, kissy-face, surprise, sneer and wink. For silent speech
+recognition, we chose eight commands designed to control a
+music player: "play", "stop", "next song", "previous song",
+"volume up", "volume down", "share", and "open lyric".
+
+
+
+
+         Figure 15. The emojis prompted to the participants
+
+We prompted each emoji and each word 10 times in the train-
+ing video, and fve times in the testing video. For the silent
+speech portion of our study, participants were instructed to
+silently mouth commands that were displayed on the monitor.
+For each participant, we collected 15K samples on average for
+training and 6K samples for testing.                                           Figure 16. The confusion matrix for emoji recognition
+
+Data processing pipeline
+C-Face is able to predict 42 facial landmarks per frame. This
+allows us to create a data fow containing the landmark clusters.
+To recognize emoji and silent speech input gestures, we frst
+segment the gestures in the data fow and then train a classifer
+to distinguish between various emoji faces or mouthed-words.
+To segment the gestures, we begin by calculating the total
+difference between the predicted landmarks from C-Face and
+the landmarks from a natural facial expression each frame.
+Since facial landmarks change most signifcantly at the peak
+of each gesture (when making a face or mouthing a word),
+a peaking seeking algorithm is applied to fnd the peaks in
+the stream of landmark differences. We then sort out the
+primary peaks, which represent the gestures. These landmarks
+are software-segmented and inputted into the trained BLSTM
+described below.
+Since the extracted events after segmentation are temporal se-              Figure 17. The confusion matrix for silent speech recognition
+ries with variable lengths, we deploy a two-layer Bidirectional
+Long Short-Term Memory (BLSTM) model [16, 9] followed                   These two preliminary experiment results recognizing emojis
+by a fully connected layer with a softmax function to classify          and silent speech phrases validate the possibilities of putting
+
+
+                                                                  120
+Session 3A: Tracking User's Bodies and Faces Using Cameras                      UIST '20, October 20–23, 2020, Virtual Event, USA
+
+C-Face to use in real-world applications. However, the perfor-            naturally wore glasses to leave them on throughout the original
+mance is not yet optimal. To better interpret these results, we           study. After the study, we compared the average results from
+frst compared the results of feeding C-Face data into our ges-            the users who wore glasses with users who did not.
+ture recognition protocol with ground truth data using the three
+lowest scoring participants (P2, P4, P6). We did this in order            To evaluate our system’s performance while wearing a face
+to gauge the extent to which inaccurate C-Face reconstructions            mask, we conducted a short follow-up study on fve partic-
+were to blame for the sub-optimal performances. C-Face’s                  ipants in our original study. The study procedure went as
+emoji recognition accuracy for each of the three users was                follows: First, we cut a hole in the center of a face mask so
+89.76%, 77.05% and 78.9% respectively, while ground-truth                 that the ground truth camera could collect the facial feature
+results were 94.4%, 81.36%, and 83.88%. C-Face’s silent                   points of the nose and mouth. Second, we secured the cut mask
+                                                                          on the participant’s face. Lastly, we put the earphones on the
+speech recognition accuracy for each of the three users was
+                                                                          user, adjusted the cameras on them, and ran the continuous
+77.4%, 70.2% and 80.8% respectively, while ground-truth re-
+                                                                          reconstruction data collection as described in the "User Study"
+sults were 77.8%, 67.45% and 73.8%. This indicates that
+                                                                          section. We demonstrated that the camera views with the cut
+gesture recognition performance using C-Face is compara-
+ble to direct CV-based methods, which is consistent with our              mask (for ground truth collection) and the regular uncut mask
+continuous facial reconstruction results.                                 were the same by capturing pictures of both masks on one of
+                                                                          the participants. Figure 18 shows that the cut hole had little to
+One possible factor that could have lowered performance is                no effect on the captured image of the facial contours.
+our small dataset size. We only required each participant to
+perform each utterance 15 times. If words were mouthed                    Occlusion from Eye Glasses
+differently across utterances, our data may have lacked the di-           In our user study, we had four participants who naturally
+versity necessary for our model to accurately classify gestures.          wore glasses: P5, P6, P7 and P9. For earphones, the average
+Also, given the small training data size, other ML models may             MSD of these four users is 0.824 mm (SD = 0.07 mm) and
+have performed better than BLSTM. In the future we can focus              the average MMAE is 1.44 mm (SD = 0.19 mm), while the
+on improving our classifcation results.                                   average MSD of the other 5 users without glasses is 0.743 mm
+                                                                          (SD = 0.09 mm) and the MMAE is 1.392 mm (SD = 0.2 mm).
+DISCUSSION                                                                For headphones, the MSD with glasses is 0.798 mm (SD =
+                                                                          0.09 mm) and the MMAE is 1.59 mm (SD = 0.26 mm), while
+System Performance with Face Occlusion                                    the MSD without glasses is 0.703 mm (SD = 0.06 mm) and
+Traditional CV methods using frontal cameras to reconstruct               the MMAE is 1.24 mm (SD = 0.14 mm). Even though the
+facial expressions are often unreliable if the face is partially          MSD and MMAE of users with eye glasses is slightly higher,
+blocked. For example, a camera pointed directly at the face               their overall performance is quite similar.
+relies on capturing images of the lips to determine the feature
+points of the mouth. If a user wears a face mask, their lips              Occlusion from a Face Mask
+are blocked and the system fails to reconstruct their mouth.              In our mask blocking experiment, the mask training dataset
+As face mask use increases worldwide amidst the COVID-19                  and mask testing dataset of four participants (P1, P3, P5, P6)
+pandemic, a system like C-Face could be especially practical              were fed into a deep learning model. Then, we compared
+and valuable going into the future.                                       the continuous reconstruction results of the participants when
+                                                                          wearing and not wearing a mask. The four participants with
+                                                                          a mask had an average MSD of 0.717 mm (SD = 0.07) and
+                                                                          average MMAE of 1.36 mm (SD = 0.28 mm), compared with
+                                                                          an average MSD of 0.801 mm (SD = 0.068 mm) and MMAE
+                                                                          of 1.51 mm (SD = 0.24 mm) without a mask. The results show
+                                                                          that the performance while wearing mask is even a little better
+                                                                          than the results without a mask.
+                                                                          These results also demonstrate the strength of C-Face over
+                                                                          other traditional CV methods. C-Face still provides reasonably
+                                                                          accurate facial expression tracking even when part of the face
+                                                                          is blocked.
+
+                                                                          User-independent Models
+                                                                          The results we presented so far use user-dependent models,
+                                                                          where the training and testing data come from the same partic-
+                                                                          ipant. We started with user-dependent models because contour
+Figure 18. The face and facial contours when wearing the mask and         shapes may vary between people. However, this model may in-
+glasses
+                                                                          troduce a burden as users need to provide training data before
+                                                                          practical use of the system.
+We tested partial facial obstruction with two common wear-
+ables: eye glasses and face masks. For facial reconstruction              In order to understand how C-Face performs with user-
+data with eye glasses, we simply allowed the participants who             independent models, we conducted a follow-up study using
+
+
+                                                                    121
+Session 3A: Tracking User's Bodies and Faces Using Cameras                          UIST '20, October 20–23, 2020, Virtual Event, USA
+
+the data collected in the earphones user study with 9 partic-                 Privacy Concerns
+ipants for continuous facial reconstruction. We built user-                   If C-Face is deployed, it may raise serious privacy concerns
+independent models, where we used 8 participants’ data to                     as the cameras can potentially capture information in private
+train the models, and one remaining participant’s data as the                 environments. There are ways to address this issue, like ex-
+testing set. We iterated this process over each participant. The              tracting features on the fy and not saving raw captured images.
+average error across 9 participants of our 42 feature points                  To fully address privacy concerns, we need a much longer
+(MSD) and 20 major feature points (MMAE) were 1.95 mm                         discussion aside from our main paper topic. We plan to further
+and 3.78 mm, respectively. The user-dependent model had                       explore this issue in the future.
+smaller errors of 0.76 mm for MSD and 1.8 mm for MMAE.
+The results for user-independent models still show potential                  Improving Ground Truth Acquisition Method
+for C-Face to perform well on different participants if a larger              Our current ground-truth acquisition method uses a state-of-
+training set can be obtained.                                                 the-art computer vision library to track facial expressions. This
+                                                                              data acquisition method may not be the most accurate way
+Power Consumption                                                             to track facial expressions. It is an approximation of actual
+Improving C-Face’s power consumption is a critical step to-                   ground-truths, which limits the performance of C-Face. The
+wards real world deployment to conserve battery life. In our                  ceiling of C-Face’s performance is set by the performance of
+experiment, we use multiple Raspberry Pis which consume a                     the CV library we chose. If there is a more accurate method
+relatively high amount of power (over 2W [32]). It prevents the               for acquiring ground-truth data, C-Face’s performance can
+current prototype from an immediate large-scale deployment.                   potentially improve. Our CV-based ground-truth acquisition
+In future work, we can design the main control board ourselves                also limits the use cases of C-Face.
+with a low-power MCU, a wireless module, and other chips to
+reduce power use. For example, we could choose ESP, a low                     Other Limitations
+power MCU with a WiFi antenna (210mW ), which could save                      Like most CV-based systems, ambient light may infuence
+around 89% of the power used by a Raspberry Pi.                               C-Face’s real-world implementation. The main procedure that
+Additionally, according to [54], lowering camera resolution                   may be affected is the facial contour extraction when pre-
+could also reduce power consumption. However, lowering                        processing. If the ambient light becomes too bright or dim,
+image resolutions may reduce facial reconstruction accuracy.                  the face segmentation algorithm may fail, affecting the fnal
+To investigate this issue, we conducted an experiment where                   continuous reconstruction result. Also, longer hair can block
+we tested four image resolutions (640x480, 320x240, 160x120                   C-Face’s view of a user’s facial contours. This issue could
+and 80x60) on the data set we collected from the 9 users wear-                lead to inaccurate model predictions of landmark positions
+ing our earphones in the previous study. The results in Fig. 19               and in turn result in poor facial reconstruction.
+demonstrate that a lower resolution does lead to a slightly
+lower reconstruction accuracy. But with an image resolution                   CONCLUSION
+of 90*60, C-Face can still reconstruct facial movements with                  In this paper, we present C-Face, a minimally intrusive ear-
+a MSD of 0.97mm and MMAE of 1.02 mm. This indicates C-                        mounted technology that continuously reconstructs full facial
+Face has potential to be a more energy effcient to be deployed                expressions by capturing the positions and shapes of the mouth,
+in real-world devices.                                                        eyes and eyebrows. It uses two miniature cameras to capture
+                                                                              the contours of the face, which are used to train a deep learning
+                                                                              model to predict facial expressions. A user study with 9 partic-
+                                                                              ipants demonstrated that C-Face can continuously reconstruct
+                                                                              facial feature points with an MSD of 0.77mm using earphones
+                                                                              and 0.74mm using headphones, and an MMAE of 1.43mm
+Figure 19. The reconstruction performance under different resolutions
+                                                                              using earphones and 1.39mm using headphones. When the
+                                                                              face is partially covered by a face mask or eye glass frame,
+                                                                              C-Face can still reconstruct the facial feature points with an
+Image Segmentation and Different Backgrounds                                  MSD of 0.717mm while wearing a mask, and 0.824mm while
+We conducted the user study indoors, but have yet to investi-                 wearing glasses, and an MMAE of 1.36mm when wearing a
+gate how the system works in different environments. Vary-                    mask and 1.44mm while wearing glasses.
+ing light conditions and backgrounds can lead to poor image
+segmentation results, so we added noise in the segmentation                   ACKNOWLEDGMENTS
+process to address this issue during the training process in                  This work is supported by Information Science Department
+our experiment. However, this method may not work well                        at Cornell University. We thank all study participants for
+when segmentation results are far from expected values. In                    participating in the study, reviewers for constructive comments,
+the future, we plan to improve segmentation by training a                     and lab mates in Cornell SciFi Lab for providing feedback.
+deep model with a larger dataset dedicated to segment human
+skin from the environment. Also, we can add more sens-                        REFERENCES
+ing methods for segmentation, such as using a depth camera.                    [1] Toshiyuki Ando, Yuki Kubo, Buntarou Shizuki, and
+Depth-cameras are large, but we believe they could become                          Shin Takahashi. 2017. Canalsense: Face-related
+small enough to ft into an ear-mounted device in the future.                       movement recognition system based on sensing air
+
+
+                                                                        122
+Session 3A: Tracking User's Bodies and Faces Using Cameras                   UIST '20, October 20–23, 2020, Virtual Event, USA
+
+     pressure in ear canals. In Proceedings of the 30th Annual         [13] Lang He, Dongmei Jiang, Le Yang, Ercheng Pei, Peng
+     ACM Symposium on User Interface Software and                           Wu, and Hichem Sahli. 2015. Multimodal affective
+     Technology. 679–689.                                                   dimension prediction using deep bidirectional long
+                                                                            short-term memory recurrent neural networks. In
+ [2] Zhe Cao, Gines Hidalgo, Tomas Simon, Shih-En Wei,
+                                                                            Proceedings of the 5th International Workshop on
+     and Yaser Sheikh. 2018. OpenPose: realtime
+                                                                            Audio/Visual Emotion Challenge. 73–80.
+     multi-person 2D pose estimation using Part Affnity
+     Fields. arXiv preprint arXiv:1812.08008 (2018).                   [14] Shan He, Shangfei Wang, Wuwei Lan, Huan Fu, and
+ [3] George Caridakis, Lori Malatesta, Loic Kessous, Noam                   Qiang Ji. 2013. Facial expression recognition using deep
+     Amir, Amaryllis Raouzaiou, and Kostas Karpouzis.                       Boltzmann machine from thermal infrared images. In
+     2006. Modeling naturalistic affective states via facial                2013 Humaine Association Conference on Affective
+     and vocal expressions recognition. In Proceedings of the               Computing and Intelligent Interaction. IEEE, 239–244.
+     8th international conference on Multimodal interfaces.            [15] Tong He, Zhi Zhang, Hang Zhang, Zhongyue Zhang,
+     146–154.                                                               Junyuan Xie, and Mu Li. 2019. Bag of tricks for image
+ [4] Lam Aun Cheah, James M Gilbert, José A González,                       classifcation with convolutional neural networks. In
+     Phil D Green, Stephen R Ell, Roger K Moore, and Ed                     Proceedings of the IEEE Conference on Computer
+     Holdsworth. 2018. A Wearable Silent Speech Interface                   Vision and Pattern Recognition. 558–567.
+     based on Magnetic Sensors with Motion-Artefact                    [16] Sepp Hochreiter and Jürgen Schmidhuber. 1997. Long
+     Removal.. In BIODEVICES. 56–62.                                        short-term memory. Neural computation 9, 8 (1997),
+ [5] Ciprian Adrian Corneanu, Marc Oliu Simón, Jeffrey F                    1735–1780.
+     Cohn, and Sergio Escalera Guerrero. 2016. Survey on               [17] Robin Hofe, Stephen R Ell, Michael J Fagan, James M
+     rgb, 3d, thermal, and multimodal approaches for facial                 Gilbert, Phil D Green, Roger K Moore, and Sergey I
+     expression recognition: History, trends, and                           Rybchenko. 2013. Small-vocabulary speech recognition
+     affect-related applications. IEEE transactions on pattern              using a silent speech interface based on magnetic
+     analysis and machine intelligence 38, 8 (2016),                        sensing. Speech Communication 55, 1 (2013), 22–32.
+     1548–1568.
+                                                                       [18] Fang Hu, Peng He, Songlin Xu, Yin Li, and Cheng
+ [6] Roddy Cowie, Ellen Douglas-Cowie, Nicolas                              Zhang. 2020. FingerTrak: Continuous 3D Hand Pose
+     Tsapatsoulis, George Votsis, Stefanos Kollias, Winfried                Tracking by Deep Learning Hand Silhouettes Captured
+     Fellenz, and John G Taylor. 2001. Emotion recognition                  by Miniature Thermal Cameras on Wrist. Proceedings
+     in human-computer interaction. IEEE Signal processing                  of the ACM on Interactive, Mobile, Wearable and
+     magazine 18, 1 (2001), 32–80.                                          Ubiquitous Technologies 4, 2 (2020), 1–24.
+ [7] Bruce Denby, Yacine Oussar, Gérard Dreyfus, and                   [19] Peter J Huber. 1992. Robust estimation of a location
+     Maureen Stone. 2006. Prospects for a silent speech                     parameter. In Breakthroughs in statistics. Springer,
+     interface using ultrasound imaging. In 2006 IEEE                       492–518.
+     International Conference on Acoustics Speech and
+     Signal Processing Proceedings, Vol. 1. IEEE, I–I.                 [20] Thomas Hueber, Elie-Laurent Benaroya, Gérard Chollet,
+                                                                            Bruce Denby, Gérard Dreyfus, and Maureen Stone.
+ [8] Bruce Denby, Tanja Schultz, Kiyoshi Honda, Thomas                      2010. Development of a Silent Speech Interface Driven
+     Hueber, Jim M Gilbert, and Jonathan S Brumberg. 2010.                  by Ultrasound and Optical Images of the Tongue and
+     Silent speech interfaces. Speech Communication 52, 4                   Lips. Speech Commun. 52, 4 (April 2010), 288–300.
+     (2010), 270–287.                                                       DOI:http://dx.doi.org/10.1016/j.specom.2009.11.004
+ [9] Alex Graves and Jürgen Schmidhuber. 2005. Framewise               [21] Sergey Ioffe and Christian Szegedy. 2015. Batch
+     phoneme classifcation with bidirectional LSTM and                      normalization: Accelerating deep network training by
+     other neural network architectures. Neural networks 18,                reducing internal covariate shift. arXiv preprint
+     5-6 (2005), 602–610.                                                   arXiv:1502.03167 (2015).
+[10] Anna Gruebler and Kenji Suzuki. 2010. Measurement of
+                                                                       [22] Yasha Iravantchi, Yang Zhang, Evi Bernitsas, Mayank
+     distal EMG signals using a wearable device for reading
+                                                                            Goel, and Chris Harrison. 2019. Interferi: Gesture
+     facial expressions. In 2010 Annual International
+                                                                            Sensing Using On-Body Acoustic Interferometry. In
+     Conference of the IEEE Engineering in Medicine and
+                                                                            Proceedings of the 2019 CHI Conference on Human
+     Biology. IEEE, 4594–4597.
+                                                                            Factors in Computing Systems. 1–13.
+[11] Jun He, Jianfeng Cai, Lingzhi Fang, and Z He. 2016.
+                                                                       [23] Aaron S Jackson, Adrian Bulat, Vasileios Argyriou, and
+     Facial expression recognition based on LBP/VAR and
+                                                                            Georgios Tzimiropoulos. 2017. Large pose 3D face
+     DBN model. Appl. Res. Comput 33 (2016), 453–461.
+                                                                            reconstruction from a single image via direct volumetric
+[12] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian                      CNN regression. In Proceedings of the IEEE
+     Sun. 2016. Deep residual learning for image recognition.               International Conference on Computer Vision.
+     In Proceedings of the IEEE conference on computer                      1031–1039.
+     vision and pattern recognition. 770–778.
+
+
+                                                                 123
+Session 3A: Tracking User's Bodies and Faces Using Cameras                  UIST '20, October 20–23, 2020, Virtual Event, USA
+
+[24] Eloi Moliner Juanpere and Tamás Gábor Csapó. 2019.                    photo refective sensors on smart eyewear. In
+     Ultrasound-Based Silent Speech Interface Using                        Proceedings of the 21st International Conference on
+     Convolutional and Recurrent Neural Networks. Acta                     Intelligent User Interfaces. 317–326.
+     Acustica united with Acustica 105, 4 (2019), 587–590.
+                                                                      [36] Denys JC Matthies, Bernhard A Strecker, and Bodo
+[25] Samira Ebrahimi Kahou, Christopher Pal, Xavier                        Urban. 2017. Earfeldsensing: A novel in-ear electric
+     Bouthillier, Pierre Froumenty, Çaglar Gülçehre, Roland                feld sensing to enrich wearable gesture input through
+     Memisevic, Pascal Vincent, Aaron Courville, Yoshua                    facial expressions. In Proceedings of the 2017 CHI
+     Bengio, Raul Chandias Ferrari, and others. 2013.                      Conference on Human Factors in Computing Systems.
+     Combining modality specifc deep neural networks for                   1911–1922.
+     emotion recognition in video. In Proceedings of the 15th
+                                                                      [37] Jérémie Nicolle, Vincent Rapp, Kévin Bailly, Lionel
+     ACM on International conference on multimodal
+                                                                           Prevost, and Mohamed Chetouani. 2012. Robust
+     interaction. 543–550.
+                                                                           continuous prediction of human emotions using
+[26] Asifullah Khan, Anabia Sohail, Umme Zahoora, and                      multiscale dynamic cues. In Proceedings of the 14th
+     Aqsa Saeed Qureshi. 2019. A survey of the recent                      ACM international conference on Multimodal
+     architectures of deep convolutional neural networks.                  interaction. 501–508.
+     Artifcial Intelligence Review (2019), 1–62.
+                                                                      [38] Frederic I Parke and Keith Waters. 1996. Computer
+[27] Naoki Kimura, Michinari Kono, and Jun Rekimoto.                       facial animation. CRC press.
+     2019. SottoVoce: an ultrasound imaging-based silent
+                                                                      [39] Stavros Petridis, Jie Shen, Doruk Cetin, and Maja Pantic.
+     speech interaction using deep neural networks. In
+                                                                           2018. Visual-only recognition of normal, whispered and
+     Proceedings of the 2019 CHI Conference on Human
+                                                                           silent speech. In 2018 IEEE International Conference on
+     Factors in Computing Systems. 1–11.
+                                                                           Acoustics, Speech and Signal Processing (ICASSP).
+[28] Davis E King. 2009. Dlib-ml: A machine learning                       IEEE, 6219–6223.
+     toolkit. Journal of Machine Learning Research 10, Jul
+                                                                      [40] Huy Phan, Martin Krawczyk-Becker, Timo Gerkmann,
+     (2009), 1755–1758.
+                                                                           and Alfred Mertins. 2017. DNN and CNN with
+[29] Irene Kotsia and Ioannis Pitas. 2006. Facial expression               weighted and multi-task loss functions for audio event
+     recognition in image sequences using geometric                        detection. arXiv preprint arXiv:1708.03211 (2017).
+     deformation features and support vector machines. IEEE
+                                                                      [41] Subramanian Ramanathan, Ashraf Kassim, YV
+     transactions on image processing 16, 1 (2006), 172–187.
+                                                                           Venkatesh, and Wu Sin Wah. 2006. Human facial
+[30] Ying-Hsiu Lai and Shang-Hong Lai. 2018.                               expression recognition using a 3D morphable model. In
+     Emotion-preserving representation learning via                        2006 International conference on image processing.
+     generative adversarial network for multi-view facial                  IEEE, 661–664.
+     expression recognition. In 2018 13th IEEE International
+                                                                      [42] Ville Rantanen, Pekka-Henrik Niemenlehto, Jarmo
+     Conference on Automatic Face & Gesture Recognition
+                                                                           Verho, and Jukka Lekkala. 2010. Capacitive facial
+     (FG 2018). IEEE, 263–270.
+                                                                           movement detection for human–computer interaction to
+[31] Hao Li, Laura Trutoiu, Kyle Olszewski, Lingyu Wei,                    click by frowning and lifting eyebrows. Medical &
+     Tristan Trutna, Pei-Lun Hsieh, Aaron Nicholls, and                    biological engineering & computing 48, 1 (2010),
+     Chongyang Ma. 2015. Facial performance sensing                        39–47.
+     head-mounted display. ACM Transactions on Graphics
+                                                                      [43] Ville Rantanen, Hanna Venesvirta, Oleg Spakov, Jarmo
+     (ToG) 34, 4 (2015), 1–9.
+                                                                           Verho, Akos Vetek, Veikko Surakka, and Jukka Lekkala.
+[32] Robert LiKamWa, Bodhi Priyantha, Matthai Philipose,                   2013. Capacitive measurement of facial activity intensity.
+     Lin Zhong, and Paramvir Bahl. 2013. Energy                            IEEE Sensors journal 13, 11 (2013), 4329–4338.
+     characterization and optimization of image sensing
+                                                                      [44] Marc’Aurelio Ranzato, Joshua Susskind, Volodymyr
+     toward continuous mobile vision. In Proceeding of the
+                                                                           Mnih, and Geoffrey Hinton. 2011. On deep generative
+     11th annual international conference on Mobile systems,
+                                                                           models with applications to recognition. In CVPR 2011.
+     applications, and services. 69–82.
+                                                                           IEEE, 2857–2864.
+[33] Ping Liu, Shizhong Han, Zibo Meng, and Yan Tong.
+                                                                      [45] Salah Rifai, Yoshua Bengio, Aaron Courville, Pascal
+     2014. Facial expression recognition via a boosted deep
+                                                                           Vincent, and Mehdi Mirza. 2012a. Disentangling factors
+     belief network. In Proceedings of the IEEE conference
+                                                                           of variation for facial expression recognition. In
+     on computer vision and pattern recognition. 1805–1812.
+                                                                           European Conference on Computer Vision. Springer,
+[34] Ilya Loshchilov and Frank Hutter. 2016. Sgdr:                         808–822.
+     Stochastic gradient descent with warm restarts. arXiv
+                                                                      [46] Salah Rifai, Yoshua Bengio, Aaron Courville, Pascal
+     preprint arXiv:1608.03983 (2016).
+                                                                           Vincent, and Mehdi Mirza. 2012b. Disentangling factors
+[35] Katsutoshi Masai, Yuta Sugiura, Masa Ogata, Kai                       of variation for facial expression recognition. In
+     Kunze, Masahiko Inami, and Maki Sugimoto. 2016.                       European Conference on Computer Vision. Springer,
+     Facial expression recognition in daily life by embedded               808–822.
+
+                                                                124
+Session 3A: Tracking User's Bodies and Faces Using Cameras                  UIST '20, October 20–23, 2020, Virtual Event, USA
+
+[47] Himanshu Sahni, Abdelkareem Bedri, Gabriel Reyes,                [54] Anestis Terzis. 2016. Handbook of camera monitor
+     Pavleen Thukral, Zehua Guo, Thad Starner, and                         systems: The automotive mirror-replacement technology
+     Maysam Ghovanloo. 2014. The tongue and ear interface:                 based on ISO 16505. Vol. 5. Springer.
+     a wearable system for silent speech recognition. In
+                                                                      [55] Jacob Whitehill, Marian Bartlett, and Javier Movellan.
+     Proceedings of the 2014 ACM International Symposium
+                                                                           2008. Automatic facial expression recognition for
+     on Wearable Computers. 47–54.
+                                                                           intelligent tutoring systems. In 2008 IEEE Computer
+[48] Jocelyn Scheirer, Raul Fernandez, and Rosalind W                      Society Conference on Computer Vision and Pattern
+     Picard. 1999. Expression glasses: a wearable device for               Recognition Workshops. IEEE, 1–6.
+     facial expression recognition. In CHI’99 Extended
+                                                                      [56] Huiyuan Yang, Zheng Zhang, and Lijun Yin. 2018.
+     Abstracts on Human Factors in Computing Systems.
+                                                                           Identity-adaptive facial expression recognition through
+     262–263.
+                                                                           expression regeneration using conditional generative
+[49] Tanja Schultz. 2010. ICCHP keynote: Recognizing                       adversarial networks. In 2018 13th IEEE International
+     silent and weak speech based on electromyography. In                  Conference on Automatic Face & Gesture Recognition
+     International Conference on Computers for                             (FG 2018). IEEE, 294–301.
+     Handicapped Persons. Springer, 595–604.
+                                                                      [57] Cheng Zhang, Qiuyue Xue, Anandghan Waghmare,
+[50] Tanja Schultz and Michael Wand. 2010. Modeling                        Ruichen Meng, Sumeet Jain, Yizeng Han, Xinyu Li,
+     coarticulation in EMG-based continuous speech                         Kenneth Cunefare, Thomas Ploetz, Thad Starner, and
+     recognition. Speech Communication 52, 4 (2010),                       others. 2018a. FingerPing: Recognizing fne-grained
+     341–353.                                                              hand poses using active acoustic on-body sensing. In
+                                                                           Proceedings of the 2018 CHI Conference on Human
+[51] Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky,                  Factors in Computing Systems. 1–10.
+     Ilya Sutskever, and Ruslan Salakhutdinov. 2014.
+     Dropout: a simple way to prevent neural networks from            [58] Feifei Zhang, Tianzhu Zhang, Qirong Mao, and
+     overftting. The journal of machine learning research 15,              Changsheng Xu. 2018b. Joint pose and expression
+     1 (2014), 1929–1958.                                                  modeling for facial expression recognition. In
+                                                                           Proceedings of the IEEE Conference on Computer
+[52] Bo Sun, Liandong Li, Tian Zuo, Ying Chen, Guoyan                      Vision and Pattern Recognition. 3359–3368.
+     Zhou, and Xuewen Wu. 2014. Combining multimodal
+     features with hierarchical classifer fusion for emotion          [59] Minghua Zhao and Yonggang Zhao. 2010. Skin color
+     recognition in the wild. In Proceedings of the 16th                   segmentation based on improved 2D Otsu and YCgCr.
+     international conference on multimodal interaction.                   In 2010 International Conference on Electrical and
+     481–486.                                                              Control Engineering. IEEE, 1954–1957.
+[53] Ke Sun, Chun Yu, Weinan Shi, Lan Liu, and Yuanchun               [60] Ruicong Zhi, Markus Flierl, Qiuqi Ruan, and
+     Shi. 2018. Lip-Interact: Improving Mobile Device                      W Bastiaan Kleijn. 2010. Graph-preserving sparse
+     Interaction with Silent Speech Commands. In                           nonnegative matrix factorization with application to
+     Proceedings of the 31st Annual ACM Symposium on                       facial expression recognition. IEEE Transactions on
+     User Interface Software and Technology. 581–593.                      Systems, Man, and Cybernetics, Part B (Cybernetics) 41,
+                                                                           1 (2010), 38–52.
+
+
+
+
+                                                                125
+

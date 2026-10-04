@@ -1,0 +1,211 @@
+         Facial Gesture Recognition Using Bio-impedance Sensing
+                    Mengxi Liu                                             Daniel Geißler                                     Sizhen Bian
+    German Research Center for Artificial                  German Research Center for Artificial                German Research Center for Artificial
+            Intelligence (DFKI)                                    Intelligence (DFKI)                                  Intelligence (DFKI)
+         Kaiserslautern, Germany                                Kaiserslautern, Germany                              Kaiserslautern, Germany
+           mengxi.liu@dfki.de                                    daniel.geissler@dfki.de                               Sizhen.Bian@dfki.de
+
+                  Joanna Sorysz                                              Bo Zhou                                        Paul Lukowicz
+    German Research Center for Artificial                  German Research Center for Artificial                German Research Center for Artificial
+            Intelligence (DFKI)                                    Intelligence (DFKI)                                  Intelligence (DFKI)
+         Kaiserslautern, Germany                                Kaiserslautern, Germany                              Kaiserslautern, Germany
+          joanna.sorysz@dfki.de                                     bo.zhou@dfki.de                                  Paul.Lukowicz@dfki.de
+
+
+
+               48 mm
+
+
+
+
+                                                                              Ch1
+
+                                                                             Ch2
+
+
+
+                                                                                         Omni Puff             Right Puff         Left Puff            Suck
+
+         Hardware Prototype                  Measurement Configuration                                                Facial Gesture
+
+Figure 1: Facial gesture recognition using bio-impedance sensing. The wearable hardware prototype is built based on the
+AD5941 bio-impedance sensing module and the microcontroller ESP32PICO. Four puff cheek gestures are detected by the
+proposed method. The raw signals (only magnitude is plotted here) from the two bio-impedance channels are presented under
+each facial gesture. It can be observed that the cheek movement can cause an obvious bio-impedance variation.
+Abstract                                                                                 ACM Reference Format:
+Facial gesture recognition plays a crucial role in human-computer                        Mengxi Liu, Daniel Geißler, Sizhen Bian, Joanna Sorysz, Bo Zhou, and Paul
+                                                                                         Lukowicz. 2025. Facial Gesture Recognition Using Bio-impedance Sensing.
+interaction (HCI), enabling intuitive and non-intrusive input meth-
+                                                                                         In The Augmented Humans International Conference 2025 (AHs 2025), March
+ods. In this work, we present a facial gesture recognition solution                      16–20, 2025, Masdar City, Abu Dhabi, United Arab Emirates. ACM, New York,
+based on bio-impedance sensing. Our proposed method effectively                          NY, USA, 3 pages. https://doi.org/10.1145/3745900.3746120
+detects four types of cheek puff activities and demonstrates its fea-
+sibility through an experiment involving four participants perform-
+ing these gestures. With a Random Forest classifier, our approach
+achieves an average accuracy of 93 %, highlighting its potential as
+an input modality in HCI applications.                                                   1    Introduction
+                                                                                         Human-computer interaction (HCI) has seen tremendous progress
+Keywords                                                                                 with the development of innovative input methods designed to
+                                                                                         enhance accessibility and user experience. While traditional in-
+bio-impedance sensing, facial gesture recognition
+                                                                                         teraction techniques, such as touchscreens, keyboards, and voice
+                                                                                         commands, are widely used, they are not always practical in certain
+                                                                                         scenarios. For example, hands-free control may be required when
+                                                                                         users’ hands are occupied, or voice commands may fail in noisy
+This work is licensed under a Creative Commons Attribution International
+4.0 License.                                                                             environments [2]. In such cases, facial gestures provide a promising
+                                                                                         alternative for interaction. They are natural, intuitive, and require
+AHs 2025, Masdar City, Abu Dhabi, United Arab Emirates                                   minimal effort to perform [3, 4, 6, 14]. However, despite their po-
+© 2025 Copyright held by the owner/author(s).
+ACM ISBN 979-8-4007-1566-2/25/03                                                         tential, achieving efficient and accurate facial gesture recognition
+https://doi.org/10.1145/3745900.3746120                                                  remains a significant challenge.
+
+
+
+
+                                                                                   491
+AHs 2025, March 16–20, 2025, Masdar City, Abu Dhabi, United Arab Emirates                                                                         Liu et al.
+
+
+   Most existing research on facial gesture recognition relies on                 infrared emitters to track jaw and lip movements, enhancing VR
+vision-based approaches that use deep learning and computer vi-                   interaction. Gjoreski et al. [4] developed a wearable surface elec-
+sion techniques to track facial expressions and muscle movements                  tromyography (sEMG) device to monitor facial muscle activity
+[4, 6, 14]. While these methods have demonstrated effectiveness,                  associated with emotional states. By capturing muscle activation
+they come with limitations. Vision-based systems often require                    patterns, this device offers an accessible and user-friendly method
+high computational resources, struggle in low-light conditions or                 for tracking affective states in daily life, with potential applications
+with occluded faces, and may raise privacy concerns. Alternative                  in psychology, human-computer interaction (HCI), and healthcare.
+sensing modalities leveraging body’s electrical field [1], such as                Matthies et al. [11] proposed an innovative in-ear electric field sens-
+electromyography (EMG) and proximity sensing [3, 4, 7], have also                 ing technique, dubbed EarFS, to detect facial expressions. Using
+been explored for detecting facial activity. EMG-based methods,                   electrodes placed in the ear canal, EarFS captures electrical changes
+for instance, measure electrical signals generated by facial muscles              induced by facial muscle movements, providing an unobtrusive
+using surface electrodes. Although EMG provides high temporal                     solution for gesture-based input in wearable devices and enabling
+resolution and directly captures muscle activation, it is prone to                hands-free interaction in mobile computing environments.
+motion artifacts, depends heavily on precise electrode placement,                     While bio-impedance sensing has shown promising results in hu-
+and often requires skin preparation to ensure signal reliability.                 man activity recognition (HAR) tasks [9, 10, 12, 13], its application
+   Bio-impedance sensing has recently emerged as a promising                      to facial gesture recognition remains underexplored. Therefore, in
+solution for human activity recognition (HAR). As a kind of elec-                 this work, we investigate the performance of bio-impedance sens-
+trophysiological signal, it can monitor the conductive information                ing for facial gesture recognition, with a specific focus on cheek
+of the object located between two electrodes (two-electrode con-                  movements. Additionally, a related study, GazePuffer [6], addressed
+figuration). This technology has been researched in many fields,                  a limitation of traditional gaze input by incorporating a confirma-
+such as respiratory monitoring [13], sports activity recognition [9],             tion mechanism triggered by cheek puffs. However, that approach
+and muscle activity detection [5]. More recently, researchers have                still relied on camera-based perception to detect cheek movements,
+begun exploring its potential for wearable human activity recogni-                highlighting a gap that our bio-impedance-based solution aims to
+tion tasks, including hand gesture [8, 12] and dietary classification             fill.
+[10]. When compared to EMG-based approaches, bio-impedance
+sensing provides additional benefits. Unlike EMG signals, which are               3 Methodology
+highly sensitive to motion artifacts and require precise electrode
+                                                                                  3.1 Hardware Implementation
+placement, bio-impedance measures changes in tissue conductivity
+between the electrodes, which makes it less susceptible to variabil-              In this study, we develop a wearable device to measure facial bio-
+ity caused by electrode positioning and further provides a more                   impedance variations induced by cheek puff activities, as illustrated
+stable signal with fewer motion-related disturbances. Additionally,               in Figure 1. The core component of the device is the AD5941 bio-
+bio-impedance sensors can detect deeper tissue activity beyond                    impedance sensing module, interfaced with the face via wet elec-
+surface-level muscle movements, offering richer information for                   trodes. This component generates a 100 kHz alternating current
+gesture recognition tasks. Facial gestures often lead to the con-                 (AC) signal with a peak-to-peak amplitude of 100 mV, which is
+ductance variation of the face, for example, in puff cheeks, the                  applied to the target area. The resulting response current signal is
+bio-impedance will be increased as the airflow into the mouth.                    measured through the face, processed by the on-chip hardware Fast
+These advantages make bio-impedance sensing a potential and                       Fourier Transform (FFT) accelerator, and the impedance data is re-
+promising solution for facial gesture recognition in real-world HCI               trieved via the SPI interface by the ESP32-PICO-V3 microcontroller,
+applications. However, bio-impedance sensing-based facial gesture                 which also supports WiFi and Bluetooth connectivity. The data
+recognition is rarely studied compared to other sensing modalities.               sampling rate is set to 20 Hz. To ensure safety, the current injected
+   In this work, we demonstrate a novel facial gesture recognition                into the body adheres to IEC 60601 standards, which impose limits
+system based on bio-impedance sensing that is capable of detecting                on both direct current (DC) and alternating current (AC) entering
+three distinct cheek puff activities. To evaluate our approach, we                the human body. Specifically, the DC component must be less than
+conducted experiments with four participants performing these                     10 𝜇A, while the maximum allowable AC current is 500 𝜇A at 50
+gestures and achieved an average accuracy of 93% using a ran-                     kHz and 600 𝜇A at 60 kHz. To comply with these requirements, a
+dom forest classifier. Our findings demonstrate the potential of                  470 nF capacitor and a 1000-ohm resistor were sequentially inte-
+bio-impedance sensing as an effective input method for HCI applica-               grated into the measurement circuit to block DC signals and limit
+tions, offering a lightweight, privacy-preserving, and environment-               the current flow respectively.
+independent alternative to existing solutions.
+                                                                                  3.2    Experiment
+                                                                                  To evaluate the performance of the bio-impedance sensing solution
+2    Related Work                                                                 for facial activity recognition, we recruited four volunteers (two
+In recent years, several sensor-based facial gesture recognition so-              females and two males) to participate in the experiment. These
+lutions have been proposed [3, 4, 7, 11]. Li et al. [7] introduced a              participants were asked to wear the proposed hardware and perform
+cost-effective cheek-sensing method to infer continuous jaw motion                four distinct cheek gestures, such as left puff, right puff, omni puff,
+in mobile virtual reality (VR) applications. Their novel approach                 and suck, as illustrated in Figure 1. To capture two-channel bio-
+employs five VCNL4020 fully integrated proximity sensors with                     impedance signals, three electrodes were strategically placed on
+
+
+
+
+                                                                            492
+Facial Gesture Recognition Using Bio-impedance Sensing                             AHs 2025, March 16–20, 2025, Masdar City, Abu Dhabi, United Arab Emirates
+
+
+                      Table 1: Result Summary                                underscores the potential of bio-impedance sensing as a robust
+                                                                             method for facial gesture recognition, with applications in various
+      Metric/Subject          1       2       3       4     Average          scenarios in the field of HCI, where it can serve as an effective and
+        Accuracy             0.96    0.90    0.97    0.91    0.93            alternative hands-free input technique.
+       Macro Recall          0.95    0.83    0.96    0.92    0.91
+      Macro F1-score         0.95    0.87    0.97    0.92    0.92            References
+      Macro Precision        0.96    0.92    0.98    0.91    0.94             [1] Sizhen Bian, Mengxi Liu, Bo Zhou, Paul Lukowicz, and Michele Magno. 2024.
+                                                                                  Body-area capacitive or electric field sensing for human activity recognition and
+                                                                                  human-computer interaction: A comprehensive survey. Proceedings of the ACM
+                                                                                  on Interactive, Mobile, Wearable and Ubiquitous Technologies 8, 1 (2024), 1–49.
+the face: one electrode was positioned beneath the mouth as the               [2] Elias Dritsas, Maria Trigka, Christos Troussas, and Phivos Mylonas. 2025. Mul-
+                                                                                  timodal Interaction, Interfaces, and Communication: A Survey. Multimodal
+stimuli signal electrode, while the other two were affixed to each                Technologies and Interaction 9, 1 (2025), 6.
+cheek as the measurement electrodes, as depicted in Figure 1.                 [3] Kyosuke Futami, Kohei Oyama, and Kazuya Murao. 2022. Augmenting ear
+                                                                                  accessories for facial gesture input using infrared distance sensor array. Electronics
+                                                                                  11, 9 (2022), 1480.
+3.3     Data Processing                                                       [4] Martin Gjoreski, Ivana Kiprijanovska, Simon Stankoski, Ifigeneia Mavridou,
+                                                                                  M John Broulidakis, Hristijan Gjoreski, and Charles Nduka. 2022. Facial EMG
+As shown in Figure 1, facial gestures induce noticeable variations                sensing for monitoring affect using a wearable device. Scientific reports 12, 1
+in bio-impedance signals. For example, when the user performs the                 (2022), 16876.
+                                                                              [5] Roman Kusche, Andra Oltmann, and Philipp Rostalski. 2024. A wearable dual-
+omni cheek puff, both bio-impedance channels exhibit a significant                channel bioimpedance spectrometer for real-time muscle contraction detection.
+increase due to the expansion of air volume in the oral cavity. In con-           IEEE Sensors Journal (2024).
+trast, sucking gestures result in a clear decrease in bio-impedance           [6] Yunfei Lai, Minghui Sun, and Zhuofeng Li. 2024. GazePuffer: Hands-Free Input
+                                                                                  Method Leveraging Puff Cheeks for VR. In 2024 IEEE Conference Virtual Reality
+as air is expelled. Additionally, a single-side puff primarily affects            and 3D User Interfaces (VR). IEEE, 331–341.
+the signal from one measurement channel. These distinct signal                [7] Richard Li and Gabriel Reyes. 2018. Buccal: Low-cost cheek sensing for inferring
+variations enable the classification of four facial gestures using a              continuous jaw motion in mobile virtual reality. In Proceedings of the 2018 ACM
+                                                                                  International Symposium on Wearable Computers. 180–183.
+lightweight algorithm.                                                        [8] Mengxi Liu, Hymalai Bello, Bo Zhou, Paul Lukowicz, and Jakob Karolus. 2024.
+    The data processing pipeline involves several key steps to en-                iFace: Hand-Over-Face Gesture Recognition Leveraging Impedance Sensing. In
+                                                                                  Proceedings of the Augmented Humans International Conference 2024. 131–137.
+sure effective activity classification. First, to reduce noise, a peak-       [9] Mengxi Liu, Vitor Fortes Rey, Yu Zhang, Lala Shakti Swarup Ray, Bo Zhou, and
+removal method is applied by replacing extreme values with the                    Paul Lukowicz. 2024. iMove: Exploring Bio-impedance Sensing for Fitness Activ-
+mean. A sliding window approach (window size = 20) is then                        ity Recognition. In 2024 IEEE International Conference on Pervasive Computing
+                                                                                  and Communications (PerCom). IEEE, 194–205.
+employed to segment the data into overlapping feature vectors,               [10] Mengxi Liu, Bo Zhou, Vitor Fortes Rey, Sizhen Bian, and Paul Lukowicz. 2024. iEat:
+where each window concatenates 20 consecutive readings from                       automatic wearable dietary monitoring with bio-impedance sensing. Scientific
+both impedance channels. The label assigned to each window cor-                   Reports 14, 1 (2024), 17873.
+                                                                             [11] Denys JC Matthies, Bernhard A Strecker, and Bodo Urban. 2017. Earfieldsensing:
+responds to the last time step in the segment. The processed data is              A novel in-ear electric field sensing to enrich wearable gesture input through
+subsequently split into training (80%) and testing (20%) sets. A Ran-             facial expressions. In Proceedings of the 2017 CHI Conference on Human Factors in
+                                                                                  Computing Systems. 1911–1922.
+dom Forest classifier, consisting of 100 decision trees, is trained on       [12] Mehmood Nawaz, Russell W Chan, Anju Malik, Tariq Khan, and Peng Cao. 2022.
+these features to learn activity patterns. Finally, model performance             Hand gestures classification using electrical impedance tomography images. IEEE
+is evaluated using a classification report (accuracy, precision, recall,          Sensors Journal 22, 19 (2022), 18922–18932.
+                                                                             [13] Chunkai Qiu, Fan Wu, Weiqiao Han, and Mehmet Rasit Yuce. 2022. A wearable
+and f1 score), providing insights into the predictive capability of               bioimpedance chest patch for real-time ambulatory respiratory monitoring. IEEE
+the trained model.                                                                Transactions on Biomedical Engineering 69, 9 (2022), 2970–2981.
+                                                                             [14] Yueting Weng, Chun Yu, Yingtian Shi, Yuhang Zhao, Yukang Yan, and Yuanchun
+                                                                                  Shi. 2021. Facesight: Enabling hand-to-face gesture interaction on ar glasses with
+4     Results                                                                     a downward-facing camera vision. In Proceedings of the 2021 CHI Conference on
+                                                                                  Human Factors in Computing Systems. 1–14.
+Table 1 shows the facial gesture classification result summary. The
+classification results indicate strong overall performance. The model
+achieved an average accuracy of 93%, demonstrating its reliability
+across subjects. The macro recall (91%) suggests that the model
+performs well in identifying all classes, though subject 2 had a
+relatively lower recall (83%), indicating some misclassification. The
+macro F1-score (92%) reflects a good balance between precision and
+recall, confirming the model’s robustness. Overall, the classifier
+shows strong and consistent performance across different subjects,
+with slight variability in recall.
+
+5     Conclusion
+In this study, we showcased the promising potential of bio-impedance
+sensing for facial gesture recognition. Using a two-channel bio-
+impedance signal collected from the face, we successfully identified
+four distinct cheek movements and null class with a random forest
+classifier, achieving an average accuracy of 93%. This high accuracy
+
+
+
+
+                                                                       493
+

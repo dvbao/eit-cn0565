@@ -1,0 +1,297 @@
+{
+  "protocol_id": "facial-bioimpedance-pilot-01",
+  "version": "0.2",
+  "date": "2026-10-02",
+  "status": "PROPOSED_REMOTE_16_ELECTRODE_LAYOUT_PENDING_BENCH_AND_HUMAN_REVIEW",
+  "artifact_type": "design_manifest_not_device_configuration",
+  "paired_with_direct_muscle_manifest": "facial-pilot-01-direct-muscle-design.json",
+  "user_confirmed_design_intent": "two separate 16-electrode sessions, direct/near-muscle and remote/unobtrusive",
+  "archived_24_electrode_manifest": "archive/facial-pilot-01-design-24-v0.1.json",
+  "purpose": "remote unobtrusive facial-task-associated bioimpedance feasibility compared descriptively with near-muscle session, not muscle-specific or clinical inference",
+  "execution": {
+    "contains_observed_data": false,
+    "controls_hardware": false,
+    "human_use_approved": false,
+    "lab_reviewer": null,
+    "review_record": null
+  },
+  "electrodes": {
+    "count": 16,
+    "material_form_user_confirmed": "gold cup",
+    "model": null,
+    "cup_diameter_mm": null,
+    "contact_medium": null,
+    "layout_id": "C16-R-candidate-v0.2",
+    "layout_evidence_status": "proposal_not_validated",
+    "sites": [
+      {
+        "site_id": "L1",
+        "side": "participant_left",
+        "candidate_zone": "lateral_forehead",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L2",
+        "side": "participant_left",
+        "candidate_zone": "temple",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L3",
+        "side": "participant_left",
+        "candidate_zone": "preauricular_skin",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L4",
+        "side": "participant_left",
+        "candidate_zone": "postauricular_skin",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L5",
+        "side": "participant_left",
+        "candidate_zone": "inferior_mandibular_angle",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L6",
+        "side": "participant_left",
+        "candidate_zone": "mid_inferior_mandibular_border",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L7",
+        "side": "participant_left",
+        "candidate_zone": "anterior_inferior_jaw_off_anterior_mouth",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "L8",
+        "side": "participant_left",
+        "candidate_zone": "submental_lateral",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R1",
+        "side": "participant_right",
+        "candidate_zone": "lateral_forehead",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R2",
+        "side": "participant_right",
+        "candidate_zone": "temple",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R3",
+        "side": "participant_right",
+        "candidate_zone": "preauricular_skin",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R4",
+        "side": "participant_right",
+        "candidate_zone": "postauricular_skin",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R5",
+        "side": "participant_right",
+        "candidate_zone": "inferior_mandibular_angle",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R6",
+        "side": "participant_right",
+        "candidate_zone": "mid_inferior_mandibular_border",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R7",
+        "side": "participant_right",
+        "candidate_zone": "anterior_inferior_jaw_off_anterior_mouth",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      },
+      {
+        "site_id": "R8",
+        "side": "participant_right",
+        "candidate_zone": "submental_lateral",
+        "physical_coordinates_mm": null,
+        "p1_pin": null,
+        "switch_x": null,
+        "software_index": null
+      }
+    ]
+  },
+  "measurement": {
+    "mode": "four_terminal_multiplexed",
+    "extra_body_ground_or_bias_electrode": false,
+    "reference_definition": "per-trial pre-task rest, same pattern/frequency/calibration",
+    "p1_switch_pins": "3-14 X0-X11; 17-28 X12-X23; verify connector orientation on bench",
+    "p1_ground_pins": [
+      1,
+      2,
+      15,
+      16,
+      29,
+      30
+    ],
+    "site_to_p1_mapping_verified": false,
+    "patterns": [
+      {
+        "id": "M01",
+        "force_plus": "L3",
+        "force_minus": "L7",
+        "sense_plus": "L5",
+        "sense_minus": "L6",
+        "status": "proposed_bench_validation_required"
+      },
+      {
+        "id": "M02",
+        "force_plus": "R3",
+        "force_minus": "R7",
+        "sense_plus": "R5",
+        "sense_minus": "R6",
+        "status": "proposed_bench_validation_required"
+      },
+      {
+        "id": "M03",
+        "force_plus": "L4",
+        "force_minus": "L8",
+        "sense_plus": "L5",
+        "sense_minus": "L7",
+        "status": "proposed_bench_validation_required"
+      },
+      {
+        "id": "M04",
+        "force_plus": "R4",
+        "force_minus": "R8",
+        "sense_plus": "R5",
+        "sense_minus": "R7",
+        "status": "proposed_bench_validation_required"
+      },
+      {
+        "id": "M05",
+        "force_plus": "L1",
+        "force_minus": "L5",
+        "sense_plus": "L2",
+        "sense_minus": "L3",
+        "status": "proposed_bench_validation_required"
+      },
+      {
+        "id": "M06",
+        "force_plus": "R1",
+        "force_minus": "R5",
+        "sense_plus": "R2",
+        "sense_minus": "R3",
+        "status": "proposed_bench_validation_required"
+      },
+      {
+        "id": "M07",
+        "force_plus": "L5",
+        "force_minus": "R5",
+        "sense_plus": "L7",
+        "sense_minus": "R7",
+        "status": "proposed_bench_validation_required"
+      },
+      {
+        "id": "M08",
+        "force_plus": "L1",
+        "force_minus": "R1",
+        "sense_plus": "L8",
+        "sense_minus": "R8",
+        "status": "proposed_bench_validation_required"
+      }
+    ],
+    "frequency_hz": null,
+    "excitation_amplitude_v": null,
+    "approved_current_limit_a": null,
+    "rtia_ohms": null,
+    "settling_s": null,
+    "dfT_averaging": null,
+    "calibration_id": null,
+    "frame_duration_s_measured": null
+  },
+  "study_design_proposed": {
+    "population": "self pilot only after human-use review",
+    "runs": [
+      "A1_initial_mount",
+      "A2_same_day_remount_if_feasible",
+      "B1_separate_day_if_feasible"
+    ],
+    "conditions": [
+      "REST",
+      "PURSE",
+      "SMILE_L",
+      "SMILE_R",
+      "PUFF_BOTH"
+    ],
+    "repetitions_per_condition_per_run": 5,
+    "pre_rest_s": 5,
+    "task_s": 5,
+    "post_rest_s": 5,
+    "timing_status": "proposal_depends_on_measured_complete_frame_rate",
+    "controls": [
+      "gentle_head_turn",
+      "jaw_open_without_speaking"
+    ],
+    "camera_reference": "proposed",
+    "emg_reference": "optional"
+  },
+  "required_before_human_use": [
+    "site-to-lead-to-P1-to-X-to-software map verified",
+    "known resistor/RC and phantom results",
+    "current paths and isolation/leakage/fault review",
+    "frequency and excitation set from bench and lab approval",
+    "cup size/paste/fixation and placement photos",
+    "actual complete frame timing",
+    "consent and human-use process"
+  ]
+}
