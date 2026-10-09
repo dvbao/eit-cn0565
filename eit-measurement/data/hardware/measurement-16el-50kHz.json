@@ -1,0 +1,11 @@
+{
+  "n_electrodes": 16,
+  "force_distance": 1,
+  "sense_distance": 1,
+  "excitation_frequency_hz": 50000,
+  "excitation_amplitude": 600.0,
+  "measurement_mode": "voltage",
+  "magnitude_mode": false,
+  "seconds_per_measurement": 0.099,
+  "wiring": "data/hardware/C16-R-user-interleaved-TMJ5-v2-208.json"
+}

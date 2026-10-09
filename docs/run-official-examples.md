@@ -39,7 +39,7 @@ Thứ tự bốn số là `F+ F- S+ S-`. Kết quả gồm impedance dạng ph�
 python scripts\run_official_example.py sweep --port COM7
 ```
 
-Khi được hỏi có tạo CSV không, nhập `Y`. File `cn0565_example_data.csv` được tạo trong `data/raw/`.
+Khi được hỏi có tạo CSV không, nhập `Y`. File `cn0565_example_data.csv` được tạo trong `eit-measurement/data/bench/adi-examples/`.
 
 ## Cảnh báo: lỗi drop-payload của firmware ADuCM3029
 

@@ -1,0 +1,338 @@
+[
+  {
+    "trial_id": "T001",
+    "state": "task",
+    "position": "before",
+    "time_s": 10.0313213,
+    "checked_utc": "2026-10-05T05:58:43.823414+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T001",
+    "state": "task",
+    "position": "after",
+    "time_s": 30.7000282,
+    "checked_utc": "2026-10-05T05:59:04.493164+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T002",
+    "state": "task",
+    "position": "before",
+    "time_s": 32.8277796,
+    "checked_utc": "2026-10-05T05:59:06.619192+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T002",
+    "state": "task",
+    "position": "after",
+    "time_s": 53.53501,
+    "checked_utc": "2026-10-05T05:59:27.327899+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T003",
+    "state": "task",
+    "position": "before",
+    "time_s": 55.6587499,
+    "checked_utc": "2026-10-05T05:59:29.451518+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T003",
+    "state": "task",
+    "position": "after",
+    "time_s": 76.3600708,
+    "checked_utc": "2026-10-05T05:59:50.149446+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T004",
+    "state": "task",
+    "position": "before",
+    "time_s": 78.4956767,
+    "checked_utc": "2026-10-05T05:59:52.289679+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T004",
+    "state": "task",
+    "position": "after",
+    "time_s": 99.2200368,
+    "checked_utc": "2026-10-05T06:00:13.009129+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T005",
+    "state": "task",
+    "position": "before",
+    "time_s": 101.3397425,
+    "checked_utc": "2026-10-05T06:00:15.133171+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T005",
+    "state": "task",
+    "position": "after",
+    "time_s": 121.9660332,
+    "checked_utc": "2026-10-05T06:00:35.759220+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T006",
+    "state": "task",
+    "position": "before",
+    "time_s": 124.2252682,
+    "checked_utc": "2026-10-05T06:00:38.019270+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T006",
+    "state": "task",
+    "position": "after",
+    "time_s": 144.87265,
+    "checked_utc": "2026-10-05T06:00:58.662789+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T007",
+    "state": "task",
+    "position": "before",
+    "time_s": 147.1057936,
+    "checked_utc": "2026-10-05T06:01:00.899703+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  {
+    "trial_id": "T007",
+    "state": "task",
+    "position": "after",
+    "time_s": 167.6890411,
+    "checked_utc": "2026-10-05T06:01:21.479335+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 10000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 10000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  }
+]

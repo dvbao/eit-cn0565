@@ -1,0 +1,15 @@
+trial_id,state,position,time_s,source,frequency_hz,amplitude_mvpp,magnitude_mode,impedance_mode
+T001,task,before,10.0186311,live,50000.0,600.0,False,False
+T001,task,after,30.5381512,live,50000.0,600.0,False,False
+T002,task,before,32.6825566,live,50000.0,600.0,False,False
+T002,task,after,53.2593051,live,50000.0,600.0,False,False
+T003,task,before,55.3978528,live,50000.0,600.0,False,False
+T003,task,after,76.0241193,live,50000.0,600.0,False,False
+T004,task,before,78.0638273,live,50000.0,600.0,False,False
+T004,task,after,98.5850955,live,50000.0,600.0,False,False
+T005,task,before,100.7137673,live,50000.0,600.0,False,False
+T005,task,after,121.1820928,live,50000.0,600.0,False,False
+T006,task,before,123.4439768,live,50000.0,600.0,False,False
+T006,task,after,143.9264079,live,50000.0,600.0,False,False
+T007,task,before,146.1769792,live,50000.0,600.0,False,False
+T007,task,after,166.8091937,live,50000.0,600.0,False,False

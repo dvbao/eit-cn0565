@@ -103,4 +103,4 @@ Thực hiện theo thứ tự:
 
 ## Kết thúc phiên đo
 
-Đóng script/GUI đang dùng COM port trước, sau đó mới rút P10. Dữ liệu thô lưu vào `data/raw/`; dữ liệu đã xử lý và ảnh tái tạo lưu vào `data/processed/`.
+Đóng script/GUI đang dùng COM port trước, sau đó mới rút P10. Dữ liệu thô của các script này (định dạng cũ `PREFIX.voltages.csv`, không phải định dạng phiên) lưu vào `eit-measurement/data/bench/`; dữ liệu đã xử lý và ảnh tái tạo lưu vào `eit-measurement/data/results/`.

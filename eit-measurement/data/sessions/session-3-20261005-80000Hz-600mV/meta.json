@@ -1,0 +1,2125 @@
+{
+  "version": "cn0565-first-pilot-v5-verified-routing",
+  "settings": {
+    "mode": "live",
+    "use_case": "human",
+    "uri": "ip:127.0.0.1:30431",
+    "frequency_hz": 80000,
+    "amplitude_mvpp": 600.0,
+    "configuration_verified": false,
+    "configuration_record": "",
+    "firmware_id": "unknown",
+    "cup_and_contact_notes": "",
+    "timeout_ms": 5000,
+    "mock_seed": 42,
+    "mock_delay_s": 0.0,
+    "bench_record_path": "",
+    "proxy_delay_ms": 10,
+    "measurement_mode": "voltage"
+  },
+  "mapping": {
+    "schema_version": 1,
+    "layout_id": "C16-R-user-interleaved-TMJ5-v2-208",
+    "status": "USER_REPORTED_WIRING_NOT_CONTINUITY_VERIFIED",
+    "anatomy_status": "REMOTE_C16_R_SELECTED_BY_USER_LANDMARK_COORDINATES_PROVISIONAL",
+    "source": "User message on 2026-10-04; P1 net correspondence checked against Rev B schematic sheet 2",
+    "notes": [
+      "Indices/X lines alternate L1,R1,L2,R2,...,L8,R8. This supersedes the earlier proposed perimeter order for the reported cable.",
+      "Colors are reported by the user; RGB swatches are illustrative. Color alone does not identify a lead because colors repeat.",
+      "Pins 1,2,15,16,29,30 are GND_ISO and receive no body cup. X16..X23 are unused.",
+      "Index-adjacent 208 patterns still count 208, but force_distance=1 now includes bilateral pairs. It is not a perimeter-adjacent physical layout.",
+      "Use --mapping docs/protocols/user-p1-wiring-interleaved-208.json for the reported wiring. The default capture manifest describes the earlier proposal.",
+      "Pattern 0 board order F+,S+,S-,F- = indices 0,2,3,1 = sites L1,L2,R2,R1.",
+      "The user selected the previous remote C16-R landmark definitions. Exact coordinates, cup footprint and anatomical registration remain unmeasured.",
+      "The user confirmed the supplied image over the currently saved PPTX slide: TMJ is L5/R5, not L8/R8. X/P1/color/site electrical identities are unchanged."
+    ],
+    "channels": [
+      {
+        "index": 0,
+        "site": "L1",
+        "x_line": "X0",
+        "p1_pin": 3,
+        "wire_id": "W00",
+        "wire_color": "Black",
+        "wire_color_vi": "\u0110en",
+        "color_rgb": "000000",
+        "skin_landmark": "Lateral forehead",
+        "anatomical_region": "Frontalis region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 1,
+        "site": "R1",
+        "x_line": "X1",
+        "p1_pin": 4,
+        "wire_id": "W01",
+        "wire_color": "Brown",
+        "wire_color_vi": "N\u00e2u",
+        "color_rgb": "8B4513",
+        "skin_landmark": "Lateral forehead",
+        "anatomical_region": "Frontalis region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 2,
+        "site": "L2",
+        "x_line": "X2",
+        "p1_pin": 5,
+        "wire_id": "W02",
+        "wire_color": "Red",
+        "wire_color_vi": "\u0110\u1ecf",
+        "color_rgb": "D72626",
+        "skin_landmark": "Temple",
+        "anatomical_region": "Temporal / temporalis region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 3,
+        "site": "R2",
+        "x_line": "X3",
+        "p1_pin": 6,
+        "wire_id": "W03",
+        "wire_color": "Orange",
+        "wire_color_vi": "Cam",
+        "color_rgb": "EE8C23",
+        "skin_landmark": "Temple",
+        "anatomical_region": "Temporal / temporalis region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 4,
+        "site": "L3",
+        "x_line": "X4",
+        "p1_pin": 7,
+        "wire_id": "W04",
+        "wire_color": "Yellow",
+        "wire_color_vi": "V\u00e0ng",
+        "color_rgb": "F3D11B",
+        "skin_landmark": "Preauricular skin",
+        "anatomical_region": "Auricularis anterior / preauricular region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 5,
+        "site": "R3",
+        "x_line": "X5",
+        "p1_pin": 8,
+        "wire_id": "W05",
+        "wire_color": "Green",
+        "wire_color_vi": "Xanh l\u00e1",
+        "color_rgb": "268A43",
+        "skin_landmark": "Preauricular skin",
+        "anatomical_region": "Auricularis anterior / preauricular region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 6,
+        "site": "L4",
+        "x_line": "X6",
+        "p1_pin": 9,
+        "wire_id": "W06",
+        "wire_color": "Blue",
+        "wire_color_vi": "Xanh bi\u1ec3n",
+        "color_rgb": "2463B4",
+        "skin_landmark": "Postauricular skin",
+        "anatomical_region": "Auricularis posterior / postauricular region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 7,
+        "site": "R4",
+        "x_line": "X7",
+        "p1_pin": 10,
+        "wire_id": "W07",
+        "wire_color": "Violet",
+        "wire_color_vi": "T\u00edm",
+        "color_rgb": "843AB5",
+        "skin_landmark": "Postauricular skin",
+        "anatomical_region": "Auricularis posterior / postauricular region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 8,
+        "site": "L5",
+        "x_line": "X8",
+        "p1_pin": 11,
+        "wire_id": "W08",
+        "wire_color": "Gray",
+        "wire_color_vi": "X\u00e1m",
+        "color_rgb": "808080",
+        "skin_landmark": "Temporomandibular joint skin landmark",
+        "anatomical_region": "Temporomandibular Joint / TMJ",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 9,
+        "site": "R5",
+        "x_line": "X9",
+        "p1_pin": 12,
+        "wire_id": "W09",
+        "wire_color": "White",
+        "wire_color_vi": "Tr\u1eafng",
+        "color_rgb": "FFFFFF",
+        "skin_landmark": "Temporomandibular joint skin landmark",
+        "anatomical_region": "Temporomandibular Joint / TMJ",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 10,
+        "site": "L6",
+        "x_line": "X10",
+        "p1_pin": 13,
+        "wire_id": "W10",
+        "wire_color": "Black",
+        "wire_color_vi": "\u0110en",
+        "color_rgb": "000000",
+        "skin_landmark": "Below mandibular angle",
+        "anatomical_region": "Inferior mandibular-angle region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 11,
+        "site": "R6",
+        "x_line": "X11",
+        "p1_pin": 14,
+        "wire_id": "W11",
+        "wire_color": "Brown",
+        "wire_color_vi": "N\u00e2u",
+        "color_rgb": "8B4513",
+        "skin_landmark": "Below mandibular angle",
+        "anatomical_region": "Inferior mandibular-angle region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 12,
+        "site": "L7",
+        "x_line": "X12",
+        "p1_pin": 17,
+        "wire_id": "W12",
+        "wire_color": "Red",
+        "wire_color_vi": "\u0110\u1ecf",
+        "color_rgb": "D72626",
+        "skin_landmark": "Mid inferior jaw border",
+        "anatomical_region": "Mid inferior mandibular-border region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 13,
+        "site": "R7",
+        "x_line": "X13",
+        "p1_pin": 18,
+        "wire_id": "W13",
+        "wire_color": "Orange",
+        "wire_color_vi": "Cam",
+        "color_rgb": "EE8C23",
+        "skin_landmark": "Mid inferior jaw border",
+        "anatomical_region": "Mid inferior mandibular-border region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 14,
+        "site": "L8",
+        "x_line": "X14",
+        "p1_pin": 19,
+        "wire_id": "W14",
+        "wire_color": "Yellow",
+        "wire_color_vi": "V\u00e0ng",
+        "color_rgb": "F3D11B",
+        "skin_landmark": "Anterior inferior jaw border",
+        "anatomical_region": "Anterior inferior mandibular-border region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      },
+      {
+        "index": 15,
+        "site": "R8",
+        "x_line": "X15",
+        "p1_pin": 20,
+        "wire_id": "W15",
+        "wire_color": "Green",
+        "wire_color_vi": "Xanh l\u00e1",
+        "color_rgb": "268A43",
+        "skin_landmark": "Anterior inferior jaw border",
+        "anatomical_region": "Anterior inferior mandibular-border region",
+        "placement_coordinates_status": "PROVISIONAL_NOT_MEASURED"
+      }
+    ],
+    "anatomy_selection_source": "User-supplied placement image, explicitly confirmed: L5/R5=TMJ; L6/R6=inferior mandibular angle; L7/R7=mid inferior mandibular border; L8/R8=anterior inferior mandibular border."
+  },
+  "sequence_order": "F+,S+,S-,F-",
+  "sequence": [
+    [
+      0,
+      4,
+      6,
+      2
+    ],
+    [
+      0,
+      6,
+      8,
+      2
+    ],
+    [
+      0,
+      8,
+      10,
+      2
+    ],
+    [
+      0,
+      10,
+      12,
+      2
+    ],
+    [
+      0,
+      12,
+      14,
+      2
+    ],
+    [
+      0,
+      14,
+      15,
+      2
+    ],
+    [
+      0,
+      15,
+      13,
+      2
+    ],
+    [
+      0,
+      13,
+      11,
+      2
+    ],
+    [
+      0,
+      11,
+      9,
+      2
+    ],
+    [
+      0,
+      9,
+      7,
+      2
+    ],
+    [
+      0,
+      7,
+      5,
+      2
+    ],
+    [
+      0,
+      5,
+      3,
+      2
+    ],
+    [
+      0,
+      3,
+      1,
+      2
+    ],
+    [
+      2,
+      6,
+      8,
+      4
+    ],
+    [
+      2,
+      8,
+      10,
+      4
+    ],
+    [
+      2,
+      10,
+      12,
+      4
+    ],
+    [
+      2,
+      12,
+      14,
+      4
+    ],
+    [
+      2,
+      14,
+      15,
+      4
+    ],
+    [
+      2,
+      15,
+      13,
+      4
+    ],
+    [
+      2,
+      13,
+      11,
+      4
+    ],
+    [
+      2,
+      11,
+      9,
+      4
+    ],
+    [
+      2,
+      9,
+      7,
+      4
+    ],
+    [
+      2,
+      7,
+      5,
+      4
+    ],
+    [
+      2,
+      5,
+      3,
+      4
+    ],
+    [
+      2,
+      3,
+      1,
+      4
+    ],
+    [
+      2,
+      1,
+      0,
+      4
+    ],
+    [
+      4,
+      0,
+      2,
+      6
+    ],
+    [
+      4,
+      8,
+      10,
+      6
+    ],
+    [
+      4,
+      10,
+      12,
+      6
+    ],
+    [
+      4,
+      12,
+      14,
+      6
+    ],
+    [
+      4,
+      14,
+      15,
+      6
+    ],
+    [
+      4,
+      15,
+      13,
+      6
+    ],
+    [
+      4,
+      13,
+      11,
+      6
+    ],
+    [
+      4,
+      11,
+      9,
+      6
+    ],
+    [
+      4,
+      9,
+      7,
+      6
+    ],
+    [
+      4,
+      7,
+      5,
+      6
+    ],
+    [
+      4,
+      5,
+      3,
+      6
+    ],
+    [
+      4,
+      3,
+      1,
+      6
+    ],
+    [
+      4,
+      1,
+      0,
+      6
+    ],
+    [
+      6,
+      0,
+      2,
+      8
+    ],
+    [
+      6,
+      2,
+      4,
+      8
+    ],
+    [
+      6,
+      10,
+      12,
+      8
+    ],
+    [
+      6,
+      12,
+      14,
+      8
+    ],
+    [
+      6,
+      14,
+      15,
+      8
+    ],
+    [
+      6,
+      15,
+      13,
+      8
+    ],
+    [
+      6,
+      13,
+      11,
+      8
+    ],
+    [
+      6,
+      11,
+      9,
+      8
+    ],
+    [
+      6,
+      9,
+      7,
+      8
+    ],
+    [
+      6,
+      7,
+      5,
+      8
+    ],
+    [
+      6,
+      5,
+      3,
+      8
+    ],
+    [
+      6,
+      3,
+      1,
+      8
+    ],
+    [
+      6,
+      1,
+      0,
+      8
+    ],
+    [
+      8,
+      0,
+      2,
+      10
+    ],
+    [
+      8,
+      2,
+      4,
+      10
+    ],
+    [
+      8,
+      4,
+      6,
+      10
+    ],
+    [
+      8,
+      12,
+      14,
+      10
+    ],
+    [
+      8,
+      14,
+      15,
+      10
+    ],
+    [
+      8,
+      15,
+      13,
+      10
+    ],
+    [
+      8,
+      13,
+      11,
+      10
+    ],
+    [
+      8,
+      11,
+      9,
+      10
+    ],
+    [
+      8,
+      9,
+      7,
+      10
+    ],
+    [
+      8,
+      7,
+      5,
+      10
+    ],
+    [
+      8,
+      5,
+      3,
+      10
+    ],
+    [
+      8,
+      3,
+      1,
+      10
+    ],
+    [
+      8,
+      1,
+      0,
+      10
+    ],
+    [
+      10,
+      0,
+      2,
+      12
+    ],
+    [
+      10,
+      2,
+      4,
+      12
+    ],
+    [
+      10,
+      4,
+      6,
+      12
+    ],
+    [
+      10,
+      6,
+      8,
+      12
+    ],
+    [
+      10,
+      14,
+      15,
+      12
+    ],
+    [
+      10,
+      15,
+      13,
+      12
+    ],
+    [
+      10,
+      13,
+      11,
+      12
+    ],
+    [
+      10,
+      11,
+      9,
+      12
+    ],
+    [
+      10,
+      9,
+      7,
+      12
+    ],
+    [
+      10,
+      7,
+      5,
+      12
+    ],
+    [
+      10,
+      5,
+      3,
+      12
+    ],
+    [
+      10,
+      3,
+      1,
+      12
+    ],
+    [
+      10,
+      1,
+      0,
+      12
+    ],
+    [
+      12,
+      0,
+      2,
+      14
+    ],
+    [
+      12,
+      2,
+      4,
+      14
+    ],
+    [
+      12,
+      4,
+      6,
+      14
+    ],
+    [
+      12,
+      6,
+      8,
+      14
+    ],
+    [
+      12,
+      8,
+      10,
+      14
+    ],
+    [
+      12,
+      15,
+      13,
+      14
+    ],
+    [
+      12,
+      13,
+      11,
+      14
+    ],
+    [
+      12,
+      11,
+      9,
+      14
+    ],
+    [
+      12,
+      9,
+      7,
+      14
+    ],
+    [
+      12,
+      7,
+      5,
+      14
+    ],
+    [
+      12,
+      5,
+      3,
+      14
+    ],
+    [
+      12,
+      3,
+      1,
+      14
+    ],
+    [
+      12,
+      1,
+      0,
+      14
+    ],
+    [
+      14,
+      0,
+      2,
+      15
+    ],
+    [
+      14,
+      2,
+      4,
+      15
+    ],
+    [
+      14,
+      4,
+      6,
+      15
+    ],
+    [
+      14,
+      6,
+      8,
+      15
+    ],
+    [
+      14,
+      8,
+      10,
+      15
+    ],
+    [
+      14,
+      10,
+      12,
+      15
+    ],
+    [
+      14,
+      13,
+      11,
+      15
+    ],
+    [
+      14,
+      11,
+      9,
+      15
+    ],
+    [
+      14,
+      9,
+      7,
+      15
+    ],
+    [
+      14,
+      7,
+      5,
+      15
+    ],
+    [
+      14,
+      5,
+      3,
+      15
+    ],
+    [
+      14,
+      3,
+      1,
+      15
+    ],
+    [
+      14,
+      1,
+      0,
+      15
+    ],
+    [
+      15,
+      0,
+      2,
+      13
+    ],
+    [
+      15,
+      2,
+      4,
+      13
+    ],
+    [
+      15,
+      4,
+      6,
+      13
+    ],
+    [
+      15,
+      6,
+      8,
+      13
+    ],
+    [
+      15,
+      8,
+      10,
+      13
+    ],
+    [
+      15,
+      10,
+      12,
+      13
+    ],
+    [
+      15,
+      12,
+      14,
+      13
+    ],
+    [
+      15,
+      11,
+      9,
+      13
+    ],
+    [
+      15,
+      9,
+      7,
+      13
+    ],
+    [
+      15,
+      7,
+      5,
+      13
+    ],
+    [
+      15,
+      5,
+      3,
+      13
+    ],
+    [
+      15,
+      3,
+      1,
+      13
+    ],
+    [
+      15,
+      1,
+      0,
+      13
+    ],
+    [
+      13,
+      0,
+      2,
+      11
+    ],
+    [
+      13,
+      2,
+      4,
+      11
+    ],
+    [
+      13,
+      4,
+      6,
+      11
+    ],
+    [
+      13,
+      6,
+      8,
+      11
+    ],
+    [
+      13,
+      8,
+      10,
+      11
+    ],
+    [
+      13,
+      10,
+      12,
+      11
+    ],
+    [
+      13,
+      12,
+      14,
+      11
+    ],
+    [
+      13,
+      14,
+      15,
+      11
+    ],
+    [
+      13,
+      9,
+      7,
+      11
+    ],
+    [
+      13,
+      7,
+      5,
+      11
+    ],
+    [
+      13,
+      5,
+      3,
+      11
+    ],
+    [
+      13,
+      3,
+      1,
+      11
+    ],
+    [
+      13,
+      1,
+      0,
+      11
+    ],
+    [
+      11,
+      0,
+      2,
+      9
+    ],
+    [
+      11,
+      2,
+      4,
+      9
+    ],
+    [
+      11,
+      4,
+      6,
+      9
+    ],
+    [
+      11,
+      6,
+      8,
+      9
+    ],
+    [
+      11,
+      8,
+      10,
+      9
+    ],
+    [
+      11,
+      10,
+      12,
+      9
+    ],
+    [
+      11,
+      12,
+      14,
+      9
+    ],
+    [
+      11,
+      14,
+      15,
+      9
+    ],
+    [
+      11,
+      15,
+      13,
+      9
+    ],
+    [
+      11,
+      7,
+      5,
+      9
+    ],
+    [
+      11,
+      5,
+      3,
+      9
+    ],
+    [
+      11,
+      3,
+      1,
+      9
+    ],
+    [
+      11,
+      1,
+      0,
+      9
+    ],
+    [
+      9,
+      0,
+      2,
+      7
+    ],
+    [
+      9,
+      2,
+      4,
+      7
+    ],
+    [
+      9,
+      4,
+      6,
+      7
+    ],
+    [
+      9,
+      6,
+      8,
+      7
+    ],
+    [
+      9,
+      8,
+      10,
+      7
+    ],
+    [
+      9,
+      10,
+      12,
+      7
+    ],
+    [
+      9,
+      12,
+      14,
+      7
+    ],
+    [
+      9,
+      14,
+      15,
+      7
+    ],
+    [
+      9,
+      15,
+      13,
+      7
+    ],
+    [
+      9,
+      13,
+      11,
+      7
+    ],
+    [
+      9,
+      5,
+      3,
+      7
+    ],
+    [
+      9,
+      3,
+      1,
+      7
+    ],
+    [
+      9,
+      1,
+      0,
+      7
+    ],
+    [
+      7,
+      0,
+      2,
+      5
+    ],
+    [
+      7,
+      2,
+      4,
+      5
+    ],
+    [
+      7,
+      4,
+      6,
+      5
+    ],
+    [
+      7,
+      6,
+      8,
+      5
+    ],
+    [
+      7,
+      8,
+      10,
+      5
+    ],
+    [
+      7,
+      10,
+      12,
+      5
+    ],
+    [
+      7,
+      12,
+      14,
+      5
+    ],
+    [
+      7,
+      14,
+      15,
+      5
+    ],
+    [
+      7,
+      15,
+      13,
+      5
+    ],
+    [
+      7,
+      13,
+      11,
+      5
+    ],
+    [
+      7,
+      11,
+      9,
+      5
+    ],
+    [
+      7,
+      3,
+      1,
+      5
+    ],
+    [
+      7,
+      1,
+      0,
+      5
+    ],
+    [
+      5,
+      0,
+      2,
+      3
+    ],
+    [
+      5,
+      2,
+      4,
+      3
+    ],
+    [
+      5,
+      4,
+      6,
+      3
+    ],
+    [
+      5,
+      6,
+      8,
+      3
+    ],
+    [
+      5,
+      8,
+      10,
+      3
+    ],
+    [
+      5,
+      10,
+      12,
+      3
+    ],
+    [
+      5,
+      12,
+      14,
+      3
+    ],
+    [
+      5,
+      14,
+      15,
+      3
+    ],
+    [
+      5,
+      15,
+      13,
+      3
+    ],
+    [
+      5,
+      13,
+      11,
+      3
+    ],
+    [
+      5,
+      11,
+      9,
+      3
+    ],
+    [
+      5,
+      9,
+      7,
+      3
+    ],
+    [
+      5,
+      1,
+      0,
+      3
+    ],
+    [
+      3,
+      0,
+      2,
+      1
+    ],
+    [
+      3,
+      2,
+      4,
+      1
+    ],
+    [
+      3,
+      4,
+      6,
+      1
+    ],
+    [
+      3,
+      6,
+      8,
+      1
+    ],
+    [
+      3,
+      8,
+      10,
+      1
+    ],
+    [
+      3,
+      10,
+      12,
+      1
+    ],
+    [
+      3,
+      12,
+      14,
+      1
+    ],
+    [
+      3,
+      14,
+      15,
+      1
+    ],
+    [
+      3,
+      15,
+      13,
+      1
+    ],
+    [
+      3,
+      13,
+      11,
+      1
+    ],
+    [
+      3,
+      11,
+      9,
+      1
+    ],
+    [
+      3,
+      9,
+      7,
+      1
+    ],
+    [
+      3,
+      7,
+      5,
+      1
+    ],
+    [
+      1,
+      2,
+      4,
+      0
+    ],
+    [
+      1,
+      4,
+      6,
+      0
+    ],
+    [
+      1,
+      6,
+      8,
+      0
+    ],
+    [
+      1,
+      8,
+      10,
+      0
+    ],
+    [
+      1,
+      10,
+      12,
+      0
+    ],
+    [
+      1,
+      12,
+      14,
+      0
+    ],
+    [
+      1,
+      14,
+      15,
+      0
+    ],
+    [
+      1,
+      15,
+      13,
+      0
+    ],
+    [
+      1,
+      13,
+      11,
+      0
+    ],
+    [
+      1,
+      11,
+      9,
+      0
+    ],
+    [
+      1,
+      9,
+      7,
+      0
+    ],
+    [
+      1,
+      7,
+      5,
+      0
+    ],
+    [
+      1,
+      5,
+      3,
+      0
+    ]
+  ],
+  "sequence_index_kind": "physical P1 X line",
+  "driver_index_map": "driver_index = (P1 X line + 12) % 24",
+  "role_rails": "F+ Y0, S+ Y6, S- Y7, F- Y3",
+  "original_208_pattern_ids": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "protocol_hash": "124f201560fe7679432c98bf94d14e61d604a98a2ae0a32b58f09d0c401aefc5",
+  "patterns_per_frame": 208,
+  "protocol": {
+    "name": "perimeter208",
+    "selected_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207
+    ],
+    "logical_to_physical": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      15,
+      13,
+      11,
+      9,
+      7,
+      5,
+      3,
+      1
+    ],
+    "status": "CANDIDATE_NOT_ANATOMICALLY_VALIDATED"
+  },
+  "adi_driver_sources": {
+    "cn0565": {
+      "path": "c:\\Users\\dvb22\\Documents\\eit-cn0565\\cn0565-env\\Lib\\site-packages\\adi\\cn0565.py",
+      "sha256": "e19ab44dbc17dd04984e7f8ff35908e4ebc2d31824f4b50a54ac9599f568a6d5"
+    },
+    "ad5940": {
+      "path": "c:\\Users\\dvb22\\Documents\\eit-cn0565\\cn0565-env\\Lib\\site-packages\\adi\\ad5940.py",
+      "sha256": "e9f120c6852acce9fd08b4ddd12b870ea01abe5e2723b1989e4cc36565499ed4"
+    },
+    "adg2128": {
+      "path": "c:\\Users\\dvb22\\Documents\\eit-cn0565\\cn0565-env\\Lib\\site-packages\\adi\\adg2128.py",
+      "sha256": "8b121afd0f9c0f8e88bcf654d19fac274f7f8b0aea96a83d523c6d6cf5801351"
+    }
+  },
+  "contact_qc": {
+    "source": "live",
+    "configuration": {
+      "frequency_hz": 80000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "protocol_hash": "124f201560fe7679432c98bf94d14e61d604a98a2ae0a32b58f09d0c401aefc5",
+    "tested_contacts": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "flagged_contacts": [],
+    "saved_to": "C:\\Users\\dvb22\\Documents\\eit-cn0565\\data\\raw\\pilot\\contact-qc-20261005T062538-20087d"
+  },
+  "source": "live",
+  "readback": {
+    "frequency_hz": 80000.0,
+    "amplitude_mvpp_reported": 600.0,
+    "magnitude_mode": false,
+    "impedance_mode": false,
+    "device_names": [
+      "ad5940",
+      "adg2128"
+    ]
+  },
+  "proxy": {
+    "port": "COM7",
+    "baud": 230400,
+    "tcp_port": 30431,
+    "delay_ms": 10
+  },
+  "packages": {
+    "pyadi-iio": "0.0.22",
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "ipywidgets": "8.1.9",
+    "ipykernel": "7.4.0"
+  },
+  "clock": "time.perf_counter_ns; UTC is supplementary wall clock",
+  "amplitude_semantics": "amplitude_mvpp/configured_amplitude_mvpp are legacy names for the firmware DacVoltPP command, not measured electrode mVpp",
+  "value_kind": "raw_complex_voltage; not calibrated volts or impedance",
+  "status": "complete",
+  "origin_perf_counter_ns": 459132817008300,
+  "started_utc": "2026-10-05T06:26:45.014985+00:00",
+  "completed_frames": 7,
+  "plan": [
+    {
+      "trial_id": "T001",
+      "repetition": 1,
+      "task": "REST",
+      "instruction": "Remain relaxed. Keep the same resting head, jaw and lip pose."
+    },
+    {
+      "trial_id": "T002",
+      "repetition": 1,
+      "task": "SMILE_LEFT",
+      "instruction": "Smile with the LEFT mouth corner; keep your head still."
+    },
+    {
+      "trial_id": "T003",
+      "repetition": 1,
+      "task": "SMILE_RIGHT",
+      "instruction": "Smile with the RIGHT mouth corner; keep your head still."
+    },
+    {
+      "trial_id": "T004",
+      "repetition": 1,
+      "task": "SMILE_BOTH",
+      "instruction": "Smile with BOTH mouth corners; keep your head still."
+    },
+    {
+      "trial_id": "T005",
+      "repetition": 1,
+      "task": "PUFF_LEFT",
+      "instruction": "Gently inflate the LEFT cheek with air; do not blow out."
+    },
+    {
+      "trial_id": "T006",
+      "repetition": 1,
+      "task": "PUFF_RIGHT",
+      "instruction": "Gently inflate the RIGHT cheek with air; do not blow out."
+    },
+    {
+      "trial_id": "T007",
+      "repetition": 1,
+      "task": "PUFF_BOTH",
+      "instruction": "Gently inflate BOTH cheeks with air; do not blow out."
+    }
+  ],
+  "frames_per_phase": 1,
+  "timing_benchmark": {
+    "protocol_hash": "124f201560fe7679432c98bf94d14e61d604a98a2ae0a32b58f09d0c401aefc5",
+    "source": "live",
+    "configuration": {
+      "frequency_hz": 80000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "status": "complete",
+    "frame_duration_median_s": 20.4617152,
+    "frame_duration_p95_s": 20.65552129,
+    "frame_start_interval_median_s": 20.58316845,
+    "continuous_frame_rate_hz": 0.0485833851299021,
+    "frame_start_interval_p95_s": 20.679861435,
+    "frame_duration_max_s": 20.6770553,
+    "frames": 3,
+    "all_zero_response": false,
+    "saved_to": "C:\\Users\\dvb22\\Documents\\eit-cn0565\\data\\raw\\pilot\\timing-20261005T062540-9a2119",
+    "timing_confidence": "repeated observed scans; future timing may vary",
+    "note": "Timing includes selected-pattern reads, not recording CSV/cue overhead. Final recording reports its own intervals."
+  },
+  "recording_design": "state_sequence",
+  "baseline_policy": "initial_rest_only",
+  "task_hold_cap_s": 30.0,
+  "transition_s": 2.0,
+  "phase_duration_s": null,
+  "countdown_s": 10.0,
+  "cue_warning_s": 3.0,
+  "cue_warning_note": "Host warning precedes each state cue/DONE in state-sequence mode, or TASK/REST in the older design, by at least this duration. Usually overlaps the scan; an unexpectedly early finish adds waiting. Frontend delivery latency is unmeasured.",
+  "between_trials_s": 0,
+  "schedule": {
+    "estimated_session_s": 166.75903004499997,
+    "estimated_phase_s": 20.679861435,
+    "frames": 7,
+    "pattern_rows": 1456,
+    "basis": "Single initial REST; six consecutive tasks; no pre/post REST or rest gaps. Estimated from saved scan timing; verification/CSV/stalls can extend it."
+  },
+  "initial_configuration_check": {
+    "checked_utc": "2026-10-05T06:26:45.013982+00:00",
+    "source": "live",
+    "requested": {
+      "frequency_hz": 80000,
+      "amplitude_mvpp": 600.0,
+      "firmware_id": "unknown"
+    },
+    "reported": {
+      "frequency_hz": 80000.0,
+      "amplitude_mvpp_reported": 600.0,
+      "magnitude_mode": false,
+      "impedance_mode": false,
+      "device_names": [
+        "ad5940",
+        "adg2128"
+      ]
+    },
+    "note": "IIO attribute read-back verifies firmware-reported settings. Absolute AC output/current requires physical measurement."
+  },
+  "task_label_basis": "cue_assigned_no_video",
+  "cue_note": "Host cue timestamps precede frontend delivery. Settling interval is an operator protocol; actual movement is unobserved. CSV verifies acquisition timing, not task performance.",
+  "completed_utc": "2026-10-05T06:29:32.251826+00:00"
+}

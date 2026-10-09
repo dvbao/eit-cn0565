@@ -363,7 +363,7 @@ cn0565-env\Scripts\python.exe scripts\eit_sim_playground.py --preset null
 
 # Thêm noise và lưu hình
 cn0565-env\Scripts\python.exe scripts\eit_sim_playground.py `
-  --noise-rel 0.001 --seed 1 --save data\processed\fig14-noise-001.png --no-show
+  --noise-rel 0.001 --seed 1 --save eit-measurement\data\results\fig14-noise-001.png --no-show
 ```
 
 Đổi `P_VAL`, `LAMB_VAL`, `JAC_METHOD`, `GREIT_N`, `GREIT_S`, `GREIT_RATIO`,
@@ -372,11 +372,11 @@ và ghi lại config cùng raw metric.
 
 ## Tài liệu nguồn trong repo
 
-- [`cn0565 rev. a.pdf`](../cn0565%20rev.%20a.pdf), Fig. 14 và phần Image
+- [`reference/cn0565 rev. a.pdf`](../reference/cn0565%20rev.%20a.pdf), Fig. 14 và phần Image
   Reconstruction Algorithms.
-- [`papers/1-s2.0-S2352711018301407-main.pdf`](../papers/1-s2.0-S2352711018301407-main.pdf),
+- [`reference/papers/reconstructing_alg/1-s2.0-S2352711018301407-main.pdf`](../reference/papers/reconstructing_alg/1-s2.0-S2352711018301407-main.pdf),
   pyEIT framework.
-- [`papers/Adler_2007_Physiol._Meas._28_S1.pdf`](../papers/Adler_2007_Physiol._Meas._28_S1.pdf),
+- [`reference/papers/reconstructing_alg/Adler_2007_Physiol._Meas._28_S1.pdf`](../reference/papers/reconstructing_alg/Adler_2007_Physiol._Meas._28_S1.pdf),
   one-step GN và regularization.
-- [`papers/Adler_2009_Physiol._Meas._30_S35.pdf`](../papers/Adler_2009_Physiol._Meas._30_S35.pdf),
+- [`reference/papers/reconstructing_alg/Adler_2009_Physiol._Meas._30_S35.pdf`](../reference/papers/reconstructing_alg/Adler_2009_Physiol._Meas._30_S35.pdf),
   GREIT và performance figures of merit.

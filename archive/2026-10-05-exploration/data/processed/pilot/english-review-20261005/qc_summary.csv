@@ -1,0 +1,4 @@
+session,frequency_hz,amplitude_command,n_rows,median_scan_s,median_rest_magnitude_counts,n_rest_ge50,n_rest_ge100,last_task_since_rest_mid_s,operator_reported_windows_present
+session-1-20261005-10000Hz-600mV,10000,600.0,1456,20.6430228,26.91653606490997,73,37,137.03129775000002,True
+session-2-20261005-50000Hz-600mV,50000,600.0,1456,20.4947727,31.160538261769354,82,41,136.2144971,False
+session-3-20261005-80000Hz-600mV,80000,600.0,1456,20.5629758,30.561396063252104,73,35,136.4714775,False

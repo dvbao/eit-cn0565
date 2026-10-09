@@ -1,0 +1,8 @@
+trial_id,task,state,start_s,end_s,uncertainty_s,valid,provenance,reason
+T001,REST,task,10.0441917,30.8139574,0,True,operator_reported_cue_following,Operator reports following the cue through the complete phase. Host bounds are exact; movement stability/onset is unobserved. No video.
+T002,SMILE_LEFT,task,32.8400358,53.6571737,0,True,operator_reported_cue_following,Operator reports following the cue through the complete phase. Host bounds are exact; movement stability/onset is unobserved. No video.
+T003,SMILE_RIGHT,task,55.6710553,76.4806071,0,True,operator_reported_cue_following,Operator reports following the cue through the complete phase. Host bounds are exact; movement stability/onset is unobserved. No video.
+T004,SMILE_BOTH,task,78.5083378,99.3326731,0,True,operator_reported_cue_following,Operator reports following the cue through the complete phase. Host bounds are exact; movement stability/onset is unobserved. No video.
+T005,PUFF_LEFT,task,101.3521067,122.2181547,0,True,operator_reported_cue_following,Operator reports following the cue through the complete phase. Host bounds are exact; movement stability/onset is unobserved. No video.
+T006,PUFF_RIGHT,task,124.238042,145.0935025,0,True,operator_reported_cue_following,Operator reports following the cue through the complete phase. Host bounds are exact; movement stability/onset is unobserved. No video.
+T007,PUFF_BOTH,task,147.1192491,167.9079805,0,True,operator_reported_cue_following,Operator reports following the cue through the complete phase. Host bounds are exact; movement stability/onset is unobserved. No video.

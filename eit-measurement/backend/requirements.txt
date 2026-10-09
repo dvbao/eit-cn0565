@@ -1,0 +1,13 @@
+# Pinned versions for the backend (python -m app), tested with Python 3.9.6 on macOS.
+# Install from the repository root (eit-cn0565/):
+#   python3 -m venv .venv-sim && .venv-sim/bin/python -m pip install -r eit-measurement/backend/requirements.txt
+# For the desktop app install eit-measurement/requirements.txt instead (this file + PySide6), and register the
+# package folders as described in eit-measurement/README.md ("Cài đặt").
+# FastAPI and uvicorn are added here when the API (backend/app/main.py) is built.
+# The Windows acquisition environment (cn0565-env, requirements.txt at the repository root) also has these
+# packages (unpinned); results are only guaranteed identical with the versions below.
+numpy==2.0.2
+scipy==1.13.1
+pandas==2.3.3
+matplotlib==3.9.4
+pyeit==1.2.4

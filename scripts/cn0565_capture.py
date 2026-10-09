@@ -11,7 +11,7 @@ Dry run (no board, no excitation):
 Live bench example (values must come from an approved bench configuration):
     python3 scripts/cn0565_capture.py --uri 'serial:/dev/ttyACM0,230400,8n1n' \
         --frequency-hz FREQ --amplitude-mv AMPLITUDE --frames 20 \
-        --output-prefix data/raw/bench-01
+        --output-prefix eit-measurement/data/bench/bench-01
 """
 
 from __future__ import annotations

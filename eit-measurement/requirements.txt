@@ -1,0 +1,7 @@
+# Everything the desktop app needs: interface (PySide6) + backend. Install from the repository root:
+#   .venv-sim/bin/python -m pip install -r eit-measurement/requirements.txt
+# Then register both package folders once (see README.md, "Cài đặt"). PySide6 is LGPL: the app can be
+# distributed as an installer without publishing its own source (keep PySide6 as separate, replaceable libraries).
+# The real-board adapter will add pyadi-iio and pylibiio (Windows) when it is built.
+-r backend/requirements.txt
+PySide6-Essentials==6.10.3

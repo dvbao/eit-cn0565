@@ -1,6 +1,42 @@
-# CN0565 EIT workspace
+# eit-cn0565: facial EIT research workspace
 
-This folder keeps the EIT experiment reproducible: firmware, connection checks, raw captures, processed results, and notes are separate.
+Facial EIT research with the Analog Devices CN0565 board. The repository has two parts:
+
+1. **`eit-measurement/` — the application** (everything you build, run and control): frontend, backend,
+   communication, hardware adapter, analysis, configuration and data. Start with
+   **[eit-measurement/README.md](eit-measurement/README.md)**.
+2. **Everything around it** — research notes, references, slides and the Windows hardware toolkit.
+
+```
+eit-cn0565/
+├── eit-measurement/     THE APPLICATION (see eit-measurement/README.md)
+│   ├── AGENTS.md          project rules for people and coding agents
+│   ├── frontend/          desktop interface (Python + PySide6): python -m frontend
+│   ├── backend/           analysis (app/eit), configuration (app/schemas), session planning (app/services);
+│   │                      hardware adapter + live session (not built yet)
+│   ├── data/              hardware/, protocols/, studies/, sessions/, results/, bench/
+│   └── docs/              architecture.md (big picture + progress), pipeline.md, hardware-mapping.md
+├── docs/                research notes, reports, Windows connection guides
+├── reference/           datasheets, circuit note, board design files, firmware, papers, diagrams
+├── presentations/       slide decks and the template
+├── archive/             superseded scripts, outputs and scratch (kept, not used)
+└── Windows hardware toolkit (kept at the root because the Windows PC uses these paths):
+    bootstrap-cn0565-env.ps1, requirements.txt, cn0565-env/, scripts/, examples/, work/
+```
+
+Main commands (from this folder, after the one-time setup in
+[eit-measurement/README.md](eit-measurement/README.md)):
+
+```bash
+.venv-sim/bin/python -m frontend                                    # open the app
+.venv-sim/bin/python -m app design --design data/protocols/facial-rest-task-rest-v1.json \
+    --measurement data/hardware/measurement-16el-50kHz.json      # session schedule, validated
+.venv-sim/bin/python -m app check data/sessions/<session>           # QC right after a session
+.venv-sim/bin/python -m app study data/studies/three-frequency-20261005.json   # full analysis
+```
+
+Background reading: [docs/README.md](docs/README.md) (index), [EIT noise sources](docs/eit-noise-sources.md),
+[facial environment and forward models](docs/facial-environment-and-forward-models.md).
 
 ## Current connection path
 
@@ -12,7 +48,7 @@ For a valid host connection, the CN0565 firmware must be flashed to the DAPLINK 
 
 ## First-time environment setup
 
-1. Place the CN0565 `.hex` firmware in `firmware/`.
+1. Place the CN0565 `.hex` firmware in `reference/firmware/`.
 2. Copy it to the DAPLINK drive. A brief disconnect/reconnect is expected after a successful flash.
 3. With Python 3.11 installed, create the source-matched environment:
 
@@ -47,7 +83,7 @@ hardware-free reconstruction sandbox, create a native environment instead:
 ```bash
 python3 -m venv .venv-sim
 source .venv-sim/bin/activate
-python -m pip install -r requirements-sim.txt
+python -m pip install -r requirements-sim.txt   # or eit-measurement/backend/requirements.txt (pinned superset; same .venv-sim as in eit-measurement/README.md)
 python scripts/eit_sim_playground.py --preset null
 python scripts/eit_sim_playground.py --noise-rel 0.001 --seed 1
 ```
@@ -58,16 +94,6 @@ directly:
 ```bash
 .venv-sim/bin/python scripts/eit_sim_playground.py
 ```
-
-## Contents
-
-- `firmware/` — supplied or built `.hex` images; do not mix different builds.
-- `scripts/` — repeatable host-side checks and acquisition scripts.
-- `data/raw/` — untouched acquisition outputs.
-- `data/processed/` — derived tables, images, and reconstructions.
-- `logs/` — console captures and fault notes.
-- `docs/` — setup notes and experimental record.
-- `cn0565-env/` — local Python 3.11 virtual environment (created locally; ignored by Git).
 
 ## Reference commands
 

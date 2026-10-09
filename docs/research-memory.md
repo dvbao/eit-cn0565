@@ -122,7 +122,7 @@ eventually assessment of post-stroke dysarthria? That requires separate validati
   during a task, using `Delta v = v_task - v_reference`. The hypothesis is that
   task changes cause a detectable boundary-voltage pattern. They have not
   claimed a human result; rest subtraction does not isolate muscle effects.
-- The user supplied two PDFs in `papers/tasks/`: a 2021 atlas of 29 voluntary
+- The user supplied two PDFs in `reference/papers/tasks/`: a 2021 atlas of 29 voluntary
   facial tasks using high-channel sEMG and a 2022 ear-muscle EMG study. These
   inform task selection and placement confounds; neither proves bioimpedance
   task recognition at the intended ear/jaw sites.
@@ -159,7 +159,7 @@ eventually assessment of post-stroke dysarthria? That requires separate validati
   roles, bias/ground/reference, and facial placement without assuming a
   circular ring or one electrode per target muscle.
 - In reply to a connector-photo question, the user directed the assistant to
-  `cn0565-designsupport/` and confirmed 30 P1 pins: 24 electrode connections
+  `reference/cn0565-designsupport/` and confirmed 30 P1 pins: 24 electrode connections
   and six grounds. The assistant checked the supplied Rev B schematic:
   electrode pins 3–14 and 17–28; GND_ISO pins 1, 2, 15, 16, 29, 30.
   Do not ask for the same schematic again. Physical cable orientation and

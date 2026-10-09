@@ -91,16 +91,16 @@ Chạy thử hoàn toàn offline trên macOS, **không kết nối board/không 
 
 ```sh
 python3 scripts/cn0565_capture.py --mock --frames 12 \
-  --output-prefix data/raw/software-check-01
+  --output-prefix eit-measurement/data/bench/software-check-01
 
 python3 scripts/cn0565_prepare_difference.py \
-  --input-prefix data/raw/software-check-01 \
+  --input-prefix eit-measurement/data/bench/software-check-01 \
   --rest-frames 0,1,2 --task-frames 4,5,6 --post-rest-frames 9,10,11 \
-  --output data/processed/software-check-01.json
+  --output eit-measurement/data/results/software-check-01.json
 
 .venv-sim/bin/python scripts/cn0565_plot_difference.py \
-  --comparison data/processed/software-check-01.json \
-  --output data/processed/software-check-01.png
+  --comparison eit-measurement/data/results/software-check-01.json \
+  --output eit-measurement/data/results/software-check-01.png
 ```
 
 Nếu environment có matplotlib nằm ở nơi khác, dùng interpreter của environment

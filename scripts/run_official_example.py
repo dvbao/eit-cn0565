@@ -98,21 +98,21 @@ def main() -> int:
                 "cn0565_example_single.py",
                 [str(value) for value in args.pair],
                 uri,
-                WORKSPACE / "data" / "raw",
+                WORKSPACE / "eit-measurement" / "data" / "bench" / "adi-examples",
             )
         elif args.mode == "sweep":
             execute_example(
                 "cn0565_example.py",
                 [],
                 uri,
-                WORKSPACE / "data" / "raw",
+                WORKSPACE / "eit-measurement" / "data" / "bench" / "adi-examples",
             )
         elif args.mode == "prodtest":
             execute_example(
                 "cn0565_prod_tst.py",
                 [],
                 uri,
-                WORKSPACE / "data" / "raw",
+                WORKSPACE / "eit-measurement" / "data" / "bench" / "adi-examples",
             )
         else:
             execute_example(

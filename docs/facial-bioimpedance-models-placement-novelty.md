@@ -567,9 +567,9 @@ Trong đó (\Delta\mathbf g) là geometry/jaw/air changes, (\Delta\mathbf c) là
 
 **Provenance rule:** [IT'IS dielectric database](https://itis.swiss/virtual-population/tissue-properties/database/low-frequency-conductivity) và [Gabriel et al. review](https://pubmed.ncbi.nlm.nih.gov/19636081/) là **priors/ranges** theo frequency và tissue, không “chứng minh” một số (\sigma) đúng cho mọi người/cơ mặt. Lập bảng cho từng parameter: source, tissue, frequency, measurement conditions, uncertainty range, version, effect on (V), calibration measurement và planned sensitivity sweep. Nếu không có nguồn/đo riêng, ghi **unknown; sweep**, không bịa single value. (\sigma_{rel}=1) và `perm=10` của playground chỉ là normalization và toy contrast, không phải nước/máu/cơ người.
 
-## 13. Audit nghiêm khắc các tasks từ `papers/tasks/`
+## 13. Audit nghiêm khắc các tasks từ `reference/papers/tasks/`
 
-Nguồn chính: [Schumann et al. 2021, Table 1](https://doi.org/10.1371/journal.pone.0254932), local `papers/tasks/journal.pone.0254932.pdf`: 30 nam khỏe mạnh, 29 tasks, 10 mimic muscle groups hai bên bằng high-channel sEMG; masseter/temporalis là control. “Highest” nghĩa là **cao nhất trong các cơ đã đo, dưới task đó**, không phải một cơ duy nhất. Atlas dùng color scale *riêng cho từng task* nên màu đỏ không so absolute activation giữa hai tasks. [Rüschenschmidt et al. 2022](https://doi.org/10.3390/diagnostics12010121), local `papers/tasks/diagnostics-12-00121.pdf`: ear-muscle EMG ở 12 healthy và 7 postparalytic synkinesis, không phải BioZ/EIT và không phải post-stroke dysarthria.
+Nguồn chính: [Schumann et al. 2021, Table 1](https://doi.org/10.1371/journal.pone.0254932), local `reference/papers/tasks/journal.pone.0254932.pdf`: 30 nam khỏe mạnh, 29 tasks, 10 mimic muscle groups hai bên bằng high-channel sEMG; masseter/temporalis là control. “Highest” nghĩa là **cao nhất trong các cơ đã đo, dưới task đó**, không phải một cơ duy nhất. Atlas dùng color scale *riêng cho từng task* nên màu đỏ không so absolute activation giữa hai tasks. [Rüschenschmidt et al. 2022](https://doi.org/10.3390/diagnostics12010121), local `reference/papers/tasks/diagnostics-12-00121.pdf`: ear-muscle EMG ở 12 healthy và 7 postparalytic synkinesis, không phải BioZ/EIT và không phải post-stroke dysarthria.
 
 | Proposed task (sửa English label) | Atlas evidence / correction | Editorial use |
 |---|---|---|
@@ -640,8 +640,8 @@ chưa biết model, diameter, paste/gel hoặc đầu dây. Mục tiêu pilot l�
 ### 17.1 CN0565 nối như thế nào?
 
 Nguồn: [CN0565 circuit note](https://www.analog.com/en/resources/reference-designs/circuits-from-the-lab/CN0565.html),
-local `cn0565 rev. a.pdf`, và schematic **02_066534 Rev B, sheet 2/3** trong
-`cn0565-designsupport/CN0565-DesignSupport/EVAL-CN0565-ARDZ Files/`.
+local `reference/cn0565 rev. a.pdf`, và schematic **02_066534 Rev B, sheet 2/3** trong
+`reference/cn0565-designsupport/CN0565-DesignSupport/EVAL-CN0565-ARDZ Files/`.
 
 - Hai ADG2128 là **bidirectional 8 x 12 crosspoint switches**, không phải hai
   bộ 12 ADC. Tổng cộng có 24 đường electrode X. AD5940 đo qua các đường được

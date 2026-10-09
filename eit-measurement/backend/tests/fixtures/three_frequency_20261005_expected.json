@@ -1,0 +1,917 @@
+{
+ "source": "outputs of scripts/analysis/three_frequency_report.py and algorithm_comparison.py, 2026-10-05 (pre-reorganisation)",
+ "qc": {
+  "10 kHz": {
+   "rest_n_ge_50": 73,
+   "rest_n_ge_100": 37,
+   "rest_abs_median_counts": 26.91653606490997,
+   "recip_err_strong_median_pct": 17.703920555238874,
+   "recip_err_after_drive_gain_fit_pct": 4.871916839355035,
+   "frames_inside_hold": "7/7"
+  },
+  "50 kHz": {
+   "rest_n_ge_50": 82,
+   "rest_n_ge_100": 41,
+   "rest_abs_median_counts": 31.160538261769354,
+   "recip_err_strong_median_pct": 12.30180318615604,
+   "recip_err_after_drive_gain_fit_pct": 7.203459740197885,
+   "frames_inside_hold": "7/7"
+  },
+  "80 kHz": {
+   "rest_n_ge_50": 73,
+   "rest_n_ge_100": 35,
+   "rest_abs_median_counts": 30.561396063252104,
+   "recip_err_strong_median_pct": 13.386856269941768,
+   "recip_err_after_drive_gain_fit_pct": 8.881979175651852,
+   "frames_inside_hold": "7/7"
+  }
+ },
+ "task_features": {
+  "10 kHz|SMILE_LEFT": {
+   "median_abs_dz_pct_strong": 1.853156208465472,
+   "median_abs_dz_pct_ge100": 1.44068572620802,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 9,
+   "pct_strong_gt_2pct": 47.94520547945205
+  },
+  "10 kHz|SMILE_RIGHT": {
+   "median_abs_dz_pct_strong": 1.8278756253377788,
+   "median_abs_dz_pct_ge100": 1.1952969139668086,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 11,
+   "pct_strong_gt_2pct": 47.94520547945205
+  },
+  "10 kHz|SMILE_BOTH": {
+   "median_abs_dz_pct_strong": 3.6453362838021426,
+   "median_abs_dz_pct_ge100": 2.953336755924468,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 28,
+   "pct_strong_gt_2pct": 78.08219178082192
+  },
+  "10 kHz|PUFF_LEFT": {
+   "median_abs_dz_pct_strong": 3.080678367578503,
+   "median_abs_dz_pct_ge100": 2.0993398614040646,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 12,
+   "pct_strong_gt_2pct": 67.12328767123287
+  },
+  "10 kHz|PUFF_RIGHT": {
+   "median_abs_dz_pct_strong": 2.75032662068046,
+   "median_abs_dz_pct_ge100": 2.208630521496931,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 13,
+   "pct_strong_gt_2pct": 67.12328767123287
+  },
+  "10 kHz|PUFF_BOTH": {
+   "median_abs_dz_pct_strong": 2.7605251570478124,
+   "median_abs_dz_pct_ge100": 1.858859994229576,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 23,
+   "pct_strong_gt_2pct": 60.273972602739725
+  },
+  "50 kHz|SMILE_LEFT": {
+   "median_abs_dz_pct_strong": 2.981445994962807,
+   "median_abs_dz_pct_ge100": 2.20230128582257,
+   "n_strong": 82,
+   "n_all_dv_gt_3x_noise_max": 24,
+   "pct_strong_gt_2pct": 62.19512195121951
+  },
+  "50 kHz|SMILE_RIGHT": {
+   "median_abs_dz_pct_strong": 3.0462846690562397,
+   "median_abs_dz_pct_ge100": 1.9886965531777143,
+   "n_strong": 82,
+   "n_all_dv_gt_3x_noise_max": 22,
+   "pct_strong_gt_2pct": 67.07317073170732
+  },
+  "50 kHz|SMILE_BOTH": {
+   "median_abs_dz_pct_strong": 5.048648961957275,
+   "median_abs_dz_pct_ge100": 4.4990550813609405,
+   "n_strong": 82,
+   "n_all_dv_gt_3x_noise_max": 46,
+   "pct_strong_gt_2pct": 79.26829268292683
+  },
+  "50 kHz|PUFF_LEFT": {
+   "median_abs_dz_pct_strong": 3.837705890705124,
+   "median_abs_dz_pct_ge100": 3.7658495154786737,
+   "n_strong": 82,
+   "n_all_dv_gt_3x_noise_max": 21,
+   "pct_strong_gt_2pct": 73.17073170731707
+  },
+  "50 kHz|PUFF_RIGHT": {
+   "median_abs_dz_pct_strong": 3.632846013054563,
+   "median_abs_dz_pct_ge100": 2.1105314459656364,
+   "n_strong": 82,
+   "n_all_dv_gt_3x_noise_max": 16,
+   "pct_strong_gt_2pct": 65.85365853658537
+  },
+  "50 kHz|PUFF_BOTH": {
+   "median_abs_dz_pct_strong": 3.787039931857463,
+   "median_abs_dz_pct_ge100": 2.787100016028084,
+   "n_strong": 82,
+   "n_all_dv_gt_3x_noise_max": 22,
+   "pct_strong_gt_2pct": 71.95121951219512
+  },
+  "80 kHz|SMILE_LEFT": {
+   "median_abs_dz_pct_strong": 2.254030923600469,
+   "median_abs_dz_pct_ge100": 1.323773325465399,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 10,
+   "pct_strong_gt_2pct": 56.16438356164384
+  },
+  "80 kHz|SMILE_RIGHT": {
+   "median_abs_dz_pct_strong": 2.3782574707724704,
+   "median_abs_dz_pct_ge100": 1.7746509148999974,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 11,
+   "pct_strong_gt_2pct": 61.64383561643836
+  },
+  "80 kHz|SMILE_BOTH": {
+   "median_abs_dz_pct_strong": 4.457893447634325,
+   "median_abs_dz_pct_ge100": 3.6110261304004343,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 30,
+   "pct_strong_gt_2pct": 83.56164383561644
+  },
+  "80 kHz|PUFF_LEFT": {
+   "median_abs_dz_pct_strong": 4.524470031791268,
+   "median_abs_dz_pct_ge100": 2.996806069384919,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 15,
+   "pct_strong_gt_2pct": 76.71232876712328
+  },
+  "80 kHz|PUFF_RIGHT": {
+   "median_abs_dz_pct_strong": 3.19928344075492,
+   "median_abs_dz_pct_ge100": 2.5408222923375634,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 13,
+   "pct_strong_gt_2pct": 71.23287671232876
+  },
+  "80 kHz|PUFF_BOTH": {
+   "median_abs_dz_pct_strong": 2.6059384613740253,
+   "median_abs_dz_pct_ge100": 1.9760376304381095,
+   "n_strong": 73,
+   "n_all_dv_gt_3x_noise_max": 16,
+   "pct_strong_gt_2pct": 64.38356164383562
+  }
+ },
+ "lateralization": {
+  "10 kHz|SMILE_LEFT": {
+   "LI": 0.6764227186292296,
+   "mirror_n_L_gt_R": 15,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.093190493333336,
+   "t_right_patterns_mean_s": 15.239221108333338
+  },
+  "10 kHz|SMILE_RIGHT": {
+   "LI": -0.1973048668099379,
+   "mirror_n_L_gt_R": 6,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.060431911666668,
+   "t_right_patterns_mean_s": 15.193928275000005
+  },
+  "10 kHz|SMILE_BOTH": {
+   "LI": 0.2601790684655172,
+   "mirror_n_L_gt_R": 12,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.111240806666664,
+   "t_right_patterns_mean_s": 15.247909221666664
+  },
+  "10 kHz|PUFF_LEFT": {
+   "LI": 0.2579912374374818,
+   "mirror_n_L_gt_R": 14,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.061633793333339,
+   "t_right_patterns_mean_s": 15.143408875000004
+  },
+  "10 kHz|PUFF_RIGHT": {
+   "LI": -0.0156312987708871,
+   "mirror_n_L_gt_R": 10,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.081782968333335,
+   "t_right_patterns_mean_s": 15.174299921666668
+  },
+  "10 kHz|PUFF_BOTH": {
+   "LI": 0.0418544938610177,
+   "mirror_n_L_gt_R": 8,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.0490677050000015,
+   "t_right_patterns_mean_s": 15.11484976
+  },
+  "50 kHz|SMILE_LEFT": {
+   "LI": 0.5968680040905497,
+   "mirror_n_L_gt_R": 16,
+   "mirror_pairs_both_strong": 17,
+   "t_left_patterns_mean_s": 4.081346768333337,
+   "t_right_patterns_mean_s": 15.130513245000005
+  },
+  "50 kHz|SMILE_RIGHT": {
+   "LI": -0.1379850874729171,
+   "mirror_n_L_gt_R": 4,
+   "mirror_pairs_both_strong": 17,
+   "t_left_patterns_mean_s": 4.085172621666666,
+   "t_right_patterns_mean_s": 15.16032074666666
+  },
+  "50 kHz|SMILE_BOTH": {
+   "LI": 0.2933861274512712,
+   "mirror_n_L_gt_R": 11,
+   "mirror_pairs_both_strong": 17,
+   "t_left_patterns_mean_s": 4.0611317266666624,
+   "t_right_patterns_mean_s": 15.07303214166666
+  },
+  "50 kHz|PUFF_LEFT": {
+   "LI": 0.4064234865834878,
+   "mirror_n_L_gt_R": 13,
+   "mirror_pairs_both_strong": 17,
+   "t_left_patterns_mean_s": 4.052573451666667,
+   "t_right_patterns_mean_s": 15.037022813333335
+  },
+  "50 kHz|PUFF_RIGHT": {
+   "LI": 0.0663675282859346,
+   "mirror_n_L_gt_R": 10,
+   "mirror_pairs_both_strong": 17,
+   "t_left_patterns_mean_s": 4.039868591666665,
+   "t_right_patterns_mean_s": 15.031721971666665
+  },
+  "50 kHz|PUFF_BOTH": {
+   "LI": 0.1053379914975498,
+   "mirror_n_L_gt_R": 10,
+   "mirror_pairs_both_strong": 17,
+   "t_left_patterns_mean_s": 4.081851350000016,
+   "t_right_patterns_mean_s": 15.17459787166668
+  },
+  "80 kHz|SMILE_LEFT": {
+   "LI": 0.6749841297873048,
+   "mirror_n_L_gt_R": 16,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.081095094999998,
+   "t_right_patterns_mean_s": 15.137975539999998
+  },
+  "80 kHz|SMILE_RIGHT": {
+   "LI": -0.1768689267005254,
+   "mirror_n_L_gt_R": 4,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.096486176666668,
+   "t_right_patterns_mean_s": 15.176646846666667
+  },
+  "80 kHz|SMILE_BOTH": {
+   "LI": 0.2070445967099075,
+   "mirror_n_L_gt_R": 8,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.0759593983333415,
+   "t_right_patterns_mean_s": 15.130737665000009
+  },
+  "80 kHz|PUFF_LEFT": {
+   "LI": 0.438365038518114,
+   "mirror_n_L_gt_R": 11,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.05392597833333,
+   "t_right_patterns_mean_s": 15.062896243333332
+  },
+  "80 kHz|PUFF_RIGHT": {
+   "LI": 0.2089186642984113,
+   "mirror_n_L_gt_R": 8,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.047921260000005,
+   "t_right_patterns_mean_s": 15.02931787166667
+  },
+  "80 kHz|PUFF_BOTH": {
+   "LI": -0.1224432415455652,
+   "mirror_n_L_gt_R": 5,
+   "mirror_pairs_both_strong": 16,
+   "t_left_patterns_mean_s": 4.091900563333331,
+   "t_right_patterns_mean_s": 15.181317694999995
+  }
+ },
+ "cross_session_r": {
+  "10 kHz|50 kHz|SMILE_LEFT": 0.8497971897847822,
+  "10 kHz|80 kHz|SMILE_LEFT": 0.9380792332112368,
+  "50 kHz|80 kHz|SMILE_LEFT": 0.8414399286329302,
+  "10 kHz|50 kHz|SMILE_RIGHT": 0.9137672659097053,
+  "10 kHz|80 kHz|SMILE_RIGHT": 0.9235905428305916,
+  "50 kHz|80 kHz|SMILE_RIGHT": 0.9774767008785722,
+  "10 kHz|50 kHz|SMILE_BOTH": 0.9506795207548464,
+  "10 kHz|80 kHz|SMILE_BOTH": 0.8921454695145749,
+  "50 kHz|80 kHz|SMILE_BOTH": 0.9696610466386764,
+  "10 kHz|50 kHz|PUFF_LEFT": 0.9412404346398412,
+  "10 kHz|80 kHz|PUFF_LEFT": 0.9234081833720564,
+  "50 kHz|80 kHz|PUFF_LEFT": 0.9606569474481252,
+  "10 kHz|50 kHz|PUFF_RIGHT": 0.9374883024611678,
+  "10 kHz|80 kHz|PUFF_RIGHT": 0.9376855305108798,
+  "50 kHz|80 kHz|PUFF_RIGHT": 0.9737071603375992,
+  "10 kHz|50 kHz|PUFF_BOTH": 0.9632315649395606,
+  "10 kHz|80 kHz|PUFF_BOTH": 0.9571980506744464,
+  "50 kHz|80 kHz|PUFF_BOTH": 0.98321807204092
+ },
+ "additivity_r2": {
+  "10 kHz|SMILE": 0.7671072256715507,
+  "10 kHz|PUFF": 0.844219101920005,
+  "50 kHz|SMILE": 0.9519763361558228,
+  "50 kHz|PUFF": 0.8997970020010094,
+  "80 kHz|SMILE": 0.8131825244879776,
+  "80 kHz|PUFF": 0.8772190486569862
+ },
+ "involvement": {
+  "10 kHz|SMILE_LEFT": {
+   "L1": 1.607027181450725,
+   "L2": 2.509436490915679,
+   "L3": 3.107640793014291,
+   "L4": 4.771690381686874,
+   "L5": 5.827365160213913,
+   "L6": 6.23299566733048,
+   "L7": 7.105281405108634,
+   "L8": 5.721943201729294,
+   "R8": 4.904955338255533,
+   "R7": 4.387165381975017,
+   "R6": 2.533794852735048,
+   "R5": 1.4605666655686806,
+   "R4": 1.3701002362212291,
+   "R3": 0.9589617205849296,
+   "R2": 0.5543986240668991,
+   "R1": 1.034141180224288
+  },
+  "10 kHz|SMILE_RIGHT": {
+   "L1": 2.493752354484856,
+   "L2": 1.2883084083912335,
+   "L3": 1.390248117321715,
+   "L4": 1.661512519428251,
+   "L5": 1.8838859219121808,
+   "L6": 3.0119064341466553,
+   "L7": 4.239967999667557,
+   "L8": 4.137634594825932,
+   "R8": 5.134233465129917,
+   "R7": 8.511922845319477,
+   "R6": 5.553950314451081,
+   "R5": 4.936513535311872,
+   "R4": 5.886509742812382,
+   "R3": 2.134320803107282,
+   "R2": 1.752489799533956,
+   "R1": 2.79506488623732
+  },
+  "10 kHz|SMILE_BOTH": {
+   "L1": 3.9794447631041825,
+   "L2": 4.019487036899756,
+   "L3": 3.920281853590389,
+   "L4": 5.7171648880763035,
+   "L5": 6.675279649132158,
+   "L6": 7.184722587429013,
+   "L7": 9.45575079801379,
+   "L8": 10.152958907372073,
+   "R8": 10.006272142842056,
+   "R7": 10.349060027652705,
+   "R6": 6.82320048833341,
+   "R5": 5.835940444333562,
+   "R4": 5.98773031699725,
+   "R3": 2.3873709186887413,
+   "R2": 1.8589653502227073,
+   "R1": 3.2705047812847727
+  },
+  "10 kHz|PUFF_LEFT": {
+   "L1": 2.55578736151786,
+   "L2": 2.204888270072235,
+   "L3": 2.822498919340579,
+   "L4": 3.0092011356621975,
+   "L5": 4.619858372454458,
+   "L6": 7.9498640076669345,
+   "L7": 8.184180426239504,
+   "L8": 8.395178154150429,
+   "R8": 9.172154196481442,
+   "R7": 8.016372244919909,
+   "R6": 4.939969293492622,
+   "R5": 2.992367032996766,
+   "R4": 3.103534439858356,
+   "R3": 1.938711564632967,
+   "R2": 1.4041094915301675,
+   "R1": 2.4210283799029355
+  },
+  "10 kHz|PUFF_RIGHT": {
+   "L1": 2.0935001625457748,
+   "L2": 1.901034992795726,
+   "L3": 2.831198556710564,
+   "L4": 2.7230269303454406,
+   "L5": 2.592794607344208,
+   "L6": 3.5377711186033576,
+   "L7": 6.022110333376089,
+   "L8": 8.97234687714214,
+   "R8": 7.739293500600051,
+   "R7": 8.101108770933925,
+   "R6": 7.731563174908336,
+   "R5": 4.736815510553611,
+   "R4": 3.5315470191769496,
+   "R3": 1.8854281922851752,
+   "R2": 1.480552269616503,
+   "R1": 2.0103091456034896
+  },
+  "10 kHz|PUFF_BOTH": {
+   "L1": 2.2740162657167566,
+   "L2": 1.702138009565221,
+   "L3": 2.020497323471017,
+   "L4": 2.8296485317140285,
+   "L5": 4.144396677088067,
+   "L6": 9.274265336062795,
+   "L7": 12.70405299680826,
+   "L8": 11.795308051311348,
+   "R8": 11.083912048029967,
+   "R7": 14.362030193235448,
+   "R6": 11.073429110608451,
+   "R5": 4.890588622894459,
+   "R4": 3.753966679346065,
+   "R3": 2.0846611879176247,
+   "R2": 1.5566630881263446,
+   "R1": 2.0066095324439504
+  },
+  "50 kHz|SMILE_LEFT": {
+   "L1": 2.525262429121196,
+   "L2": 3.941253460475918,
+   "L3": 4.050155600220668,
+   "L4": 6.013487136298109,
+   "L5": 7.541203166520432,
+   "L6": 6.442093451904804,
+   "L7": 8.10495102082454,
+   "L8": 9.954151130525322,
+   "R8": 7.89800629609635,
+   "R7": 5.639576826386819,
+   "R6": 3.8844636556728407,
+   "R5": 2.427245898397394,
+   "R4": 1.845326613014643,
+   "R3": 0.8534456982249788,
+   "R2": 1.4205319452187632,
+   "R1": 2.016910960335457
+  },
+  "50 kHz|SMILE_RIGHT": {
+   "L1": 3.0881392018294993,
+   "L2": 1.6233557407825567,
+   "L3": 2.333873320659694,
+   "L4": 2.3684421217893887,
+   "L5": 2.6728092767935943,
+   "L6": 4.124917979932695,
+   "L7": 6.306218051531999,
+   "L8": 6.885993006739647,
+   "R8": 8.749857273505496,
+   "R7": 12.071189246902904,
+   "R6": 7.4147682548702845,
+   "R5": 8.59157854414124,
+   "R4": 8.588504032870453,
+   "R3": 2.646481409620397,
+   "R2": 5.595414831033088,
+   "R1": 5.960902607343931
+  },
+  "50 kHz|SMILE_BOTH": {
+   "L1": 5.33230530565392,
+   "L2": 5.523123676061978,
+   "L3": 5.532363332153148,
+   "L4": 7.307530014017431,
+   "L5": 8.777228460313546,
+   "L6": 9.140650467012613,
+   "L7": 10.954133183884244,
+   "L8": 13.630064078454597,
+   "R8": 14.051742303911912,
+   "R7": 12.32130569655756,
+   "R6": 8.660564447518697,
+   "R5": 9.120082892144064,
+   "R4": 7.880284854525602,
+   "R3": 2.3960596262527876,
+   "R2": 7.07277485417022,
+   "R1": 7.470401685618614
+  },
+  "50 kHz|PUFF_LEFT": {
+   "L1": 4.029448622239682,
+   "L2": 3.671619043944782,
+   "L3": 4.24084743011896,
+   "L4": 3.4603167193976043,
+   "L5": 5.275941049584541,
+   "L6": 9.397388107701708,
+   "L7": 10.495981682886102,
+   "L8": 9.37261858973664,
+   "R8": 10.261803681117208,
+   "R7": 10.342967470106307,
+   "R6": 5.198719482379496,
+   "R5": 3.332481951770642,
+   "R4": 3.2989568780603133,
+   "R3": 2.426645866838872,
+   "R2": 5.026325698305028,
+   "R1": 5.622279518809
+  },
+  "50 kHz|PUFF_RIGHT": {
+   "L1": 3.279371433065859,
+   "L2": 3.0217608976678947,
+   "L3": 3.964735373036909,
+   "L4": 3.3183682717932577,
+   "L5": 2.959473991864363,
+   "L6": 3.8263205426211377,
+   "L7": 6.853998860935762,
+   "L8": 9.565544383783353,
+   "R8": 7.989353880207396,
+   "R7": 10.359581959266665,
+   "R6": 9.756297306593387,
+   "R5": 5.128633795699918,
+   "R4": 3.561946879874812,
+   "R3": 1.8922575489682696,
+   "R2": 3.986902292585085,
+   "R1": 4.5417478779503115
+  },
+  "50 kHz|PUFF_BOTH": {
+   "L1": 2.8805931733602006,
+   "L2": 2.5338394308654837,
+   "L3": 2.9071725699760083,
+   "L4": 2.885771157276767,
+   "L5": 4.447236685629799,
+   "L6": 9.24545685596024,
+   "L7": 12.691682578387756,
+   "L8": 13.777629640549536,
+   "R8": 13.197584588155507,
+   "R7": 15.802669107530512,
+   "R6": 11.598532083831785,
+   "R5": 5.269939161366948,
+   "R4": 3.737585019491996,
+   "R3": 2.077014028828197,
+   "R2": 3.7872420309489168,
+   "R1": 3.885896747355892
+  },
+  "80 kHz|SMILE_LEFT": {
+   "L1": 2.2230070316336685,
+   "L2": 2.303242223190306,
+   "L3": 2.222991744445366,
+   "L4": 4.899143948876597,
+   "L5": 6.118041304817546,
+   "L6": 6.042540269001493,
+   "L7": 6.209199116342071,
+   "L8": 6.180579456506284,
+   "R8": 6.36050834746972,
+   "R7": 4.35525618278441,
+   "R6": 2.363361757898142,
+   "R5": 1.8835698419986464,
+   "R4": 1.4734506424009497,
+   "R3": 0.9271610597698076,
+   "R2": 1.1406904361063408,
+   "R1": 1.787932100270082
+  },
+  "80 kHz|SMILE_RIGHT": {
+   "L1": 2.6897703759798484,
+   "L2": 1.4907676897847115,
+   "L3": 1.770760767320451,
+   "L4": 2.1446345003480443,
+   "L5": 2.2193249271387336,
+   "L6": 2.9839018153444585,
+   "L7": 5.741777912476438,
+   "L8": 5.388944973257696,
+   "R8": 5.932098751522243,
+   "R7": 9.754214827714293,
+   "R6": 6.400209976834402,
+   "R5": 7.017902311538763,
+   "R4": 7.442230096572574,
+   "R3": 2.579313111076834,
+   "R2": 4.551167128820286,
+   "R1": 4.621542482466729
+  },
+  "80 kHz|SMILE_BOTH": {
+   "L1": 6.088024805791888,
+   "L2": 3.949527138117263,
+   "L3": 3.997102109032708,
+   "L4": 5.386751801438144,
+   "L5": 6.3306109644236095,
+   "L6": 6.603440205083928,
+   "L7": 9.67444644644762,
+   "L8": 12.010447633185734,
+   "R8": 12.064515215747363,
+   "R7": 11.552726654253632,
+   "R6": 8.287396903411839,
+   "R5": 8.30683496919528,
+   "R4": 7.434094818269502,
+   "R3": 3.43089498308021,
+   "R2": 8.362345235884128,
+   "R1": 9.178646533316687
+  },
+  "80 kHz|PUFF_LEFT": {
+   "L1": 4.72058400053461,
+   "L2": 3.503553888355169,
+   "L3": 3.722446153302728,
+   "L4": 3.501206028579116,
+   "L5": 5.3106052906555075,
+   "L6": 9.795380352791955,
+   "L7": 9.771156873349364,
+   "L8": 8.943399622368704,
+   "R8": 10.98284670119078,
+   "R7": 9.42103364312244,
+   "R6": 4.365650974582145,
+   "R5": 3.72242598388695,
+   "R4": 3.879890115928044,
+   "R3": 2.0658305951905707,
+   "R2": 4.698370251183326,
+   "R1": 5.921984359349554
+  },
+  "80 kHz|PUFF_RIGHT": {
+   "L1": 3.0926820111158384,
+   "L2": 2.8661977386198942,
+   "L3": 3.2059771011570435,
+   "L4": 3.40331476816435,
+   "L5": 3.3161891289631185,
+   "L6": 3.772589976727735,
+   "L7": 8.826530065320227,
+   "L8": 11.829441058077062,
+   "R8": 9.713513897392415,
+   "R7": 11.74169436566644,
+   "R6": 10.791235464178502,
+   "R5": 5.408291412164527,
+   "R4": 3.2018804416641,
+   "R3": 1.9077078116455712,
+   "R2": 3.1262546964528872,
+   "R1": 3.577529044022582
+  },
+  "80 kHz|PUFF_BOTH": {
+   "L1": 2.287870814606877,
+   "L2": 1.7589889375948904,
+   "L3": 1.8994601574714145,
+   "L4": 2.080664392859841,
+   "L5": 3.702951463515617,
+   "L6": 8.458545914650614,
+   "L7": 13.526913258449614,
+   "L8": 14.214936202303807,
+   "R8": 14.05694484550485,
+   "R7": 15.700019950200904,
+   "R6": 10.77901263199134,
+   "R5": 4.969101358465745,
+   "R4": 3.105338492309003,
+   "R3": 2.181733482944593,
+   "R2": 3.1169180607097475,
+   "R1": 3.110030358598977
+  }
+ },
+ "recognition": {
+  "accuracy": 1.0,
+  "perm_p": 0.0004997501249375312,
+  "n_patterns": 66
+ },
+ "common_strong_patterns": 66,
+ "recon": {
+  "BP|10 kHz|SMILE_LEFT": {
+   "left_energy_fraction": 0.8431821806826373,
+   "lower_energy_fraction": 0.9352728403772588,
+   "image_to_noise": 3.728375605556601
+  },
+  "JAC|10 kHz|SMILE_LEFT": {
+   "left_energy_fraction": 0.7456223568325118,
+   "lower_energy_fraction": 0.800196955905653,
+   "image_to_noise": 0.8983007008965589
+  },
+  "GREIT|10 kHz|SMILE_LEFT": {
+   "left_energy_fraction": 0.7321657325384604,
+   "lower_energy_fraction": 0.8163908173219396,
+   "image_to_noise": 1.4940834141796115
+  },
+  "BP|10 kHz|SMILE_RIGHT": {
+   "left_energy_fraction": 0.0781504212643995,
+   "lower_energy_fraction": 0.9031311374129416,
+   "image_to_noise": 4.927019209066987
+  },
+  "JAC|10 kHz|SMILE_RIGHT": {
+   "left_energy_fraction": 0.244150375734763,
+   "lower_energy_fraction": 0.8455023536946166,
+   "image_to_noise": 1.0520427680949511
+  },
+  "GREIT|10 kHz|SMILE_RIGHT": {
+   "left_energy_fraction": 0.1748675560346935,
+   "lower_energy_fraction": 0.8489328362577453,
+   "image_to_noise": 2.2169482530317417
+  },
+  "BP|10 kHz|SMILE_BOTH": {
+   "left_energy_fraction": 0.5175859111892034,
+   "lower_energy_fraction": 0.9513090609500836,
+   "image_to_noise": 8.818868125554348
+  },
+  "JAC|10 kHz|SMILE_BOTH": {
+   "left_energy_fraction": 0.4297509595161015,
+   "lower_energy_fraction": 0.9134983076900708,
+   "image_to_noise": 1.5468848267177522
+  },
+  "GREIT|10 kHz|SMILE_BOTH": {
+   "left_energy_fraction": 0.4796300175358451,
+   "lower_energy_fraction": 0.888861113541005,
+   "image_to_noise": 3.548328847476179
+  },
+  "BP|10 kHz|PUFF_LEFT": {
+   "left_energy_fraction": 0.7393367217506203,
+   "lower_energy_fraction": 0.942211675310262,
+   "image_to_noise": 6.183088561225483
+  },
+  "JAC|10 kHz|PUFF_LEFT": {
+   "left_energy_fraction": 0.8459281943322702,
+   "lower_energy_fraction": 0.8285644728355122,
+   "image_to_noise": 2.099319448649487
+  },
+  "GREIT|10 kHz|PUFF_LEFT": {
+   "left_energy_fraction": 0.9430732765730068,
+   "lower_energy_fraction": 0.8423587610255152,
+   "image_to_noise": 2.709301957539905
+  },
+  "BP|10 kHz|PUFF_RIGHT": {
+   "left_energy_fraction": 0.2611250232411108,
+   "lower_energy_fraction": 0.925578661630008,
+   "image_to_noise": 5.468497635360545
+  },
+  "JAC|10 kHz|PUFF_RIGHT": {
+   "left_energy_fraction": 0.1582395495483478,
+   "lower_energy_fraction": 0.8327988880862157,
+   "image_to_noise": 2.8562944617702937
+  },
+  "GREIT|10 kHz|PUFF_RIGHT": {
+   "left_energy_fraction": 0.0664697179591775,
+   "lower_energy_fraction": 0.8152625411882225,
+   "image_to_noise": 2.759288858022338
+  },
+  "BP|10 kHz|PUFF_BOTH": {
+   "left_energy_fraction": 0.5173067097300182,
+   "lower_energy_fraction": 0.9767269827913114,
+   "image_to_noise": 10.20041375466411
+  },
+  "JAC|10 kHz|PUFF_BOTH": {
+   "left_energy_fraction": 0.3410249042493136,
+   "lower_energy_fraction": 0.870821874647821,
+   "image_to_noise": 3.303352367823077
+  },
+  "GREIT|10 kHz|PUFF_BOTH": {
+   "left_energy_fraction": 0.5083126502442086,
+   "lower_energy_fraction": 0.9363622488444132,
+   "image_to_noise": 4.305151115899085
+  },
+  "BP|50 kHz|SMILE_LEFT": {
+   "left_energy_fraction": 0.760226495708369,
+   "lower_energy_fraction": 0.9578880791065064,
+   "image_to_noise": 6.40014954655327
+  },
+  "JAC|50 kHz|SMILE_LEFT": {
+   "left_energy_fraction": 0.6646591933597836,
+   "lower_energy_fraction": 0.8208876611793982,
+   "image_to_noise": 1.7779551871095072
+  },
+  "GREIT|50 kHz|SMILE_LEFT": {
+   "left_energy_fraction": 0.7196060556129922,
+   "lower_energy_fraction": 0.8926785754267903,
+   "image_to_noise": 2.244481107224439
+  },
+  "BP|50 kHz|SMILE_RIGHT": {
+   "left_energy_fraction": 0.1829172504205413,
+   "lower_energy_fraction": 0.7906071678774476,
+   "image_to_noise": 8.212187862278316
+  },
+  "JAC|50 kHz|SMILE_RIGHT": {
+   "left_energy_fraction": 0.1059667631284446,
+   "lower_energy_fraction": 0.4244604229980501,
+   "image_to_noise": 2.5758278475024423
+  },
+  "GREIT|50 kHz|SMILE_RIGHT": {
+   "left_energy_fraction": 0.1865772757570006,
+   "lower_energy_fraction": 0.6794971635422973,
+   "image_to_noise": 3.73725612548039
+  },
+  "BP|50 kHz|SMILE_BOTH": {
+   "left_energy_fraction": 0.4687146007695795,
+   "lower_energy_fraction": 0.8676032023971874,
+   "image_to_noise": 11.59986326758951
+  },
+  "JAC|50 kHz|SMILE_BOTH": {
+   "left_energy_fraction": 0.2665159161703671,
+   "lower_energy_fraction": 0.6545875013971543,
+   "image_to_noise": 3.275555978480574
+  },
+  "GREIT|50 kHz|SMILE_BOTH": {
+   "left_energy_fraction": 0.3954536271310268,
+   "lower_energy_fraction": 0.7208867473936466,
+   "image_to_noise": 4.789707635911797
+  },
+  "BP|50 kHz|PUFF_LEFT": {
+   "left_energy_fraction": 0.7072377604081811,
+   "lower_energy_fraction": 0.8923503764626515,
+   "image_to_noise": 8.554809036379968
+  },
+  "JAC|50 kHz|PUFF_LEFT": {
+   "left_energy_fraction": 0.7116625785504512,
+   "lower_energy_fraction": 0.7834276553673821,
+   "image_to_noise": 2.5830908062712834
+  },
+  "GREIT|50 kHz|PUFF_LEFT": {
+   "left_energy_fraction": 0.6969544102160803,
+   "lower_energy_fraction": 0.6912118917098987,
+   "image_to_noise": 3.4710977530234057
+  },
+  "BP|50 kHz|PUFF_RIGHT": {
+   "left_energy_fraction": 0.2332117231248058,
+   "lower_energy_fraction": 0.8627797280258566,
+   "image_to_noise": 7.03561831149922
+  },
+  "JAC|50 kHz|PUFF_RIGHT": {
+   "left_energy_fraction": 0.1632977820837624,
+   "lower_energy_fraction": 0.8170602663094164,
+   "image_to_noise": 2.3498237962965924
+  },
+  "GREIT|50 kHz|PUFF_RIGHT": {
+   "left_energy_fraction": 0.1391559594873224,
+   "lower_energy_fraction": 0.7814686391430382,
+   "image_to_noise": 3.3300640311132215
+  },
+  "BP|50 kHz|PUFF_BOTH": {
+   "left_energy_fraction": 0.5416167333662391,
+   "lower_energy_fraction": 0.9657879202564216,
+   "image_to_noise": 11.802907371643974
+  },
+  "JAC|50 kHz|PUFF_BOTH": {
+   "left_energy_fraction": 0.4126400078536909,
+   "lower_energy_fraction": 0.8544899916199258,
+   "image_to_noise": 3.1677768566556628
+  },
+  "GREIT|50 kHz|PUFF_BOTH": {
+   "left_energy_fraction": 0.4274842567606273,
+   "lower_energy_fraction": 0.8889346672159338,
+   "image_to_noise": 4.71402644190011
+  },
+  "BP|80 kHz|SMILE_LEFT": {
+   "left_energy_fraction": 0.8037271355688194,
+   "lower_energy_fraction": 0.930755579119674,
+   "image_to_noise": 3.1599187372052353
+  },
+  "JAC|80 kHz|SMILE_LEFT": {
+   "left_energy_fraction": 0.6902119710376629,
+   "lower_energy_fraction": 0.8345013033565223,
+   "image_to_noise": 1.8151824085662391
+  },
+  "GREIT|80 kHz|SMILE_LEFT": {
+   "left_energy_fraction": 0.7297136574238349,
+   "lower_energy_fraction": 0.815948032732748,
+   "image_to_noise": 1.8585289098578128
+  },
+  "BP|80 kHz|SMILE_RIGHT": {
+   "left_energy_fraction": 0.1177438244644341,
+   "lower_energy_fraction": 0.7803744807483712,
+   "image_to_noise": 6.36498309814254
+  },
+  "JAC|80 kHz|SMILE_RIGHT": {
+   "left_energy_fraction": 0.1239668965373356,
+   "lower_energy_fraction": 0.6238290879975052,
+   "image_to_noise": 2.2968241924245603
+  },
+  "GREIT|80 kHz|SMILE_RIGHT": {
+   "left_energy_fraction": 0.1023592703330012,
+   "lower_energy_fraction": 0.6916082776683866,
+   "image_to_noise": 2.6021494814739827
+  },
+  "BP|80 kHz|SMILE_BOTH": {
+   "left_energy_fraction": 0.4060777865337515,
+   "lower_energy_fraction": 0.7753842174374554,
+   "image_to_noise": 9.892149093542669
+  },
+  "JAC|80 kHz|SMILE_BOTH": {
+   "left_energy_fraction": 0.3640481608694074,
+   "lower_energy_fraction": 0.6527687317629173,
+   "image_to_noise": 3.843912034826413
+  },
+  "GREIT|80 kHz|SMILE_BOTH": {
+   "left_energy_fraction": 0.3122816067537574,
+   "lower_energy_fraction": 0.5875055000727953,
+   "image_to_noise": 4.418432561744353
+  },
+  "BP|80 kHz|PUFF_LEFT": {
+   "left_energy_fraction": 0.6697302464508696,
+   "lower_energy_fraction": 0.8465137485347589,
+   "image_to_noise": 6.929945610084906
+  },
+  "JAC|80 kHz|PUFF_LEFT": {
+   "left_energy_fraction": 0.6778803936858073,
+   "lower_energy_fraction": 0.7622332152708503,
+   "image_to_noise": 3.0041354579942325
+  },
+  "GREIT|80 kHz|PUFF_LEFT": {
+   "left_energy_fraction": 0.7395638570611186,
+   "lower_energy_fraction": 0.6453032223658849,
+   "image_to_noise": 2.944228898188411
+  },
+  "BP|80 kHz|PUFF_RIGHT": {
+   "left_energy_fraction": 0.2000740702790566,
+   "lower_energy_fraction": 0.9439700034943788,
+   "image_to_noise": 7.981894588747576
+  },
+  "JAC|80 kHz|PUFF_RIGHT": {
+   "left_energy_fraction": 0.1811179941391924,
+   "lower_energy_fraction": 0.8118851408140125,
+   "image_to_noise": 2.2638521614979292
+  },
+  "GREIT|80 kHz|PUFF_RIGHT": {
+   "left_energy_fraction": 0.1623672155442931,
+   "lower_energy_fraction": 0.9100379407945745,
+   "image_to_noise": 4.0356354446522475
+  },
+  "BP|80 kHz|PUFF_BOTH": {
+   "left_energy_fraction": 0.4644425682308113,
+   "lower_energy_fraction": 0.9844507572173912,
+   "image_to_noise": 11.527855503846371
+  },
+  "JAC|80 kHz|PUFF_BOTH": {
+   "left_energy_fraction": 0.5203672229597561,
+   "lower_energy_fraction": 0.8780047912307624,
+   "image_to_noise": 3.254107481789903
+  },
+  "GREIT|80 kHz|PUFF_BOTH": {
+   "left_energy_fraction": 0.3968055853888793,
+   "lower_energy_fraction": 0.9499119095284098,
+   "image_to_noise": 5.169994019338598
+  }
+ }
+}

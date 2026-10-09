@@ -439,8 +439,8 @@ model complexity to hide the failure. Absence here does not refute all EIT.
 
 **S1. Analog Devices CN0565.**
 https://www.analog.com/en/resources/reference-designs/circuits-from-the-lab/CN0565.html
-Local `cn0565 rev. a.pdf`; schematic `02_066534 Rev B`, sheet 2/3, in
-`cn0565-designsupport/`. Supports switch architecture, excitation/current
+Local `reference/cn0565 rev. a.pdf`; schematic `02_066534 Rev B`, sheet 2/3, in
+`reference/cn0565-designsupport/`. Supports switch architecture, excitation/current
 measurement, calibration/isolation and connector mapping. Does not validate
 the human setup or C24 layout.
 
@@ -448,7 +448,7 @@ the human setup or C24 layout.
 https://doi.org/10.1371/journal.pone.0254932
 Table 1 and methods inspected; 30 men, 29 tasks, facial sEMG. Supports
 instructions and dominant sampled muscle patterns, not isolation or this
-BioZ timing/layout. Local `papers/tasks/journal.pone.0254932.pdf`.
+BioZ timing/layout. Local `reference/papers/tasks/journal.pone.0254932.pdf`.
 
 **S3. Liu et al., 2025. Facial Gesture Recognition Using Bio-impedance Sensing.**
 https://doi.org/10.1145/3745900.3746120
@@ -493,7 +493,7 @@ vascular or that the devices available here are mutually compatible.
 
 **S9. Rüschenschmidt et al., 2022. Ear-muscle EMG study.**
 https://doi.org/10.3390/diagnostics12010121
-Local `papers/tasks/diagnostics-12-00121.pdf`. Supports local auricular
+Local `reference/papers/tasks/diagnostics-12-00121.pdf`. Supports local auricular
 co-activation as a confound; not facial BioZ sensitivity evidence.
 
 **S10. Hyvönen, Seppänen & Staboulis. Optimizing Electrode Positions in EIT.**

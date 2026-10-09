@@ -122,7 +122,7 @@ chính xác cái gì gây ra thay đổi bạn thấy:
    `excitation_frequency` (sửa trực tiếp trong `cn0565_example_single.py`
    hoặc gọi `adi.cn0565` từ một script riêng), ghi lại real/imag mỗi tần số
    → hiểu đặc tính trở kháng của mẫu/medium bạn đang đo.
-3. **`sweep` toàn bộ cặp ở 1 tần số cố định**: xem `data/raw/cn0565_example_data.csv`
+3. **`sweep` toàn bộ cặp ở 1 tần số cố định**: xem `reference/adi-example-data/cn0565_example_data.csv`
    để hiểu cấu trúc dữ liệu thô trước khi đưa vào pyEIT.
 4. **GUI với mesh mặc định (đĩa tròn)**: chạy `gui`, dùng **Baseline** trên
    một trạng thái đã biết, rồi so sánh BP vs JAC vs GREIT trên cùng một thay

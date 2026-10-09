@@ -1,0 +1,8 @@
+trial_id,repetition,task,instruction
+T001,1,REST,"Remain relaxed. Keep the same resting head, jaw and lip pose."
+T002,1,SMILE_LEFT,Smile with the LEFT mouth corner; keep your head still.
+T003,1,SMILE_RIGHT,Smile with the RIGHT mouth corner; keep your head still.
+T004,1,SMILE_BOTH,Smile with BOTH mouth corners; keep your head still.
+T005,1,PUFF_LEFT,Gently inflate the LEFT cheek with air; do not blow out.
+T006,1,PUFF_RIGHT,Gently inflate the RIGHT cheek with air; do not blow out.
+T007,1,PUFF_BOTH,Gently inflate BOTH cheeks with air; do not blow out.

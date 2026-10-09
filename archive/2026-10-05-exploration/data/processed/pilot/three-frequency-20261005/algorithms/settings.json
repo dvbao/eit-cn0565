@@ -1,0 +1,14 @@
+{
+  "h0": 0.08,
+  "p": 0.5,
+  "lambda": 0.01,
+  "jac_method": "kotre",
+  "bp_weight": "none",
+  "greit_n": 32,
+  "greit_s": 20.0,
+  "greit_ratio": 0.1,
+  "strong_counts": 50.0,
+  "noise_counts": 2.0,
+  "n_elements": 1090,
+  "n_nodes": 586
+}

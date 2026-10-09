@@ -75,7 +75,7 @@ không phải một cup reference như EMG.
   optional post-rest; componentwise median, v0/v1/delta và descriptive metrics.
 - scripts/cn0565_plot_difference.py: time course và 208 signed real/imaginary
   differences; đây không phải anatomical reconstruction.
-- tests/test_cn0565_capture.py: 8 tests đã pass offline; không phải hardware,
+- scripts/test_cn0565_capture.py: 8 tests đã pass offline; không phải hardware,
   physiological hoặc image-localization validation. Mock chỉ test file format,
   không mô phỏng cơ mặt. Không dùng mock timing để chọn human hold duration.
 
@@ -110,8 +110,8 @@ known-target validation là các bước phát triển tiếp theo.
 6. docs/facial-bioimpedance-pilot-01.md và protocols: có older M08 proposals;
    không trộn M08 với current 208-pattern logger. 24-electrode proposals cũ
    trong archive không phải current first collection.
-7. papers/tasks/, papers/electrodes_placement/, papers/EIT related works/ và
-   cn0565-designsupport/. Đọc original papers/schematic khi cần proof.
+7. reference/papers/tasks/, reference/papers/electrodes_placement/, reference/papers/EIT related works/ và
+   reference/cn0565-designsupport/. Đọc original reference/papers/schematic khi cần proof.
 
 Prior art quan trọng gồm Facial Gesture Recognition Using Bio-impedance
 Sensing; Soft electrodes for simultaneous bio-potential and bio-impedance

@@ -78,7 +78,7 @@ python3 scripts/cn0565_capture.py \
   --uri 'serial:/dev/ttyACM0,230400,8n1n' \
   --frequency-hz FREQ_FROM_BENCH_REVIEW \
   --amplitude-mv AMPLITUDE_FROM_BENCH_REVIEW \
-  --frames 20 --output-prefix data/raw/bench-01
+  --frames 20 --output-prefix eit-measurement/data/bench/bench-01
 ```
 
 The literal placeholders must be replaced; the command will reject them as
@@ -147,9 +147,9 @@ does this alignment after the analyst selects valid complete frame IDs:
 
 ```sh
 python3 scripts/cn0565_prepare_difference.py \
-  --input-prefix data/raw/bench-01 \
+  --input-prefix eit-measurement/data/bench/bench-01 \
   --rest-frames 1,2,3 --task-frames 7,8,9 \
-  --output data/processed/bench-01-trial-01.json
+  --output eit-measurement/data/results/bench-01-trial-01.json
 ```
 
 This emits the 208-row `v0`, `v1` and `delta` vectors, preserving both real

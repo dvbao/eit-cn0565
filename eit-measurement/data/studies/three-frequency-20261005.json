@@ -1,0 +1,18 @@
+{
+  "study_id": "three-frequency-20261005",
+  "title": "Facial pilot, 2026-10-05: REST + six tasks at 10 / 50 / 80 kHz (one frame per state, same order, one subject, one electrode mount)",
+  "raw_root": "data/sessions",
+  "out_root": "data/results",
+  "sessions": [
+    {"dir": "session-1-20261005-10000Hz-600mV", "label": "10 kHz"},
+    {"dir": "session-2-20261005-50000Hz-600mV", "label": "50 kHz"},
+    {"dir": "session-3-20261005-80000Hz-600mV", "label": "80 kHz"}
+  ],
+  "rest_label": "REST",
+  "tasks": ["SMILE_LEFT", "SMILE_RIGHT", "SMILE_BOTH", "PUFF_LEFT", "PUFF_RIGHT", "PUFF_BOTH"],
+  "baseline": "initial_rest",
+  "drop_first_task_frames": 0,
+  "strong_counts": 50.0,
+  "noise_counts": 2.0,
+  "noise_counts_max": 2.9
+}

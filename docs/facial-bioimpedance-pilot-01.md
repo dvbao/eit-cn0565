@@ -146,7 +146,7 @@ Cần user/lab chốt: exact gold-cup model/diameter/paste và fit quanh môi/c�
 
 Nguồn:
 
-- [S1 Analog Devices CN0565](https://www.analog.com/en/resources/reference-designs/circuits-from-the-lab/CN0565.html), cùng schematic trong cn0565-designsupport/: architecture, connector, calibration; không chứng nhận setup người.
+- [S1 Analog Devices CN0565](https://www.analog.com/en/resources/reference-designs/circuits-from-the-lab/CN0565.html), cùng schematic trong reference/cn0565-designsupport/: architecture, connector, calibration; không chứng nhận setup người.
 - [S2 Schumann et al., facial muscle activation atlas](https://doi.org/10.1371/journal.pone.0254932): task–muscle patterns, không phải isolation.
 - [S3 Liu et al., Facial Gesture Recognition Using Bio-impedance Sensing](https://doi.org/10.1145/3745900.3746120): facial task feasibility với contacts gần má/miệng, không phải remote C16.
 - [S4 Kim et al., upper-airway EIT](https://doi.org/10.5664/jcsm.7714): anatomy-linked head/neck layout, khác ROI/hardware.

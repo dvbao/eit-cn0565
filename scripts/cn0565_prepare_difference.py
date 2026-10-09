@@ -5,8 +5,8 @@ checking cue/video timing and excluding transitional or visibly bad frames.
 
 Example:
     python3 scripts/cn0565_prepare_difference.py \
-        --input-prefix data/raw/bench-01 --rest-frames 1,2,3 \
-        --task-frames 7,8,9 --output data/processed/bench-01-trial-01.json
+        --input-prefix eit-measurement/data/bench/bench-01 --rest-frames 1,2,3 \
+        --task-frames 7,8,9 --output eit-measurement/data/results/bench-01-trial-01.json
 """
 
 from __future__ import annotations

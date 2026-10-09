@@ -1,0 +1,101 @@
+{
+  "name": "facial-rest-task-rest-v1",
+  "tasks": [
+    {
+      "name": "SMILE_LEFT",
+      "instruction": "Smile with the LEFT mouth corner; keep your head still.",
+      "ready_instruction": "",
+      "release_instruction": "",
+      "frames": null,
+      "hold_s": null
+    },
+    {
+      "name": "SMILE_RIGHT",
+      "instruction": "Smile with the RIGHT mouth corner; keep your head still.",
+      "ready_instruction": "",
+      "release_instruction": "",
+      "frames": null,
+      "hold_s": null
+    },
+    {
+      "name": "SMILE_BOTH",
+      "instruction": "Smile with BOTH mouth corners; keep your head still.",
+      "ready_instruction": "",
+      "release_instruction": "",
+      "frames": null,
+      "hold_s": null
+    },
+    {
+      "name": "PUFF_LEFT",
+      "instruction": "Gently inflate the LEFT cheek with air; do not blow out.",
+      "ready_instruction": "",
+      "release_instruction": "",
+      "frames": null,
+      "hold_s": null
+    },
+    {
+      "name": "PUFF_RIGHT",
+      "instruction": "Gently inflate the RIGHT cheek with air; do not blow out.",
+      "ready_instruction": "",
+      "release_instruction": "",
+      "frames": null,
+      "hold_s": null
+    },
+    {
+      "name": "PUFF_BOTH",
+      "instruction": "Gently inflate BOTH cheeks with air; do not blow out.",
+      "ready_instruction": "",
+      "release_instruction": "",
+      "frames": null,
+      "hold_s": null
+    },
+    {
+      "name": "TONGUE_CHEEK_LEFT",
+      "instruction": "Push the tongue into the LEFT cheek (bulge without air); keep your head still.",
+      "ready_instruction": "",
+      "release_instruction": "",
+      "frames": null,
+      "hold_s": null
+    },
+    {
+      "name": "TONGUE_CHEEK_RIGHT",
+      "instruction": "Push the tongue into the RIGHT cheek (bulge without air); keep your head still.",
+      "ready_instruction": "",
+      "release_instruction": "",
+      "frames": null,
+      "hold_s": null
+    }
+  ],
+  "rest": {
+    "name": "REST",
+    "instruction": "Remain relaxed. Keep the same resting head, jaw and lip pose.",
+    "ready_instruction": "",
+    "release_instruction": "",
+    "frames": null,
+    "hold_s": null
+  },
+  "control": {
+    "name": "REST_CONTROL",
+    "instruction": "Remain relaxed (control: no task). Keep the same resting pose.",
+    "ready_instruction": "",
+    "release_instruction": "",
+    "frames": null,
+    "hold_s": null
+  },
+  "rounds": 2,
+  "seed": 20261006,
+  "randomize": true,
+  "controls_per_round": 1,
+  "initial_rest_frames": 3,
+  "frames_per_task": 1,
+  "rest_between_tasks": true,
+  "timing": {
+    "prepare_manual": false,
+    "ready_s": 3.0,
+    "settle_s": 2.0,
+    "hold_margin_s": 0.5,
+    "release_s": 0.0,
+    "start_countdown_s": 10.0,
+    "hold_cap_s": 30.0
+  }
+}
